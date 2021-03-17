@@ -9,6 +9,8 @@ package Clases.InicioSesion;
  *
  * @author Hacknel
  */
+
+/*Hola*/
 public class ClsInicioSesion {
     
 }
