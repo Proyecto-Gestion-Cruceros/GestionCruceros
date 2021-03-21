@@ -27,21 +27,104 @@ public class frmInicioSesion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        btnIniciarSesion = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("INICIO DE SESIÓN");
+        setName("frmInicioLogin"); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(0, 79, 129));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1635, 1035));
+        jPanel1.setLayout(null);
+
+        jLabel7.setFont(new java.awt.Font("Doppio One", 1, 40)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 204, 51));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("BON VOYAGE CRUISE LINE");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(46, 70, 1539, 51);
+
+        jLabel2.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Usuario");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(1040, 450, 73, 26);
+
+        jTextField1.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(jTextField1);
+        jTextField1.setBounds(1130, 530, 203, 26);
+
+        jLabel3.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Contraseña");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(1010, 530, 108, 26);
+
+        jTextField2.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(jTextField2);
+        jTextField2.setBounds(1130, 450, 203, 26);
+
+        btnIniciarSesion.setBackground(new java.awt.Color(255, 204, 51));
+        btnIniciarSesion.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
+        btnIniciarSesion.setForeground(new java.awt.Color(0, 0, 0));
+        btnIniciarSesion.setText("INICIAR SESIÓN");
+        jPanel1.add(btnIniciarSesion);
+        btnIniciarSesion.setBounds(1090, 670, 195, 63);
+
+        jLabel8.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 204, 51));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Logo BonVoyage Peq.png"))); // NOI18N
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(240, 330, 400, 443);
+
+        jLabel9.setFont(new java.awt.Font("Doppio One", 1, 40)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 204, 51));
+        jLabel9.setText("¡BIENVENIDO!");
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(1044, 320, 270, 51);
+
+        jSeparator1.setBackground(new java.awt.Color(255, 204, 51));
+        jSeparator1.setForeground(new java.awt.Color(255, 204, 51));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator1);
+        jSeparator1.setBounds(810, 160, 10, 820);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       
+        
+        
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -79,5 +162,15 @@ public class frmInicioSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIniciarSesion;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
