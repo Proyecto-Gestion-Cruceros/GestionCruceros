@@ -5,6 +5,11 @@
  */
 package Formularios.InicioSesion;
 
+import Clases.ClsValidaciones;
+import Clases.InicioSesion.ClsInicioSesion;
+import Clases.dbConnection;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Hacknel
@@ -18,6 +23,9 @@ public class frmInicioSesion extends javax.swing.JFrame {
         initComponents();
     }
 
+    ClsInicioSesion clase = new ClsInicioSesion();
+    ClsValidaciones v = new ClsValidaciones();
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,13 +38,14 @@ public class frmInicioSesion extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
         btnIniciarSesion = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        txtContra = new javax.swing.JPasswordField();
+        chkMostrarContra = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INICIO DE SESIÓN");
@@ -64,24 +73,26 @@ public class frmInicioSesion extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(1040, 450, 73, 26);
 
-        jTextField1.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(1130, 530, 203, 26);
-
         jLabel3.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Contraseña");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(1010, 530, 108, 26);
 
-        jTextField2.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(1130, 450, 203, 26);
+        txtUsuario.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        txtUsuario.setToolTipText("Ingrese su identidad");
+        jPanel1.add(txtUsuario);
+        txtUsuario.setBounds(1130, 450, 203, 30);
 
         btnIniciarSesion.setBackground(new java.awt.Color(255, 204, 51));
         btnIniciarSesion.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
         btnIniciarSesion.setForeground(new java.awt.Color(0, 0, 0));
         btnIniciarSesion.setText("INICIAR SESIÓN");
+        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarSesionActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnIniciarSesion);
         btnIniciarSesion.setBounds(1090, 670, 195, 63);
 
@@ -104,6 +115,22 @@ public class frmInicioSesion extends javax.swing.JFrame {
         jPanel1.add(jSeparator1);
         jSeparator1.setBounds(810, 160, 10, 820);
 
+        txtContra.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        txtContra.setToolTipText("Ingrese su contraseña");
+        jPanel1.add(txtContra);
+        txtContra.setBounds(1130, 530, 200, 30);
+
+        chkMostrarContra.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        chkMostrarContra.setForeground(new java.awt.Color(255, 255, 255));
+        chkMostrarContra.setText("Mostrar Contraseña");
+        chkMostrarContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkMostrarContraActionPerformed(evt);
+            }
+        });
+        jPanel1.add(chkMostrarContra);
+        chkMostrarContra.setBounds(1350, 530, 230, 30);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,10 +148,37 @@ public class frmInicioSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       
-        
-        
+
+
+        dbConnection.dbConexion();
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+        
+        if (!txtUsuario.getText().isBlank() && !txtContra.getPassword().equals("")) {
+            if (v.isEntero(txtUsuario.getText()) && txtUsuario.getText().length() == 13) {
+                if (clase.verificarInicio(txtUsuario.getText(), txtContra.getPassword())) {
+                    JOptionPane.showMessageDialog(this, "ola q ase");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Verifique valores");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Ingrese valores");
+        }
+
+
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
+    private void chkMostrarContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMostrarContraActionPerformed
+        if(chkMostrarContra.isSelected()){
+            txtContra.setEchoChar((char)0);
+        }else{
+            txtContra.setEchoChar('*');
+        }
+    }//GEN-LAST:event_chkMostrarContraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,6 +217,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;
+    private javax.swing.JCheckBox chkMostrarContra;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
@@ -170,7 +225,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPasswordField txtContra;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
