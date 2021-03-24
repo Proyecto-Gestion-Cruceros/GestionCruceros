@@ -1,10 +1,19 @@
 package Clases.Personas;
 
 public class clsUsuarios extends ClsPersona {
-
+    public static String Usuario;
     protected static int Cargo;
     protected static String Contrasenia;
 
+    public static String getUsuario() {
+        return Usuario;
+    }
+
+    public static void setUsuario(String Usuario) {
+        clsUsuarios.Usuario = Usuario;
+    }
+
+    
     public static int getCargo() {
         return Cargo;
     }
