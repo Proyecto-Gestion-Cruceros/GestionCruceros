@@ -49,66 +49,68 @@ public class frmCrudClientes extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 79, 129));
         jPanel1.setPreferredSize(new java.awt.Dimension(1635, 1035));
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Avenir LT Std 45 Book", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 51));
         jLabel1.setText("Clientes:");
 
-        jLabel2.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 20)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombres del Cliente:");
 
-        jLabel3.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 20)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Apellidos del Cliente:");
 
-        jLabel4.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 20)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Teléfono:");
 
-        jLabel5.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 20)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Correo Electrónico:");
 
-        jLabel6.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 20)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Estado:");
 
         txtNombresCliente.setBackground(new java.awt.Color(204, 204, 204));
-        txtNombresCliente.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 20)); // NOI18N
+        txtNombresCliente.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
         txtNombresCliente.setForeground(new java.awt.Color(0, 0, 0));
 
         txtApellidosCliente.setBackground(new java.awt.Color(204, 204, 204));
-        txtApellidosCliente.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 20)); // NOI18N
+        txtApellidosCliente.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
         txtApellidosCliente.setForeground(new java.awt.Color(0, 0, 0));
 
         txtTelefono.setBackground(new java.awt.Color(204, 204, 204));
-        txtTelefono.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 20)); // NOI18N
+        txtTelefono.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
         txtTelefono.setForeground(new java.awt.Color(0, 0, 0));
 
         txtCorreoCliente.setBackground(new java.awt.Color(204, 204, 204));
-        txtCorreoCliente.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 20)); // NOI18N
+        txtCorreoCliente.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
         txtCorreoCliente.setForeground(new java.awt.Color(0, 0, 0));
 
         cmbEstadoCliente.setBackground(new java.awt.Color(204, 204, 204));
-        cmbEstadoCliente.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 20)); // NOI18N
+        cmbEstadoCliente.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
         cmbEstadoCliente.setForeground(new java.awt.Color(0, 0, 0));
-        cmbEstadoCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        cmbEstadoCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " <Seleccione>", "Activo", "Inactivo" }));
         cmbEstadoCliente.setToolTipText("");
 
         btnAgregar.setBackground(new java.awt.Color(255, 204, 51));
-        btnAgregar.setFont(new java.awt.Font("Consolas", 1, 22)); // NOI18N
+        btnAgregar.setFont(new java.awt.Font("Avenir LT Std 45 Book", 0, 22)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(0, 0, 0));
         btnAgregar.setText("Agregar");
 
         btnModificar.setBackground(new java.awt.Color(255, 204, 51));
-        btnModificar.setFont(new java.awt.Font("Consolas", 1, 22)); // NOI18N
+        btnModificar.setFont(new java.awt.Font("Avenir LT Std 45 Book", 0, 22)); // NOI18N
+        btnModificar.setForeground(new java.awt.Color(0, 0, 0));
         btnModificar.setText("Modificar");
 
-        jLabel7.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 20)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Dirección:");
 
         txtDireccionCliente.setBackground(new java.awt.Color(204, 204, 204));
-        txtDireccionCliente.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 20)); // NOI18N
+        txtDireccionCliente.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
         txtDireccionCliente.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -187,7 +189,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
                         .addComponent(btnAgregar)
                         .addGap(58, 58, 58)
                         .addComponent(btnModificar)))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(267, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
