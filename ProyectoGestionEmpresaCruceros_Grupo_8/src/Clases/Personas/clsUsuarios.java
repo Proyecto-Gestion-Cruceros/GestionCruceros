@@ -1,9 +1,18 @@
 package Clases.Personas;
 
+import Clases.dbConnection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 public class clsUsuarios extends ClsPersona {
+
     public static String Usuario;
     protected static int Cargo;
     protected static String Contrasenia;
+    PreparedStatement ps;
+    ResultSet result = null;
 
     public static String getUsuario() {
         return Usuario;
@@ -13,7 +22,6 @@ public class clsUsuarios extends ClsPersona {
         clsUsuarios.Usuario = Usuario;
     }
 
-    
     public static int getCargo() {
         return Cargo;
     }
@@ -30,28 +38,94 @@ public class clsUsuarios extends ClsPersona {
         clsUsuarios.Contrasenia = Contrasenia;
     }
 
-        //Metodos deL Crud
-    
+    //Metodos deL Crud
     @Override
-    public void AgregarPersona(){
+    public boolean AgregarPersona() {
+
+        int resultado = 0;
+        try {
+            ps = dbConnection.dbConexion().prepareStatement("execute ActualizarAgregarUsuario ?,?,?,?,?,?,?,?");
+            ps.setInt(1, 1);
+            ps.setString(2, Identidad);
+            ps.setString(3, Nombres);
+            ps.setString(4, Apellidos);
+            ps.setString(5, Telefono);
+            ps.setString(6, CorreoElectronico);
+            ps.setInt(7, Cargo);
+            ps.setString(8, Contrasenia);
+
+            resultado = ps.executeUpdate();
+
+            if (resultado > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+
+            return false;
+        }
         
     }
-    
-    
+
     @Override
-    public void ActualizarPersona(){
-        
+    public boolean ActualizarPersona() {
+
+        int resultado = 0;
+        try {
+            ps = dbConnection.dbConexion().prepareStatement("execute ActualizarAgregarUsuario ?,?,?,?,?,?,?,?");
+            ps.setInt(1, 2);
+            ps.setString(2, Identidad);
+            ps.setString(3, Nombres);
+            ps.setString(4, Apellidos);
+            ps.setString(5, Telefono);
+            ps.setString(6, CorreoElectronico);
+            ps.setInt(7, Cargo);
+            ps.setString(8, Contrasenia);
+
+            resultado = ps.executeUpdate();
+
+            if (resultado > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+
+            return false;
+        }
+
     }
-    
-    
+
     @Override
-    public void EliminarPersona(){
-        
+    public boolean EliminarPersona() {
+        int resultado = 0;
+        try {
+            ps = dbConnection.dbConexion().prepareStatement("update usuarios set estado = 2 where identidadUsuario =?");
+            ps.setString(1, Identidad);
+       
+
+            resultado = ps.executeUpdate();
+
+            if (resultado > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+
+            return false;
+        }
     }
-    
-    
+
     @Override
-    public void VerPersonas(){
-        
+    public boolean VerPersonas() {
+        return false;
     }
 }
