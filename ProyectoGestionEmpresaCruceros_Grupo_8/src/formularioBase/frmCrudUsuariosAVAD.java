@@ -296,20 +296,44 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCargoUsuarioActionPerformed
 
     private void btnActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarUsuarioActionPerformed
-        if (!txtIdentidadUsuario.getText().isBlank() && txtNombresUsuarios.getText().isBlank() && txtApellidosUsuario.getText().isBlank() && txtTelefonoUsuario.getText().isBlank()
-                && txtCorreoElectronicoUsuario.getText().isBlank() && txtContraseñaUsuario.getText().isBlank() && txtConfirmarContraseñaUsuario.getText().isBlank()) {
+        if (!txtIdentidadUsuario.getText().isBlank() && !txtNombresUsuarios.getText().isBlank() && !txtApellidosUsuario.getText().isBlank() && !txtTelefonoUsuario.getText().isBlank()
+                && !txtCorreoElectronicoUsuario.getText().isBlank() && !txtContraseñaUsuario.getText().isBlank() && !txtConfirmarContraseñaUsuario.getText().isBlank()) {
             if (validar.isEntero(txtIdentidadUsuario.getText()) && txtIdentidadUsuario.getText().length() == 13) {
-                if(validar.isLetras(txtNombresUsuarios.getText()) && validar.isLetras(txtApellidosUsuario.getText())){
-                    if(validar.isEntero(txtTelefonoUsuario.getText()) && txtTelefonoUsuario.getText().length() == 8){
-                     //VALIDACIONES PARA CORREO Y CONTRASEÑO LUEGO PROCEDIMIENTO
+                if (validar.isLetras(txtNombresUsuarios.getText()) && validar.isLetras(txtApellidosUsuario.getText())) {
+                    if (validar.isEntero(txtTelefonoUsuario.getText()) && txtTelefonoUsuario.getText().length() == 8) {
+                        //VALIDACIONES PARA CORREO Y CONTRASEÑO LUEGO PROCEDIMIENTO
+
+                        if (txtContraseñaUsuario.getText().equals(txtConfirmarContraseñaUsuario.getText())) {
+
+                            Persona.setIdentidad(txtIdentidadUsuario.getText());
+                            Persona.setNombres(txtNombresUsuarios.getText());
+                            Persona.setApellidos(txtApellidosUsuario.getText());
+                            Persona.setTelefono(txtTelefonoUsuario.getText());
+                            Persona.setCorreoElectronico(txtCorreoElectronicoUsuario.getText());
+
+                            if (txtCargoUsuario.getText().equals("Administrador")) {
+                                Usuario.setCargo(1);
+                            } else {
+                                Usuario.setCargo(2);
+                            }
+                            Usuario.setContrasenia(txtContraseñaUsuario.getText());
+
+                            try {
+                                if (Usuario.ActualizarPersona()) {
+                                    JOptionPane.showMessageDialog(null, "Usuario Actualizado Correctamente");
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Error al Actualizar");
+                                }
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(null, ex);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Ingrese correctamente la contraseña");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ingrese correctamente el telefono");
                     }
-                    else
-                    {
-                    JOptionPane.showMessageDialog(null, "Ingrese correctamente el telefono");                        
-                    }
-                }
-                else
-                {
+                } else {
                     JOptionPane.showMessageDialog(null, "Ingrese correctamente nombres o apellidos");
                 }
             } else {
@@ -342,20 +366,44 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnAgregarUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarUsuario1ActionPerformed
-        if (!txtIdentidadUsuario.getText().isBlank() && txtNombresUsuarios.getText().isBlank() && txtApellidosUsuario.getText().isBlank() && txtTelefonoUsuario.getText().isBlank()
-                && txtCorreoElectronicoUsuario.getText().isBlank() && txtContraseñaUsuario.getText().isBlank() && txtConfirmarContraseñaUsuario.getText().isBlank()) {
+        if (!txtIdentidadUsuario.getText().isBlank() && !txtNombresUsuarios.getText().isBlank() && !txtApellidosUsuario.getText().isBlank() && !txtTelefonoUsuario.getText().isBlank()
+                && !txtCorreoElectronicoUsuario.getText().isBlank() && !txtContraseñaUsuario.getText().isBlank() && !txtConfirmarContraseñaUsuario.getText().isBlank()) {
             if (validar.isEntero(txtIdentidadUsuario.getText()) && txtIdentidadUsuario.getText().length() == 13) {
-                if(validar.isLetras(txtNombresUsuarios.getText()) && validar.isLetras(txtApellidosUsuario.getText())){
-                    if(validar.isEntero(txtTelefonoUsuario.getText()) && txtTelefonoUsuario.getText().length() == 8){
-                     //VALIDACIONES PARA CORREO Y CONTRASEÑO LUEGO PROCEDIMIENTO
+                if (validar.isLetras(txtNombresUsuarios.getText()) && validar.isLetras(txtApellidosUsuario.getText())) {
+                    if (validar.isEntero(txtTelefonoUsuario.getText()) && txtTelefonoUsuario.getText().length() == 8) {
+                        //VALIDACIONES PARA CORREO Y CONTRASEÑO LUEGO PROCEDIMIENTO
+
+                        if (txtContraseñaUsuario.getText().equals(txtConfirmarContraseñaUsuario.getText())) {
+
+                            Persona.setIdentidad(txtIdentidadUsuario.getText());
+                            Persona.setNombres(txtNombresUsuarios.getText());
+                            Persona.setApellidos(txtApellidosUsuario.getText());
+                            Persona.setTelefono(txtTelefonoUsuario.getText());
+                            Persona.setCorreoElectronico(txtCorreoElectronicoUsuario.getText());
+
+                            if (txtCargoUsuario.getText().equals("Administrador")) {
+                                Usuario.setCargo(1);
+                            } else {
+                                Usuario.setCargo(2);
+                            }
+                            Usuario.setContrasenia(txtContraseñaUsuario.getText());
+
+                            try {
+                                if (Usuario.AgregarPersona()) {
+                                    JOptionPane.showMessageDialog(null, "Usuario Ingresado Correctamente");
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Error al ingresar");
+                                }
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(null, ex);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Ingrese correctamente la contraseña");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ingrese correctamente el telefono");
                     }
-                    else
-                    {
-                    JOptionPane.showMessageDialog(null, "Ingrese correctamente el telefono");                        
-                    }
-                }
-                else
-                {
+                } else {
                     JOptionPane.showMessageDialog(null, "Ingrese correctamente nombres o apellidos");
                 }
             } else {
@@ -370,10 +418,23 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     private void btnEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioActionPerformed
         if (!txtIdentidadUsuario.getText().isBlank()) {
             if (validar.isEntero(txtIdentidadUsuario.getText()) && txtIdentidadUsuario.getText().length() == 13) {
-                //PROCEDIMIENTO O COMANDO
+                try {
+                     Persona.setIdentidad(txtIdentidadUsuario.getText());  
+                    if (Usuario.EliminarPersona()) {
+                        JOptionPane.showMessageDialog(null, "Usuario Eliminado Correctamente");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al Eliminar");
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Ingrese correctamente La identidad");
             }
+        }
+        else
+        {
+             JOptionPane.showMessageDialog(null, "Ingrese la identidad para eliminar");
         }
     }//GEN-LAST:event_btnEliminarUsuarioActionPerformed
 
