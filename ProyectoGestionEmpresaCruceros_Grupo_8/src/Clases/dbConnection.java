@@ -1,38 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Clases;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import javax.swing.JOptionPane;
+//import javax.sql.DataSource;
 
-/**
- *
- * @author Hacknel
- */
 public class dbConnection {
     
     public static Connection conn = null;
+    //public DataSource dataSoorce;
     
     public static Connection dbConexion(){
-        String url = "jdbc:sqlserver://HACKNEL:1433;databaseName=agenciaCruceros";
+        String url = "jdbc:sqlserver://DESKTOP-2KKKGON:1433;databaseName=agenciaCruceros";
         
         try{
             
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             
         }catch(Exception ex){
-            System.out.println("ERROR DE CONEXIÓN");
+            JOptionPane.showMessageDialog(null, "Error de conexion");
         }
         
         try{
-           conn = DriverManager.getConnection(url, "sa", "15263");
+           conn = DriverManager.getConnection(url, "sa", "1234");
+          //  JOptionPane.showMessageDialog(null, "Conexion Exitosa");
         }catch(Exception ex){
-            System.out.println("ERROR DE CONEXIÓN");
-        }
-        
+            JOptionPane.showMessageDialog(null, "Error de conexion");
+        }  
         return conn;
     }
     
