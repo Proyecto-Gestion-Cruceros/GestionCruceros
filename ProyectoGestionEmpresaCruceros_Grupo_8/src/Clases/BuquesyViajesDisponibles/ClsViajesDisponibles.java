@@ -1,5 +1,14 @@
 package Clases.BuquesyViajesDisponibles;
 
-public class ClsViajesDisponibles {
+import Clases.dbConnection;
+
+
+public class ClsViajesDisponibles extends dbConnection {
+     
+    
+    
+    
+    
+    
 
 }
