@@ -28,14 +28,14 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        lblBackground = new javax.swing.JLabel();
+        btnNivelUno = new javax.swing.JButton();
+        btnNivelDos = new javax.swing.JButton();
+        btnNivelTres = new javax.swing.JButton();
+        btnNivelCuatro = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAtras = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,51 +43,51 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(3287, 1058));
         jPanel1.setLayout(null);
 
-        jLabel5.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\OscarM\\Documents\\1 PERIODO 2021\\Programacion Multiplataforma\\III Parcial\\ID2 (1).png")); // NOI18N
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(30, 140, 1880, 600);
+        lblBackground.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/perfilDelCrucero.png"))); // NOI18N
+        jPanel1.add(lblBackground);
+        lblBackground.setBounds(30, 140, 1880, 600);
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 255));
-        jButton5.setFont(new java.awt.Font("Doppio One", 0, 24)); // NOI18N
-        jButton5.setText("NIVEL 1");
-        jPanel1.add(jButton5);
-        jButton5.setBounds(120, 450, 1520, 50);
+        btnNivelUno.setBackground(new java.awt.Color(255, 255, 255));
+        btnNivelUno.setFont(new java.awt.Font("Doppio One", 0, 24)); // NOI18N
+        btnNivelUno.setText("NIVEL 1");
+        jPanel1.add(btnNivelUno);
+        btnNivelUno.setBounds(120, 450, 1520, 50);
 
-        jButton6.setBackground(new java.awt.Color(255, 255, 255));
-        jButton6.setFont(new java.awt.Font("Doppio One", 0, 24)); // NOI18N
-        jButton6.setText("NIVEL 2");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnNivelDos.setBackground(new java.awt.Color(255, 255, 255));
+        btnNivelDos.setFont(new java.awt.Font("Doppio One", 0, 24)); // NOI18N
+        btnNivelDos.setText("NIVEL 2");
+        btnNivelDos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnNivelDosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6);
-        jButton6.setBounds(50, 501, 1660, 50);
+        jPanel1.add(btnNivelDos);
+        btnNivelDos.setBounds(50, 501, 1660, 50);
 
-        jButton7.setBackground(new java.awt.Color(255, 255, 255));
-        jButton7.setFont(new java.awt.Font("Doppio One", 0, 24)); // NOI18N
-        jButton7.setText("NIVEL 3");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnNivelTres.setBackground(new java.awt.Color(255, 255, 255));
+        btnNivelTres.setFont(new java.awt.Font("Doppio One", 0, 24)); // NOI18N
+        btnNivelTres.setText("NIVEL 3");
+        btnNivelTres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnNivelTresActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7);
-        jButton7.setBounds(30, 552, 1700, 40);
+        jPanel1.add(btnNivelTres);
+        btnNivelTres.setBounds(30, 552, 1700, 40);
 
-        jButton8.setBackground(new java.awt.Color(255, 255, 255));
-        jButton8.setFont(new java.awt.Font("Doppio One", 0, 24)); // NOI18N
-        jButton8.setText("NIVEL 4                        ");
-        jButton8.setPreferredSize(new java.awt.Dimension(184, 29));
-        jButton8.setRequestFocusEnabled(false);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnNivelCuatro.setBackground(new java.awt.Color(255, 255, 255));
+        btnNivelCuatro.setFont(new java.awt.Font("Doppio One", 0, 24)); // NOI18N
+        btnNivelCuatro.setText("NIVEL 4                        ");
+        btnNivelCuatro.setPreferredSize(new java.awt.Dimension(184, 29));
+        btnNivelCuatro.setRequestFocusEnabled(false);
+        btnNivelCuatro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btnNivelCuatroActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton8);
-        jButton8.setBounds(30, 594, 1840, 70);
+        jPanel1.add(btnNivelCuatro);
+        btnNivelCuatro.setBounds(30, 594, 1840, 70);
 
         jLabel1.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 51));
@@ -95,19 +95,19 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(770, 80, 430, 49);
 
-        jButton1.setBackground(new java.awt.Color(255, 204, 51));
-        jButton1.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("ATRAS");
-        jPanel1.add(jButton1);
-        jButton1.setBounds(0, 990, 210, 60);
+        btnAtras.setBackground(new java.awt.Color(255, 204, 51));
+        btnAtras.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
+        btnAtras.setForeground(new java.awt.Color(0, 0, 0));
+        btnAtras.setText("ATRAS");
+        jPanel1.add(btnAtras);
+        btnAtras.setBounds(0, 990, 210, 60);
 
-        jButton2.setBackground(new java.awt.Color(255, 204, 51));
-        jButton2.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("SIGUIENTE");
-        jPanel1.add(jButton2);
-        jButton2.setBounds(1700, 990, 210, 60);
+        btnSiguiente.setBackground(new java.awt.Color(255, 204, 51));
+        btnSiguiente.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
+        btnSiguiente.setForeground(new java.awt.Color(0, 0, 0));
+        btnSiguiente.setText("SIGUIENTE");
+        jPanel1.add(btnSiguiente);
+        btnSiguiente.setBounds(1700, 990, 210, 60);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,17 +125,17 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnNivelDosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNivelDosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnNivelDosActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btnNivelTresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNivelTresActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnNivelTresActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btnNivelCuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNivelCuatroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_btnNivelCuatroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,14 +173,14 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnNivelCuatro;
+    private javax.swing.JButton btnNivelDos;
+    private javax.swing.JButton btnNivelTres;
+    private javax.swing.JButton btnNivelUno;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblBackground;
     // End of variables declaration//GEN-END:variables
 }

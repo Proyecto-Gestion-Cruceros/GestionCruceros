@@ -4,6 +4,14 @@
  * and open the template in the editor.
  */
 package FormulariosCrucero;
+import java.awt.Color;
+import java.awt.Component;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.sql.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,7 +25,31 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
     public frmVistaCamarotesN2() {
         initComponents();
     }
+    public static Connection conn = null;
+    int numeroCamaroteSeleccionado;
+    PreparedStatement ps;
+    ResultSet result = null;
+           
+    public static Connection dbConexion() {
+        String url = "jdbc:sqlserver://DESKTOP-P4A3L4O:1433;databaseName=agenciaCruceros";
 
+        try {
+
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+        } catch (Exception ex) {
+            System.out.println("ERROR DE CONEXIÓN");
+        }
+
+        try {
+            conn = DriverManager.getConnection(url, "sa", "1234");
+        } catch (Exception ex) {
+            System.out.println("ERROR DE CONEXIÓN");
+        }
+
+        return conn;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,66 +59,72 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        group = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton28 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton25 = new javax.swing.JButton();
-        jButton27 = new javax.swing.JButton();
-        jButton29 = new javax.swing.JButton();
-        jButton30 = new javax.swing.JButton();
-        jButton31 = new javax.swing.JButton();
-        jButton32 = new javax.swing.JButton();
-        jButton33 = new javax.swing.JButton();
-        jButton35 = new javax.swing.JButton();
-        jButton36 = new javax.swing.JButton();
-        jButton37 = new javax.swing.JButton();
-        jButton38 = new javax.swing.JButton();
-        jButton39 = new javax.swing.JButton();
-        jButton40 = new javax.swing.JButton();
-        jButton41 = new javax.swing.JButton();
-        jButton42 = new javax.swing.JButton();
-        jButton43 = new javax.swing.JButton();
-        jButton44 = new javax.swing.JButton();
-        jButton45 = new javax.swing.JButton();
-        jButton46 = new javax.swing.JButton();
-        jButton47 = new javax.swing.JButton();
-        jButton48 = new javax.swing.JButton();
-        jButton49 = new javax.swing.JButton();
-        jButton50 = new javax.swing.JButton();
-        jButton26 = new javax.swing.JButton();
-        jButton51 = new javax.swing.JButton();
-        jButton52 = new javax.swing.JButton();
-        jButton53 = new javax.swing.JButton();
-        jButton54 = new javax.swing.JButton();
-        jButton55 = new javax.swing.JButton();
-        jButton56 = new javax.swing.JButton();
-        jButton66 = new javax.swing.JButton();
-        jButton34 = new javax.swing.JButton();
-        jButton68 = new javax.swing.JButton();
-        jButton69 = new javax.swing.JButton();
-        jButton70 = new javax.swing.JButton();
-        jButton71 = new javax.swing.JButton();
-        jButton72 = new javax.swing.JButton();
-        jButton73 = new javax.swing.JButton();
-        jButton74 = new javax.swing.JButton();
-        jButton75 = new javax.swing.JButton();
-        jButton76 = new javax.swing.JButton();
-        jButton77 = new javax.swing.JButton();
-        jButton57 = new javax.swing.JButton();
-        jButton58 = new javax.swing.JButton();
-        jButton59 = new javax.swing.JButton();
-        jButton60 = new javax.swing.JButton();
-        jButton61 = new javax.swing.JButton();
-        jButton63 = new javax.swing.JButton();
-        jButton78 = new javax.swing.JButton();
-        jButton62 = new javax.swing.JButton();
-        jButton64 = new javax.swing.JButton();
-        jButton65 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JButton();
+        indicador11 = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
+        indicador37 = new javax.swing.JButton();
+        indicador31 = new javax.swing.JButton();
+        indicador8 = new javax.swing.JButton();
+        indicador12 = new javax.swing.JButton();
+        indicador10 = new javax.swing.JButton();
+        indicador7 = new javax.swing.JButton();
+        indicador6 = new javax.swing.JButton();
+        indicador9 = new javax.swing.JButton();
+        indicador3 = new javax.swing.JButton();
+        indicador2 = new javax.swing.JButton();
+        indicador19 = new javax.swing.JButton();
+        indicador5 = new javax.swing.JButton();
+        indicador4 = new javax.swing.JButton();
+        indicador20 = new javax.swing.JButton();
+        indicador21 = new javax.swing.JButton();
+        indicador22 = new javax.swing.JButton();
+        indicador23 = new javax.swing.JButton();
+        indicador24 = new javax.swing.JButton();
+        indicador25 = new javax.swing.JButton();
+        indicador26 = new javax.swing.JButton();
+        indicador27 = new javax.swing.JButton();
+        indicador28 = new javax.swing.JButton();
+        indicador1 = new javax.swing.JButton();
+        indicador29 = new javax.swing.JButton();
+        indicador38 = new javax.swing.JButton();
+        indicador40 = new javax.swing.JButton();
+        indicador50 = new javax.swing.JButton();
+        indicador42 = new javax.swing.JButton();
+        indicador39 = new javax.swing.JButton();
+        indicador49 = new javax.swing.JButton();
+        indicador36 = new javax.swing.JButton();
+        indicador33 = new javax.swing.JButton();
+        indicador13 = new javax.swing.JButton();
+        indicador14 = new javax.swing.JButton();
+        indicador15 = new javax.swing.JButton();
+        indicador16 = new javax.swing.JButton();
+        indicador17 = new javax.swing.JButton();
+        indicador18 = new javax.swing.JButton();
+        indicador30 = new javax.swing.JButton();
+        indicador34 = new javax.swing.JButton();
+        indicadorVacio = new javax.swing.JButton();
+        indicador32 = new javax.swing.JButton();
+        indicador45 = new javax.swing.JButton();
+        indicador51 = new javax.swing.JButton();
+        indicador47 = new javax.swing.JButton();
+        indicador41 = new javax.swing.JButton();
+        indicador52 = new javax.swing.JButton();
+        indicador46 = new javax.swing.JButton();
+        indicador35 = new javax.swing.JButton();
+        indicador43 = new javax.swing.JButton();
+        indicador48 = new javax.swing.JButton();
+        indicador44 = new javax.swing.JButton();
+        lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 79, 129));
         jPanel1.setPreferredSize(new java.awt.Dimension(1635, 1035));
@@ -98,538 +136,1139 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(600, 70, 510, 49);
 
-        jButton1.setBackground(new java.awt.Color(255, 204, 51));
-        jButton1.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("ATRAS");
-        jPanel1.add(jButton1);
-        jButton1.setBounds(0, 830, 210, 60);
+        btnAtras.setBackground(new java.awt.Color(255, 204, 51));
+        btnAtras.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
+        btnAtras.setForeground(new java.awt.Color(0, 0, 0));
+        btnAtras.setText("ATRAS");
+        jPanel1.add(btnAtras);
+        btnAtras.setBounds(0, 830, 210, 60);
 
-        jButton28.setBackground(new java.awt.Color(255, 0, 51));
-        jButton28.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton28.setHideActionText(true);
-        jButton28.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton28);
-        jButton28.setBounds(784, 230, 40, 40);
-
-        jButton2.setBackground(new java.awt.Color(255, 204, 51));
-        jButton2.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("SIGUIENTE");
-        jPanel1.add(jButton2);
-        jButton2.setBounds(1420, 830, 210, 60);
-
-        jButton25.setBackground(new java.awt.Color(255, 0, 51));
-        jButton25.setHideActionText(true);
-        jButton25.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton25);
-        jButton25.setBounds(698, 307, 40, 30);
-
-        jButton27.setBackground(new java.awt.Color(255, 0, 51));
-        jButton27.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton27.setHideActionText(true);
-        jButton27.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton27);
-        jButton27.setBounds(908, 422, 40, 40);
-
-        jButton29.setBackground(new java.awt.Color(255, 0, 51));
-        jButton29.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton29.setHideActionText(true);
-        jButton29.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton29);
-        jButton29.setBounds(600, 230, 40, 40);
-
-        jButton30.setBackground(new java.awt.Color(255, 0, 51));
-        jButton30.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton30.setHideActionText(true);
-        jButton30.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton30);
-        jButton30.setBounds(847, 230, 40, 40);
-
-        jButton31.setBackground(new java.awt.Color(255, 0, 51));
-        jButton31.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton31.setHideActionText(true);
-        jButton31.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton31);
-        jButton31.setBounds(722, 230, 40, 40);
-
-        jButton32.setBackground(new java.awt.Color(255, 0, 51));
-        jButton32.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton32.setText("   ");
-        jButton32.setToolTipText("");
-        jButton32.setHideActionText(true);
-        jButton32.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton32);
-        jButton32.setBounds(540, 230, 40, 40);
-
-        jButton33.setBackground(new java.awt.Color(255, 0, 51));
-        jButton33.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton33.setText("   ");
-        jButton33.setToolTipText("");
-        jButton33.setHideActionText(true);
-        jButton33.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton33);
-        jButton33.setBounds(479, 230, 40, 40);
-
-        jButton35.setBackground(new java.awt.Color(255, 0, 51));
-        jButton35.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton35.setHideActionText(true);
-        jButton35.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton35);
-        jButton35.setBounds(660, 230, 40, 40);
-
-        jButton36.setBackground(new java.awt.Color(255, 0, 51));
-        jButton36.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton36.setText("  ");
-        jButton36.setHideActionText(true);
-        jButton36.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton36);
-        jButton36.setBounds(240, 230, 40, 40);
-
-        jButton37.setBackground(new java.awt.Color(255, 0, 51));
-        jButton37.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton37.setText("  ");
-        jButton37.setHideActionText(true);
-        jButton37.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton37);
-        jButton37.setBounds(180, 230, 40, 40);
-
-        jButton38.setBackground(new java.awt.Color(255, 0, 51));
-        jButton38.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton38.setText("  ");
-        jButton38.setHideActionText(true);
-        jButton38.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton38);
-        jButton38.setBounds(120, 422, 40, 40);
-
-        jButton39.setBackground(new java.awt.Color(255, 0, 51));
-        jButton39.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton39.setText("   ");
-        jButton39.setToolTipText("");
-        jButton39.setHideActionText(true);
-        jButton39.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton39);
-        jButton39.setBounds(380, 230, 40, 40);
-
-        jButton40.setBackground(new java.awt.Color(255, 0, 51));
-        jButton40.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton40.setText("  ");
-        jButton40.setHideActionText(true);
-        jButton40.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton40);
-        jButton40.setBounds(302, 230, 40, 40);
-
-        jButton41.setBackground(new java.awt.Color(255, 0, 51));
-        jButton41.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton41.setText("  ");
-        jButton41.setHideActionText(true);
-        jButton41.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton41);
-        jButton41.setBounds(180, 422, 40, 40);
-
-        jButton42.setBackground(new java.awt.Color(255, 0, 51));
-        jButton42.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton42.setText("   ");
-        jButton42.setToolTipText("");
-        jButton42.setHideActionText(true);
-        jButton42.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton42);
-        jButton42.setBounds(240, 422, 40, 40);
-
-        jButton43.setBackground(new java.awt.Color(255, 0, 0));
-        jButton43.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton43.setText("   ");
-        jButton43.setToolTipText("");
-        jButton43.setHideActionText(true);
-        jButton43.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton43);
-        jButton43.setBounds(302, 422, 40, 40);
-
-        jButton44.setBackground(new java.awt.Color(255, 0, 51));
-        jButton44.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton44.setText("   ");
-        jButton44.setToolTipText("");
-        jButton44.setHideActionText(true);
-        jButton44.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton44);
-        jButton44.setBounds(380, 422, 40, 40);
-
-        jButton45.setBackground(new java.awt.Color(255, 0, 51));
-        jButton45.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton45.setText("   ");
-        jButton45.setToolTipText("");
-        jButton45.setHideActionText(true);
-        jButton45.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton45);
-        jButton45.setBounds(479, 422, 40, 40);
-
-        jButton46.setBackground(new java.awt.Color(255, 0, 51));
-        jButton46.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton46.setHideActionText(true);
-        jButton46.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton46);
-        jButton46.setBounds(540, 422, 40, 40);
-
-        jButton47.setBackground(new java.awt.Color(255, 0, 51));
-        jButton47.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton47.setHideActionText(true);
-        jButton47.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton47);
-        jButton47.setBounds(600, 422, 40, 40);
-
-        jButton48.setBackground(new java.awt.Color(255, 0, 51));
-        jButton48.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton48.setHideActionText(true);
-        jButton48.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton48);
-        jButton48.setBounds(660, 422, 40, 40);
-
-        jButton49.setBackground(new java.awt.Color(255, 0, 51));
-        jButton49.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton49.setHideActionText(true);
-        jButton49.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton49);
-        jButton49.setBounds(722, 422, 40, 40);
-
-        jButton50.setBackground(new java.awt.Color(255, 0, 51));
-        jButton50.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton50.setText("  ");
-        jButton50.setHideActionText(true);
-        jButton50.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton50);
-        jButton50.setBounds(120, 230, 40, 40);
-
-        jButton26.setBackground(new java.awt.Color(255, 0, 51));
-        jButton26.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton26.setHideActionText(true);
-        jButton26.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton26.addActionListener(new java.awt.event.ActionListener() {
+        indicador11.setBackground(new java.awt.Color(51, 255, 0));
+        indicador11.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador11);
+        indicador11.setHideActionText(true);
+        indicador11.setName("indicador11"); // NOI18N
+        indicador11.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton26ActionPerformed(evt);
+                indicador11ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton26);
-        jButton26.setBounds(784, 422, 40, 40);
+        jPanel1.add(indicador11);
+        indicador11.setBounds(784, 230, 40, 40);
 
-        jButton51.setBackground(new java.awt.Color(255, 0, 51));
-        jButton51.setHideActionText(true);
-        jButton51.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton51);
-        jButton51.setBounds(758, 307, 40, 30);
+        btnSiguiente.setBackground(new java.awt.Color(255, 204, 51));
+        btnSiguiente.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
+        btnSiguiente.setForeground(new java.awt.Color(0, 0, 0));
+        btnSiguiente.setText("SIGUIENTE");
+        jPanel1.add(btnSiguiente);
+        btnSiguiente.setBounds(1420, 830, 210, 60);
 
-        jButton52.setBackground(new java.awt.Color(255, 0, 51));
-        jButton52.setHideActionText(true);
-        jButton52.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton52.addActionListener(new java.awt.event.ActionListener() {
+        indicador37.setBackground(new java.awt.Color(102, 255, 0));
+        indicador37.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador37);
+        indicador37.setHideActionText(true);
+        indicador37.setName("indicador37"); // NOI18N
+        indicador37.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador37.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton52ActionPerformed(evt);
+                indicador37ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton52);
-        jButton52.setBounds(638, 358, 40, 30);
+        jPanel1.add(indicador37);
+        indicador37.setBounds(698, 307, 40, 30);
 
-        jButton53.setBackground(new java.awt.Color(255, 0, 51));
-        jButton53.setHideActionText(true);
-        jButton53.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton53.addActionListener(new java.awt.event.ActionListener() {
+        indicador31.setBackground(new java.awt.Color(102, 255, 0));
+        indicador31.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador31.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador31);
+        indicador31.setHideActionText(true);
+        indicador31.setName("indicador31"); // NOI18N
+        indicador31.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador31.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton53ActionPerformed(evt);
+                indicador31ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton53);
-        jButton53.setBounds(1042, 357, 40, 30);
+        jPanel1.add(indicador31);
+        indicador31.setBounds(908, 422, 40, 40);
 
-        jButton54.setBackground(new java.awt.Color(255, 0, 51));
-        jButton54.setHideActionText(true);
-        jButton54.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton54.addActionListener(new java.awt.event.ActionListener() {
+        indicador8.setBackground(new java.awt.Color(102, 255, 0));
+        indicador8.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador8);
+        indicador8.setHideActionText(true);
+        indicador8.setName("indicador8"); // NOI18N
+        indicador8.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton54ActionPerformed(evt);
+                indicador8ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton54);
-        jButton54.setBounds(758, 358, 40, 30);
+        jPanel1.add(indicador8);
+        indicador8.setBounds(600, 230, 40, 40);
 
-        jButton55.setBackground(new java.awt.Color(255, 0, 51));
-        jButton55.setHideActionText(true);
-        jButton55.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton55);
-        jButton55.setBounds(818, 307, 40, 30);
-
-        jButton56.setBackground(new java.awt.Color(255, 0, 51));
-        jButton56.setHideActionText(true);
-        jButton56.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton56.addActionListener(new java.awt.event.ActionListener() {
+        indicador12.setBackground(new java.awt.Color(102, 255, 0));
+        indicador12.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador12);
+        indicador12.setHideActionText(true);
+        indicador12.setName("indicador12"); // NOI18N
+        indicador12.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton56ActionPerformed(evt);
+                indicador12ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton56);
-        jButton56.setBounds(985, 372, 40, 20);
+        jPanel1.add(indicador12);
+        indicador12.setBounds(847, 230, 40, 40);
 
-        jButton66.setBackground(new java.awt.Color(255, 0, 51));
-        jButton66.setHideActionText(true);
-        jButton66.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton66);
-        jButton66.setBounds(638, 307, 40, 30);
-
-        jButton34.setBackground(new java.awt.Color(255, 0, 51));
-        jButton34.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton34.setHideActionText(true);
-        jButton34.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton34);
-        jButton34.setBounds(1036, 422, 40, 40);
-
-        jButton68.setBackground(new java.awt.Color(255, 0, 51));
-        jButton68.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton68.setHideActionText(true);
-        jButton68.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton68);
-        jButton68.setBounds(908, 230, 40, 40);
-
-        jButton69.setBackground(new java.awt.Color(255, 0, 51));
-        jButton69.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton69.setHideActionText(true);
-        jButton69.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton69);
-        jButton69.setBounds(976, 230, 40, 40);
-
-        jButton70.setBackground(new java.awt.Color(255, 0, 51));
-        jButton70.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton70.setHideActionText(true);
-        jButton70.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton70);
-        jButton70.setBounds(1036, 230, 40, 40);
-
-        jButton71.setBackground(new java.awt.Color(255, 0, 51));
-        jButton71.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton71.setHideActionText(true);
-        jButton71.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton71);
-        jButton71.setBounds(1095, 230, 40, 40);
-
-        jButton72.setBackground(new java.awt.Color(255, 0, 51));
-        jButton72.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton72.setHideActionText(true);
-        jButton72.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton72);
-        jButton72.setBounds(1151, 230, 40, 40);
-
-        jButton73.setBackground(new java.awt.Color(255, 0, 51));
-        jButton73.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton73.setHideActionText(true);
-        jButton73.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton73);
-        jButton73.setBounds(1210, 230, 40, 40);
-
-        jButton74.setBackground(new java.awt.Color(255, 0, 51));
-        jButton74.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton74.setHideActionText(true);
-        jButton74.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton74);
-        jButton74.setBounds(847, 422, 40, 40);
-
-        jButton75.setBackground(new java.awt.Color(255, 0, 51));
-        jButton75.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton75.setHideActionText(true);
-        jButton75.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton75);
-        jButton75.setBounds(1095, 422, 40, 40);
-
-        jButton76.setBackground(new java.awt.Color(255, 0, 51));
-        jButton76.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton76.setHideActionText(true);
-        jButton76.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton76);
-        jButton76.setBounds(1210, 422, 40, 40);
-
-        jButton77.setBackground(new java.awt.Color(255, 0, 51));
-        jButton77.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton77.setHideActionText(true);
-        jButton77.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton77);
-        jButton77.setBounds(976, 422, 40, 40);
-
-        jButton57.setBackground(new java.awt.Color(255, 0, 51));
-        jButton57.setHideActionText(true);
-        jButton57.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton57.addActionListener(new java.awt.event.ActionListener() {
+        indicador10.setBackground(new java.awt.Color(102, 255, 0));
+        indicador10.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador10);
+        indicador10.setHideActionText(true);
+        indicador10.setName("indicador10"); // NOI18N
+        indicador10.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton57ActionPerformed(evt);
+                indicador10ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton57);
-        jButton57.setBounds(1042, 307, 40, 30);
+        jPanel1.add(indicador10);
+        indicador10.setBounds(722, 230, 40, 40);
 
-        jButton58.setBackground(new java.awt.Color(255, 0, 51));
-        jButton58.setHideActionText(true);
-        jButton58.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton58.addActionListener(new java.awt.event.ActionListener() {
+        indicador7.setBackground(new java.awt.Color(102, 255, 0));
+        indicador7.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador7.setText("   ");
+        indicador7.setToolTipText("");
+        indicador7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador7);
+        indicador7.setHideActionText(true);
+        indicador7.setName("indicador7"); // NOI18N
+        indicador7.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton58ActionPerformed(evt);
+                indicador7ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton58);
-        jButton58.setBounds(1100, 357, 40, 30);
+        jPanel1.add(indicador7);
+        indicador7.setBounds(540, 230, 40, 40);
 
-        jButton59.setBackground(new java.awt.Color(255, 0, 51));
-        jButton59.setHideActionText(true);
-        jButton59.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton59.addActionListener(new java.awt.event.ActionListener() {
+        indicador6.setBackground(new java.awt.Color(102, 255, 0));
+        indicador6.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador6.setText("   ");
+        indicador6.setToolTipText("");
+        indicador6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador6);
+        indicador6.setHideActionText(true);
+        indicador6.setName("indicador6"); // NOI18N
+        indicador6.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton59ActionPerformed(evt);
+                indicador6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton59);
-        jButton59.setBounds(1170, 307, 40, 30);
+        jPanel1.add(indicador6);
+        indicador6.setBounds(479, 230, 40, 40);
 
-        jButton60.setBackground(new java.awt.Color(255, 0, 51));
-        jButton60.setHideActionText(true);
-        jButton60.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton60.addActionListener(new java.awt.event.ActionListener() {
+        indicador9.setBackground(new java.awt.Color(102, 255, 0));
+        indicador9.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador9);
+        indicador9.setHideActionText(true);
+        indicador9.setName("indicador9"); // NOI18N
+        indicador9.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton60ActionPerformed(evt);
+                indicador9ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton60);
-        jButton60.setBounds(698, 358, 40, 30);
+        jPanel1.add(indicador9);
+        indicador9.setBounds(660, 230, 40, 40);
 
-        jButton61.setBackground(new java.awt.Color(255, 0, 51));
-        jButton61.setHideActionText(true);
-        jButton61.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton61.addActionListener(new java.awt.event.ActionListener() {
+        indicador3.setBackground(new java.awt.Color(102, 255, 0));
+        indicador3.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador3.setText("  ");
+        indicador3.setActionCommand("indicador3");
+        indicador3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador3);
+        indicador3.setHideActionText(true);
+        indicador3.setName("indicador3"); // NOI18N
+        indicador3.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton61ActionPerformed(evt);
+                indicador3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton61);
-        jButton61.setBounds(1170, 357, 40, 30);
+        jPanel1.add(indicador3);
+        indicador3.setBounds(240, 230, 40, 40);
 
-        jButton63.setBackground(new java.awt.Color(255, 0, 51));
-        jButton63.setHideActionText(true);
-        jButton63.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton63.addActionListener(new java.awt.event.ActionListener() {
+        indicador2.setBackground(new java.awt.Color(102, 255, 0));
+        indicador2.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador2.setText("  ");
+        indicador2.setActionCommand("");
+        indicador2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador2);
+        indicador2.setHideActionText(true);
+        indicador2.setName("indicador2"); // NOI18N
+        indicador2.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton63ActionPerformed(evt);
+                indicador2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton63);
-        jButton63.setBounds(1100, 307, 40, 30);
+        jPanel1.add(indicador2);
+        indicador2.setBounds(180, 230, 40, 40);
 
-        jButton78.setBackground(new java.awt.Color(255, 0, 51));
-        jButton78.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        jButton78.setHideActionText(true);
-        jButton78.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jButton78);
-        jButton78.setBounds(1151, 422, 40, 40);
-
-        jButton62.setBackground(new java.awt.Color(255, 0, 51));
-        jButton62.setHideActionText(true);
-        jButton62.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton62.addActionListener(new java.awt.event.ActionListener() {
+        indicador19.setBackground(new java.awt.Color(102, 255, 0));
+        indicador19.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador19.setText("  ");
+        indicador19.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador19);
+        indicador19.setHideActionText(true);
+        indicador19.setName("indicador19"); // NOI18N
+        indicador19.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton62ActionPerformed(evt);
+                indicador19ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton62);
-        jButton62.setBounds(818, 358, 40, 30);
+        jPanel1.add(indicador19);
+        indicador19.setBounds(120, 422, 40, 40);
 
-        jButton64.setBackground(new java.awt.Color(255, 0, 51));
-        jButton64.setHideActionText(true);
-        jButton64.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton64.addActionListener(new java.awt.event.ActionListener() {
+        indicador5.setBackground(new java.awt.Color(102, 255, 0));
+        indicador5.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador5.setText("   ");
+        indicador5.setToolTipText("");
+        indicador5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador5);
+        indicador5.setHideActionText(true);
+        indicador5.setName("indicador5"); // NOI18N
+        indicador5.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton64ActionPerformed(evt);
+                indicador5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton64);
-        jButton64.setBounds(1242, 302, 40, 20);
+        jPanel1.add(indicador5);
+        indicador5.setBounds(380, 230, 40, 40);
 
-        jButton65.setBackground(new java.awt.Color(255, 0, 51));
-        jButton65.setHideActionText(true);
-        jButton65.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton65.addActionListener(new java.awt.event.ActionListener() {
+        indicador4.setBackground(new java.awt.Color(102, 255, 0));
+        indicador4.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador4.setText("  ");
+        indicador4.setActionCommand("indicado4");
+        indicador4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador4);
+        indicador4.setHideActionText(true);
+        indicador4.setName("indicador4"); // NOI18N
+        indicador4.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton65ActionPerformed(evt);
+                indicador4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton65);
-        jButton65.setBounds(985, 300, 40, 20);
+        jPanel1.add(indicador4);
+        indicador4.setBounds(302, 230, 40, 40);
 
-        jLabel5.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\OscarM\\Documents\\1 PERIODO 2021\\Programacion Multiplataforma\\III Parcial\\mapa33 (2).png")); // NOI18N
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(0, 140, 1700, 410);
+        indicador20.setBackground(new java.awt.Color(102, 255, 0));
+        indicador20.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador20.setText("  ");
+        indicador20.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador20);
+        indicador20.setHideActionText(true);
+        indicador20.setName("indicador20"); // NOI18N
+        indicador20.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador20ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador20);
+        indicador20.setBounds(180, 422, 40, 40);
+
+        indicador21.setBackground(new java.awt.Color(102, 255, 0));
+        indicador21.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador21.setText("   ");
+        indicador21.setToolTipText("");
+        indicador21.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador21);
+        indicador21.setHideActionText(true);
+        indicador21.setName("indicador21"); // NOI18N
+        indicador21.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador21ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador21);
+        indicador21.setBounds(240, 422, 40, 40);
+
+        indicador22.setBackground(new java.awt.Color(102, 255, 0));
+        indicador22.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador22.setText("   ");
+        indicador22.setToolTipText("");
+        indicador22.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador22);
+        indicador22.setHideActionText(true);
+        indicador22.setName("indicador22"); // NOI18N
+        indicador22.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador22ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador22);
+        indicador22.setBounds(302, 422, 40, 40);
+
+        indicador23.setBackground(new java.awt.Color(102, 255, 0));
+        indicador23.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador23.setText("   ");
+        indicador23.setToolTipText("");
+        indicador23.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador23);
+        indicador23.setHideActionText(true);
+        indicador23.setName("indicador23"); // NOI18N
+        indicador23.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador23ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador23);
+        indicador23.setBounds(380, 422, 40, 40);
+
+        indicador24.setBackground(new java.awt.Color(102, 255, 0));
+        indicador24.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador24.setText("   ");
+        indicador24.setToolTipText("");
+        indicador24.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador24);
+        indicador24.setHideActionText(true);
+        indicador24.setName("indicador24"); // NOI18N
+        indicador24.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador24ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador24);
+        indicador24.setBounds(479, 422, 40, 40);
+
+        indicador25.setBackground(new java.awt.Color(102, 255, 0));
+        indicador25.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador25.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador25);
+        indicador25.setHideActionText(true);
+        indicador25.setName("indicador25"); // NOI18N
+        indicador25.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador25ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador25);
+        indicador25.setBounds(540, 422, 40, 40);
+
+        indicador26.setBackground(new java.awt.Color(102, 255, 0));
+        indicador26.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador26.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador26);
+        indicador26.setHideActionText(true);
+        indicador26.setName("indicador26"); // NOI18N
+        indicador26.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador26ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador26);
+        indicador26.setBounds(600, 422, 40, 40);
+
+        indicador27.setBackground(new java.awt.Color(102, 255, 0));
+        indicador27.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador27.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador27);
+        indicador27.setHideActionText(true);
+        indicador27.setName("indicador27"); // NOI18N
+        indicador27.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador27ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador27);
+        indicador27.setBounds(660, 422, 40, 40);
+
+        indicador28.setBackground(new java.awt.Color(102, 255, 0));
+        indicador28.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador28.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador28);
+        indicador28.setHideActionText(true);
+        indicador28.setName("indicador28"); // NOI18N
+        indicador28.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador28ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador28);
+        indicador28.setBounds(722, 422, 40, 40);
+
+        indicador1.setBackground(new java.awt.Color(102, 255, 0));
+        indicador1.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador1.setToolTipText("");
+        indicador1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador1);
+        indicador1.setHideActionText(true);
+        indicador1.setName("indicador1"); // NOI18N
+        indicador1.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador1);
+        indicador1.setBounds(120, 230, 40, 40);
+
+        indicador29.setBackground(new java.awt.Color(102, 255, 0));
+        indicador29.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador29.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador29);
+        indicador29.setHideActionText(true);
+        indicador29.setName("indicador29"); // NOI18N
+        indicador29.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador29ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador29);
+        indicador29.setBounds(784, 422, 40, 40);
+
+        indicador38.setBackground(new java.awt.Color(102, 255, 0));
+        indicador38.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador38);
+        indicador38.setHideActionText(true);
+        indicador38.setName("indicador38"); // NOI18N
+        indicador38.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador38.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador38ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador38);
+        indicador38.setBounds(758, 307, 40, 30);
+
+        indicador40.setBackground(new java.awt.Color(102, 255, 0));
+        indicador40.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador40);
+        indicador40.setHideActionText(true);
+        indicador40.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador40.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador40ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador40);
+        indicador40.setBounds(638, 358, 40, 30);
+
+        indicador50.setBackground(new java.awt.Color(102, 255, 0));
+        indicador50.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador50);
+        indicador50.setHideActionText(true);
+        indicador50.setName("indicador50"); // NOI18N
+        indicador50.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador50.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador50ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador50);
+        indicador50.setBounds(1042, 357, 40, 30);
+
+        indicador42.setBackground(new java.awt.Color(102, 255, 0));
+        indicador42.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador42);
+        indicador42.setHideActionText(true);
+        indicador42.setName("indicador42"); // NOI18N
+        indicador42.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador42.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador42ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador42);
+        indicador42.setBounds(758, 358, 40, 30);
+
+        indicador39.setBackground(new java.awt.Color(102, 255, 0));
+        indicador39.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador39);
+        indicador39.setHideActionText(true);
+        indicador39.setName("indicador39"); // NOI18N
+        indicador39.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador39.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador39ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador39);
+        indicador39.setBounds(818, 307, 40, 30);
+
+        indicador49.setBackground(new java.awt.Color(102, 255, 0));
+        indicador49.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador49);
+        indicador49.setHideActionText(true);
+        indicador49.setName("indicador49"); // NOI18N
+        indicador49.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador49.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador49ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador49);
+        indicador49.setBounds(985, 372, 40, 20);
+
+        indicador36.setBackground(new java.awt.Color(102, 255, 0));
+        indicador36.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador36);
+        indicador36.setHideActionText(true);
+        indicador36.setName("indicador36"); // NOI18N
+        indicador36.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador36.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador36ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador36);
+        indicador36.setBounds(638, 307, 40, 30);
+
+        indicador33.setBackground(new java.awt.Color(102, 255, 0));
+        indicador33.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador33.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador33);
+        indicador33.setHideActionText(true);
+        indicador33.setName("indicador33"); // NOI18N
+        indicador33.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador33ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador33);
+        indicador33.setBounds(1036, 422, 40, 40);
+
+        indicador13.setBackground(new java.awt.Color(102, 255, 0));
+        indicador13.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador13.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador13);
+        indicador13.setHideActionText(true);
+        indicador13.setName("indicador13"); // NOI18N
+        indicador13.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador13ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador13);
+        indicador13.setBounds(908, 230, 40, 40);
+
+        indicador14.setBackground(new java.awt.Color(102, 255, 0));
+        indicador14.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador14.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador14);
+        indicador14.setHideActionText(true);
+        indicador14.setName("indicador14"); // NOI18N
+        indicador14.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador14ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador14);
+        indicador14.setBounds(976, 230, 40, 40);
+
+        indicador15.setBackground(new java.awt.Color(102, 255, 0));
+        indicador15.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador15.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador15);
+        indicador15.setHideActionText(true);
+        indicador15.setName("indicador15"); // NOI18N
+        indicador15.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador15ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador15);
+        indicador15.setBounds(1036, 230, 40, 40);
+
+        indicador16.setBackground(new java.awt.Color(102, 255, 0));
+        indicador16.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador16.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador16);
+        indicador16.setHideActionText(true);
+        indicador16.setName("indicador16"); // NOI18N
+        indicador16.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador16ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador16);
+        indicador16.setBounds(1095, 230, 40, 40);
+
+        indicador17.setBackground(new java.awt.Color(102, 255, 0));
+        indicador17.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador17.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador17);
+        indicador17.setHideActionText(true);
+        indicador17.setName("indicador17"); // NOI18N
+        indicador17.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador17ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador17);
+        indicador17.setBounds(1151, 230, 40, 40);
+
+        indicador18.setBackground(new java.awt.Color(102, 255, 0));
+        indicador18.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador18.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador18);
+        indicador18.setHideActionText(true);
+        indicador18.setName("indicador18"); // NOI18N
+        indicador18.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador18ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador18);
+        indicador18.setBounds(1210, 230, 40, 40);
+
+        indicador30.setBackground(new java.awt.Color(102, 255, 0));
+        indicador30.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador30.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador30);
+        indicador30.setHideActionText(true);
+        indicador30.setName("indicador30"); // NOI18N
+        indicador30.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador30ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador30);
+        indicador30.setBounds(847, 422, 40, 40);
+
+        indicador34.setBackground(new java.awt.Color(102, 255, 0));
+        indicador34.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador34.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador34);
+        indicador34.setHideActionText(true);
+        indicador34.setName("indicador34"); // NOI18N
+        indicador34.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador34ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador34);
+        indicador34.setBounds(1095, 422, 40, 40);
+
+        indicadorVacio.setBackground(new java.awt.Color(102, 255, 0));
+        indicadorVacio.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicadorVacio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicadorVacio);
+        indicadorVacio.setHideActionText(true);
+        indicadorVacio.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel1.add(indicadorVacio);
+        indicadorVacio.setBounds(1210, 422, 40, 40);
+
+        indicador32.setBackground(new java.awt.Color(102, 255, 0));
+        indicador32.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador32.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador32);
+        indicador32.setHideActionText(true);
+        indicador32.setName("indicador32"); // NOI18N
+        indicador32.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador32ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador32);
+        indicador32.setBounds(976, 422, 40, 40);
+
+        indicador45.setBackground(new java.awt.Color(102, 255, 0));
+        indicador45.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador45);
+        indicador45.setHideActionText(true);
+        indicador45.setName("indicador45"); // NOI18N
+        indicador45.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador45.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador45ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador45);
+        indicador45.setBounds(1042, 307, 40, 30);
+
+        indicador51.setBackground(new java.awt.Color(102, 255, 0));
+        indicador51.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador51);
+        indicador51.setHideActionText(true);
+        indicador51.setName("indicador51"); // NOI18N
+        indicador51.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador51.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador51ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador51);
+        indicador51.setBounds(1100, 357, 40, 30);
+
+        indicador47.setBackground(new java.awt.Color(102, 255, 0));
+        indicador47.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador47);
+        indicador47.setHideActionText(true);
+        indicador47.setName("indicador47"); // NOI18N
+        indicador47.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador47.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador47ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador47);
+        indicador47.setBounds(1170, 307, 40, 30);
+
+        indicador41.setBackground(new java.awt.Color(102, 255, 0));
+        indicador41.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador41);
+        indicador41.setHideActionText(true);
+        indicador41.setName("indicador41"); // NOI18N
+        indicador41.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador41.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador41ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador41);
+        indicador41.setBounds(698, 358, 40, 30);
+
+        indicador52.setBackground(new java.awt.Color(102, 255, 0));
+        indicador52.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador52);
+        indicador52.setHideActionText(true);
+        indicador52.setName("indicador52"); // NOI18N
+        indicador52.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador52.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador52ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador52);
+        indicador52.setBounds(1170, 357, 40, 30);
+
+        indicador46.setBackground(new java.awt.Color(102, 255, 0));
+        indicador46.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador46);
+        indicador46.setHideActionText(true);
+        indicador46.setName("indicador46"); // NOI18N
+        indicador46.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador46.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador46ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador46);
+        indicador46.setBounds(1100, 307, 40, 30);
+
+        indicador35.setBackground(new java.awt.Color(102, 255, 0));
+        indicador35.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
+        indicador35.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador35);
+        indicador35.setHideActionText(true);
+        indicador35.setName("indicador35"); // NOI18N
+        indicador35.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador35ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador35);
+        indicador35.setBounds(1151, 422, 40, 40);
+
+        indicador43.setBackground(new java.awt.Color(102, 255, 0));
+        indicador43.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador43);
+        indicador43.setHideActionText(true);
+        indicador43.setName("indicador43"); // NOI18N
+        indicador43.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador43.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador43ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador43);
+        indicador43.setBounds(818, 358, 40, 30);
+
+        indicador48.setBackground(new java.awt.Color(102, 255, 0));
+        indicador48.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador48);
+        indicador48.setHideActionText(true);
+        indicador48.setName("indicador48"); // NOI18N
+        indicador48.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador48.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador48ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador48);
+        indicador48.setBounds(1242, 302, 40, 20);
+
+        indicador44.setBackground(new java.awt.Color(102, 255, 0));
+        indicador44.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        group.add(indicador44);
+        indicador44.setHideActionText(true);
+        indicador44.setName("indicador44"); // NOI18N
+        indicador44.setPreferredSize(new java.awt.Dimension(50, 50));
+        indicador44.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indicador44ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(indicador44);
+        indicador44.setBounds(985, 300, 40, 20);
+
+        lblBackground.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/mapa33 (2).png"))); // NOI18N
+        jPanel1.add(lblBackground);
+        lblBackground.setBounds(0, 140, 1700, 410);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton64ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton64ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton64ActionPerformed
+    private void indicador48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador48ActionPerformed
+        bloquearBotones(indicador48);
+        numeroCamaroteSeleccionado = 48;
+    }//GEN-LAST:event_indicador48ActionPerformed
 
-    private void jButton62ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton62ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton62ActionPerformed
+    private void indicador43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador43ActionPerformed
+        bloquearBotones(indicador43);
+        numeroCamaroteSeleccionado = 43;
+    }//GEN-LAST:event_indicador43ActionPerformed
 
-    private void jButton61ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton61ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton61ActionPerformed
+    private void indicador52ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador52ActionPerformed
+        bloquearBotones(indicador52);
+        numeroCamaroteSeleccionado = 52;
+    }//GEN-LAST:event_indicador52ActionPerformed
 
-    private void jButton56ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton56ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton56ActionPerformed
+    private void indicador49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador49ActionPerformed
+        bloquearBotones(indicador49);
+        numeroCamaroteSeleccionado = 49;
+    }//GEN-LAST:event_indicador49ActionPerformed
 
-    private void jButton63ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton63ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton63ActionPerformed
+    private void indicador46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador46ActionPerformed
+        bloquearBotones(indicador46);
+        numeroCamaroteSeleccionado = 46;
+    }//GEN-LAST:event_indicador46ActionPerformed
 
-    private void jButton59ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton59ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton59ActionPerformed
+    private void indicador47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador47ActionPerformed
+        bloquearBotones(indicador47);
+        numeroCamaroteSeleccionado = 47;
+    }//GEN-LAST:event_indicador47ActionPerformed
 
-    private void jButton58ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton58ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton58ActionPerformed
+    private void indicador51ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador51ActionPerformed
+        bloquearBotones(indicador51);
+        numeroCamaroteSeleccionado = 51;
+    }//GEN-LAST:event_indicador51ActionPerformed
 
-    private void jButton52ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton52ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton52ActionPerformed
+    private void indicador40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador40ActionPerformed
+        bloquearBotones(indicador40);
+        numeroCamaroteSeleccionado = 40;
+    }//GEN-LAST:event_indicador40ActionPerformed
 
-    private void jButton65ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton65ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton65ActionPerformed
+    private void indicador44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador44ActionPerformed
+        bloquearBotones(indicador44);
+        numeroCamaroteSeleccionado = 44;
+    }//GEN-LAST:event_indicador44ActionPerformed
 
-    private void jButton60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton60ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton60ActionPerformed
+    private void indicador41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador41ActionPerformed
+        bloquearBotones(indicador41);
+        numeroCamaroteSeleccionado = 41;
+    }//GEN-LAST:event_indicador41ActionPerformed
 
-    private void jButton54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton54ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton54ActionPerformed
+    private void indicador42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador42ActionPerformed
+        bloquearBotones(indicador42);
+        numeroCamaroteSeleccionado = 42;
+    }//GEN-LAST:event_indicador42ActionPerformed
 
-    private void jButton57ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton57ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton57ActionPerformed
+    private void indicador45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador45ActionPerformed
+        bloquearBotones(indicador45);
+        numeroCamaroteSeleccionado = 45;
+    }//GEN-LAST:event_indicador45ActionPerformed
 
-    private void jButton53ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton53ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton53ActionPerformed
+    private void indicador50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador50ActionPerformed
+        bloquearBotones(indicador50);
+        numeroCamaroteSeleccionado = 50;
+    }//GEN-LAST:event_indicador50ActionPerformed
 
-    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton26ActionPerformed
+    private void indicador29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador29ActionPerformed
+        bloquearBotones(indicador29);
+        numeroCamaroteSeleccionado = 29;
+    }//GEN-LAST:event_indicador29ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        verificarBotones();
+
+        retornarEstadoCamarote();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void indicador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador1ActionPerformed
+
+        bloquearBotones(indicador1);
+        numeroCamaroteSeleccionado = 1;
+    }//GEN-LAST:event_indicador1ActionPerformed
+
+    private void indicador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador2ActionPerformed
+        bloquearBotones(indicador2);
+        numeroCamaroteSeleccionado = 2;
+    }//GEN-LAST:event_indicador2ActionPerformed
+
+    private void indicador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador3ActionPerformed
+        bloquearBotones(indicador3);
+        numeroCamaroteSeleccionado = 3;
+    }//GEN-LAST:event_indicador3ActionPerformed
+
+    private void indicador4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador4ActionPerformed
+        bloquearBotones(indicador4);
+        numeroCamaroteSeleccionado = 4;    }//GEN-LAST:event_indicador4ActionPerformed
+
+    private void indicador5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador5ActionPerformed
+        bloquearBotones(indicador5);
+        numeroCamaroteSeleccionado = 5;
+    }//GEN-LAST:event_indicador5ActionPerformed
+
+    private void indicador6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador6ActionPerformed
+        bloquearBotones(indicador6);
+        numeroCamaroteSeleccionado = 6;        // TODO add your handling code here:
+    }//GEN-LAST:event_indicador6ActionPerformed
+
+    private void indicador7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador7ActionPerformed
+        bloquearBotones(indicador7);
+        numeroCamaroteSeleccionado = 7;        // TODO add your handling code here:
+    }//GEN-LAST:event_indicador7ActionPerformed
+
+    private void indicador8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador8ActionPerformed
+        bloquearBotones(indicador8);
+        numeroCamaroteSeleccionado = 8;
+    }//GEN-LAST:event_indicador8ActionPerformed
+
+    private void indicador9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador9ActionPerformed
+        bloquearBotones(indicador9);
+        numeroCamaroteSeleccionado = 9;
+    }//GEN-LAST:event_indicador9ActionPerformed
+
+    private void indicador10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador10ActionPerformed
+        bloquearBotones(indicador10);
+        numeroCamaroteSeleccionado = 10;
+    }//GEN-LAST:event_indicador10ActionPerformed
+
+    private void indicador11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador11ActionPerformed
+        bloquearBotones(indicador11);
+        numeroCamaroteSeleccionado = 11;
+    }//GEN-LAST:event_indicador11ActionPerformed
+
+    private void indicador12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador12ActionPerformed
+        bloquearBotones(indicador12);
+        numeroCamaroteSeleccionado = 12;        // TODO add your handling code here:
+    }//GEN-LAST:event_indicador12ActionPerformed
+
+    private void indicador13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador13ActionPerformed
+        bloquearBotones(indicador13);
+        numeroCamaroteSeleccionado = 13;
+    }//GEN-LAST:event_indicador13ActionPerformed
+
+    private void indicador14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador14ActionPerformed
+        bloquearBotones(indicador14);
+        numeroCamaroteSeleccionado = 14;
+    }//GEN-LAST:event_indicador14ActionPerformed
+
+    private void indicador15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador15ActionPerformed
+        bloquearBotones(indicador15);
+        numeroCamaroteSeleccionado = 15;
+    }//GEN-LAST:event_indicador15ActionPerformed
+
+    private void indicador16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador16ActionPerformed
+        bloquearBotones(indicador16);
+        numeroCamaroteSeleccionado = 16;
+    }//GEN-LAST:event_indicador16ActionPerformed
+
+    private void indicador17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador17ActionPerformed
+        bloquearBotones(indicador17);
+        numeroCamaroteSeleccionado = 17;
+    }//GEN-LAST:event_indicador17ActionPerformed
+
+    private void indicador18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador18ActionPerformed
+        bloquearBotones(indicador18);
+        numeroCamaroteSeleccionado = 18;      
+    }//GEN-LAST:event_indicador18ActionPerformed
+
+    private void indicador19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador19ActionPerformed
+        bloquearBotones(indicador19);
+        numeroCamaroteSeleccionado = 19;
+    }//GEN-LAST:event_indicador19ActionPerformed
+
+    private void indicador20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador20ActionPerformed
+        bloquearBotones(indicador20);
+        numeroCamaroteSeleccionado = 20;
+    }//GEN-LAST:event_indicador20ActionPerformed
+
+    private void indicador21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador21ActionPerformed
+        bloquearBotones(indicador21);
+        numeroCamaroteSeleccionado = 21;
+    }//GEN-LAST:event_indicador21ActionPerformed
+
+    private void indicador22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador22ActionPerformed
+        bloquearBotones(indicador22);
+        numeroCamaroteSeleccionado = 22;
+    }//GEN-LAST:event_indicador22ActionPerformed
+
+    private void indicador23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador23ActionPerformed
+        bloquearBotones(indicador23);
+        numeroCamaroteSeleccionado = 23;    }//GEN-LAST:event_indicador23ActionPerformed
+
+    private void indicador24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador24ActionPerformed
+        bloquearBotones(indicador24);
+        numeroCamaroteSeleccionado = 24;
+    }//GEN-LAST:event_indicador24ActionPerformed
+
+    private void indicador25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador25ActionPerformed
+        bloquearBotones(indicador25);
+        numeroCamaroteSeleccionado = 25;
+    }//GEN-LAST:event_indicador25ActionPerformed
+
+    private void indicador26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador26ActionPerformed
+        bloquearBotones(indicador26);
+        numeroCamaroteSeleccionado = 26;
+    }//GEN-LAST:event_indicador26ActionPerformed
+
+    private void indicador27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador27ActionPerformed
+        bloquearBotones(indicador27);
+        numeroCamaroteSeleccionado = 27;
+    }//GEN-LAST:event_indicador27ActionPerformed
+
+    private void indicador28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador28ActionPerformed
+        bloquearBotones(indicador28);
+        numeroCamaroteSeleccionado = 28;
+    }//GEN-LAST:event_indicador28ActionPerformed
+
+    private void indicador30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador30ActionPerformed
+        bloquearBotones(indicador30);
+        numeroCamaroteSeleccionado = 30;
+    }//GEN-LAST:event_indicador30ActionPerformed
+
+    private void indicador31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador31ActionPerformed
+        bloquearBotones(indicador31);
+        numeroCamaroteSeleccionado = 31;
+    }//GEN-LAST:event_indicador31ActionPerformed
+
+    private void indicador32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador32ActionPerformed
+        bloquearBotones(indicador32);
+        numeroCamaroteSeleccionado = 32;
+    }//GEN-LAST:event_indicador32ActionPerformed
+
+    private void indicador33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador33ActionPerformed
+        bloquearBotones(indicador33);
+        numeroCamaroteSeleccionado = 33;
+    }//GEN-LAST:event_indicador33ActionPerformed
+
+    private void indicador34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador34ActionPerformed
+        bloquearBotones(indicador34);
+        numeroCamaroteSeleccionado = 34;
+    }//GEN-LAST:event_indicador34ActionPerformed
+
+    private void indicador35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador35ActionPerformed
+        bloquearBotones(indicador35);
+        numeroCamaroteSeleccionado = 35;
+    }//GEN-LAST:event_indicador35ActionPerformed
+
+    private void indicador36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador36ActionPerformed
+        bloquearBotones(indicador36);
+        numeroCamaroteSeleccionado = 36;
+    }//GEN-LAST:event_indicador36ActionPerformed
+
+    private void indicador37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador37ActionPerformed
+        bloquearBotones(indicador37);
+        numeroCamaroteSeleccionado = 37;
+    }//GEN-LAST:event_indicador37ActionPerformed
+
+    private void indicador38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador38ActionPerformed
+        bloquearBotones(indicador38);
+        numeroCamaroteSeleccionado = 38;
+    }//GEN-LAST:event_indicador38ActionPerformed
+
+    private void indicador39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador39ActionPerformed
+        bloquearBotones(indicador39);
+        numeroCamaroteSeleccionado = 39;
+    }//GEN-LAST:event_indicador39ActionPerformed
+
+    public void bloquearBotones(JButton boton) {
+
+        Enumeration elements = group.getElements();
+
+        if (boton.isContentAreaFilled() == true ) {
+
+            while (elements.hasMoreElements()) {
+               
+                AbstractButton button = (AbstractButton) elements.nextElement();
+                button.setEnabled(true);
+            }
+            
+            boton.setEnabled(true);
+            boton.setContentAreaFilled(false);
+
+        } else {
+            while (elements.hasMoreElements()) {
+
+                AbstractButton button = (AbstractButton) elements.nextElement();
+                button.setEnabled(false);
+
+            }
+            boton.setEnabled(true);
+            boton.setContentAreaFilled(true);
+        }
+
+    }
+    
+    public void verificarBotones() {
+        Enumeration elements = group.getElements();
+
+        while (elements.hasMoreElements()) {
+
+            AbstractButton button = (AbstractButton) elements.nextElement();
+            button.setEnabled(true);
+            button.setContentAreaFilled(false);
+        }
+
+
+
+    }
 
     /**
      * @param args the command line arguments
@@ -665,65 +1304,101 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void retornarEstadoCamarote() {
+        try {
+            for (int i = 1; i <= 52; i++) {
+                int estadoCamarote;
+                String nombreBoton;
+                ps = dbConexion().prepareStatement("SELECT estadoCamarote FROM camarotes WHERE codigoCamarote = " + i);
+                ResultSet result = ps.executeQuery();
+                if (result.next()) {
+                    estadoCamarote = Integer.parseInt(result.getString("estadoCamarote"));
+                    if (estadoCamarote == 2) {
+
+                        Enumeration elements = group.getElements();
+                        while (elements.hasMoreElements()) {
+                            AbstractButton button = (AbstractButton) elements.nextElement();
+                            nombreBoton = "indicador" + i;
+
+                            if (nombreBoton.equals(button.getName())) {
+                                button.setEnabled(false);
+                                button.setBackground(Color.gray);
+                                button.setBorderPainted(false);
+                                button.setContentAreaFilled(true);
+                                group.remove(button);
+                            }
+                        }
+
+                    }
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("" + ex.getMessage());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton25;
-    private javax.swing.JButton jButton26;
-    private javax.swing.JButton jButton27;
-    private javax.swing.JButton jButton28;
-    private javax.swing.JButton jButton29;
-    private javax.swing.JButton jButton30;
-    private javax.swing.JButton jButton31;
-    private javax.swing.JButton jButton32;
-    private javax.swing.JButton jButton33;
-    private javax.swing.JButton jButton34;
-    private javax.swing.JButton jButton35;
-    private javax.swing.JButton jButton36;
-    private javax.swing.JButton jButton37;
-    private javax.swing.JButton jButton38;
-    private javax.swing.JButton jButton39;
-    private javax.swing.JButton jButton40;
-    private javax.swing.JButton jButton41;
-    private javax.swing.JButton jButton42;
-    private javax.swing.JButton jButton43;
-    private javax.swing.JButton jButton44;
-    private javax.swing.JButton jButton45;
-    private javax.swing.JButton jButton46;
-    private javax.swing.JButton jButton47;
-    private javax.swing.JButton jButton48;
-    private javax.swing.JButton jButton49;
-    private javax.swing.JButton jButton50;
-    private javax.swing.JButton jButton51;
-    private javax.swing.JButton jButton52;
-    private javax.swing.JButton jButton53;
-    private javax.swing.JButton jButton54;
-    private javax.swing.JButton jButton55;
-    private javax.swing.JButton jButton56;
-    private javax.swing.JButton jButton57;
-    private javax.swing.JButton jButton58;
-    private javax.swing.JButton jButton59;
-    private javax.swing.JButton jButton60;
-    private javax.swing.JButton jButton61;
-    private javax.swing.JButton jButton62;
-    private javax.swing.JButton jButton63;
-    private javax.swing.JButton jButton64;
-    private javax.swing.JButton jButton65;
-    private javax.swing.JButton jButton66;
-    private javax.swing.JButton jButton68;
-    private javax.swing.JButton jButton69;
-    private javax.swing.JButton jButton70;
-    private javax.swing.JButton jButton71;
-    private javax.swing.JButton jButton72;
-    private javax.swing.JButton jButton73;
-    private javax.swing.JButton jButton74;
-    private javax.swing.JButton jButton75;
-    private javax.swing.JButton jButton76;
-    private javax.swing.JButton jButton77;
-    private javax.swing.JButton jButton78;
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnSiguiente;
+    private javax.swing.ButtonGroup group;
+    private javax.swing.JButton indicador1;
+    private javax.swing.JButton indicador10;
+    private javax.swing.JButton indicador11;
+    private javax.swing.JButton indicador12;
+    private javax.swing.JButton indicador13;
+    private javax.swing.JButton indicador14;
+    private javax.swing.JButton indicador15;
+    private javax.swing.JButton indicador16;
+    private javax.swing.JButton indicador17;
+    private javax.swing.JButton indicador18;
+    private javax.swing.JButton indicador19;
+    private javax.swing.JButton indicador2;
+    private javax.swing.JButton indicador20;
+    private javax.swing.JButton indicador21;
+    private javax.swing.JButton indicador22;
+    private javax.swing.JButton indicador23;
+    private javax.swing.JButton indicador24;
+    private javax.swing.JButton indicador25;
+    private javax.swing.JButton indicador26;
+    private javax.swing.JButton indicador27;
+    private javax.swing.JButton indicador28;
+    private javax.swing.JButton indicador29;
+    private javax.swing.JButton indicador3;
+    private javax.swing.JButton indicador30;
+    private javax.swing.JButton indicador31;
+    private javax.swing.JButton indicador32;
+    private javax.swing.JButton indicador33;
+    private javax.swing.JButton indicador34;
+    private javax.swing.JButton indicador35;
+    private javax.swing.JButton indicador36;
+    private javax.swing.JButton indicador37;
+    private javax.swing.JButton indicador38;
+    private javax.swing.JButton indicador39;
+    private javax.swing.JButton indicador4;
+    private javax.swing.JButton indicador40;
+    private javax.swing.JButton indicador41;
+    private javax.swing.JButton indicador42;
+    private javax.swing.JButton indicador43;
+    private javax.swing.JButton indicador44;
+    private javax.swing.JButton indicador45;
+    private javax.swing.JButton indicador46;
+    private javax.swing.JButton indicador47;
+    private javax.swing.JButton indicador48;
+    private javax.swing.JButton indicador49;
+    private javax.swing.JButton indicador5;
+    private javax.swing.JButton indicador50;
+    private javax.swing.JButton indicador51;
+    private javax.swing.JButton indicador52;
+    private javax.swing.JButton indicador6;
+    private javax.swing.JButton indicador7;
+    private javax.swing.JButton indicador8;
+    private javax.swing.JButton indicador9;
+    private javax.swing.JButton indicadorVacio;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblBackground;
     // End of variables declaration//GEN-END:variables
 }
