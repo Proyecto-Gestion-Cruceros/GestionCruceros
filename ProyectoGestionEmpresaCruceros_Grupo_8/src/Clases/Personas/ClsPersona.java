@@ -59,19 +59,19 @@ public class ClsPersona {
     
     
     //Metodos deL Crud
-    public void AgregarPersona(){
-        
+    public boolean AgregarPersona(){
+        return false;
     }
     
-    public void ActualizarPersona(){
-        
+    public boolean ActualizarPersona(){
+        return false;
     }
     
-    public void EliminarPersona(){
-        
+    public boolean EliminarPersona(){
+        return false;
     }
     
-    public void VerPersonas(){
-        
+    public boolean VerPersonas(){
+        return false;
     }
 }

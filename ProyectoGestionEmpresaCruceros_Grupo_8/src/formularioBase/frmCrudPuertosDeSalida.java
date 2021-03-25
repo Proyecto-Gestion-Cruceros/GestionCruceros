@@ -6,7 +6,13 @@
 package formularioBase;
 
 import Clases.ClsValidaciones;
+import Clases.PuertosSalida.clsPuertosSalidas;
+import Clases.dbConnection;
 import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -21,8 +27,13 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
         initComponents();
     }
 
+    dbConnection conexion = new dbConnection();
+    PreparedStatement ps;
+    ResultSet result = null;
+
     ClsValidaciones validar = new ClsValidaciones();
-    
+    clsPuertosSalidas puerto = new clsPuertosSalidas();
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -150,30 +161,49 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarPuertoSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPuertoSalidaActionPerformed
-    if(validar.isLetras(txtNombrePuertoSalida.getText())){
-        //PROCEDIMIENTO
-    }
-    else{
-        JOptionPane.showMessageDialog(null, "Ingrese correctamente El nombre del puerto");
-    }
+        if (validar.isLetras(txtNombrePuertoSalida.getText())) {
+            try {
+                     puerto.setCodigoPuerto(Integer.parseInt(txtCodigoPuertoSalida.getText())); 
+                    if (puerto.ActualizarPuertoSalida()) {
+                        JOptionPane.showMessageDialog(null, "Puerto Actualizado Correctamente");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al Actualizar");
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex);
+                }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese correctamente El nombre del puerto");
+        }
     }//GEN-LAST:event_btnActualizarPuertoSalidaActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-       if(validar.isLetras(txtNombrePuertoSalida.getText())){
-        //PROCEDIMIENTO
-    }
-    else{
-        JOptionPane.showMessageDialog(null, "Ingrese correctamente El nombre del puerto");
-    }
+        if (validar.isLetras(txtNombrePuertoSalida.getText())) {
+            //PROCEDIMIENTO
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese correctamente El nombre del puerto");
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAgregarPuertoSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPuertoSalidaActionPerformed
-       if(validar.isLetras(txtNombrePuertoSalida.getText())){
-        //PROCEDIMIENTO
-    }
-    else{
-        JOptionPane.showMessageDialog(null, "Ingrese correctamente El nombre del puerto");
-    }
+        if (validar.isLetras(txtNombrePuertoSalida.getText())) {
+            puerto.setNombrePuerto(txtNombrePuertoSalida.getText());
+            try{
+                if(puerto.AgregarPuertoSalida()){
+                     JOptionPane.showMessageDialog(null, "Puerto Ingresado Correctamente");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Error al ingresar");
+                }
+            }
+            catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese correctamente El nombre del puerto");
+        }
     }//GEN-LAST:event_btnAgregarPuertoSalidaActionPerformed
 
     /**
