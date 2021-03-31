@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package FormulariosCrucero;
+
+import Clases.dbConnection;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.Enumeration;
@@ -25,31 +27,17 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
     public frmVistaCamarotesN2() {
         initComponents();
     }
+    
+    dbConnection conexion = new dbConnection();
+    clsVariablesViaje variables = new clsVariablesViaje();
+    
+    int cantidadOcupantes = variables.getNumeroPersonas();
     public static Connection conn = null;
-    int numeroCamaroteSeleccionado;
+    int numeroCamaroteSeleccionado = 0;
     PreparedStatement ps;
     ResultSet result = null;
-           
-    public static Connection dbConexion() {
-        String url = "jdbc:sqlserver://DESKTOP-P4A3L4O:1433;databaseName=agenciaCruceros";
-
-        try {
-
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-        } catch (Exception ex) {
-            System.out.println("ERROR DE CONEXIÓN");
-        }
-
-        try {
-            conn = DriverManager.getConnection(url, "sa", "1234");
-        } catch (Exception ex) {
-            System.out.println("ERROR DE CONEXIÓN");
-        }
-
-        return conn;
-    }
     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -118,8 +106,11 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         indicador48 = new javax.swing.JButton();
         indicador44 = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDatosCamarote = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -130,18 +121,24 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1635, 1035));
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel1.setText("CAMAROTES - NIVEL 1");
+        jLabel1.setText("Detalles del Camarote");
+        jLabel1.setFocusTraversalPolicyProvider(true);
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(600, 70, 510, 49);
+        jLabel1.setBounds(680, 620, 330, 49);
 
         btnAtras.setBackground(new java.awt.Color(255, 204, 51));
         btnAtras.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
         btnAtras.setForeground(new java.awt.Color(0, 0, 0));
         btnAtras.setText("ATRAS");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnAtras);
-        btnAtras.setBounds(0, 830, 210, 60);
+        btnAtras.setBounds(0, 970, 210, 60);
 
         indicador11.setBackground(new java.awt.Color(51, 255, 0));
         indicador11.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -162,8 +159,13 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         btnSiguiente.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
         btnSiguiente.setForeground(new java.awt.Color(0, 0, 0));
         btnSiguiente.setText("SIGUIENTE");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnSiguiente);
-        btnSiguiente.setBounds(1420, 830, 210, 60);
+        btnSiguiente.setBounds(1420, 970, 210, 60);
 
         indicador37.setBackground(new java.awt.Color(102, 255, 0));
         indicador37.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -565,6 +567,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         indicador40.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         group.add(indicador40);
         indicador40.setHideActionText(true);
+        indicador40.setName("indicador40"); // NOI18N
         indicador40.setPreferredSize(new java.awt.Dimension(50, 50));
         indicador40.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -628,7 +631,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador49);
-        indicador49.setBounds(985, 372, 40, 20);
+        indicador49.setBounds(987, 372, 40, 20);
 
         indicador36.setBackground(new java.awt.Color(102, 255, 0));
         indicador36.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -843,7 +846,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador47);
-        indicador47.setBounds(1170, 307, 40, 30);
+        indicador47.setBounds(1173, 307, 40, 30);
 
         indicador41.setBackground(new java.awt.Color(102, 255, 0));
         indicador41.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -871,7 +874,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador52);
-        indicador52.setBounds(1170, 357, 40, 30);
+        indicador52.setBounds(1173, 357, 40, 30);
 
         indicador46.setBackground(new java.awt.Color(102, 255, 0));
         indicador46.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -942,12 +945,31 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador44);
-        indicador44.setBounds(985, 300, 40, 20);
+        indicador44.setBounds(987, 300, 40, 20);
 
         lblBackground.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/mapa33 (2).png"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/mapaNivel1FinalDef.png"))); // NOI18N
         jPanel1.add(lblBackground);
         lblBackground.setBounds(0, 140, 1700, 410);
+
+        txtDatosCamarote.setEditable(false);
+        txtDatosCamarote.setBackground(new java.awt.Color(0, 79, 129));
+        txtDatosCamarote.setColumns(20);
+        txtDatosCamarote.setFont(new java.awt.Font("Doppio One", 0, 24)); // NOI18N
+        txtDatosCamarote.setForeground(new java.awt.Color(255, 204, 51));
+        txtDatosCamarote.setRows(5);
+        txtDatosCamarote.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204)));
+        txtDatosCamarote.setFocusable(false);
+        jScrollPane1.setViewportView(txtDatosCamarote);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(610, 680, 450, 200);
+
+        jLabel2.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 204, 51));
+        jLabel2.setText("CAMAROTES - NIVEL 4");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(630, 70, 510, 49);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -957,7 +979,9 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -965,72 +989,155 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
 
     private void indicador48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador48ActionPerformed
         bloquearBotones(indicador48);
-        numeroCamaroteSeleccionado = 48;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 48;
+            llenarDatosCamarote(48);
+        }
     }//GEN-LAST:event_indicador48ActionPerformed
 
     private void indicador43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador43ActionPerformed
         bloquearBotones(indicador43);
-        numeroCamaroteSeleccionado = 43;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 43;
+            llenarDatosCamarote(43);
+        }
     }//GEN-LAST:event_indicador43ActionPerformed
 
     private void indicador52ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador52ActionPerformed
         bloquearBotones(indicador52);
-        numeroCamaroteSeleccionado = 52;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 52;
+            llenarDatosCamarote(52);
+        }
     }//GEN-LAST:event_indicador52ActionPerformed
 
     private void indicador49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador49ActionPerformed
         bloquearBotones(indicador49);
-        numeroCamaroteSeleccionado = 49;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 49;
+            llenarDatosCamarote(49);
+        }
     }//GEN-LAST:event_indicador49ActionPerformed
 
     private void indicador46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador46ActionPerformed
         bloquearBotones(indicador46);
-        numeroCamaroteSeleccionado = 46;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 46;
+            llenarDatosCamarote(46);
+        }
     }//GEN-LAST:event_indicador46ActionPerformed
 
     private void indicador47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador47ActionPerformed
         bloquearBotones(indicador47);
-        numeroCamaroteSeleccionado = 47;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 47;
+            llenarDatosCamarote(47);
+        }
     }//GEN-LAST:event_indicador47ActionPerformed
 
     private void indicador51ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador51ActionPerformed
         bloquearBotones(indicador51);
-        numeroCamaroteSeleccionado = 51;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 51;
+            llenarDatosCamarote(51);
+        }
     }//GEN-LAST:event_indicador51ActionPerformed
 
     private void indicador40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador40ActionPerformed
         bloquearBotones(indicador40);
-        numeroCamaroteSeleccionado = 40;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 40;
+            llenarDatosCamarote(40);
+        }
     }//GEN-LAST:event_indicador40ActionPerformed
 
     private void indicador44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador44ActionPerformed
         bloquearBotones(indicador44);
-        numeroCamaroteSeleccionado = 44;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 44;
+            llenarDatosCamarote(44);
+        }
     }//GEN-LAST:event_indicador44ActionPerformed
 
     private void indicador41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador41ActionPerformed
-        bloquearBotones(indicador41);
-        numeroCamaroteSeleccionado = 41;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 41;
+            llenarDatosCamarote(41);
+        }
     }//GEN-LAST:event_indicador41ActionPerformed
 
     private void indicador42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador42ActionPerformed
         bloquearBotones(indicador42);
-        numeroCamaroteSeleccionado = 42;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 42;
+            llenarDatosCamarote(42);
+        }
     }//GEN-LAST:event_indicador42ActionPerformed
 
     private void indicador45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador45ActionPerformed
         bloquearBotones(indicador45);
-        numeroCamaroteSeleccionado = 45;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 45;
+            llenarDatosCamarote(45);
+        }
     }//GEN-LAST:event_indicador45ActionPerformed
 
     private void indicador50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador50ActionPerformed
         bloquearBotones(indicador50);
-        numeroCamaroteSeleccionado = 50;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 50;
+            llenarDatosCamarote(50);
+        }
     }//GEN-LAST:event_indicador50ActionPerformed
 
     private void indicador29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador29ActionPerformed
         bloquearBotones(indicador29);
-        numeroCamaroteSeleccionado = 29;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 29;
+            llenarDatosCamarote(29);
+        }
     }//GEN-LAST:event_indicador29ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1042,204 +1149,458 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
     private void indicador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador1ActionPerformed
 
         bloquearBotones(indicador1);
-        numeroCamaroteSeleccionado = 1;
+
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 1;
+            llenarDatosCamarote(1);
+        }
+
     }//GEN-LAST:event_indicador1ActionPerformed
 
     private void indicador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador2ActionPerformed
         bloquearBotones(indicador2);
-        numeroCamaroteSeleccionado = 2;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 2;
+            llenarDatosCamarote(2);
+        }
     }//GEN-LAST:event_indicador2ActionPerformed
 
     private void indicador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador3ActionPerformed
         bloquearBotones(indicador3);
-        numeroCamaroteSeleccionado = 3;
-    }//GEN-LAST:event_indicador3ActionPerformed
 
-    private void indicador4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador4ActionPerformed
-        bloquearBotones(indicador4);
-        numeroCamaroteSeleccionado = 4;    }//GEN-LAST:event_indicador4ActionPerformed
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 3;
+            llenarDatosCamarote(3);
+        }
+    }//GEN-LAST:event_indicador3ActionPerformed
 
     private void indicador5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador5ActionPerformed
         bloquearBotones(indicador5);
-        numeroCamaroteSeleccionado = 5;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 5;
+            llenarDatosCamarote(5);
+        }
     }//GEN-LAST:event_indicador5ActionPerformed
 
     private void indicador6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador6ActionPerformed
         bloquearBotones(indicador6);
-        numeroCamaroteSeleccionado = 6;        // TODO add your handling code here:
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 6;
+            llenarDatosCamarote(6);
+        }      // TODO add your handling code here:
     }//GEN-LAST:event_indicador6ActionPerformed
 
     private void indicador7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador7ActionPerformed
         bloquearBotones(indicador7);
-        numeroCamaroteSeleccionado = 7;        // TODO add your handling code here:
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 7;
+            llenarDatosCamarote(7);
+        }       // TODO add your handling code here:
     }//GEN-LAST:event_indicador7ActionPerformed
 
     private void indicador8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador8ActionPerformed
         bloquearBotones(indicador8);
-        numeroCamaroteSeleccionado = 8;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 8;
+            llenarDatosCamarote(8);
+        }
     }//GEN-LAST:event_indicador8ActionPerformed
 
     private void indicador9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador9ActionPerformed
         bloquearBotones(indicador9);
-        numeroCamaroteSeleccionado = 9;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 9;
+            llenarDatosCamarote(9);
+        }
     }//GEN-LAST:event_indicador9ActionPerformed
 
     private void indicador10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador10ActionPerformed
         bloquearBotones(indicador10);
-        numeroCamaroteSeleccionado = 10;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 10;
+            llenarDatosCamarote(10);
+        }
     }//GEN-LAST:event_indicador10ActionPerformed
 
     private void indicador11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador11ActionPerformed
         bloquearBotones(indicador11);
-        numeroCamaroteSeleccionado = 11;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 11;
+            llenarDatosCamarote(11);
+        }
     }//GEN-LAST:event_indicador11ActionPerformed
 
     private void indicador12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador12ActionPerformed
         bloquearBotones(indicador12);
-        numeroCamaroteSeleccionado = 12;        // TODO add your handling code here:
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 12;
+            llenarDatosCamarote(12);
+        }      // TODO add your handling code here:
     }//GEN-LAST:event_indicador12ActionPerformed
 
     private void indicador13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador13ActionPerformed
         bloquearBotones(indicador13);
-        numeroCamaroteSeleccionado = 13;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 13;
+            llenarDatosCamarote(13);
+        }
     }//GEN-LAST:event_indicador13ActionPerformed
 
     private void indicador14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador14ActionPerformed
         bloquearBotones(indicador14);
-        numeroCamaroteSeleccionado = 14;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 14;
+            llenarDatosCamarote(14);
+        }
     }//GEN-LAST:event_indicador14ActionPerformed
 
     private void indicador15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador15ActionPerformed
         bloquearBotones(indicador15);
-        numeroCamaroteSeleccionado = 15;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 15;
+            llenarDatosCamarote(15);
+        }
     }//GEN-LAST:event_indicador15ActionPerformed
 
     private void indicador16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador16ActionPerformed
         bloquearBotones(indicador16);
-        numeroCamaroteSeleccionado = 16;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 16;
+            llenarDatosCamarote(16);
+        }
     }//GEN-LAST:event_indicador16ActionPerformed
 
     private void indicador17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador17ActionPerformed
         bloquearBotones(indicador17);
-        numeroCamaroteSeleccionado = 17;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 17;
+            llenarDatosCamarote(17);
+        }
     }//GEN-LAST:event_indicador17ActionPerformed
 
     private void indicador18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador18ActionPerformed
         bloquearBotones(indicador18);
-        numeroCamaroteSeleccionado = 18;      
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 18;
+            llenarDatosCamarote(18);
+        }
     }//GEN-LAST:event_indicador18ActionPerformed
 
     private void indicador19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador19ActionPerformed
         bloquearBotones(indicador19);
-        numeroCamaroteSeleccionado = 19;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 19;
+            llenarDatosCamarote(19);
+        }
     }//GEN-LAST:event_indicador19ActionPerformed
 
     private void indicador20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador20ActionPerformed
         bloquearBotones(indicador20);
-        numeroCamaroteSeleccionado = 20;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 20;
+            llenarDatosCamarote(20);
+        }
     }//GEN-LAST:event_indicador20ActionPerformed
 
     private void indicador21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador21ActionPerformed
         bloquearBotones(indicador21);
-        numeroCamaroteSeleccionado = 21;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 21;
+            llenarDatosCamarote(21);
+        }
     }//GEN-LAST:event_indicador21ActionPerformed
 
     private void indicador22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador22ActionPerformed
         bloquearBotones(indicador22);
-        numeroCamaroteSeleccionado = 22;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 22;
+            llenarDatosCamarote(22);
+        }
     }//GEN-LAST:event_indicador22ActionPerformed
-
-    private void indicador23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador23ActionPerformed
-        bloquearBotones(indicador23);
-        numeroCamaroteSeleccionado = 23;    }//GEN-LAST:event_indicador23ActionPerformed
 
     private void indicador24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador24ActionPerformed
         bloquearBotones(indicador24);
-        numeroCamaroteSeleccionado = 24;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 24;
+            llenarDatosCamarote(24);
+        }
     }//GEN-LAST:event_indicador24ActionPerformed
 
     private void indicador25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador25ActionPerformed
         bloquearBotones(indicador25);
-        numeroCamaroteSeleccionado = 25;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 25;
+            llenarDatosCamarote(25);
+        }
     }//GEN-LAST:event_indicador25ActionPerformed
 
     private void indicador26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador26ActionPerformed
         bloquearBotones(indicador26);
-        numeroCamaroteSeleccionado = 26;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 26;
+            llenarDatosCamarote(26);
+        }
     }//GEN-LAST:event_indicador26ActionPerformed
 
     private void indicador27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador27ActionPerformed
         bloquearBotones(indicador27);
-        numeroCamaroteSeleccionado = 27;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 27;
+            llenarDatosCamarote(27);
+        }
     }//GEN-LAST:event_indicador27ActionPerformed
 
     private void indicador28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador28ActionPerformed
         bloquearBotones(indicador28);
-        numeroCamaroteSeleccionado = 28;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 28;
+            llenarDatosCamarote(28);
+        }
     }//GEN-LAST:event_indicador28ActionPerformed
 
     private void indicador30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador30ActionPerformed
         bloquearBotones(indicador30);
-        numeroCamaroteSeleccionado = 30;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 30;
+            llenarDatosCamarote(30);
+        }
     }//GEN-LAST:event_indicador30ActionPerformed
 
     private void indicador31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador31ActionPerformed
         bloquearBotones(indicador31);
-        numeroCamaroteSeleccionado = 31;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 31;
+            llenarDatosCamarote(31);
+        }
     }//GEN-LAST:event_indicador31ActionPerformed
 
     private void indicador32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador32ActionPerformed
         bloquearBotones(indicador32);
-        numeroCamaroteSeleccionado = 32;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 32;
+            llenarDatosCamarote(32);
+        }
     }//GEN-LAST:event_indicador32ActionPerformed
 
     private void indicador33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador33ActionPerformed
         bloquearBotones(indicador33);
-        numeroCamaroteSeleccionado = 33;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 33;
+            llenarDatosCamarote(33);
+        }
     }//GEN-LAST:event_indicador33ActionPerformed
 
     private void indicador34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador34ActionPerformed
         bloquearBotones(indicador34);
-        numeroCamaroteSeleccionado = 34;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 34;
+            llenarDatosCamarote(34);
+        }
     }//GEN-LAST:event_indicador34ActionPerformed
 
     private void indicador35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador35ActionPerformed
         bloquearBotones(indicador35);
-        numeroCamaroteSeleccionado = 35;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 35;
+            llenarDatosCamarote(35);
+        }
     }//GEN-LAST:event_indicador35ActionPerformed
 
     private void indicador36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador36ActionPerformed
         bloquearBotones(indicador36);
-        numeroCamaroteSeleccionado = 36;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 36;
+            llenarDatosCamarote(36);
+        }
     }//GEN-LAST:event_indicador36ActionPerformed
 
     private void indicador37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador37ActionPerformed
         bloquearBotones(indicador37);
-        numeroCamaroteSeleccionado = 37;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 37;
+            llenarDatosCamarote(37);
+        }
     }//GEN-LAST:event_indicador37ActionPerformed
 
     private void indicador38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador38ActionPerformed
         bloquearBotones(indicador38);
-        numeroCamaroteSeleccionado = 38;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 38;
+            llenarDatosCamarote(38);
+        }
     }//GEN-LAST:event_indicador38ActionPerformed
 
     private void indicador39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador39ActionPerformed
         bloquearBotones(indicador39);
-        numeroCamaroteSeleccionado = 39;
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 39;
+            llenarDatosCamarote(39);
+        }
     }//GEN-LAST:event_indicador39ActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        if (numeroCamaroteSeleccionado != 0) {
+            JOptionPane.showMessageDialog(null, "EL CAMAROTE SELECCIONADO ES: " + numeroCamaroteSeleccionado);
+            variables.setNumeroCamarote(numeroCamaroteSeleccionado);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN CAMAROTE");
+        }
+    }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void indicador4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador4ActionPerformed
+        bloquearBotones(indicador4);
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+ 
+           
+        } else {
+            numeroCamaroteSeleccionado = 4;
+            llenarDatosCamarote(4);
+        }
+    }//GEN-LAST:event_indicador4ActionPerformed
+
+    private void indicador23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador23ActionPerformed
+        bloquearBotones(indicador23);
+        if (numeroCamaroteSeleccionado != 0) {
+            numeroCamaroteSeleccionado = 0;
+            llenarDatosCamarote(0);
+        } else {
+            numeroCamaroteSeleccionado = 23;
+            llenarDatosCamarote(23);
+        }
+    }//GEN-LAST:event_indicador23ActionPerformed
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        numeroCamaroteSeleccionado = 0;
+        variables.setNumeroCamarote(0);
+        this.dispose();
+
+        frmSeleccionNivel seleccionador = new frmSeleccionNivel();
+        seleccionador.setVisible(true);
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     public void bloquearBotones(JButton boton) {
 
         Enumeration elements = group.getElements();
 
-        if (boton.isContentAreaFilled() == true ) {
+        if (boton.isContentAreaFilled() == true) {
 
             while (elements.hasMoreElements()) {
-               
+
                 AbstractButton button = (AbstractButton) elements.nextElement();
                 button.setEnabled(true);
             }
-            
+
             boton.setEnabled(true);
             boton.setContentAreaFilled(false);
 
@@ -1255,7 +1616,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         }
 
     }
-    
+
     public void verificarBotones() {
         Enumeration elements = group.getElements();
 
@@ -1265,8 +1626,6 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             button.setEnabled(true);
             button.setContentAreaFilled(false);
         }
-
-
 
     }
 
@@ -1304,17 +1663,21 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void retornarEstadoCamarote() {
         try {
             for (int i = 1; i <= 52; i++) {
-                int estadoCamarote;
+                String estadoCamarote;
                 String nombreBoton;
-                ps = dbConexion().prepareStatement("SELECT estadoCamarote FROM camarotes WHERE codigoCamarote = " + i);
+                int capacidadMax;
+                
+                ps = conexion.dbConexion().prepareStatement("SELECT estadoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + i);
                 ResultSet result = ps.executeQuery();
                 if (result.next()) {
-                    estadoCamarote = Integer.parseInt(result.getString("estadoCamarote"));
-                    if (estadoCamarote == 2) {
+                    estadoCamarote = result.getString("estadoCamarote");
+                    capacidadMax = Integer.parseInt(result.getString("capacidadMaxima"));
+
+                    if (estadoCamarote.equals("Ocupado") || (cantidadOcupantes > capacidadMax)) {
 
                         Enumeration elements = group.getElements();
                         while (elements.hasMoreElements()) {
@@ -1329,10 +1692,58 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
                                 group.remove(button);
                             }
                         }
+                    }
+                } else {
+                    Enumeration elements = group.getElements();
+                    while (elements.hasMoreElements()) {
+                        AbstractButton button = (AbstractButton) elements.nextElement();
+                        nombreBoton = "indicador" + i;
 
+                        if (nombreBoton.equals(button.getName())) {
+                            button.setEnabled(false);
+                            button.setBackground(Color.red);
+                            button.setBorderPainted(false);
+                            button.setContentAreaFilled(true);
+                            group.remove(button);
+                        }
                     }
                 }
 
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("" + ex.getMessage());
+        }
+    }
+
+    public void llenarDatosCamarote(int numeroCamarote) {
+
+        try {
+
+            int codigoBuque;
+            int nivel;
+            String tipoCamarote;
+            int capacidadMaxima;
+
+            if (numeroCamarote != 0) {
+                ps = conexion.dbConexion().prepareStatement("SELECT codigoBuque, nivel, tipoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + numeroCamarote);
+                ResultSet result = ps.executeQuery();
+                if (result.next()) {
+                    codigoBuque = Integer.parseInt(result.getString("codigoBuque"));
+                    nivel = Integer.parseInt(result.getString("nivel"));
+                    tipoCamarote = result.getString("tipoCamarote");
+                    capacidadMaxima = Integer.parseInt(result.getString("capacidadMaxima"));
+
+                    txtDatosCamarote.append(" Numero de Camarote: " + numeroCamarote);
+                    txtDatosCamarote.append("\n Codigo del Buque: " + codigoBuque);
+                    txtDatosCamarote.append("\n Nivel: " + nivel);
+                    txtDatosCamarote.append("\n Tipo: " + tipoCamarote);
+                    txtDatosCamarote.append("\n Capacidad Maxima: " + capacidadMaxima + " Personas");
+
+                }
+
+            } else {
+                txtDatosCamarote.setText(null);
             }
 
         } catch (SQLException ex) {
@@ -1398,7 +1809,10 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
     private javax.swing.JButton indicador9;
     private javax.swing.JButton indicadorVacio;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JTextArea txtDatosCamarote;
     // End of variables declaration//GEN-END:variables
 }
