@@ -29,19 +29,16 @@ public class clsPuertosSalidas {
     }
 
     public boolean AgregarPuertoSalida() {
-        
-        int resultado = 0;
+
+        int resultado;
         try {
-            ps = dbConnection.dbConexion().prepareStatement("insert into puertosSalida(nombrePuerto,estado) values(?, 1)");
+            ps = dbConnection.dbConexion().prepareStatement("insert into puertosSalida(nombrePuerto,estado) values(?, ?)");
             ps.setString(1, NombrePuerto);
+            ps.setString(2, "Activo");
+                
+            resultado = ps.executeUpdate();
 
-             resultado = ps.executeUpdate();
-
-            if (resultado > 0) {
-                return true;    
-            } else {
-                return false;
-            }
+            return resultado > 0;
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -50,45 +47,17 @@ public class clsPuertosSalidas {
         }
 
     }
-    /*
-        public boolean AgregarPuertoSalida() {
-        
-        int resultado = 0;
-        try {
-            ps = dbConnection.dbConexion().prepareStatement("insert into puertosSalida(nombrePuerto,estado) values(?, 1)");
-            ps.setString(1, NombrePuerto);
 
-             resultado = ps.executeUpdate();
-
-            if (resultado > 0) {
-                return true;    
-            } else {
-                return false;
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-
-            return false;
-        }
-
-    }
-    */
-    
     public boolean ActualizarPuertoSalida() {
         int resultado = 0;
         try {
             ps = dbConnection.dbConexion().prepareStatement("update puertosSalida set nombrePuerto = ? where [codigoPuerto] = ?");
             ps.setString(1, NombrePuerto);
             ps.setInt(2, CodigoPuerto);
-          
+
             resultado = ps.executeUpdate();
 
-            if (resultado > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return resultado > 0;
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -98,6 +67,23 @@ public class clsPuertosSalidas {
 
     }
     
+        public boolean EliminarPuertoSalida() {
+        int resultado = 0;
+        try {
+            ps = dbConnection.dbConexion().prepareStatement("  UPDATE [agenciaCruceros].[dbo].[puertosSalida] set estado = 'Inactivo' where codigoPuerto = ?");
+            ps.setInt(1, CodigoPuerto);
 
+            resultado = ps.executeUpdate();
+
+            return resultado > 0;
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+
+            return false;
+        }
+
+    }
+    
 
 }

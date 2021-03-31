@@ -12,7 +12,7 @@ public class dbConnection {
     //public DataSource dataSoorce;
     
     public static Connection dbConexion(){
-        String url = "jdbc:sqlserver://DESKTOP-7MB4NES:1433;databaseName=agenciaCruceros";
+        String url = "jdbc:sqlserver://DESKTOP-IFG9AL0\\DESKTOP-IFG9AL0\\SQLEXPRESS:1433;databaseName=agenciaCruceros";
         
         try{
             

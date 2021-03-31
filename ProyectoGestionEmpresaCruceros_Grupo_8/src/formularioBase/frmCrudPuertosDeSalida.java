@@ -9,10 +9,12 @@ import Clases.ClsValidaciones;
 import Clases.PuertosSalida.clsPuertosSalidas;
 import Clases.dbConnection;
 import javax.swing.JOptionPane;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -29,7 +31,10 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
 
     dbConnection conexion = new dbConnection();
     PreparedStatement ps;
-    ResultSet result = null;
+    ResultSet rs;
+    ResultSetMetaData rsm;
+    DefaultTableModel dtm;
+    DefaultTableModel temp;
 
     ClsValidaciones validar = new ClsValidaciones();
     clsPuertosSalidas puerto = new clsPuertosSalidas();
@@ -46,8 +51,15 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
         btnActualizarPuertoSalida = new javax.swing.JButton();
         btnAgregarPuertoSalida = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPuertosSalida = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 79, 129));
 
@@ -98,6 +110,30 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
             }
         });
 
+        jPuertosSalida.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        jPuertosSalida.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo Puerto", "Nombre Puerto", "Estado Puerto"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jPuertosSalida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPuertosSalidaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jPuertosSalida);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -105,52 +141,62 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(543, 543, 543)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtNombrePuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtCodigoPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGap(537, 537, 537)
+                        .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(386, 386, 386)
-                        .addComponent(btnActualizarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(115, 115, 115)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(110, 110, 110)
-                        .addComponent(btnAgregarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(432, Short.MAX_VALUE))
+                        .addGap(201, 201, 201)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnActualizarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(312, 312, 312)
+                                .addComponent(btnAgregarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtNombrePuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtCodigoPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(110, 110, 110)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(212, 212, 212)
+                .addGap(80, 80, 80)
                 .addComponent(jLabel2)
-                .addGap(135, 135, 135)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtCodigoPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(66, 66, 66)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtNombrePuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(191, 191, 191)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(264, 264, 264)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtCodigoPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(169, 169, 169)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtNombrePuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addGap(154, 154, 154))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,50 +207,141 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarPuertoSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPuertoSalidaActionPerformed
-        if (validar.isLetras(txtNombrePuertoSalida.getText())) {
-            try {
-                     puerto.setCodigoPuerto(Integer.parseInt(txtCodigoPuertoSalida.getText())); 
-                    if (puerto.ActualizarPuertoSalida()) {
-                        JOptionPane.showMessageDialog(null, "Puerto Actualizado Correctamente");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error al Actualizar");
+        if (!txtCodigoPuertoSalida.getText().isBlank()) {
+            if (!txtNombrePuertoSalida.getText().isBlank()) {
+                if (validar.isLetras(txtNombrePuertoSalida.getText())) {
+                    try {
+                        puerto.setCodigoPuerto(Integer.parseInt(txtCodigoPuertoSalida.getText()));
+                        puerto.setNombrePuerto(txtNombrePuertoSalida.getText());
+                        if (puerto.ActualizarPuertoSalida()) {
+                            JOptionPane.showMessageDialog(null, "Puerto Actualizado Correctamente");
+                            limpiaTabla();
+                            MostrarPuertosSalida();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Error al Actualizar");
+                        }
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, ex);
                     }
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ingrese correctamente El nombre del puerto");
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "No puede dejar en blanco el nombre del puerto");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Ingrese correctamente El nombre del puerto");
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un puerto a modificar");
         }
+
     }//GEN-LAST:event_btnActualizarPuertoSalidaActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        if (validar.isLetras(txtNombrePuertoSalida.getText())) {
-            //PROCEDIMIENTO
+        if (!txtCodigoPuertoSalida.getText().isBlank()) {
+            puerto.setCodigoPuerto(Integer.parseInt(txtCodigoPuertoSalida.getText()));
+            puerto.EliminarPuertoSalida();
+            limpiaTabla();
+            MostrarPuertosSalida();
         } else {
-            JOptionPane.showMessageDialog(null, "Ingrese correctamente El nombre del puerto");
+            JOptionPane.showMessageDialog(null, "Debe seleccionar el puerto a eliminar");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAgregarPuertoSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPuertoSalidaActionPerformed
-        if (validar.isLetras(txtNombrePuertoSalida.getText())) {
-            puerto.setNombrePuerto(txtNombrePuertoSalida.getText());
-            try{
-                if(puerto.AgregarPuertoSalida()){
-                     JOptionPane.showMessageDialog(null, "Puerto Ingresado Correctamente");
+        if (!txtNombrePuertoSalida.getText().isBlank())
+            if (validar.isLetras(txtNombrePuertoSalida.getText())) {
+                puerto.setNombrePuerto(txtNombrePuertoSalida.getText());
+                try {
+                    if (puerto.AgregarPuertoSalida()) {
+                        JOptionPane.showMessageDialog(null, "Puerto Ingresado Correctamente");
+                        limpiaTabla();
+                        MostrarPuertosSalida();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al ingresar");
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex);
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Error al ingresar");
-                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingrese correctamente El nombre del puerto");
             }
-            catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
-            }
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "Ingrese correctamente El nombre del puerto");
+        else {
+            JOptionPane.showMessageDialog(null, "Ingrese los datos necesarios");
         }
     }//GEN-LAST:event_btnAgregarPuertoSalidaActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        MostrarPuertosSalida();
+        CodigoNuevoPuerto();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jPuertosSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPuertosSalidaMouseClicked
+        int seleccionar = jPuertosSalida.rowAtPoint(evt.getPoint());
+        txtCodigoPuertoSalida.setText(String.valueOf(jPuertosSalida.getValueAt(seleccionar, 0)));
+        txtNombrePuertoSalida.setText(String.valueOf(jPuertosSalida.getValueAt(seleccionar, 1)));
+    }//GEN-LAST:event_jPuertosSalidaMouseClicked
+
+    void limpiaTabla() {
+        try {
+            temp = (DefaultTableModel) jPuertosSalida.getModel();
+            int a = temp.getRowCount() - 1;
+            temp.setRowCount(0);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void MostrarPuertosSalida() {
+        try {
+            ps = dbConnection.dbConexion().prepareStatement("SELECT [codigoPuerto], [nombrePuerto], [estado] FROM [agenciaCruceros].[dbo].[puertosSalida]");
+            rs = ps.executeQuery();
+            rsm = rs.getMetaData();
+
+            ArrayList<Object[]> data = new ArrayList<>();
+
+            while (rs.next()) {
+                Object[] rows = new Object[rsm.getColumnCount()];
+                for (int i = 0; i < rows.length; i++) {
+                    rows[i] = rs.getObject(i + 1);
+                }
+                data.add(rows);
+            }
+
+            dtm = (DefaultTableModel) this.jPuertosSalida.getModel();
+            for (int i = 0; i < data.size(); i++) {
+                dtm.addRow(data.get(i));
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+    }
+
+    public void CodigoNuevoPuerto() {
+        try {
+            String obtenerUltimoCodigo;
+            int UltimoCodigo;
+            ps = dbConnection.dbConexion().prepareStatement("SELECT TOP 1 [codigoPuerto] FROM [agenciaCruceros].[dbo].[puertosSalida] order by [codigoPuerto] desc");
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                obtenerUltimoCodigo = rs.getString("codigoPuerto").trim();
+                UltimoCodigo = Integer.parseInt(obtenerUltimoCodigo) + 1;
+                txtCodigoPuertoSalida.setText("" + UltimoCodigo);
+
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+    }
+
+    public void Limpiar() {
+        txtCodigoPuertoSalida.setText(null);
+        txtNombrePuertoSalida.setText(null);
+        CodigoNuevoPuerto();
+    }
 
     /**
      * @param args the command line arguments
@@ -249,6 +386,8 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTable jPuertosSalida;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtCodigoPuertoSalida;
     private javax.swing.JTextField txtNombrePuertoSalida;
     // End of variables declaration//GEN-END:variables

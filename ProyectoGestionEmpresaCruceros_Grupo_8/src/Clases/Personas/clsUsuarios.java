@@ -105,7 +105,7 @@ public class clsUsuarios extends ClsPersona {
     public boolean EliminarPersona() {
         int resultado = 0;
         try {
-            ps = dbConnection.dbConexion().prepareStatement("update usuarios set estado = 2 where identidadUsuario =?");
+            ps = dbConnection.dbConexion().prepareStatement("update usuarios set estado = 'Inactivo' where identidadUsuario =?");
             ps.setString(1, Identidad);
        
 
