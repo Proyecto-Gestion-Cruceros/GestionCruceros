@@ -1,13 +1,12 @@
 package formularioBase;
 
-import Clases.BuquesyViajesDisponibles.ClsBuques;
 import Clases.ClsValidaciones;
 import Clases.dbConnection;
-import java.beans.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,9 +33,6 @@ public class frmCrudBuques extends javax.swing.JFrame {
         txtNombreBuque = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtBuques = new javax.swing.JTable();
-        btnEliminar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        txtCodBuque = new javax.swing.JTextField();
 
         jLabel1.setBackground(new java.awt.Color(255, 204, 51));
         jLabel1.setFont(new java.awt.Font("Balsamiq Sans", 0, 36)); // NOI18N
@@ -102,83 +98,54 @@ public class frmCrudBuques extends javax.swing.JFrame {
                 "Codigo buque", "Nombre buque", "N. Camarotes", "N. De Niveles", "Estado"
             }
         ));
-        jtBuques.setEnabled(false);
-        jtBuques.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtBuquesMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jtBuques);
-
-        btnEliminar.setBackground(new java.awt.Color(255, 204, 51));
-        btnEliminar.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
-        btnEliminar.setForeground(new java.awt.Color(0, 0, 0));
-        btnEliminar.setText("ELIMINAR");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Codigo buque:");
-
-        txtCodBuque.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
-        txtCodBuque.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(733, 733, 733))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(268, 268, 268)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(315, 315, 315)
+                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(252, 252, 252)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel3))
                         .addGap(65, 65, 65)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNombreBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtNumNIveles, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtNumCamarotes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtCodBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82))
+                                .addComponent(txtNumCamarotes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(705, 705, 705))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(81, 81, 81)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(175, 175, 175)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(txtNombreBuque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(txtCodBuque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(72, 72, 72)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtNombreBuque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(63, 63, 63)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -188,13 +155,16 @@ public class frmCrudBuques extends javax.swing.JFrame {
                         .addGap(81, 81, 81)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel7)
-                            .addComponent(txtNumNIveles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(248, 248, 248))
+                            .addComponent(txtNumNIveles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(194, 194, 194))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(227, 227, 227))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -211,72 +181,54 @@ public class frmCrudBuques extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    PreparedStatement pps = null;
+    PreparedStatement ps;
     ResultSet rs;
-    Statement st;
-    ResultSetMetaData rsmd;
-    DefaultTableModel model;
+    ResultSetMetaData rsm;
+    DefaultTableModel dtm;
     
     ClsValidaciones Validar = new ClsValidaciones();
-    ClsBuques buques = new ClsBuques();
-    
     
     private void limpiar() {
-        txtCodBuque.setText(null);
         txtNombreBuque.setText(null);
         txtNumCamarotes.setText(null);
         txtNumNIveles.setText(null);
     }
     
     private void LlenarJtable(){
-  
-        model = (DefaultTableModel) jtBuques.getModel();
-        model.setRowCount(0);
         
-        try
-        {
-            pps = dbConnection.dbConexion().prepareStatement("SELECT * FROM [dbo].[buques]");
-            rs = pps.executeQuery();
-            rsmd = rs.getMetaData();
+        try {
+            ps = dbConnection.dbConexion().prepareStatement("SELECT [codigoBuque], [nombreBuque], [numeroCamarotes], [numeroNiveles], [estado] FROM [dbo].[buques]");
+            rs = ps.executeQuery();
+            rsm = rs.getMetaData();
+            ArrayList<Object[]> data = new ArrayList<>();
             
-            int col = rsmd.getColumnCount();
-            
-            while(rs.next())
-            {
-                Object fil[] = new Object[col];
-                for(int i = 0; i<col; i++)
-                {
-                    fil[i] = rs.getObject(i + 1);
+            while (rs.next()){
+                Object[] rows = new Object[rsm.getColumnCount()];
+                for (int i = 0; i < rows.length; i++){
+                    rows[i] = rs.getObject(i+1);
                 }
-                model.addRow(fil);
-                
+                data.add(rows);
             }
-        }
-        catch(Exception ex)
-        {
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla"+ex);
+            
+            dtm = (DefaultTableModel)this.jtBuques.getModel();
+            for(int i = 0; i < data.size(); i++){
+                dtm.addRow(data.get(i));
+            }
+            
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
 
     }
     
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-             
         
         if (!txtNombreBuque.getText().isBlank() && !txtNumCamarotes.getText().isBlank() && !txtNumNIveles.getText().isBlank()) {
             
             if (Validar.isLetras(txtNombreBuque.getText()) && Validar.isEntero(txtNumCamarotes.getText()) && Validar.isEntero(txtNumNIveles.getText())) {
                 
-                buques.setCodigoBuque(Integer.parseInt(txtCodBuque.getText()));
-                buques.setNombreBuque(txtNombreBuque.getText());
-                buques.setNumCamarotes(Integer.parseInt(txtNumCamarotes.getText()));
-                buques.setNumNivel(Integer.parseInt(txtNumNIveles.getText()));
+                JOptionPane.showMessageDialog(this, "Si funciono");
                 
-                buques.ActualizarBuque();
-                
-                JOptionPane.showMessageDialog(this, "Buque actualizado correctamente");
-                
-                LlenarJtable();
-                limpiar();
             } else {
                 JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos solicitados");
                 limpiar();
@@ -294,16 +246,8 @@ public class frmCrudBuques extends javax.swing.JFrame {
             
             if (Validar.isLetras(txtNombreBuque.getText()) && Validar.isEntero(txtNumCamarotes.getText()) && Validar.isEntero(txtNumNIveles.getText())) {
                 
-                buques.setNombreBuque(txtNombreBuque.getText());
-                buques.setNumCamarotes(Integer.parseInt(txtNumCamarotes.getText()));
-                buques.setNumNivel(Integer.parseInt(txtNumNIveles.getText()));
-                buques.setEstado("Activo");
-                buques.RegistrarBuque();
-                
-                JOptionPane.showMessageDialog(this, "Buque agregado correctamente");
-                
-                LlenarJtable();
-                limpiar();
+                JOptionPane.showMessageDialog(this, "Si funciono");
+
             } else {
                 JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos solicitados");
                 limpiar();
@@ -320,66 +264,6 @@ public class frmCrudBuques extends javax.swing.JFrame {
         LlenarJtable();
         
     }//GEN-LAST:event_formWindowOpened
-
-       
-    private boolean VerificarBuque() {
-        int resultado = 0;
-        
-        try {
-            pps = dbConnection.dbConexion().prepareStatement("SELECT [estado] FROM [dbo].[buques] WHERE [nombreBuque] = ?");
-            pps.setString(1, txtNombreBuque.getText());
-
-            rs = pps.executeQuery();
-
-            if (rs.next()) {
-                
-                buques.setEstadoIn(rs.getString("estado").trim());
-                return true;
-                
-            } else {
-                JOptionPane.showMessageDialog(null, "Buque no encontrado");
-                return false;
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al verificar buque"+ex);
-            return false;
-        }
-    }
-    
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
-        VerificarBuque();
-        
-        if(buques.verificarEstadoIn()){
-            
-            buques.setEstado("Inactivo");
-            buques.setNombreBuque(txtNombreBuque.getText());
-            buques.EliminarBuque();
-           
-            JOptionPane.showMessageDialog(this, "Buque eliminado");
-            LlenarJtable();
-            limpiar();
-            
-        }else{
-  
-            JOptionPane.showMessageDialog(this, "Ya se encuentra eliminado");
-            limpiar();
-            
-        }
-        
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void jtBuquesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtBuquesMouseClicked
-        
-        int seleccionar = jtBuques.rowAtPoint(evt.getPoint());
-        
-        txtCodBuque.setText(String.valueOf(jtBuques.getValueAt(seleccionar, 0)));
-        txtNombreBuque.setText(String.valueOf(jtBuques.getValueAt(seleccionar, 1)));
-        txtNumCamarotes.setText(String.valueOf(jtBuques.getValueAt(seleccionar, 2)));
-        txtNumNIveles.setText(String.valueOf(jtBuques.getValueAt(seleccionar, 3)));
-        
-    }//GEN-LAST:event_jtBuquesMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -416,17 +300,14 @@ public class frmCrudBuques extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtBuques;
-    private javax.swing.JTextField txtCodBuque;
     private javax.swing.JTextField txtNombreBuque;
     private javax.swing.JTextField txtNumCamarotes;
     private javax.swing.JTextField txtNumNIveles;

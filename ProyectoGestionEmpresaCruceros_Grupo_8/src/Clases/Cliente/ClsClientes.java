@@ -21,7 +21,7 @@ public class ClsClientes extends ClsPersona{
     
     
     //METODOS
-    /*
+    
     @Override
     public void AgregarPersona()
     {
@@ -39,6 +39,6 @@ public class ClsClientes extends ClsPersona{
     {
         
     }
-    */
+    
     
 }
