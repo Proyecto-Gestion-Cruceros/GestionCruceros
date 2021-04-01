@@ -4,11 +4,21 @@ package FormulariosCrucero;
 
 public class clsVariablesViaje {
 
-        
-    protected static int codigoViaje;
+
+
+    public  int getCodigoBuque() {
+        return codigoBuque;
+    }
+
+     protected static int codigoViaje;
+    protected static int codigoBuque;
     protected static int numeroPersonas;
     protected static int nivelBarco;
     protected static int numeroCamarote;
+
+    public  void setCodigoBuque(int codigoBuque) {
+        clsVariablesViaje.codigoBuque = codigoBuque;
+    }
     
     public int getCodigoViaje() {
         return codigoViaje;

@@ -735,7 +735,7 @@ public class frmVistaCamarotesN4 extends javax.swing.JFrame {
                 String nombreBoton;
                 int capacidadMax;
 
-                ps = conexion.dbConexion().prepareStatement("SELECT estadoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + i);
+                ps = conexion.dbConexion().prepareStatement("SELECT estadoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + i + " AND codigoBuque = " + variables.getCodigoBuque() + " AND nivel = " + variables.getNivelBarco());
                 ResultSet result = ps.executeQuery();
                 if (result.next()) {
                     estadoCamarote = result.getString("estadoCamarote");
@@ -789,7 +789,7 @@ public class frmVistaCamarotesN4 extends javax.swing.JFrame {
             int capacidadMaxima;
 
             if (numeroCamarote != 0) {
-                ps = conexion.dbConexion().prepareStatement("SELECT codigoBuque, nivel, tipoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + numeroCamarote);
+                ps = conexion.dbConexion().prepareStatement("SELECT codigoBuque, nivel, tipoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + numeroCamarote + " AND codigoBuque = " + variables.getCodigoBuque() + " AND nivel = " + variables.getNivelBarco());
                 ResultSet result = ps.executeQuery();
                 if (result.next()) {
                     codigoBuque = Integer.parseInt(result.getString("codigoBuque"));

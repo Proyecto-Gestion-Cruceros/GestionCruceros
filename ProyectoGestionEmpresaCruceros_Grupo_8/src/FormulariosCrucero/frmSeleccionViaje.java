@@ -195,13 +195,14 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
 
             int idViaje;
             String nombreBuque;
+            int codigoBuque;
             String nombrePuerto;
             String nombreDestino;
             String fechaSalida;
             String fechaRegreso;
             txtDatosViaje.setText(null);
             
-            ps = conexion.dbConexion().prepareStatement("SELECT A.idViaje as id, B.nombreBuque as nb, C.nombrePuerto as np, D.nombreDestino as nd, A.fechaSalida as fs, A.fechaRegreso as fr FROM [dbo].[viajesDisponibles] A INNER JOIN [dbo].[buques] B  ON A.codigoBuque = B.codigoBuque INNER JOIN [dbo].[puertosSalida] C ON A.codigoPuertoSalida = C.codigoPuerto INNER JOIN [dbo].[destinosTuristicos] D ON A.codigoDestino = D.codigoDestino WHERE A.idViaje = " + codigoViaje);
+            ps = conexion.dbConexion().prepareStatement("SELECT A.idViaje as id, B.nombreBuque as nb, C.nombrePuerto as np, D.nombreDestino as nd, A.fechaSalida as fs, A.fechaRegreso as fr, A.codigoBuque as cb FROM [dbo].[viajesDisponibles] A INNER JOIN [dbo].[buques] B  ON A.codigoBuque = B.codigoBuque INNER JOIN [dbo].[puertosSalida] C ON A.codigoPuertoSalida = C.codigoPuerto INNER JOIN [dbo].[destinosTuristicos] D ON A.codigoDestino = D.codigoDestino WHERE A.idViaje = " + codigoViaje);
             ResultSet result = ps.executeQuery();
             if (result.next()) {
                 idViaje = Integer.parseInt(result.getString("id"));
@@ -210,7 +211,10 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
                 nombreDestino = result.getString("nd");
                 fechaSalida = result.getString("fs");
                 fechaRegreso = result.getString("fr");
-
+                codigoBuque = Integer.parseInt(result.getString("cb"));
+                
+                variables.setCodigoBuque(codigoBuque);
+                
                 txtDatosViaje.append(" Codigo de Viaje: " + idViaje);
                 txtDatosViaje.append("\n Nombre del Buque: " + nombreBuque);
                 txtDatosViaje.append("\n Puerto de Salida: " + nombrePuerto);

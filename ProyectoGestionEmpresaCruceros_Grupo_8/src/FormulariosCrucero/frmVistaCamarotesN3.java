@@ -115,7 +115,7 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel1.setText("CAMAROTES - NIVEL 3");
+        jLabel1.setText("CAMAROTES - NIVEL 2");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(600, 70, 550, 49);
 
@@ -1382,7 +1382,7 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
                 String nombreBoton;
                 int capacidadMax;
                 
-                ps = conexion.dbConexion().prepareStatement("SELECT estadoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + i);
+                ps = conexion.dbConexion().prepareStatement("SELECT estadoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + i + " AND codigoBuque = " + variables.getCodigoBuque() + " AND nivel = " + variables.getNivelBarco());
                 ResultSet result = ps.executeQuery();
                 if (result.next()) {
                     estadoCamarote = result.getString("estadoCamarote");
@@ -1436,7 +1436,7 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
             int capacidadMaxima;
 
             if (numeroCamarote != 0) {
-                ps = conexion.dbConexion().prepareStatement("SELECT codigoBuque, nivel, tipoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + numeroCamarote);
+                ps = conexion.dbConexion().prepareStatement("SELECT codigoBuque, nivel, tipoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + numeroCamarote + " AND codigoBuque = " + variables.getCodigoBuque() + " AND nivel = " + variables.getNivelBarco());
                 ResultSet result = ps.executeQuery();
                 if (result.next()) {
                     codigoBuque = Integer.parseInt(result.getString("codigoBuque"));

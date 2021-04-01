@@ -139,17 +139,16 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
     private void btnNivelDosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNivelDosActionPerformed
           dispose();
          
-        frmVistaCamarotes frmCamarote2 = new frmVistaCamarotes();
+        frmVistaCamarotesN3 frmCamarote3 = new frmVistaCamarotesN3();
         variables.setNivelBarco(2);
-        frmCamarote2.setVisible(true); 
+        frmCamarote3.setVisible(true); 
     }//GEN-LAST:event_btnNivelDosActionPerformed
 
     private void btnNivelTresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNivelTresActionPerformed
-          dispose();
-
-        frmVistaCamarotesN3 frmCamarote3 = new frmVistaCamarotesN3();
+        dispose();
+        frmVistaCamarotes frmCamarote2 = new frmVistaCamarotes();
         variables.setNivelBarco(3);
-        frmCamarote3.setVisible(true); 
+        frmCamarote2.setVisible(true); 
     }//GEN-LAST:event_btnNivelTresActionPerformed
 
     private void btnNivelCuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNivelCuatroActionPerformed
