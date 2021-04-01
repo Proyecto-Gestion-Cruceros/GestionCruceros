@@ -14,6 +14,7 @@ import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.sql.*;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -52,8 +53,8 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnAtras = new javax.swing.JButton();
-        indicador11 = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        indicador11 = new javax.swing.JButton();
         indicador37 = new javax.swing.JButton();
         indicador31 = new javax.swing.JButton();
         indicador8 = new javax.swing.JButton();
@@ -112,6 +113,8 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximizedBounds(new java.awt.Rectangle(0, 0, 1920, 1080));
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -127,7 +130,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         jLabel1.setText("Detalles del Camarote");
         jLabel1.setFocusTraversalPolicyProvider(true);
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(680, 620, 330, 49);
+        jLabel1.setBounds(810, 730, 330, 49);
 
         btnAtras.setBackground(new java.awt.Color(255, 204, 51));
         btnAtras.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -139,7 +142,19 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnAtras);
-        btnAtras.setBounds(0, 970, 210, 60);
+        btnAtras.setBounds(0, 1020, 210, 60);
+
+        btnSiguiente.setBackground(new java.awt.Color(255, 204, 51));
+        btnSiguiente.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
+        btnSiguiente.setForeground(new java.awt.Color(0, 0, 0));
+        btnSiguiente.setText("SIGUIENTE");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSiguiente);
+        btnSiguiente.setBounds(1710, 1020, 210, 60);
 
         indicador11.setBackground(new java.awt.Color(51, 255, 0));
         indicador11.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -154,19 +169,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador11);
-        indicador11.setBounds(784, 230, 40, 40);
-
-        btnSiguiente.setBackground(new java.awt.Color(255, 204, 51));
-        btnSiguiente.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
-        btnSiguiente.setForeground(new java.awt.Color(0, 0, 0));
-        btnSiguiente.setText("SIGUIENTE");
-        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSiguienteActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnSiguiente);
-        btnSiguiente.setBounds(1420, 970, 210, 60);
+        indicador11.setBounds(954, 360, 40, 40);
 
         indicador37.setBackground(new java.awt.Color(102, 255, 0));
         indicador37.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -180,7 +183,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador37);
-        indicador37.setBounds(698, 307, 40, 30);
+        indicador37.setBounds(869, 438, 40, 30);
 
         indicador31.setBackground(new java.awt.Color(102, 255, 0));
         indicador31.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -195,7 +198,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador31);
-        indicador31.setBounds(908, 422, 40, 40);
+        indicador31.setBounds(1078, 552, 40, 40);
 
         indicador8.setBackground(new java.awt.Color(102, 255, 0));
         indicador8.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -210,7 +213,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador8);
-        indicador8.setBounds(600, 230, 40, 40);
+        indicador8.setBounds(770, 360, 40, 40);
 
         indicador12.setBackground(new java.awt.Color(102, 255, 0));
         indicador12.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -225,7 +228,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador12);
-        indicador12.setBounds(847, 230, 40, 40);
+        indicador12.setBounds(1016, 360, 40, 40);
 
         indicador10.setBackground(new java.awt.Color(102, 255, 0));
         indicador10.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -240,7 +243,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador10);
-        indicador10.setBounds(722, 230, 40, 40);
+        indicador10.setBounds(894, 360, 40, 40);
 
         indicador7.setBackground(new java.awt.Color(102, 255, 0));
         indicador7.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -257,7 +260,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador7);
-        indicador7.setBounds(540, 230, 40, 40);
+        indicador7.setBounds(710, 360, 40, 40);
 
         indicador6.setBackground(new java.awt.Color(102, 255, 0));
         indicador6.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -274,7 +277,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador6);
-        indicador6.setBounds(479, 230, 40, 40);
+        indicador6.setBounds(649, 360, 40, 40);
 
         indicador9.setBackground(new java.awt.Color(102, 255, 0));
         indicador9.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -289,7 +292,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador9);
-        indicador9.setBounds(660, 230, 40, 40);
+        indicador9.setBounds(830, 360, 40, 40);
 
         indicador3.setBackground(new java.awt.Color(102, 255, 0));
         indicador3.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -306,7 +309,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador3);
-        indicador3.setBounds(240, 230, 40, 40);
+        indicador3.setBounds(412, 360, 40, 40);
 
         indicador2.setBackground(new java.awt.Color(102, 255, 0));
         indicador2.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -323,7 +326,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador2);
-        indicador2.setBounds(180, 230, 40, 40);
+        indicador2.setBounds(350, 360, 40, 40);
 
         indicador19.setBackground(new java.awt.Color(102, 255, 0));
         indicador19.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -339,7 +342,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador19);
-        indicador19.setBounds(120, 422, 40, 40);
+        indicador19.setBounds(290, 552, 40, 40);
 
         indicador5.setBackground(new java.awt.Color(102, 255, 0));
         indicador5.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -356,7 +359,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador5);
-        indicador5.setBounds(380, 230, 40, 40);
+        indicador5.setBounds(550, 360, 40, 40);
 
         indicador4.setBackground(new java.awt.Color(102, 255, 0));
         indicador4.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -373,7 +376,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador4);
-        indicador4.setBounds(302, 230, 40, 40);
+        indicador4.setBounds(472, 360, 40, 40);
 
         indicador20.setBackground(new java.awt.Color(102, 255, 0));
         indicador20.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -389,7 +392,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador20);
-        indicador20.setBounds(180, 422, 40, 40);
+        indicador20.setBounds(350, 552, 40, 40);
 
         indicador21.setBackground(new java.awt.Color(102, 255, 0));
         indicador21.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -406,7 +409,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador21);
-        indicador21.setBounds(240, 422, 40, 40);
+        indicador21.setBounds(412, 552, 40, 40);
 
         indicador22.setBackground(new java.awt.Color(102, 255, 0));
         indicador22.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -423,7 +426,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador22);
-        indicador22.setBounds(302, 422, 40, 40);
+        indicador22.setBounds(472, 552, 40, 40);
 
         indicador23.setBackground(new java.awt.Color(102, 255, 0));
         indicador23.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -440,7 +443,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador23);
-        indicador23.setBounds(380, 422, 40, 40);
+        indicador23.setBounds(550, 552, 40, 40);
 
         indicador24.setBackground(new java.awt.Color(102, 255, 0));
         indicador24.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -457,7 +460,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador24);
-        indicador24.setBounds(479, 422, 40, 40);
+        indicador24.setBounds(649, 552, 40, 40);
 
         indicador25.setBackground(new java.awt.Color(102, 255, 0));
         indicador25.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -472,7 +475,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador25);
-        indicador25.setBounds(540, 422, 40, 40);
+        indicador25.setBounds(710, 552, 40, 40);
 
         indicador26.setBackground(new java.awt.Color(102, 255, 0));
         indicador26.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -487,7 +490,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador26);
-        indicador26.setBounds(600, 422, 40, 40);
+        indicador26.setBounds(770, 552, 40, 40);
 
         indicador27.setBackground(new java.awt.Color(102, 255, 0));
         indicador27.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -502,7 +505,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador27);
-        indicador27.setBounds(660, 422, 40, 40);
+        indicador27.setBounds(830, 552, 40, 40);
 
         indicador28.setBackground(new java.awt.Color(102, 255, 0));
         indicador28.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -517,7 +520,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador28);
-        indicador28.setBounds(722, 422, 40, 40);
+        indicador28.setBounds(894, 552, 40, 40);
 
         indicador1.setBackground(new java.awt.Color(102, 255, 0));
         indicador1.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -533,7 +536,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador1);
-        indicador1.setBounds(120, 230, 40, 40);
+        indicador1.setBounds(290, 360, 40, 40);
 
         indicador29.setBackground(new java.awt.Color(102, 255, 0));
         indicador29.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -548,7 +551,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador29);
-        indicador29.setBounds(784, 422, 40, 40);
+        indicador29.setBounds(954, 552, 40, 40);
 
         indicador38.setBackground(new java.awt.Color(102, 255, 0));
         indicador38.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -562,7 +565,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador38);
-        indicador38.setBounds(758, 307, 40, 30);
+        indicador38.setBounds(928, 438, 40, 30);
 
         indicador40.setBackground(new java.awt.Color(102, 255, 0));
         indicador40.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -576,7 +579,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador40);
-        indicador40.setBounds(638, 358, 40, 30);
+        indicador40.setBounds(808, 487, 40, 30);
 
         indicador50.setBackground(new java.awt.Color(102, 255, 0));
         indicador50.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -590,7 +593,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador50);
-        indicador50.setBounds(1042, 357, 40, 30);
+        indicador50.setBounds(1212, 487, 40, 30);
 
         indicador42.setBackground(new java.awt.Color(102, 255, 0));
         indicador42.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -604,7 +607,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador42);
-        indicador42.setBounds(758, 358, 40, 30);
+        indicador42.setBounds(928, 487, 40, 30);
 
         indicador39.setBackground(new java.awt.Color(102, 255, 0));
         indicador39.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -618,7 +621,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador39);
-        indicador39.setBounds(818, 307, 40, 30);
+        indicador39.setBounds(988, 438, 40, 30);
 
         indicador49.setBackground(new java.awt.Color(102, 255, 0));
         indicador49.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -632,7 +635,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador49);
-        indicador49.setBounds(987, 372, 40, 20);
+        indicador49.setBounds(1156, 503, 40, 20);
 
         indicador36.setBackground(new java.awt.Color(102, 255, 0));
         indicador36.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -646,7 +649,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador36);
-        indicador36.setBounds(638, 307, 40, 30);
+        indicador36.setBounds(808, 438, 40, 30);
 
         indicador33.setBackground(new java.awt.Color(102, 255, 0));
         indicador33.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -661,7 +664,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador33);
-        indicador33.setBounds(1036, 422, 40, 40);
+        indicador33.setBounds(1204, 552, 40, 40);
 
         indicador13.setBackground(new java.awt.Color(102, 255, 0));
         indicador13.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -676,7 +679,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador13);
-        indicador13.setBounds(908, 230, 40, 40);
+        indicador13.setBounds(1078, 360, 40, 40);
 
         indicador14.setBackground(new java.awt.Color(102, 255, 0));
         indicador14.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -691,7 +694,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador14);
-        indicador14.setBounds(976, 230, 40, 40);
+        indicador14.setBounds(1146, 360, 40, 40);
 
         indicador15.setBackground(new java.awt.Color(102, 255, 0));
         indicador15.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -706,7 +709,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador15);
-        indicador15.setBounds(1036, 230, 40, 40);
+        indicador15.setBounds(1204, 360, 40, 40);
 
         indicador16.setBackground(new java.awt.Color(102, 255, 0));
         indicador16.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -721,7 +724,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador16);
-        indicador16.setBounds(1095, 230, 40, 40);
+        indicador16.setBounds(1264, 360, 40, 40);
 
         indicador17.setBackground(new java.awt.Color(102, 255, 0));
         indicador17.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -736,7 +739,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador17);
-        indicador17.setBounds(1151, 230, 40, 40);
+        indicador17.setBounds(1320, 360, 40, 40);
 
         indicador18.setBackground(new java.awt.Color(102, 255, 0));
         indicador18.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -751,7 +754,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador18);
-        indicador18.setBounds(1210, 230, 40, 40);
+        indicador18.setBounds(1380, 360, 40, 40);
 
         indicador30.setBackground(new java.awt.Color(102, 255, 0));
         indicador30.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -766,7 +769,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador30);
-        indicador30.setBounds(847, 422, 40, 40);
+        indicador30.setBounds(1016, 552, 40, 40);
 
         indicador34.setBackground(new java.awt.Color(102, 255, 0));
         indicador34.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -781,7 +784,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador34);
-        indicador34.setBounds(1095, 422, 40, 40);
+        indicador34.setBounds(1264, 552, 40, 40);
 
         indicadorVacio.setBackground(new java.awt.Color(102, 255, 0));
         indicadorVacio.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -790,7 +793,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         indicadorVacio.setHideActionText(true);
         indicadorVacio.setPreferredSize(new java.awt.Dimension(50, 50));
         jPanel1.add(indicadorVacio);
-        indicadorVacio.setBounds(1210, 422, 40, 40);
+        indicadorVacio.setBounds(1380, 552, 40, 40);
 
         indicador32.setBackground(new java.awt.Color(102, 255, 0));
         indicador32.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -805,7 +808,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador32);
-        indicador32.setBounds(976, 422, 40, 40);
+        indicador32.setBounds(1146, 552, 40, 40);
 
         indicador45.setBackground(new java.awt.Color(102, 255, 0));
         indicador45.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -819,7 +822,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador45);
-        indicador45.setBounds(1042, 307, 40, 30);
+        indicador45.setBounds(1212, 438, 40, 30);
 
         indicador51.setBackground(new java.awt.Color(102, 255, 0));
         indicador51.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -833,7 +836,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador51);
-        indicador51.setBounds(1100, 357, 40, 30);
+        indicador51.setBounds(1270, 487, 40, 30);
 
         indicador47.setBackground(new java.awt.Color(102, 255, 0));
         indicador47.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -847,7 +850,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador47);
-        indicador47.setBounds(1173, 307, 40, 30);
+        indicador47.setBounds(1345, 438, 40, 30);
 
         indicador41.setBackground(new java.awt.Color(102, 255, 0));
         indicador41.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -861,7 +864,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador41);
-        indicador41.setBounds(698, 358, 40, 30);
+        indicador41.setBounds(869, 487, 40, 30);
 
         indicador52.setBackground(new java.awt.Color(102, 255, 0));
         indicador52.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -875,7 +878,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador52);
-        indicador52.setBounds(1173, 357, 40, 30);
+        indicador52.setBounds(1345, 487, 40, 30);
 
         indicador46.setBackground(new java.awt.Color(102, 255, 0));
         indicador46.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -889,7 +892,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador46);
-        indicador46.setBounds(1100, 307, 40, 30);
+        indicador46.setBounds(1270, 438, 40, 30);
 
         indicador35.setBackground(new java.awt.Color(102, 255, 0));
         indicador35.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
@@ -904,7 +907,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador35);
-        indicador35.setBounds(1151, 422, 40, 40);
+        indicador35.setBounds(1320, 552, 40, 40);
 
         indicador43.setBackground(new java.awt.Color(102, 255, 0));
         indicador43.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -918,7 +921,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador43);
-        indicador43.setBounds(818, 358, 40, 30);
+        indicador43.setBounds(988, 487, 40, 30);
 
         indicador48.setBackground(new java.awt.Color(102, 255, 0));
         indicador48.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -932,7 +935,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador48);
-        indicador48.setBounds(1242, 302, 40, 20);
+        indicador48.setBounds(1412, 433, 40, 20);
 
         indicador44.setBackground(new java.awt.Color(102, 255, 0));
         indicador44.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -946,12 +949,12 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador44);
-        indicador44.setBounds(987, 300, 40, 20);
+        indicador44.setBounds(1156, 430, 40, 20);
 
         lblBackground.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/mapaNivel1FinalDef.png"))); // NOI18N
         jPanel1.add(lblBackground);
-        lblBackground.setBounds(0, 140, 1700, 410);
+        lblBackground.setBounds(170, 270, 1700, 410);
 
         txtDatosCamarote.setEditable(false);
         txtDatosCamarote.setBackground(new java.awt.Color(0, 79, 129));
@@ -964,25 +967,23 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtDatosCamarote);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(610, 680, 450, 200);
+        jScrollPane1.setBounds(740, 780, 450, 200);
 
         jLabel2.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 51));
         jLabel2.setText("CAMAROTES - NIVEL 4");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(630, 70, 510, 49);
+        jLabel2.setBounds(730, 110, 510, 49);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1920, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
 
         pack();
@@ -1142,9 +1143,10 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
     }//GEN-LAST:event_indicador29ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         verificarBotones();
 
-        retornarEstadoCamarote();
+       retornarEstadoCamarote();
     }//GEN-LAST:event_formWindowOpened
 
     private void indicador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador1ActionPerformed

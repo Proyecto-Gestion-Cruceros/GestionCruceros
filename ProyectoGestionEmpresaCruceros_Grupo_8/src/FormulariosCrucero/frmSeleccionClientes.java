@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSetMetaData;
 import java.util.HashSet;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListModel;
@@ -70,8 +71,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
     Statement st;
     PreparedStatement ps;
     ResultSetMetaData rsmd;
-    DefaultTableModel model;
-    public static DefaultTableModel model1;
+
     ResultSet result = null;
     String identidadCliente = "";
     String identidadClienteEliminar = "";
@@ -105,7 +105,9 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         txtBusqueda = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximizedBounds(new java.awt.Rectangle(0, 0, 1920, 1080));
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -120,7 +122,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 204, 51));
         jLabel1.setText("SELECCION DE CLIENTES");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(600, 60, 510, 50);
+        jLabel1.setBounds(730, 60, 510, 50);
 
         btnAtras.setBackground(new java.awt.Color(255, 204, 51));
         btnAtras.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -132,7 +134,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnAtras);
-        btnAtras.setBounds(0, 970, 210, 60);
+        btnAtras.setBounds(0, 1020, 210, 60);
 
         btnSiguiente.setBackground(new java.awt.Color(255, 204, 51));
         btnSiguiente.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -144,7 +146,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnSiguiente);
-        btnSiguiente.setBounds(1420, 970, 210, 60);
+        btnSiguiente.setBounds(1710, 1020, 210, 60);
 
         tablaClientes.setFont(new java.awt.Font("Doppio One", 0, 14)); // NOI18N
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -172,7 +174,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaClientes);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(110, 230, 1190, 440);
+        jScrollPane1.setBounds(110, 230, 1480, 440);
 
         btnAgregarCliente.setBackground(new java.awt.Color(255, 204, 51));
         btnAgregarCliente.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
@@ -183,24 +185,24 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnAgregarCliente);
-        btnAgregarCliente.setBounds(1360, 230, 220, 130);
+        btnAgregarCliente.setBounds(1640, 230, 220, 130);
 
         txtCantidadClientes.setEditable(false);
         txtCantidadClientes.setFont(new java.awt.Font("Doppio One", 0, 24)); // NOI18N
         txtCantidadClientes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCantidadClientes.setText("0");
         jPanel1.add(txtCantidadClientes);
-        txtCantidadClientes.setBounds(1030, 760, 170, 50);
+        txtCantidadClientes.setBounds(1320, 800, 170, 50);
 
         jLabel2.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
         jLabel2.setText("CANTIDAD DE CLIENTES SELECCIONADOS");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(930, 720, 350, 24);
+        jLabel2.setBounds(1230, 760, 350, 24);
 
         jLabel3.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
         jLabel3.setText("LISTA DE CLIENTES SELECCIONADOS");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(320, 700, 300, 24);
+        jLabel3.setBounds(470, 690, 300, 24);
 
         tablaSeleccionados.setFont(new java.awt.Font("Doppio One", 0, 14)); // NOI18N
         tablaSeleccionados.setModel(new javax.swing.table.DefaultTableModel(
@@ -227,7 +229,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tablaSeleccionados);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(110, 730, 700, 140);
+        jScrollPane2.setBounds(110, 730, 1010, 180);
 
         btnEliminarCliente.setBackground(new java.awt.Color(255, 153, 51));
         btnEliminarCliente.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
@@ -238,7 +240,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnEliminarCliente);
-        btnEliminarCliente.setBounds(570, 880, 240, 40);
+        btnEliminarCliente.setBounds(880, 930, 240, 40);
 
         btnRegistrarCliente.setBackground(new java.awt.Color(255, 204, 51));
         btnRegistrarCliente.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
@@ -249,9 +251,14 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnRegistrarCliente);
-        btnRegistrarCliente.setBounds(1360, 540, 220, 70);
+        btnRegistrarCliente.setBounds(1640, 590, 220, 70);
 
         txtBusqueda.setFont(new java.awt.Font("Doppio One", 0, 14)); // NOI18N
+        txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBusquedaActionPerformed(evt);
+            }
+        });
         txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtBusquedaKeyTyped(evt);
@@ -269,46 +276,42 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnLimpiar);
-        btnLimpiar.setBounds(1360, 410, 220, 80);
+        btnLimpiar.setBounds(1640, 400, 220, 80);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1920, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void mostrarForm(){
-        this.setVisible(true);
-    }
-    
+
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        if (Integer.parseInt(txtCantidadClientes.getText()) > 0) { 
+        if (Integer.parseInt(txtCantidadClientes.getText()) > 0) {
             variables.setNumeroPersonas(Integer.parseInt(txtCantidadClientes.getText()));
-            
+
             frmSeleccionViaje seleccionadorViaje = new frmSeleccionViaje();
             seleccionadorViaje.setVisible(true);
 
-        }
-        else{
+            this.dispose();
+        } else {
             JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR AL MENOS UN CLIENTE!");
-        
-        } 
-        
+
+        }
+
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
-    public void cerrarClientes(){
-        this.dispose();
-    }
     
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         this.dispose();
@@ -316,7 +319,17 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        cargarDatos();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+       
+        if(variables.getCodigoOperacion() == 1){
+                cargarDatos();
+        }
+        else if(variables.getCodigoOperacion() == 2){
+                tablaClientes.setModel(variables.model);
+                tablaSeleccionados.setModel(variables.model1);
+                cantidadClientes = variables.getNumeroPersonas();
+                txtCantidadClientes.setText("" + variables.getNumeroPersonas());
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tablaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClientesMouseClicked
@@ -373,13 +386,17 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         cargarDatos();
-        model1 = (DefaultTableModel) tablaSeleccionados.getModel();
-        model1.setRowCount(0);
+        variables.model1 = (DefaultTableModel) tablaSeleccionados.getModel();
+        variables.model1.setRowCount(0);
         
         txtCantidadClientes.setText("0");
         cantidadClientes = 0;
         variables.setNumeroPersonas(0);
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBusquedaActionPerformed
 
  
     public void filtro(int operacion) {
@@ -395,35 +412,35 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
     }
     
     private void eliminarTablaGrande(String identidadEliminar) {
-        model = (DefaultTableModel) tablaClientes.getModel();
+        variables.model = (DefaultTableModel) tablaClientes.getModel();
 
-        for (int i = 0; i < model.getRowCount(); i++) {
+        for (int i = 0; i < variables.model.getRowCount(); i++) {
             String identidadComparar;
-            identidadComparar = model.getValueAt(i, 0).toString();
+            identidadComparar = variables.model.getValueAt(i, 0).toString();
 
             if (identidadEliminar.equals(identidadComparar)) {
 
-                model.removeRow(i);
+                variables.model.removeRow(i);
                 break;
             }
         }
     }
 
     private void agregarTablaPequenia() {
-        model1 = (DefaultTableModel) tablaSeleccionados.getModel();
-        model1.addRow(new Object[]{identidadCliente, nombreCliente});
+        variables.model1 = (DefaultTableModel) tablaSeleccionados.getModel();
+        variables.model1.addRow(new Object[]{identidadCliente, nombreCliente});
     }
 
     private void eliminarTablaPequenia(String identidadEliminarPequenio) {
 
-        model1 = (DefaultTableModel) tablaSeleccionados.getModel();
+        variables.model1 = (DefaultTableModel) tablaSeleccionados.getModel();
 
-        for (int i = 0; i < model1.getRowCount(); i++) {
+        for (int i = 0; i < variables.model1.getRowCount(); i++) {
             String identidadComparar;
-            identidadComparar = model1.getValueAt(i, 0).toString();
+            identidadComparar = variables.model1.getValueAt(i, 0).toString();
 
             if (identidadEliminarPequenio.equals(identidadComparar)) {
-                model1.removeRow(i);
+                variables.model1.removeRow(i);
                 identidadClienteEliminar = "";
                 break;
             }
@@ -431,8 +448,8 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
     }
 
     private void cargarDatos() {
-        model = (DefaultTableModel) tablaClientes.getModel();
-        model.setRowCount(0);
+        variables.model = (DefaultTableModel) tablaClientes.getModel();
+        variables.model.setRowCount(0);
 
         try {
             ps = conexion.dbConexion().prepareStatement("select identidadCliente, CONCAT(nombres, ' ', apellidos), telefono, correoElectronico from clientes");
@@ -447,7 +464,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
                 for (int i = 0; i < columna; i++) {
                     fil[i] = result.getObject(i + 1);
                 }
-                model.addRow(fil);
+                variables.model.addRow(fil);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla" + ex);
@@ -455,7 +472,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
     }
 
     private void cargarDatosEspecificos(String identidad) {
-        model = (DefaultTableModel) tablaClientes.getModel();
+        variables.model = (DefaultTableModel) tablaClientes.getModel();
         try {
             ps = conexion.dbConexion().prepareStatement("select identidadCliente, CONCAT(nombres, ' ', apellidos), telefono, correoElectronico from clientes WHERE identidadCliente = '" + identidad + "'");
 
@@ -469,7 +486,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
                 for (int i = 0; i < columna; i++) {
                     fil[i] = result.getObject(i + 1);
                 }
-                model.addRow(fil);
+                variables.model.addRow(fil);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla" + ex);

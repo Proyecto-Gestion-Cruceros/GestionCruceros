@@ -13,7 +13,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Enumeration;
+import java.util.HashSet;
 import javax.swing.AbstractButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
@@ -60,6 +62,9 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximizedBounds(new java.awt.Rectangle(0, 0, 1920, 1080));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1920, 1080));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -74,7 +79,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 204, 51));
         jLabel1.setText("SELECCION DE VIAJE");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(640, 80, 510, 50);
+        jLabel1.setBounds(770, 70, 430, 50);
 
         btnAtras.setBackground(new java.awt.Color(255, 204, 51));
         btnAtras.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -86,7 +91,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnAtras);
-        btnAtras.setBounds(0, 970, 210, 60);
+        btnAtras.setBounds(0, 1020, 210, 60);
 
         btnSiguiente.setBackground(new java.awt.Color(255, 204, 51));
         btnSiguiente.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -98,7 +103,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnSiguiente);
-        btnSiguiente.setBounds(1420, 970, 210, 60);
+        btnSiguiente.setBounds(1710, 1020, 210, 60);
 
         tablaViajes.setFont(new java.awt.Font("Doppio One", 0, 14)); // NOI18N
         tablaViajes.setModel(new javax.swing.table.DefaultTableModel(
@@ -126,7 +131,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaViajes);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(80, 160, 1480, 430);
+        jScrollPane1.setBounds(70, 160, 1780, 430);
 
         txtDatosViaje.setEditable(false);
         txtDatosViaje.setBackground(new java.awt.Color(0, 79, 129));
@@ -139,26 +144,24 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
         jScrollPane2.setViewportView(txtDatosViaje);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(600, 680, 460, 220);
+        jScrollPane2.setBounds(740, 690, 460, 220);
 
         jLabel2.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 30)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 51));
         jLabel2.setText("Detalles del Viaje");
         jLabel2.setFocusTraversalPolicyProvider(true);
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(710, 610, 260, 49);
+        jLabel2.setBounds(850, 640, 260, 49);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1926, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
 
         pack();
@@ -166,7 +169,13 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         codigoViajeSeleccionado = 0;
-        this.setVisible(false);
+        
+        variables.setCodigoOperacion(2);
+        
+        frmSeleccionClientes clientes = new frmSeleccionClientes();
+        clientes.setVisible(true);
+
+        this.dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
@@ -174,6 +183,10 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
             variables.setCodigoViaje(codigoViajeSeleccionado);
             frmSeleccionNivel selectorNivel = new frmSeleccionNivel();
             selectorNivel.setVisible(true);
+            this.dispose();
+            
+        }else{
+        JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN VIAJE!");
         }
 
     }//GEN-LAST:event_btnSiguienteActionPerformed
@@ -187,7 +200,15 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaViajesMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);      
         cargarDatos();
+        
+        if(variables.getCodigoViaje() == 0){
+            txtDatosViaje.setText(null);
+        }
+        else{
+            retornarDatosViaje(variables.getCodigoViaje());
+        }
     }//GEN-LAST:event_formWindowOpened
 
     public void retornarDatosViaje(int codigoViaje) {
