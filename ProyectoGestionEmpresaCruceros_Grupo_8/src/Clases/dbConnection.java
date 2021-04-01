@@ -12,7 +12,7 @@ public class dbConnection {
     //public DataSource dataSoorce;
     
     public static Connection dbConexion(){
-        String url = "jdbc:sqlserver://DESKTOP-IFG9AL0\\DESKTOP-IFG9AL0\\SQLEXPRESS:1433;databaseName=agenciaCruceros";
+        String url = "jdbc:sqlserver://DESKTOP-P4A3L4O:1433;databaseName=agenciaCruceros";
         
         try{
             
@@ -23,7 +23,7 @@ public class dbConnection {
         }
         
         try{
-           conn = DriverManager.getConnection(url, "sa", "12345");
+           conn = DriverManager.getConnection(url, "sa", "1234");
           //  JOptionPane.showMessageDialog(null, "Conexion Exitosa");
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Error de conexion");

@@ -106,6 +106,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         txtBusqueda = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         btnMenuPrincipal = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(0, 0, 1920, 1080));
@@ -122,9 +123,9 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel1.setText("SELECCION DE CLIENTES");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/lupaRed.png"))); // NOI18N
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(730, 60, 510, 50);
+        jLabel1.setBounds(370, 170, 50, 40);
 
         btnAtras.setBackground(new java.awt.Color(255, 204, 51));
         btnAtras.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -256,6 +257,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         btnRegistrarCliente.setBounds(1640, 590, 220, 70);
 
         txtBusqueda.setFont(new java.awt.Font("Doppio One", 0, 14)); // NOI18N
+        txtBusqueda.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBusquedaActionPerformed(evt);
@@ -267,7 +269,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtBusqueda);
-        txtBusqueda.setBounds(110, 180, 260, 30);
+        txtBusqueda.setBounds(110, 170, 250, 40);
 
         btnLimpiar.setBackground(new java.awt.Color(255, 204, 51));
         btnLimpiar.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
@@ -290,6 +292,12 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         });
         jPanel1.add(btnMenuPrincipal);
         btnMenuPrincipal.setBounds(1843, 2, 75, 70);
+
+        jLabel4.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 204, 51));
+        jLabel4.setText("SELECCION DE CLIENTES");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(730, 60, 510, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -568,6 +576,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
