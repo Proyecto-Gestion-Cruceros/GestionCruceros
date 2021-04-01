@@ -32,10 +32,9 @@ public class clsPuertosSalidas {
 
         int resultado;
         try {
-            ps = dbConnection.dbConexion().prepareStatement("insert into puertosSalida(nombrePuerto,estado) values(?, ?)");
+            ps = dbConnection.dbConexion().prepareStatement("exec ADDPuertoSalida ?");
             ps.setString(1, NombrePuerto);
-            ps.setString(2, "Activo");
-                
+
             resultado = ps.executeUpdate();
 
             return resultado > 0;
@@ -51,7 +50,7 @@ public class clsPuertosSalidas {
     public boolean ActualizarPuertoSalida() {
         int resultado = 0;
         try {
-            ps = dbConnection.dbConexion().prepareStatement("update puertosSalida set nombrePuerto = ? where [codigoPuerto] = ?");
+            ps = dbConnection.dbConexion().prepareStatement("update puertosSalida set nombrePuerto = ? where [codigoPuerto] = ? and estado = 'Activo'");
             ps.setString(1, NombrePuerto);
             ps.setInt(2, CodigoPuerto);
 
@@ -66,11 +65,11 @@ public class clsPuertosSalidas {
         }
 
     }
-    
-        public boolean EliminarPuertoSalida() {
+
+    public boolean EliminarPuertoSalida() {
         int resultado = 0;
         try {
-            ps = dbConnection.dbConexion().prepareStatement("  UPDATE [agenciaCruceros].[dbo].[puertosSalida] set estado = 'Inactivo' where codigoPuerto = ?");
+            ps = dbConnection.dbConexion().prepareStatement("UPDATE [agenciaCruceros].[dbo].[puertosSalida] set estado = 'Inactivo' where codigoPuerto = ? and estado = 'Activo'");
             ps.setInt(1, CodigoPuerto);
 
             resultado = ps.executeUpdate();
@@ -84,6 +83,5 @@ public class clsPuertosSalidas {
         }
 
     }
-    
 
 }

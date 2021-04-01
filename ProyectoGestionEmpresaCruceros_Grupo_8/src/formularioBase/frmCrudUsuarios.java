@@ -7,6 +7,8 @@ package formularioBase;
 
 import Clases.Personas.clsUsuarios;
 import Clases.Personas.ClsPersona;
+import FormularioIGP.frmPrincipal;
+import javax.swing.JOptionPane;
 
 public class frmCrudUsuarios extends javax.swing.JFrame {
 
@@ -26,9 +28,11 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnAgenteVenta = new javax.swing.JButton();
         btnAdministrador = new javax.swing.JButton();
+        btnMenuPrincipal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 79, 129));
+        setUndecorated(true);
         setSize(new java.awt.Dimension(32767, 32767));
 
         plSeleccionUsuario.setBackground(new java.awt.Color(0, 79, 129));
@@ -58,6 +62,15 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
             }
         });
 
+        btnMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/imgBotonHome (2).png"))); // NOI18N
+        btnMenuPrincipal.setBorderPainted(false);
+        btnMenuPrincipal.setContentAreaFilled(false);
+        btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuPrincipalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout plSeleccionUsuarioLayout = new javax.swing.GroupLayout(plSeleccionUsuario);
         plSeleccionUsuario.setLayout(plSeleccionUsuarioLayout);
         plSeleccionUsuarioLayout.setHorizontalGroup(
@@ -65,31 +78,37 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plSeleccionUsuarioLayout.createSequentialGroup()
                 .addGap(296, 296, 296)
                 .addComponent(btnAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 371, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 748, Short.MAX_VALUE)
                 .addComponent(btnAgenteVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(296, 296, 296))
+            .addGroup(plSeleccionUsuarioLayout.createSequentialGroup()
+                .addGap(777, 777, 777)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plSeleccionUsuarioLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(599, 599, 599))
+                .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         plSeleccionUsuarioLayout.setVerticalGroup(
             plSeleccionUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plSeleccionUsuarioLayout.createSequentialGroup()
-                .addGap(123, 123, 123)
+                .addContainerGap()
+                .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(363, 363, 363)
+                .addGap(321, 321, 321)
                 .addGroup(plSeleccionUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgenteVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(356, Short.MAX_VALUE))
+                .addContainerGap(401, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(plSeleccionUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(plSeleccionUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,6 +131,17 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
        frmUsuarios.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnAgenteVentaActionPerformed
+
+    private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
+        int result = JOptionPane.showConfirmDialog(null, "Esta seguro de volver al Menu Principal?", "Salir del Módulo",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            dispose();
+            frmPrincipal igp = new frmPrincipal();
+            igp.setVisible(true);
+        }
+    }//GEN-LAST:event_btnMenuPrincipalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,6 +181,7 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdministrador;
     private javax.swing.JButton btnAgenteVenta;
+    private javax.swing.JButton btnMenuPrincipal;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel plSeleccionUsuario;
     // End of variables declaration//GEN-END:variables
