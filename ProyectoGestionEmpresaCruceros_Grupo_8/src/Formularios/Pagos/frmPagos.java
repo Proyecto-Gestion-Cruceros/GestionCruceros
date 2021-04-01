@@ -3,11 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Clases.Pagos;
+package Formularios.Pagos;
 
+import Clases.dbConnection;
+import FormularioIGP.frmPrincipal;
+import FormulariosCrucero.clsVariablesViaje;
+import FormulariosCrucero.frmSeleccionClientes;
 import java.net.URL;
+import java.sql.*;
 import javax.swing.JRadioButton;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Hacknel
@@ -21,6 +27,10 @@ public class frmPagos extends javax.swing.JFrame {
         initComponents();
     }
 
+    PreparedStatement ps;
+    DefaultTableModel modelCliente = frmSeleccionClientes.model1;
+    clsVariablesViaje variablesViaje = new clsVariablesViaje();
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,36 +43,33 @@ public class frmPagos extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtNumFactura = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtFechaInicio = new javax.swing.JTextField();
-        btnIniciarSesion = new javax.swing.JButton();
-        txtFechaInicio1 = new javax.swing.JTextField();
+        txtPuertoPartida = new javax.swing.JTextField();
+        btnConsultarPersonas = new javax.swing.JButton();
+        txtFechaFin = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        txtFechaInicio2 = new javax.swing.JTextField();
-        txtFechaInicio3 = new javax.swing.JTextField();
+        txtNombre1 = new javax.swing.JTextField();
+        txtFechaInicio = new javax.swing.JTextField();
+        txtPuertoDestino = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtNombre2 = new javax.swing.JTextField();
         btnIniciarSesion1 = new javax.swing.JButton();
-        btnIniciarSesion2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtTel = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel11 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        txtNivelCubierta = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        txtNumeroCamarote = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        txtNombreCrucero = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel16 = new javax.swing.JLabel();
         btnIniciarSesion3 = new javax.swing.JButton();
@@ -84,16 +91,17 @@ public class frmPagos extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
+        lblSubTotal = new javax.swing.JLabel();
+        lblISV = new javax.swing.JLabel();
+        lblDescuento = new javax.swing.JLabel();
+        lblPropina = new javax.swing.JLabel();
+        lblTotalPagar = new javax.swing.JLabel();
         jRadioButton3 = new javax.swing.JRadioButton();
         jLabel33 = new javax.swing.JLabel();
         jTextField16 = new javax.swing.JTextField();
         jTextField17 = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("PAGOS");
@@ -117,10 +125,10 @@ public class frmPagos extends javax.swing.JFrame {
         jPanel1.add(jLabel7);
         jLabel7.setBounds(323, 603, 200, 51);
 
-        jTextField2.setEditable(false);
-        jTextField2.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(314, 194, 102, 26);
+        txtNumFactura.setEditable(false);
+        txtNumFactura.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtNumFactura);
+        txtNumFactura.setBounds(314, 194, 102, 26);
 
         jLabel2.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -134,22 +142,27 @@ public class frmPagos extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(961, 193, 110, 26);
 
-        txtFechaInicio.setEditable(false);
-        txtFechaInicio.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(txtFechaInicio);
-        txtFechaInicio.setBounds(961, 301, 182, 26);
+        txtPuertoPartida.setEditable(false);
+        txtPuertoPartida.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtPuertoPartida);
+        txtPuertoPartida.setBounds(961, 301, 182, 30);
 
-        btnIniciarSesion.setBackground(new java.awt.Color(255, 204, 51));
-        btnIniciarSesion.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
-        btnIniciarSesion.setForeground(new java.awt.Color(0, 0, 0));
-        btnIniciarSesion.setText("CONSULTAR PERSONAS");
-        jPanel1.add(btnIniciarSesion);
-        btnIniciarSesion.setBounds(236, 353, 285, 42);
+        btnConsultarPersonas.setBackground(new java.awt.Color(255, 204, 51));
+        btnConsultarPersonas.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
+        btnConsultarPersonas.setForeground(new java.awt.Color(0, 0, 0));
+        btnConsultarPersonas.setText("CONSULTAR PERSONAS");
+        btnConsultarPersonas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarPersonasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnConsultarPersonas);
+        btnConsultarPersonas.setBounds(236, 353, 285, 42);
 
-        txtFechaInicio1.setEditable(false);
-        txtFechaInicio1.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(txtFechaInicio1);
-        txtFechaInicio1.setBounds(1189, 225, 130, 26);
+        txtFechaFin.setEditable(false);
+        txtFechaFin.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtFechaFin);
+        txtFechaFin.setBounds(1189, 225, 130, 30);
 
         jLabel4.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -169,20 +182,20 @@ public class frmPagos extends javax.swing.JFrame {
         jPanel1.add(jLabel6);
         jLabel6.setBounds(961, 269, 164, 26);
 
-        jTextField5.setEditable(false);
-        jTextField5.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField5);
-        jTextField5.setBounds(116, 301, 255, 26);
+        txtNombre1.setEditable(false);
+        txtNombre1.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtNombre1);
+        txtNombre1.setBounds(116, 301, 255, 30);
 
-        txtFechaInicio2.setEditable(false);
-        txtFechaInicio2.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(txtFechaInicio2);
-        txtFechaInicio2.setBounds(961, 225, 130, 26);
+        txtFechaInicio.setEditable(false);
+        txtFechaInicio.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtFechaInicio);
+        txtFechaInicio.setBounds(961, 225, 130, 30);
 
-        txtFechaInicio3.setEditable(false);
-        txtFechaInicio3.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(txtFechaInicio3);
-        txtFechaInicio3.setBounds(1189, 301, 182, 26);
+        txtPuertoDestino.setEditable(false);
+        txtPuertoDestino.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtPuertoDestino);
+        txtPuertoDestino.setBounds(1189, 301, 182, 30);
 
         jLabel8.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -190,10 +203,10 @@ public class frmPagos extends javax.swing.JFrame {
         jPanel1.add(jLabel8);
         jLabel8.setBounds(1189, 269, 165, 26);
 
-        jTextField6.setEditable(false);
-        jTextField6.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField6);
-        jTextField6.setBounds(389, 301, 255, 26);
+        txtNombre2.setEditable(false);
+        txtNombre2.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtNombre2);
+        txtNombre2.setBounds(389, 301, 255, 30);
 
         btnIniciarSesion1.setBackground(new java.awt.Color(255, 204, 51));
         btnIniciarSesion1.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
@@ -202,24 +215,16 @@ public class frmPagos extends javax.swing.JFrame {
         jPanel1.add(btnIniciarSesion1);
         btnIniciarSesion1.setBounds(1416, 926, 195, 63);
 
-        btnIniciarSesion2.setBackground(new java.awt.Color(255, 204, 51));
-        btnIniciarSesion2.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
-        btnIniciarSesion2.setForeground(new java.awt.Color(0, 0, 0));
-        btnIniciarSesion2.setText("<html>CONSULTAR<br />ITINERARIO\n</html>");
-        jPanel1.add(btnIniciarSesion2);
-        btnIniciarSesion2.setBounds(1389, 198, 130, 126);
-        btnIniciarSesion2.getAccessibleContext().setAccessibleName("BNT");
-
         jLabel9.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Correo electronico");
         jPanel1.add(jLabel9);
         jLabel9.setBounds(116, 432, 168, 26);
 
-        jTextField7.setEditable(false);
-        jTextField7.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField7);
-        jTextField7.setBounds(116, 464, 255, 26);
+        txtCorreo.setEditable(false);
+        txtCorreo.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtCorreo);
+        txtCorreo.setBounds(116, 464, 255, 30);
 
         jLabel10.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -227,10 +232,10 @@ public class frmPagos extends javax.swing.JFrame {
         jPanel1.add(jLabel10);
         jLabel10.setBounds(116, 508, 186, 26);
 
-        jTextField8.setEditable(false);
-        jTextField8.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField8);
-        jTextField8.setBounds(116, 540, 255, 26);
+        txtTel.setEditable(false);
+        txtTel.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtTel);
+        txtTel.setBounds(116, 540, 255, 30);
         jPanel1.add(jSeparator1);
         jSeparator1.setBounds(6, 593, 1623, 10);
 
@@ -240,32 +245,21 @@ public class frmPagos extends javax.swing.JFrame {
         jPanel1.add(jLabel11);
         jLabel11.setBounds(624, 49, 357, 51);
 
-        jTextField9.setEditable(false);
-        jTextField9.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField9);
-        jTextField9.setBounds(961, 385, 182, 26);
-
-        jLabel12.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Tipo de crucero");
-        jPanel1.add(jLabel12);
-        jLabel12.setBounds(961, 353, 140, 26);
-
         jLabel13.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Nivel de cubierta");
         jPanel1.add(jLabel13);
         jLabel13.setBounds(961, 451, 158, 26);
 
-        jTextField10.setEditable(false);
-        jTextField10.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        txtNivelCubierta.setEditable(false);
+        txtNivelCubierta.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        txtNivelCubierta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                txtNivelCubiertaActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField10);
-        jTextField10.setBounds(961, 483, 182, 26);
+        jPanel1.add(txtNivelCubierta);
+        txtNivelCubierta.setBounds(961, 483, 182, 30);
 
         jLabel14.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
@@ -273,21 +267,21 @@ public class frmPagos extends javax.swing.JFrame {
         jPanel1.add(jLabel14);
         jLabel14.setBounds(1200, 451, 197, 26);
 
-        jTextField11.setEditable(false);
-        jTextField11.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField11);
-        jTextField11.setBounds(1200, 483, 169, 26);
+        txtNumeroCamarote.setEditable(false);
+        txtNumeroCamarote.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtNumeroCamarote);
+        txtNumeroCamarote.setBounds(1200, 483, 169, 30);
 
         jLabel15.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Nombre crucero");
         jPanel1.add(jLabel15);
-        jLabel15.setBounds(1200, 353, 147, 26);
+        jLabel15.setBounds(960, 360, 147, 26);
 
-        jTextField12.setEditable(false);
-        jTextField12.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField12);
-        jTextField12.setBounds(1200, 385, 171, 26);
+        txtNombreCrucero.setEditable(false);
+        txtNombreCrucero.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtNombreCrucero);
+        txtNombreCrucero.setBounds(960, 390, 171, 30);
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel1.add(jSeparator2);
@@ -330,11 +324,11 @@ public class frmPagos extends javax.swing.JFrame {
 
         jTextField13.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(jTextField13);
-        jTextField13.setBounds(874, 804, 249, 26);
+        jTextField13.setBounds(874, 804, 249, 30);
 
         jTextField14.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(jTextField14);
-        jTextField14.setBounds(874, 871, 249, 26);
+        jTextField14.setBounds(874, 871, 249, 30);
 
         jLabel20.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
@@ -366,7 +360,7 @@ public class frmPagos extends javax.swing.JFrame {
 
         jTextField15.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(jTextField15);
-        jTextField15.setBounds(1173, 871, 63, 26);
+        jTextField15.setBounds(1173, 871, 63, 30);
 
         jLabel23.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
@@ -398,35 +392,35 @@ public class frmPagos extends javax.swing.JFrame {
         jPanel1.add(jLabel27);
         jLabel27.setBounds(246, 821, 76, 26);
 
-        jLabel28.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel28.setText("16000.00");
-        jPanel1.add(jLabel28);
-        jLabel28.setBounds(340, 689, 88, 26);
+        lblSubTotal.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        lblSubTotal.setForeground(new java.awt.Color(255, 204, 0));
+        lblSubTotal.setText("16000.00");
+        jPanel1.add(lblSubTotal);
+        lblSubTotal.setBounds(340, 689, 88, 26);
 
-        jLabel29.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
-        jLabel29.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel29.setText("2400.00");
-        jPanel1.add(jLabel29);
-        jLabel29.setBounds(350, 733, 78, 26);
+        lblISV.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        lblISV.setForeground(new java.awt.Color(255, 204, 0));
+        lblISV.setText("2400.00");
+        jPanel1.add(lblISV);
+        lblISV.setBounds(350, 733, 78, 26);
 
-        jLabel30.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
-        jLabel30.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel30.setText("0.00");
-        jPanel1.add(jLabel30);
-        jLabel30.setBounds(385, 777, 43, 26);
+        lblDescuento.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        lblDescuento.setForeground(new java.awt.Color(255, 204, 0));
+        lblDescuento.setText("0.00");
+        jPanel1.add(lblDescuento);
+        lblDescuento.setBounds(385, 777, 43, 26);
 
-        jLabel31.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
-        jLabel31.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel31.setText("1600.00");
-        jPanel1.add(jLabel31);
-        jLabel31.setBounds(353, 821, 75, 26);
+        lblPropina.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        lblPropina.setForeground(new java.awt.Color(255, 204, 0));
+        lblPropina.setText("1600.00");
+        jPanel1.add(lblPropina);
+        lblPropina.setBounds(353, 821, 75, 26);
 
-        jLabel32.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
-        jLabel32.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel32.setText("20000.00");
-        jPanel1.add(jLabel32);
-        jLabel32.setBounds(441, 887, 93, 26);
+        lblTotalPagar.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        lblTotalPagar.setForeground(new java.awt.Color(255, 204, 0));
+        lblTotalPagar.setText("20000.00");
+        jPanel1.add(lblTotalPagar);
+        lblTotalPagar.setBounds(441, 887, 93, 26);
 
         jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(jRadioButton3);
@@ -444,7 +438,7 @@ public class frmPagos extends javax.swing.JFrame {
 
         jTextField16.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(jTextField16);
-        jTextField16.setBounds(1365, 804, 130, 26);
+        jTextField16.setBounds(1365, 804, 130, 30);
 
         jTextField17.setEditable(false);
         jTextField17.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
@@ -456,6 +450,15 @@ public class frmPagos extends javax.swing.JFrame {
         jLabel34.setText("Cantidad Recibida");
         jPanel1.add(jLabel34);
         jLabel34.setBounds(1365, 773, 170, 26);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/imgBotonHome (2).png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(1550, 10, 75, 68);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -471,16 +474,69 @@ public class frmPagos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void txtNivelCubiertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNivelCubiertaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_txtNivelCubiertaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
-        
+        cargarDatos(modelCliente.getValueAt(0, 0).toString(), variablesViaje.getCodigoViaje());
         
     }//GEN-LAST:event_formWindowOpened
 
+    private void btnConsultarPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarPersonasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultarPersonasActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        this.setVisible(false);
+        new frmPrincipal().setVisible(true);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void cargarDatos(String identidadCliente, int idViaje) {
+        
+        try{
+            //Se obtienen los datos del cliente
+            ps = dbConnection.dbConexion().prepareStatement("SELECT nombres n1, apellidos n2, telefono tl, correoElectronico ce FROM clientes WHERE identidadCliente = ?");
+            ps.setString(1, identidadCliente);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                txtNombre1.setText(rs.getString("n1"));
+                txtNombre2.setText(rs.getString("n2"));
+                txtTel.setText(rs.getString("tl"));
+                txtCorreo.setText(rs.getString("ce"));
+            }
+            
+            //se obtienen los datos de factura
+            ps = dbConnection.dbConexion().prepareStatement("SELECT MAX(codigoFactura)cf FROM [dbo].[facturaFinal]");
+            rs = null;
+            rs = ps.executeQuery();
+            if(rs.next()){
+                txtNumFactura.setText("" + (rs.getInt("cf") + 1));
+            }
+            
+            //se obtienen los datos de viaje
+            ps = dbConnection.dbConexion().prepareStatement("SELECT B.nombreBuque as nb, C.nombrePuerto as np, D.nombreDestino as nd, A.fechaSalida as fs, A.fechaRegreso as fr FROM [dbo].[viajesDisponibles] A INNER JOIN [dbo].[buques] B  ON A.codigoBuque = B.codigoBuque INNER JOIN [dbo].[puertosSalida] C ON A.codigoPuertoSalida = C.codigoPuerto INNER JOIN [dbo].[destinosTuristicos] D ON A.codigoDestino = D.codigoDestino WHERE A.idViaje = ?");
+            ps.setInt(1, idViaje);
+            ResultSet result = ps.executeQuery();
+            if (result.next()) {
+                txtNombreCrucero.setText(result.getString("nb"));
+                txtPuertoPartida.setText(result.getString("np"));
+                txtPuertoDestino.setText(result.getString("nd"));
+                txtFechaInicio.setText(result.getString("fs"));
+                txtFechaFin.setText(result.getString("fr"));
+                txtNivelCubierta.setText("" + variablesViaje.getNivelBarco());
+                txtNumeroCamarote.setText("" + variablesViaje.getNumeroCamarote());
+
+            }
+            
+        }catch(SQLException ex){
+            System.out.println(""+ex.getMessage());
+        }
+
+    }
+
+    
     /**
      * @param args the command line arguments
      */
@@ -517,16 +573,15 @@ public class frmPagos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnIniciarSesion;
+    private javax.swing.JButton btnConsultarPersonas;
     private javax.swing.JButton btnIniciarSesion1;
-    private javax.swing.JButton btnIniciarSesion2;
     private javax.swing.JButton btnIniciarSesion3;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -543,12 +598,7 @@ public class frmPagos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
@@ -563,23 +613,27 @@ public class frmPagos extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel lblDescuento;
+    private javax.swing.JLabel lblISV;
+    private javax.swing.JLabel lblPropina;
+    private javax.swing.JLabel lblSubTotal;
+    private javax.swing.JLabel lblTotalPagar;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtFechaFin;
     private javax.swing.JTextField txtFechaInicio;
-    private javax.swing.JTextField txtFechaInicio1;
-    private javax.swing.JTextField txtFechaInicio2;
-    private javax.swing.JTextField txtFechaInicio3;
+    private javax.swing.JTextField txtNivelCubierta;
+    private javax.swing.JTextField txtNombre1;
+    private javax.swing.JTextField txtNombre2;
+    private javax.swing.JTextField txtNombreCrucero;
+    private javax.swing.JTextField txtNumFactura;
+    private javax.swing.JTextField txtNumeroCamarote;
+    private javax.swing.JTextField txtPuertoDestino;
+    private javax.swing.JTextField txtPuertoPartida;
+    private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables
 }
