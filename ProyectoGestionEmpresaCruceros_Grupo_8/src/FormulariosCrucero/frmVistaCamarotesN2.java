@@ -30,16 +30,15 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
     public frmVistaCamarotesN2() {
         initComponents();
     }
-    
+
     dbConnection conexion = new dbConnection();
     clsVariablesViaje variables = new clsVariablesViaje();
-    
+
     int cantidadOcupantes = variables.getNumeroPersonas();
     public static Connection conn = null;
     int numeroCamaroteSeleccionado = 0;
     PreparedStatement ps;
     ResultSet result = null;
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,10 +108,10 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         indicador48 = new javax.swing.JButton();
         indicador44 = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtDatosCamarote = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         btnMenuPrincipal = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDatosCamarote = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(0, 0, 1920, 1080));
@@ -958,19 +957,6 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         jPanel1.add(lblBackground);
         lblBackground.setBounds(170, 270, 1700, 410);
 
-        txtDatosCamarote.setEditable(false);
-        txtDatosCamarote.setBackground(new java.awt.Color(0, 79, 129));
-        txtDatosCamarote.setColumns(20);
-        txtDatosCamarote.setFont(new java.awt.Font("Doppio One", 0, 24)); // NOI18N
-        txtDatosCamarote.setForeground(new java.awt.Color(255, 204, 51));
-        txtDatosCamarote.setRows(5);
-        txtDatosCamarote.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204)));
-        txtDatosCamarote.setFocusable(false);
-        jScrollPane1.setViewportView(txtDatosCamarote);
-
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(740, 780, 450, 200);
-
         jLabel2.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 51));
         jLabel2.setText("CAMAROTES - NIVEL 4");
@@ -987,6 +973,19 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         });
         jPanel1.add(btnMenuPrincipal);
         btnMenuPrincipal.setBounds(1843, 2, 75, 70);
+
+        txtDatosCamarote.setEditable(false);
+        txtDatosCamarote.setBackground(new java.awt.Color(0, 79, 129));
+        txtDatosCamarote.setColumns(20);
+        txtDatosCamarote.setFont(new java.awt.Font("Doppio One", 0, 24)); // NOI18N
+        txtDatosCamarote.setForeground(new java.awt.Color(255, 204, 51));
+        txtDatosCamarote.setRows(5);
+        txtDatosCamarote.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204)));
+        txtDatosCamarote.setFocusable(false);
+        jScrollPane1.setViewportView(txtDatosCamarote);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(740, 780, 450, 220);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1159,7 +1158,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         verificarBotones();
 
-       retornarEstadoCamarote();
+        retornarEstadoCamarote();
     }//GEN-LAST:event_formWindowOpened
 
     private void indicador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador1ActionPerformed
@@ -1578,8 +1577,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         if (numeroCamaroteSeleccionado != 0) {
             numeroCamaroteSeleccionado = 0;
             llenarDatosCamarote(0);
- 
-           
+
         } else {
             numeroCamaroteSeleccionado = 4;
             llenarDatosCamarote(4);
@@ -1699,7 +1697,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
                 String estadoCamarote;
                 String nombreBoton;
                 int capacidadMax;
-                
+
                 ps = conexion.dbConexion().prepareStatement("SELECT estadoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + i + " AND codigoBuque = " + variables.getCodigoBuque() + " AND nivel = " + variables.getNivelBarco());
                 ResultSet result = ps.executeQuery();
                 if (result.next()) {
@@ -1746,28 +1744,30 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
     }
 
     public void llenarDatosCamarote(int numeroCamarote) {
-
         try {
 
             int codigoBuque;
             int nivel;
             String tipoCamarote;
             int capacidadMaxima;
+            float precioCamarote;
 
             if (numeroCamarote != 0) {
-                ps = conexion.dbConexion().prepareStatement("SELECT codigoBuque, nivel, tipoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + numeroCamarote + " AND codigoBuque = " + variables.getCodigoBuque() + " AND nivel = " + variables.getNivelBarco());
+                ps = conexion.dbConexion().prepareStatement("SELECT codigoBuque, nivel, tipoCamarote, capacidadMaxima, precioCamarote FROM camarotes WHERE codigoCamarote = " + numeroCamarote + " AND codigoBuque = " + variables.getCodigoBuque() + " AND nivel = " + variables.getNivelBarco());
                 ResultSet result = ps.executeQuery();
                 if (result.next()) {
                     codigoBuque = Integer.parseInt(result.getString("codigoBuque"));
                     nivel = Integer.parseInt(result.getString("nivel"));
                     tipoCamarote = result.getString("tipoCamarote");
                     capacidadMaxima = Integer.parseInt(result.getString("capacidadMaxima"));
+                    precioCamarote = Float.parseFloat(result.getString("precioCamarote"));
 
                     txtDatosCamarote.append(" Numero de Camarote: " + numeroCamarote);
                     txtDatosCamarote.append("\n Codigo del Buque: " + codigoBuque);
                     txtDatosCamarote.append("\n Nivel: " + nivel);
                     txtDatosCamarote.append("\n Tipo: " + tipoCamarote);
                     txtDatosCamarote.append("\n Capacidad Maxima: " + capacidadMaxima + " Personas");
+                    txtDatosCamarote.append("\n Precio: $ " + precioCamarote);
 
                 }
 

@@ -412,7 +412,7 @@ public class frmVistaCamarotesN4 extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtDatosCamarote);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(770, 770, 450, 200);
+        jScrollPane1.setBounds(770, 770, 450, 220);
 
         jLabel2.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 30)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 51));
@@ -817,22 +817,25 @@ public class frmVistaCamarotesN4 extends javax.swing.JFrame {
             int nivel;
             String tipoCamarote;
             int capacidadMaxima;
-
+            float precioCamarote;
+            
             if (numeroCamarote != 0) {
-                ps = conexion.dbConexion().prepareStatement("SELECT codigoBuque, nivel, tipoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + numeroCamarote + " AND codigoBuque = " + variables.getCodigoBuque() + " AND nivel = " + variables.getNivelBarco());
+                ps = conexion.dbConexion().prepareStatement("SELECT codigoBuque, nivel, tipoCamarote, capacidadMaxima, precioCamarote FROM camarotes WHERE codigoCamarote = " + numeroCamarote + " AND codigoBuque = " + variables.getCodigoBuque() + " AND nivel = " + variables.getNivelBarco());
                 ResultSet result = ps.executeQuery();
                 if (result.next()) {
                     codigoBuque = Integer.parseInt(result.getString("codigoBuque"));
                     nivel = Integer.parseInt(result.getString("nivel"));
                     tipoCamarote = result.getString("tipoCamarote");
                     capacidadMaxima = Integer.parseInt(result.getString("capacidadMaxima"));
-
+                    precioCamarote = Float.parseFloat(result.getString("precioCamarote"));
+                      
                     txtDatosCamarote.append(" Numero de Camarote: " + numeroCamarote);
                     txtDatosCamarote.append("\n Codigo del Buque: " + codigoBuque);
                     txtDatosCamarote.append("\n Nivel: " + nivel);
                     txtDatosCamarote.append("\n Tipo: " + tipoCamarote);
                     txtDatosCamarote.append("\n Capacidad Maxima: " + capacidadMaxima + " Personas");
-
+                    txtDatosCamarote.append("\n Precio: $ " + precioCamarote);
+                    
                 }
 
             } else {

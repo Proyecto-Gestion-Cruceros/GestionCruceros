@@ -5,7 +5,6 @@
  */
 package FormulariosCrucero;
 
-
 import Clases.dbConnection;
 import FormularioIGP.frmPrincipal;
 import Formularios.Pagos.frmPagos;
@@ -102,9 +101,9 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
         indicador124 = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnMenuPrincipal = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDatosCamarote = new javax.swing.JTextArea();
-        btnMenuPrincipal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(0, 0, 1920, 1080));
@@ -791,7 +790,18 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
         jLabel2.setText("Detalles del Camarote");
         jLabel2.setFocusTraversalPolicyProvider(true);
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(810, 690, 330, 49);
+        jLabel2.setBounds(800, 690, 330, 49);
+
+        btnMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/imgBotonHome (2).png"))); // NOI18N
+        btnMenuPrincipal.setBorderPainted(false);
+        btnMenuPrincipal.setContentAreaFilled(false);
+        btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuPrincipalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMenuPrincipal);
+        btnMenuPrincipal.setBounds(1843, 2, 75, 70);
 
         txtDatosCamarote.setEditable(false);
         txtDatosCamarote.setBackground(new java.awt.Color(0, 79, 129));
@@ -804,18 +814,7 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtDatosCamarote);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(740, 750, 450, 200);
-
-        btnMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/imgBotonHome (2).png"))); // NOI18N
-        btnMenuPrincipal.setBorderPainted(false);
-        btnMenuPrincipal.setContentAreaFilled(false);
-        btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuPrincipalActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnMenuPrincipal);
-        btnMenuPrincipal.setBounds(1843, 2, 75, 70);
+        jScrollPane1.setBounds(730, 760, 450, 220);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1008,7 +1007,7 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
     }//GEN-LAST:event_indicador107ActionPerformed
 
     private void indicador108ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador108ActionPerformed
-           bloquearBotones(indicador108);
+        bloquearBotones(indicador108);
         if (numeroCamaroteSeleccionado != 0) {
             numeroCamaroteSeleccionado = 0;
             llenarDatosCamarote(0);
@@ -1152,7 +1151,7 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
 
     private void indicador121ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indicador121ActionPerformed
         bloquearBotones(indicador121);
-          if (numeroCamaroteSeleccionado != 0) {
+        if (numeroCamaroteSeleccionado != 0) {
             numeroCamaroteSeleccionado = 0;
             llenarDatosCamarote(0);
         } else {
@@ -1332,7 +1331,6 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */
@@ -1367,8 +1365,8 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
             }
         });
     }
-    
-        public void bloquearBotones(JButton boton) {
+
+    public void bloquearBotones(JButton boton) {
 
         Enumeration elements = group.getElements();
 
@@ -1407,14 +1405,14 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
         }
 
     }
-    
+
     public void verificarBotones() {
         try {
-            for (int i = 95; i <= 136; i++) {                
+            for (int i = 95; i <= 136; i++) {
                 String estadoCamarote;
                 String nombreBoton;
                 int capacidadMax;
-                
+
                 ps = conexion.dbConexion().prepareStatement("SELECT estadoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + i + " AND codigoBuque = " + variables.getCodigoBuque() + " AND nivel = " + variables.getNivelBarco());
                 ResultSet result = ps.executeQuery();
                 if (result.next()) {
@@ -1460,28 +1458,30 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
     }
 
     public void llenarDatosCamarote(int numeroCamarote) {
-
         try {
 
             int codigoBuque;
             int nivel;
             String tipoCamarote;
             int capacidadMaxima;
+            float precioCamarote;
 
             if (numeroCamarote != 0) {
-                ps = conexion.dbConexion().prepareStatement("SELECT codigoBuque, nivel, tipoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + numeroCamarote + " AND codigoBuque = " + variables.getCodigoBuque() + " AND nivel = " + variables.getNivelBarco());
+                ps = conexion.dbConexion().prepareStatement("SELECT codigoBuque, nivel, tipoCamarote, capacidadMaxima, precioCamarote FROM camarotes WHERE codigoCamarote = " + numeroCamarote + " AND codigoBuque = " + variables.getCodigoBuque() + " AND nivel = " + variables.getNivelBarco());
                 ResultSet result = ps.executeQuery();
                 if (result.next()) {
                     codigoBuque = Integer.parseInt(result.getString("codigoBuque"));
                     nivel = Integer.parseInt(result.getString("nivel"));
                     tipoCamarote = result.getString("tipoCamarote");
                     capacidadMaxima = Integer.parseInt(result.getString("capacidadMaxima"));
+                    precioCamarote = Float.parseFloat(result.getString("precioCamarote"));
 
                     txtDatosCamarote.append(" Numero de Camarote: " + numeroCamarote);
                     txtDatosCamarote.append("\n Codigo del Buque: " + codigoBuque);
                     txtDatosCamarote.append("\n Nivel: " + nivel);
                     txtDatosCamarote.append("\n Tipo: " + tipoCamarote);
                     txtDatosCamarote.append("\n Capacidad Maxima: " + capacidadMaxima + " Personas");
+                    txtDatosCamarote.append("\n Precio: $ " + precioCamarote);
 
                 }
 

@@ -33,17 +33,16 @@ public class frmVistaCamarotes extends javax.swing.JFrame {
     public frmVistaCamarotes() {
         initComponents();
     }
-    
+
     dbConnection conexion = new dbConnection();
     clsVariablesViaje variables = new clsVariablesViaje();
-    
+
     int cantidadOcupantes = variables.getNumeroPersonas();
-        
+
     int numeroCamaroteSeleccionado = 0;
 
     PreparedStatement ps;
     ResultSet result = null;
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,10 +101,10 @@ public class frmVistaCamarotes extends javax.swing.JFrame {
         indicador84 = new javax.swing.JButton();
         indicador82 = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtDatosCamarote = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         btnMenuPrincipal1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDatosCamarote = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(0, 0, 1920, 1080));
@@ -787,19 +786,6 @@ public class frmVistaCamarotes extends javax.swing.JFrame {
         jPanel1.add(lblBackground);
         lblBackground.setBounds(270, 260, 1430, 410);
 
-        txtDatosCamarote.setEditable(false);
-        txtDatosCamarote.setBackground(new java.awt.Color(0, 79, 129));
-        txtDatosCamarote.setColumns(20);
-        txtDatosCamarote.setFont(new java.awt.Font("Doppio One", 0, 24)); // NOI18N
-        txtDatosCamarote.setForeground(new java.awt.Color(255, 204, 51));
-        txtDatosCamarote.setRows(5);
-        txtDatosCamarote.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204)));
-        txtDatosCamarote.setFocusable(false);
-        jScrollPane1.setViewportView(txtDatosCamarote);
-
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(730, 750, 450, 200);
-
         jLabel2.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 30)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 51));
         jLabel2.setText("Detalles del Camarote");
@@ -817,6 +803,19 @@ public class frmVistaCamarotes extends javax.swing.JFrame {
         });
         jPanel1.add(btnMenuPrincipal1);
         btnMenuPrincipal1.setBounds(1843, 2, 75, 70);
+
+        txtDatosCamarote.setEditable(false);
+        txtDatosCamarote.setBackground(new java.awt.Color(0, 79, 129));
+        txtDatosCamarote.setColumns(20);
+        txtDatosCamarote.setFont(new java.awt.Font("Doppio One", 0, 24)); // NOI18N
+        txtDatosCamarote.setForeground(new java.awt.Color(255, 204, 51));
+        txtDatosCamarote.setRows(5);
+        txtDatosCamarote.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204), new java.awt.Color(0, 102, 204)));
+        txtDatosCamarote.setFocusable(false);
+        jScrollPane1.setViewportView(txtDatosCamarote);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(720, 750, 450, 220);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1306,7 +1305,7 @@ public class frmVistaCamarotes extends javax.swing.JFrame {
         if (numeroCamaroteSeleccionado != 0) {
             JOptionPane.showMessageDialog(null, "EL CAMAROTE SELECCIONADO ES: " + numeroCamaroteSeleccionado);
             variables.setNumeroCamarote(numeroCamaroteSeleccionado);
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN CAMAROTE");
         }
@@ -1459,28 +1458,30 @@ public class frmVistaCamarotes extends javax.swing.JFrame {
     }
 
     public void llenarDatosCamarote(int numeroCamarote) {
-
         try {
 
             int codigoBuque;
             int nivel;
             String tipoCamarote;
             int capacidadMaxima;
+            float precioCamarote;
 
             if (numeroCamarote != 0) {
-                ps = conexion.dbConexion().prepareStatement("SELECT codigoBuque, nivel, tipoCamarote, capacidadMaxima FROM camarotes WHERE codigoCamarote = " + numeroCamarote + " AND codigoBuque = " + variables.getCodigoBuque() + " AND nivel = " + variables.getNivelBarco());
+                ps = conexion.dbConexion().prepareStatement("SELECT codigoBuque, nivel, tipoCamarote, capacidadMaxima, precioCamarote FROM camarotes WHERE codigoCamarote = " + numeroCamarote + " AND codigoBuque = " + variables.getCodigoBuque() + " AND nivel = " + variables.getNivelBarco());
                 ResultSet result = ps.executeQuery();
                 if (result.next()) {
                     codigoBuque = Integer.parseInt(result.getString("codigoBuque"));
                     nivel = Integer.parseInt(result.getString("nivel"));
                     tipoCamarote = result.getString("tipoCamarote");
                     capacidadMaxima = Integer.parseInt(result.getString("capacidadMaxima"));
+                    precioCamarote = Float.parseFloat(result.getString("precioCamarote"));
 
                     txtDatosCamarote.append(" Numero de Camarote: " + numeroCamarote);
                     txtDatosCamarote.append("\n Codigo del Buque: " + codigoBuque);
                     txtDatosCamarote.append("\n Nivel: " + nivel);
                     txtDatosCamarote.append("\n Tipo: " + tipoCamarote);
                     txtDatosCamarote.append("\n Capacidad Maxima: " + capacidadMaxima + " Personas");
+                    txtDatosCamarote.append("\n Precio: $ " + precioCamarote);
 
                 }
 
@@ -1496,7 +1497,6 @@ public class frmVistaCamarotes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
-    private javax.swing.JButton btnMenuPrincipal;
     private javax.swing.JButton btnMenuPrincipal1;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.ButtonGroup group;
