@@ -7,6 +7,7 @@ package FormulariosCrucero;
 
 import Clases.ClsValidaciones;
 import Clases.dbConnection;
+import FormularioIGP.frmPrincipal;
 import com.sun.jdi.Value;
 import java.awt.Color;
 import java.awt.Component;
@@ -104,6 +105,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         btnRegistrarCliente = new javax.swing.JButton();
         txtBusqueda = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
+        btnMenuPrincipal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(0, 0, 1920, 1080));
@@ -278,6 +280,17 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         jPanel1.add(btnLimpiar);
         btnLimpiar.setBounds(1640, 400, 220, 80);
 
+        btnMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/imgBotonHome (2).png"))); // NOI18N
+        btnMenuPrincipal.setBorderPainted(false);
+        btnMenuPrincipal.setContentAreaFilled(false);
+        btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuPrincipalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMenuPrincipal);
+        btnMenuPrincipal.setBounds(1843, 2, 75, 70);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -314,6 +327,8 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
 
     
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        frmPrincipal igp = new frmPrincipal();
+        igp.setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_btnAtrasActionPerformed
@@ -398,7 +413,20 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBusquedaActionPerformed
 
- 
+    private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
+
+        int result = JOptionPane.showConfirmDialog(null, "Esta seguro de volver al Menu Principal?", "Salir del Módulo",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            dispose();
+            variables.resetVariables();
+            frmPrincipal igp = new frmPrincipal();
+            igp.setVisible(true);
+        }
+    }//GEN-LAST:event_btnMenuPrincipalActionPerformed
+
+
     public void filtro(int operacion) {
         filtro = txtBusqueda.getText();
 
@@ -534,6 +562,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnEliminarCliente;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnMenuPrincipal;
     private javax.swing.JButton btnRegistrarCliente;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel jLabel1;

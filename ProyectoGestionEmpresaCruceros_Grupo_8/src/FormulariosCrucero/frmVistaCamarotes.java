@@ -6,6 +6,7 @@
 package FormulariosCrucero;
 
 import Clases.dbConnection;
+import FormularioIGP.frmPrincipal;
 import static FormulariosCrucero.frmVistaCamarotesN2.conn;
 import java.awt.Color;
 import java.sql.Connection;
@@ -104,6 +105,7 @@ public class frmVistaCamarotes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDatosCamarote = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
+        btnMenuPrincipal1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(0, 0, 1920, 1080));
@@ -805,6 +807,17 @@ public class frmVistaCamarotes extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(790, 690, 330, 49);
 
+        btnMenuPrincipal1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/imgBotonHome (2).png"))); // NOI18N
+        btnMenuPrincipal1.setBorderPainted(false);
+        btnMenuPrincipal1.setContentAreaFilled(false);
+        btnMenuPrincipal1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuPrincipal1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMenuPrincipal1);
+        btnMenuPrincipal1.setBounds(1843, 2, 75, 70);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1307,6 +1320,18 @@ public class frmVistaCamarotes extends javax.swing.JFrame {
         seleccionador.setVisible(true);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
+    private void btnMenuPrincipal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipal1ActionPerformed
+        int result = JOptionPane.showConfirmDialog(null, "Esta seguro de volver al Menu Principal?", "Salir del Módulo",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            dispose();
+            variables.resetVariables();
+            frmPrincipal igp = new frmPrincipal();
+            igp.setVisible(true);
+        }
+    }//GEN-LAST:event_btnMenuPrincipal1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1471,6 +1496,8 @@ public class frmVistaCamarotes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnMenuPrincipal;
+    private javax.swing.JButton btnMenuPrincipal1;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.ButtonGroup group;
     private javax.swing.JButton indicador53;

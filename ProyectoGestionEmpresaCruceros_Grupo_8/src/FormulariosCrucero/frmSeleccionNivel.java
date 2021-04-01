@@ -5,6 +5,7 @@
  */
 package FormulariosCrucero;
 
+import FormularioIGP.frmPrincipal;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -40,6 +41,7 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnAtras = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        btnMenuPrincipal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(0, 0, 1920, 1080));
@@ -130,6 +132,17 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
         jPanel1.add(btnSiguiente);
         btnSiguiente.setBounds(1710, 1020, 210, 60);
 
+        btnMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/imgBotonHome (2).png"))); // NOI18N
+        btnMenuPrincipal.setBorderPainted(false);
+        btnMenuPrincipal.setContentAreaFilled(false);
+        btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuPrincipalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMenuPrincipal);
+        btnMenuPrincipal.setBounds(1843, 2, 75, 70);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,6 +203,18 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_formWindowOpened
 
+    private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
+        int result = JOptionPane.showConfirmDialog(null, "Esta seguro de volver al Menu Principal?", "Salir del Módulo",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            dispose();
+            variables.resetVariables();
+            frmPrincipal igp = new frmPrincipal();
+            igp.setVisible(true);
+        }
+    }//GEN-LAST:event_btnMenuPrincipalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -227,6 +252,7 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnMenuPrincipal;
     private javax.swing.JButton btnNivelCuatro;
     private javax.swing.JButton btnNivelDos;
     private javax.swing.JButton btnNivelTres;

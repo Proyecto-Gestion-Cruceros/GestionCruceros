@@ -6,6 +6,7 @@
 package FormulariosCrucero;
 
 import Clases.dbConnection;
+import FormularioIGP.frmPrincipal;
 import Formularios.Pagos.frmPagos;
 import java.awt.Color;
 import java.awt.Component;
@@ -111,6 +112,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDatosCamarote = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
+        btnMenuPrincipal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(0, 0, 1920, 1080));
@@ -975,6 +977,17 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(730, 110, 510, 49);
 
+        btnMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/imgBotonHome (2).png"))); // NOI18N
+        btnMenuPrincipal.setBorderPainted(false);
+        btnMenuPrincipal.setContentAreaFilled(false);
+        btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuPrincipalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMenuPrincipal);
+        btnMenuPrincipal.setBounds(1843, 2, 75, 70);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1593,6 +1606,18 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         seleccionador.setVisible(true);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
+    private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
+        int result = JOptionPane.showConfirmDialog(null, "Esta seguro de volver al Menu Principal?", "Salir del Módulo",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            dispose();
+            variables.resetVariables();
+            frmPrincipal igp = new frmPrincipal();
+            igp.setVisible(true);
+        }
+    }//GEN-LAST:event_btnMenuPrincipalActionPerformed
+
     public void bloquearBotones(JButton boton) {
 
         Enumeration elements = group.getElements();
@@ -1757,6 +1782,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnMenuPrincipal;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.ButtonGroup group;
     private javax.swing.JButton indicador1;

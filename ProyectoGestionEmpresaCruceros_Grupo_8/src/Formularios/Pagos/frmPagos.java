@@ -28,9 +28,9 @@ public class frmPagos extends javax.swing.JFrame {
     }
 
     PreparedStatement ps;
-    DefaultTableModel modelCliente = frmSeleccionClientes.model1;
     clsVariablesViaje variablesViaje = new clsVariablesViaje();
-    
+    DefaultTableModel modelCliente = variablesViaje.getModel1();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

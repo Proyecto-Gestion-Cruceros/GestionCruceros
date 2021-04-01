@@ -1,18 +1,8 @@
-
 package FormulariosCrucero;
 
 import javax.swing.table.DefaultTableModel;
 
-
 public class clsVariablesViaje {
-
-    public int getCodigoOperacion() {
-        return codigoOperacion;
-    }
-
-    public void setCodigoOperacion(int codigoOperacion) {
-        clsVariablesViaje.codigoOperacion = codigoOperacion;
-    }
 
     protected static int codigoOperacion = 1;
     protected static DefaultTableModel model;
@@ -23,13 +13,30 @@ public class clsVariablesViaje {
     protected static int nivelBarco = 0;
     protected static int numeroCamarote = 0;
 
-    public  void setCodigoBuque(int codigoBuque) {
+    public int getCodigoOperacion() {
+        return codigoOperacion;
+    }
+
+    public void setCodigoOperacion(int codigoOperacion) {
+        clsVariablesViaje.codigoOperacion = codigoOperacion;
+    }
+
+    public DefaultTableModel getModel() {
+        return model;
+    }
+
+    public DefaultTableModel getModel1() {
+        return model1;
+    }
+
+    public void setCodigoBuque(int codigoBuque) {
         clsVariablesViaje.codigoBuque = codigoBuque;
     }
-        public  int getCodigoBuque() {
+
+    public int getCodigoBuque() {
         return codigoBuque;
     }
-    
+
     public int getCodigoViaje() {
         return codigoViaje;
     }
@@ -62,5 +69,13 @@ public class clsVariablesViaje {
         clsVariablesViaje.numeroCamarote = numeroCamarote;
     }
 
-    
+    public void resetVariables() {
+        codigoOperacion = 1;
+        codigoViaje = 0;
+        codigoBuque = 0;
+        numeroPersonas = 0;
+        nivelBarco = 0;
+        numeroCamarote = 0;
+    }
+
 }
