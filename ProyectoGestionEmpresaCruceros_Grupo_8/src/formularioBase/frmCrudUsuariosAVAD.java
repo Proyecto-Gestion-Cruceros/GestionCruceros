@@ -65,6 +65,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
         btnMenuPrincipal = new javax.swing.JButton();
         txtContraseñaUsuario = new javax.swing.JPasswordField();
         txtConfirmarContraseñaUsuario = new javax.swing.JPasswordField();
+        btnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -211,6 +212,16 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
 
         txtConfirmarContraseñaUsuario.setText("jPasswordField1");
 
+        btnLimpiar.setBackground(new java.awt.Color(255, 204, 51));
+        btnLimpiar.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
+        btnLimpiar.setForeground(new java.awt.Color(0, 0, 0));
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -218,38 +229,33 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(83, 83, 83)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(116, 116, 116)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtApellidosUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                                .addComponent(txtCorreoElectronicoUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                                .addComponent(txtTelefonoUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                                .addComponent(txtIdentidadUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                                .addComponent(txtNombresUsuarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                                .addComponent(txtCargoUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                                .addComponent(txtContraseñaUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                                .addComponent(txtConfirmarContraseñaUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE))
-                            .addComponent(btnActualizarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnEliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(163, 163, 163)
-                        .addComponent(btnAgregarUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(181, 181, 181))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addGap(116, 116, 116)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtApellidosUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                            .addComponent(txtCorreoElectronicoUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                            .addComponent(txtTelefonoUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                            .addComponent(txtIdentidadUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                            .addComponent(txtNombresUsuarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                            .addComponent(txtCargoUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                            .addComponent(txtContraseñaUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                            .addComponent(txtConfirmarContraseñaUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 587, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(181, 181, 181))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(690, 690, 690)
                 .addComponent(jLabel8)
@@ -258,6 +264,20 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(301, 301, 301)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130)
+                        .addComponent(btnActualizarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 689, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(699, 699, 699)
+                        .addComponent(btnEliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(160, 160, 160)
+                        .addComponent(btnAgregarUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,12 +331,13 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
                             .addComponent(txtConfirmarContraseñaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(127, 127, 127)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                    .addComponent(btnAgregarUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(104, 104, 104)
                 .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
         );
@@ -411,38 +432,36 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                 if (validar.isLetras(txtNombresUsuarios.getText()) || validar.isLetras(txtApellidosUsuario.getText())) {
                     if (validar.isEntero(txtTelefonoUsuario.getText()) && txtTelefonoUsuario.getText().length() == 8) {
                         //VALIDACIONES PARA CORREO Y CONTRASEÑO LUEGO PROCEDIMIENTO
-                        if(validar.isemail(txtCorreoElectronicoUsuario.getText())){
-                        if (String.valueOf(txtContraseñaUsuario.getPassword()).equals(String.valueOf(txtConfirmarContraseñaUsuario.getPassword()))) {
-                            
-                            Persona.setIdentidad(txtIdentidadUsuario.getText());
-                            Persona.setNombres(txtNombresUsuarios.getText());
-                            Persona.setApellidos(txtApellidosUsuario.getText());
-                            Persona.setTelefono(txtTelefonoUsuario.getText());
-                            Persona.setCorreoElectronico(txtCorreoElectronicoUsuario.getText());
+                        if (validar.isemail(txtCorreoElectronicoUsuario.getText())) {
+                            if (String.valueOf(txtContraseñaUsuario.getPassword()).equals(String.valueOf(txtConfirmarContraseñaUsuario.getPassword()))) {
 
-                            if (txtCargoUsuario.getText().equals("Administrador")) {
-                                Usuario.setCargo(1);
-                            } else {
-                                Usuario.setCargo(2);
-                            }
-                            Usuario.setContrasenia(txtContraseñaUsuario.getText());
+                                Persona.setIdentidad(txtIdentidadUsuario.getText());
+                                Persona.setNombres(txtNombresUsuarios.getText());
+                                Persona.setApellidos(txtApellidosUsuario.getText());
+                                Persona.setTelefono(txtTelefonoUsuario.getText());
+                                Persona.setCorreoElectronico(txtCorreoElectronicoUsuario.getText());
 
-                            try {
-                                if (Usuario.AgregarPersona()) {
-                                    JOptionPane.showMessageDialog(null, "Usuario Ingresado Correctamente");
-                                    MostrarUsuarios();
+                                if (txtCargoUsuario.getText().equals("Administrador")) {
+                                    Usuario.setCargo(1);
                                 } else {
-                                    JOptionPane.showMessageDialog(null, "Error al ingresar");
+                                    Usuario.setCargo(2);
                                 }
-                            } catch (Exception ex) {
-                                JOptionPane.showMessageDialog(null, ex);
+                                Usuario.setContrasenia(txtContraseñaUsuario.getText());
+
+                                try {
+                                    if (Usuario.AgregarPersona()) {
+                                        JOptionPane.showMessageDialog(null, "Usuario Ingresado Correctamente");
+                                        MostrarUsuarios();
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Error al ingresar");
+                                    }
+                                } catch (Exception ex) {
+                                    JOptionPane.showMessageDialog(null, ex);
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Ingrese correctamente la contraseña");
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, "Ingrese correctamente la contraseña");
-                        }
-                        }
-                        else
-                        {
                             JOptionPane.showMessageDialog(null, "Ingrese correctamente el correo electronico");
                         }
                     } else {
@@ -491,19 +510,29 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
         txtTelefonoUsuario.setText(String.valueOf(JUsuarios.getValueAt(seleccionar, 3)));
         txtCorreoElectronicoUsuario.setText(String.valueOf(JUsuarios.getValueAt(seleccionar, 4)));
         txtContraseñaUsuario.setText(String.valueOf(JUsuarios.getValueAt(seleccionar, 5)));
-        
+
     }//GEN-LAST:event_JUsuariosMouseClicked
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-               int result = JOptionPane.showConfirmDialog(null, "Esta seguro de volver al Menu Principal?", "Salir del Módulo",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(null, "Esta seguro de volver al Menu Principal?", "Salir del Módulo",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             frmPrincipal igp = new frmPrincipal();
             igp.setVisible(true);
         }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtIdentidadUsuario.setText(null);
+        txtNombresUsuarios.setText(null);
+        txtApellidosUsuario.setText(null);
+        txtTelefonoUsuario.setText(null);
+        txtCorreoElectronicoUsuario.setText(null);
+        txtContraseñaUsuario.setText(null);
+        txtConfirmarContraseñaUsuario.setText(null);
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     void limpiaTabla() {
         try {
@@ -588,6 +617,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     private javax.swing.JButton btnActualizarUsuario;
     private javax.swing.JButton btnAgregarUsuario1;
     private javax.swing.JButton btnEliminarUsuario;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnMenuPrincipal;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel10;
