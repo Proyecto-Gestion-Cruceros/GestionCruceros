@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Clases.InicioSesion;
+package Formularios.InicioSesion;
 
 import Clases.dbConnection;
 import java.sql.*;
@@ -21,8 +21,8 @@ public class ClsInicioSesion extends dbConnection {
             ps = dbConnection.dbConexion().prepareStatement("SELECT identidadUsuario FROM dbo.usuarios WHERE identidadUsuario = ? AND contraseniaUsuario = ?");
             ps.setString(1, user);
             ps.setString(2, String.valueOf(pass));
-            ResultSet result = ps.executeQuery();
-            if (result.next()) {
+            
+            if (ps.executeUpdate() == 1) {
                 return true;
             } else {
                 return false;

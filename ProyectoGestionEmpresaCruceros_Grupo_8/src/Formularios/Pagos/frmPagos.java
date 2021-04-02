@@ -5,15 +5,33 @@
  */
 package Formularios.Pagos;
 
+import Clases.ClsValidaciones;
 import Clases.dbConnection;
 import FormularioIGP.frmPrincipal;
+import Formularios.InicioSesion.frmInicioSesion;
 import FormulariosCrucero.clsVariablesViaje;
 import FormulariosCrucero.frmSeleccionClientes;
-import java.net.URL;
+import FormulariosCrucero.frmVistaCamarotes;
+import FormulariosCrucero.frmVistaCamarotesN2;
+import FormulariosCrucero.frmVistaCamarotesN3;
+import FormulariosCrucero.frmVistaCamarotesN4;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfGState;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import java.awt.print.PrinterJob;
+import java.io.*;
 import java.sql.*;
-import javax.swing.JRadioButton;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.printing.PDFPageable;
 /**
  *
  * @author Hacknel
@@ -27,8 +45,17 @@ public class frmPagos extends javax.swing.JFrame {
         initComponents();
     }
 
+    DecimalFormat df = new DecimalFormat("0.##");    
+    DecimalFormat df2 = new DecimalFormat("#");
+
     PreparedStatement ps;
     clsVariablesViaje variablesViaje = new clsVariablesViaje();
+    ClsPagos pago = new ClsPagos();
+    ClsValidaciones v = new ClsValidaciones();
+    String identidadC = modelCliente.getValueAt(0, 0).toString();
+    File temp;
+    String msgMetodoPago = null;
+    
     DefaultTableModel modelCliente = variablesViaje.getModel1();
 
     /**
@@ -57,7 +84,7 @@ public class frmPagos extends javax.swing.JFrame {
         txtPuertoDestino = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtNombre2 = new javax.swing.JTextField();
-        btnIniciarSesion1 = new javax.swing.JButton();
+        btnPagar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -72,22 +99,21 @@ public class frmPagos extends javax.swing.JFrame {
         txtNombreCrucero = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel16 = new javax.swing.JLabel();
-        btnIniciarSesion3 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        btnAtras = new javax.swing.JButton();
+        jrbVisa = new javax.swing.JRadioButton();
+        jrbMasterCard = new javax.swing.JRadioButton();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
+        txtTitularTarjeta = new javax.swing.JTextField();
+        txtNumeroTarjeta = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cmbMesVencimiento = new javax.swing.JComboBox<>();
+        cmbAnioVencimiento = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
+        txtCVC = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
@@ -96,17 +122,28 @@ public class frmPagos extends javax.swing.JFrame {
         lblDescuento = new javax.swing.JLabel();
         lblPropina = new javax.swing.JLabel();
         lblTotalPagar = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jrbEfectivo = new javax.swing.JRadioButton();
         jLabel33 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
+        txtCantidadRecibida = new javax.swing.JTextField();
+        txtCambioEfectivo = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        lblImpuestoPort = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtEdad = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        lblPrecioCamarote = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        lblCantPersonas = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("PAGOS");
-        setMinimumSize(new java.awt.Dimension(1635, 1035));
+        setMinimumSize(new java.awt.Dimension(1920, 1080));
         setName("frmPago"); // NOI18N
+        setUndecorated(true);
+        setSize(new java.awt.Dimension(1920, 1080));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -114,38 +151,38 @@ public class frmPagos extends javax.swing.JFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(0, 79, 129));
-        jPanel1.setMaximumSize(new java.awt.Dimension(1635, 1035));
-        jPanel1.setMinimumSize(new java.awt.Dimension(1635, 1035));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1635, 1035));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1920, 1080));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1920, 1080));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1920, 1080));
         jPanel1.setLayout(null);
 
         jLabel7.setFont(new java.awt.Font("Doppio One", 1, 40)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 204, 51));
         jLabel7.setText("DESGLOSE");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(323, 603, 200, 51);
+        jLabel7.setBounds(320, 610, 200, 51);
 
         txtNumFactura.setEditable(false);
         txtNumFactura.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(txtNumFactura);
-        txtNumFactura.setBounds(314, 194, 102, 26);
+        txtNumFactura.setBounds(520, 170, 102, 30);
 
         jLabel2.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Número de Factura");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(116, 193, 180, 26);
+        jLabel2.setBounds(320, 170, 180, 26);
 
         jLabel3.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Fecha Inicio");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(961, 193, 110, 26);
+        jLabel3.setBounds(1170, 170, 110, 26);
 
         txtPuertoPartida.setEditable(false);
         txtPuertoPartida.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(txtPuertoPartida);
-        txtPuertoPartida.setBounds(961, 301, 182, 30);
+        txtPuertoPartida.setBounds(1170, 280, 182, 40);
 
         btnConsultarPersonas.setBackground(new java.awt.Color(255, 204, 51));
         btnConsultarPersonas.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
@@ -157,99 +194,104 @@ public class frmPagos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnConsultarPersonas);
-        btnConsultarPersonas.setBounds(236, 353, 285, 42);
+        btnConsultarPersonas.setBounds(440, 330, 285, 42);
 
         txtFechaFin.setEditable(false);
         txtFechaFin.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(txtFechaFin);
-        txtFechaFin.setBounds(1189, 225, 130, 30);
+        txtFechaFin.setBounds(1400, 210, 130, 40);
 
         jLabel4.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Fecha Fin");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(1189, 193, 89, 26);
+        jLabel4.setBounds(1400, 170, 89, 26);
 
         jLabel5.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Nombre cliente");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(116, 269, 142, 26);
+        jLabel5.setBounds(320, 250, 142, 26);
 
         jLabel6.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Puerto de partida");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(961, 269, 164, 26);
+        jLabel6.setBounds(1170, 250, 164, 26);
 
         txtNombre1.setEditable(false);
         txtNombre1.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(txtNombre1);
-        txtNombre1.setBounds(116, 301, 255, 30);
+        txtNombre1.setBounds(320, 280, 255, 40);
 
         txtFechaInicio.setEditable(false);
         txtFechaInicio.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(txtFechaInicio);
-        txtFechaInicio.setBounds(961, 225, 130, 30);
+        txtFechaInicio.setBounds(1170, 210, 130, 40);
 
         txtPuertoDestino.setEditable(false);
         txtPuertoDestino.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(txtPuertoDestino);
-        txtPuertoDestino.setBounds(1189, 301, 182, 30);
+        txtPuertoDestino.setBounds(1400, 280, 182, 40);
 
         jLabel8.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Puerto de destino");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(1189, 269, 165, 26);
+        jLabel8.setBounds(1400, 250, 165, 26);
 
         txtNombre2.setEditable(false);
         txtNombre2.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(txtNombre2);
-        txtNombre2.setBounds(389, 301, 255, 30);
+        txtNombre2.setBounds(600, 280, 255, 40);
 
-        btnIniciarSesion1.setBackground(new java.awt.Color(255, 204, 51));
-        btnIniciarSesion1.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
-        btnIniciarSesion1.setForeground(new java.awt.Color(0, 0, 0));
-        btnIniciarSesion1.setText("PAGAR");
-        jPanel1.add(btnIniciarSesion1);
-        btnIniciarSesion1.setBounds(1416, 926, 195, 63);
+        btnPagar.setBackground(new java.awt.Color(255, 204, 51));
+        btnPagar.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
+        btnPagar.setForeground(new java.awt.Color(0, 0, 0));
+        btnPagar.setText("PAGAR");
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPagar);
+        btnPagar.setBounds(1710, 1000, 195, 63);
 
         jLabel9.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Correo electronico");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(116, 432, 168, 26);
+        jLabel9.setBounds(320, 410, 168, 26);
 
         txtCorreo.setEditable(false);
         txtCorreo.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(txtCorreo);
-        txtCorreo.setBounds(116, 464, 255, 30);
+        txtCorreo.setBounds(320, 440, 255, 40);
 
         jLabel10.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Número de telefóno");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(116, 508, 186, 26);
+        jLabel10.setBounds(320, 490, 186, 26);
 
         txtTel.setEditable(false);
         txtTel.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(txtTel);
-        txtTel.setBounds(116, 540, 255, 30);
+        txtTel.setBounds(320, 520, 255, 40);
         jPanel1.add(jSeparator1);
-        jSeparator1.setBounds(6, 593, 1623, 10);
+        jSeparator1.setBounds(6, 593, 1910, 10);
 
         jLabel11.setFont(new java.awt.Font("Doppio One", 1, 40)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 204, 51));
         jLabel11.setText("PAGO DE PAQUETE");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(624, 49, 357, 51);
+        jLabel11.setBounds(830, 50, 357, 51);
 
         jLabel13.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Nivel de cubierta");
         jPanel1.add(jLabel13);
-        jLabel13.setBounds(961, 451, 158, 26);
+        jLabel13.setBounds(1170, 430, 158, 26);
 
         txtNivelCubierta.setEditable(false);
         txtNivelCubierta.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
@@ -259,197 +301,227 @@ public class frmPagos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtNivelCubierta);
-        txtNivelCubierta.setBounds(961, 483, 182, 30);
+        txtNivelCubierta.setBounds(1170, 460, 182, 40);
 
         jLabel14.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Número de camarote");
         jPanel1.add(jLabel14);
-        jLabel14.setBounds(1200, 451, 197, 26);
+        jLabel14.setBounds(1410, 430, 197, 26);
 
         txtNumeroCamarote.setEditable(false);
         txtNumeroCamarote.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(txtNumeroCamarote);
-        txtNumeroCamarote.setBounds(1200, 483, 169, 30);
+        txtNumeroCamarote.setBounds(1410, 460, 169, 40);
 
         jLabel15.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Nombre crucero");
         jPanel1.add(jLabel15);
-        jLabel15.setBounds(960, 360, 147, 26);
+        jLabel15.setBounds(1170, 340, 147, 26);
 
         txtNombreCrucero.setEditable(false);
         txtNombreCrucero.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(txtNombreCrucero);
-        txtNombreCrucero.setBounds(960, 390, 171, 30);
+        txtNombreCrucero.setBounds(1170, 370, 171, 40);
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel1.add(jSeparator2);
-        jSeparator2.setBounds(798, 604, 10, 426);
+        jSeparator2.setBounds(798, 604, 10, 470);
 
         jLabel16.setFont(new java.awt.Font("Doppio One", 1, 40)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 204, 51));
         jLabel16.setText("PAGO");
         jPanel1.add(jLabel16);
-        jLabel16.setBounds(1165, 621, 108, 51);
+        jLabel16.setBounds(1300, 630, 108, 51);
 
-        btnIniciarSesion3.setBackground(new java.awt.Color(255, 204, 51));
-        btnIniciarSesion3.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
-        btnIniciarSesion3.setForeground(new java.awt.Color(0, 0, 0));
-        btnIniciarSesion3.setText("ATRAS");
-        jPanel1.add(btnIniciarSesion3);
-        btnIniciarSesion3.setBounds(15, 927, 195, 63);
+        btnAtras.setBackground(new java.awt.Color(255, 204, 51));
+        btnAtras.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
+        btnAtras.setForeground(new java.awt.Color(0, 0, 0));
+        btnAtras.setText("ATRAS");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAtras);
+        btnAtras.setBounds(20, 1000, 195, 63);
 
-        buttonGroup1.add(jRadioButton1);
-        jPanel1.add(jRadioButton1);
-        jRadioButton1.setBounds(874, 713, 28, 42);
+        buttonGroup1.add(jrbVisa);
+        jrbVisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbVisaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jrbVisa);
+        jrbVisa.setBounds(1010, 720, 28, 42);
 
-        buttonGroup1.add(jRadioButton2);
-        jPanel1.add(jRadioButton2);
-        jRadioButton2.setBounds(1018, 713, 28, 42);
+        buttonGroup1.add(jrbMasterCard);
+        jrbMasterCard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbMasterCardActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jrbMasterCard);
+        jrbMasterCard.setBounds(1150, 720, 28, 42);
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/logoMaster.png"))); // NOI18N
         jPanel1.add(jLabel17);
-        jLabel17.setBounds(1058, 713, 65, 42);
+        jLabel17.setBounds(1190, 720, 65, 42);
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/logoVisa.png"))); // NOI18N
         jPanel1.add(jLabel18);
-        jLabel18.setBounds(908, 713, 65, 42);
+        jLabel18.setBounds(1040, 720, 65, 42);
 
         jLabel19.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Titular de la tarjeta");
         jPanel1.add(jLabel19);
-        jLabel19.setBounds(874, 773, 184, 26);
+        jLabel19.setBounds(1010, 780, 184, 26);
 
-        jTextField13.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField13);
-        jTextField13.setBounds(874, 804, 249, 30);
+        txtTitularTarjeta.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtTitularTarjeta);
+        txtTitularTarjeta.setBounds(1010, 810, 249, 40);
 
-        jTextField14.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField14);
-        jTextField14.setBounds(874, 871, 249, 30);
+        txtNumeroTarjeta.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtNumeroTarjeta);
+        txtNumeroTarjeta.setBounds(1010, 910, 249, 40);
 
         jLabel20.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Número de tarjeta");
         jPanel1.add(jLabel20);
-        jLabel20.setBounds(874, 839, 173, 26);
+        jLabel20.setBounds(1010, 880, 173, 26);
 
         jLabel21.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Vencimiento");
         jPanel1.add(jLabel21);
-        jLabel21.setBounds(1173, 773, 117, 26);
+        jLabel21.setBounds(1310, 780, 117, 26);
 
-        jComboBox1.setFont(new java.awt.Font("Doppio One", 0, 13)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(1173, 805, 46, 28);
+        cmbMesVencimiento.setFont(new java.awt.Font("Doppio One", 0, 13)); // NOI18N
+        cmbMesVencimiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        jPanel1.add(cmbMesVencimiento);
+        cmbMesVencimiento.setBounds(1310, 810, 70, 28);
 
-        jComboBox2.setFont(new java.awt.Font("Doppio One", 0, 13)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031" }));
-        jPanel1.add(jComboBox2);
-        jComboBox2.setBounds(1230, 805, 60, 28);
+        cmbAnioVencimiento.setFont(new java.awt.Font("Doppio One", 0, 13)); // NOI18N
+        cmbAnioVencimiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031" }));
+        jPanel1.add(cmbAnioVencimiento);
+        cmbAnioVencimiento.setBounds(1390, 810, 80, 28);
 
         jLabel22.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("CVC");
         jPanel1.add(jLabel22);
-        jLabel22.setBounds(1173, 839, 37, 26);
+        jLabel22.setBounds(1310, 880, 37, 26);
 
-        jTextField15.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField15);
-        jTextField15.setBounds(1173, 871, 63, 30);
+        txtCVC.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtCVC);
+        txtCVC.setBounds(1310, 910, 63, 40);
 
         jLabel23.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Subtotal:");
         jPanel1.add(jLabel23);
-        jLabel23.setBounds(239, 689, 83, 26);
-
-        jLabel24.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("ISV:");
-        jPanel1.add(jLabel24);
-        jLabel24.setBounds(288, 733, 34, 26);
+        jLabel23.setBounds(530, 700, 83, 26);
 
         jLabel25.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("Descuento:");
         jPanel1.add(jLabel25);
-        jLabel25.setBounds(221, 777, 101, 26);
+        jLabel25.setBounds(510, 820, 101, 26);
 
         jLabel26.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Total a Pagar: ");
         jPanel1.add(jLabel26);
-        jLabel26.setBounds(279, 887, 135, 26);
+        jLabel26.setBounds(270, 940, 135, 26);
 
         jLabel27.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("Propina:");
         jPanel1.add(jLabel27);
-        jLabel27.setBounds(246, 821, 76, 26);
+        jLabel27.setBounds(535, 860, 80, 26);
 
         lblSubTotal.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         lblSubTotal.setForeground(new java.awt.Color(255, 204, 0));
         lblSubTotal.setText("16000.00");
         jPanel1.add(lblSubTotal);
-        lblSubTotal.setBounds(340, 689, 88, 26);
+        lblSubTotal.setBounds(630, 700, 88, 26);
 
         lblISV.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         lblISV.setForeground(new java.awt.Color(255, 204, 0));
         lblISV.setText("2400.00");
         jPanel1.add(lblISV);
-        lblISV.setBounds(350, 733, 78, 26);
+        lblISV.setBounds(630, 780, 90, 26);
 
         lblDescuento.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         lblDescuento.setForeground(new java.awt.Color(255, 204, 0));
         lblDescuento.setText("0.00");
         jPanel1.add(lblDescuento);
-        lblDescuento.setBounds(385, 777, 43, 26);
+        lblDescuento.setBounds(630, 820, 100, 26);
 
         lblPropina.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         lblPropina.setForeground(new java.awt.Color(255, 204, 0));
         lblPropina.setText("1600.00");
         jPanel1.add(lblPropina);
-        lblPropina.setBounds(353, 821, 75, 26);
+        lblPropina.setBounds(630, 860, 100, 26);
 
         lblTotalPagar.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         lblTotalPagar.setForeground(new java.awt.Color(255, 204, 0));
         lblTotalPagar.setText("20000.00");
         jPanel1.add(lblTotalPagar);
-        lblTotalPagar.setBounds(441, 887, 93, 26);
+        lblTotalPagar.setBounds(420, 940, 100, 26);
 
-        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
-        jRadioButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton3.setText("Efectivo");
-        jPanel1.add(jRadioButton3);
-        jRadioButton3.setBounds(1173, 713, 106, 42);
+        jrbEfectivo.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jrbEfectivo);
+        jrbEfectivo.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        jrbEfectivo.setForeground(new java.awt.Color(255, 255, 255));
+        jrbEfectivo.setText("Efectivo");
+        jrbEfectivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbEfectivoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jrbEfectivo);
+        jrbEfectivo.setBounds(1310, 720, 106, 42);
 
         jLabel33.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(255, 255, 255));
         jLabel33.setText("Cambio en efectivo");
         jPanel1.add(jLabel33);
-        jLabel33.setBounds(1370, 840, 190, 26);
+        jLabel33.setBounds(1510, 880, 190, 26);
 
-        jTextField16.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField16);
-        jTextField16.setBounds(1365, 804, 130, 30);
+        txtCantidadRecibida.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        txtCantidadRecibida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadRecibidaActionPerformed(evt);
+            }
+        });
+        txtCantidadRecibida.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCantidadRecibidaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCantidadRecibidaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadRecibidaKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtCantidadRecibida);
+        txtCantidadRecibida.setBounds(1510, 810, 130, 40);
 
-        jTextField17.setEditable(false);
-        jTextField17.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        jPanel1.add(jTextField17);
-        jTextField17.setBounds(1370, 870, 120, 26);
+        txtCambioEfectivo.setEditable(false);
+        txtCambioEfectivo.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtCambioEfectivo);
+        txtCambioEfectivo.setBounds(1510, 910, 180, 40);
 
         jLabel34.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(255, 255, 255));
         jLabel34.setText("Cantidad Recibida");
         jPanel1.add(jLabel34);
-        jLabel34.setBounds(1365, 773, 170, 26);
+        jLabel34.setBounds(1510, 780, 170, 26);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/imgBotonHome (2).png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -458,17 +530,74 @@ public class frmPagos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(1550, 10, 75, 68);
+        jLabel1.setBounds(1840, 10, 75, 68);
+
+        jLabel28.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("Impuesto Portuario: ");
+        jPanel1.add(jLabel28);
+        jLabel28.setBounds(430, 740, 189, 26);
+
+        lblImpuestoPort.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        lblImpuestoPort.setForeground(new java.awt.Color(255, 204, 0));
+        lblImpuestoPort.setText("2400.00");
+        jPanel1.add(lblImpuestoPort);
+        lblImpuestoPort.setBounds(630, 740, 120, 26);
+
+        jLabel12.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Edad");
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(600, 410, 47, 26);
+
+        txtEdad.setEditable(false);
+        txtEdad.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jPanel1.add(txtEdad);
+        txtEdad.setBounds(600, 440, 110, 40);
+
+        jLabel29.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setText("Precio del camarote:");
+        jPanel1.add(jLabel29);
+        jLabel29.setBounds(90, 760, 200, 26);
+
+        lblPrecioCamarote.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        lblPrecioCamarote.setForeground(new java.awt.Color(255, 204, 0));
+        lblPrecioCamarote.setText("16000.00");
+        jPanel1.add(lblPrecioCamarote);
+        lblPrecioCamarote.setBounds(290, 760, 88, 26);
+
+        jLabel30.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel30.setText("Cantidad de personas: ");
+        jPanel1.add(jLabel30);
+        jLabel30.setBounds(70, 800, 213, 26);
+
+        lblCantPersonas.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        lblCantPersonas.setForeground(new java.awt.Color(255, 204, 0));
+        lblCantPersonas.setText("2400.00");
+        jPanel1.add(lblCantPersonas);
+        lblCantPersonas.setBounds(290, 800, 120, 26);
+
+        jLabel31.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setText("ISV:");
+        jPanel1.add(jLabel31);
+        jLabel31.setBounds(580, 780, 34, 26);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1920, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -479,19 +608,230 @@ public class frmPagos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNivelCubiertaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
-        cargarDatos(modelCliente.getValueAt(0, 0).toString(), variablesViaje.getCodigoViaje());
-        
+
+        txtTitularTarjeta.setEnabled(false);
+        cmbMesVencimiento.setEnabled(false);
+        cmbAnioVencimiento.setEnabled(false);
+        txtNumeroTarjeta.setEnabled(false);
+        txtCVC.setEnabled(false);
+        txtCantidadRecibida.setEnabled(false);
+        txtCambioEfectivo.setText("0.00");
+        btnPagar.setEnabled(false);
+
+        pago.obtenerDatosClase(identidadC);
+        cargarDatos(identidadC, variablesViaje.getCodigoViaje());
+
+        lblCantPersonas.setText("" + variablesViaje.getNumeroPersonas());
+        lblSubTotal.setText("" + df.format(pago.calcSubTotal()));
+        lblImpuestoPort.setText("" + df.format(pago.calcImpuestoPortuario()));
+        lblISV.setText("" + df.format(pago.calcISV()));
+        lblDescuento.setText("" + df.format(pago.calcDescuento()));
+        lblPropina.setText("" + df.format(pago.calcPropina()));
+        lblTotalPagar.setText("" + df.format(pago.calcTotal()));
+        lblPrecioCamarote.setText("" + df.format(pago.getPrecioCamarote()));
     }//GEN-LAST:event_formWindowOpened
 
     private void btnConsultarPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarPersonasActionPerformed
-        // TODO add your handling code here:
+        new frmClientesFactura().setVisible(true);
     }//GEN-LAST:event_btnConsultarPersonasActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         this.setVisible(false);
         new frmPrincipal().setVisible(true);
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+        int mesActual = LocalDate.now().getMonthValue();
+        int anioActual = LocalDate.now().getYear();
+        if(jrbVisa.isSelected() || jrbMasterCard.isSelected())
+        {
+            if(!txtTitularTarjeta.getText().isEmpty() && !txtNumeroTarjeta.getText().isEmpty() && !txtCVC.getText().isEmpty())
+            {
+                if(v.isEntero(txtNumeroTarjeta.getText()) && v.isEntero(txtCVC.getText()) && v.isLetras(txtTitularTarjeta.getText()) && (txtCVC.getText().length() == 3 || txtCVC.getText().length() == 4) &&
+                        txtNumeroTarjeta.getText().length() == 16)
+                {
+                    if(Integer.parseInt(cmbMesVencimiento.getSelectedItem().toString()) > mesActual && Integer.parseInt(cmbAnioVencimiento.getSelectedItem().toString()) >= anioActual)
+                    {
+                        if(pago.insertarViajeBD(Integer.parseInt(txtNumFactura.getText()), identidadC, "1001200100363", variablesViaje.getCodigoBuque(), variablesViaje.getCodigoViaje(), variablesViaje.getNumeroCamarote()))
+                        {
+                            if(jrbVisa.isSelected()){
+                                msgMetodoPago = "Tarjeta VISA con terminación X-" + txtNumeroTarjeta.getText().substring(txtNumeroTarjeta.getText().length() - 4);
+                            }else if(jrbMasterCard.isSelected()){
+                                msgMetodoPago = "Tarjeta MASTERCARD con terminación X-" + txtNumeroTarjeta.getText().substring(txtNumeroTarjeta.getText().length() - 4);
+                            }
+                            imprimirFactura();
+                        }
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(this, "INGRESE UNA FECHA DE VENCIMIENTO CORRECTA");
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this, "VERIFIQUE LOS VALORES INGRESADOS");
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "INGRESE DATOS DE PAGO");
+            }
+        }
+        else if(jrbEfectivo.isSelected())
+        {
+            
+                if(!txtCantidadRecibida.getText().isEmpty())
+                {
+                    if(v.isDecimal(txtCantidadRecibida.getText()) || v.isEntero(txtCantidadRecibida.getText()))
+                    {
+                        msgMetodoPago = "Efectivo";
+                            imprimirFactura();
+
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(this, "VERIFIQUE LOS VALORES INGRESADOS");
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this, "INGRESE DATOS DE PAGO");
+                }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "SELECCIONE UN MÉTODO DE PAGO");
+        }
+        
+        
+    }//GEN-LAST:event_btnPagarActionPerformed
+
+    private void jrbVisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbVisaActionPerformed
+        if(jrbVisa.isSelected()){
+            limpiarTextBox();
+            btnPagar.setEnabled(true);
+            txtCambioEfectivo.setText("0.00");
+            txtTitularTarjeta.setEnabled(true);
+            cmbMesVencimiento.setEnabled(true);
+            cmbAnioVencimiento.setEnabled(true);
+            txtNumeroTarjeta.setEnabled(true);
+            txtCVC.setEnabled(true);
+            txtCantidadRecibida.setText(lblTotalPagar.getText());
+            txtCantidadRecibida.setEnabled(false);
+        }
+        else{
+            btnPagar.setEnabled(false);
+            txtTitularTarjeta.setEnabled(false);
+            cmbMesVencimiento.setEnabled(false);
+            cmbAnioVencimiento.setEnabled(false);
+            txtNumeroTarjeta.setEnabled(false);
+            txtCVC.setEnabled(false);
+            txtCantidadRecibida.setEnabled(false);
+        }
+    }//GEN-LAST:event_jrbVisaActionPerformed
+
+    private void jrbMasterCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMasterCardActionPerformed
+        if(jrbMasterCard.isSelected()){
+            limpiarTextBox();
+            btnPagar.setEnabled(true);
+            txtCambioEfectivo.setText("0.00");
+            txtTitularTarjeta.setEnabled(true);
+            cmbMesVencimiento.setEnabled(true);
+            cmbAnioVencimiento.setEnabled(true);
+            txtNumeroTarjeta.setEnabled(true);
+            txtCVC.setEnabled(true);
+            txtCantidadRecibida.setText(lblTotalPagar.getText());
+            txtCantidadRecibida.setEnabled(false);
+        }
+        else{
+            btnPagar.setEnabled(false);
+            txtTitularTarjeta.setEnabled(false);
+            cmbMesVencimiento.setEnabled(false);
+            cmbAnioVencimiento.setEnabled(false);
+            txtNumeroTarjeta.setEnabled(false);
+            txtCVC.setEnabled(false);
+            txtCantidadRecibida.setEnabled(false);
+        }
+    }//GEN-LAST:event_jrbMasterCardActionPerformed
+
+    private void jrbEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbEfectivoActionPerformed
+        if(jrbEfectivo.isSelected()){
+            limpiarTextBox();
+            btnPagar.setEnabled(false);
+            txtTitularTarjeta.setEnabled(false);
+            cmbMesVencimiento.setEnabled(false);
+            cmbAnioVencimiento.setEnabled(false);
+            txtNumeroTarjeta.setEnabled(false);
+            txtCVC.setEnabled(false);
+            txtCantidadRecibida.setEnabled(true);
+            
+        }
+        else{
+            txtTitularTarjeta.setEnabled(false);
+            cmbMesVencimiento.setEnabled(false);
+            cmbAnioVencimiento.setEnabled(false);
+            txtNumeroTarjeta.setEnabled(false);
+            txtCVC.setEnabled(false);
+            txtCantidadRecibida.setEnabled(false);
+        }
+    }//GEN-LAST:event_jrbEfectivoActionPerformed
+
+    private void txtCantidadRecibidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadRecibidaActionPerformed
+        
+    }//GEN-LAST:event_txtCantidadRecibidaActionPerformed
+
+    private void txtCantidadRecibidaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadRecibidaKeyPressed
+        
+    }//GEN-LAST:event_txtCantidadRecibidaKeyPressed
+
+    private void txtCantidadRecibidaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadRecibidaKeyTyped
+        
+    }//GEN-LAST:event_txtCantidadRecibidaKeyTyped
+
+    private void txtCantidadRecibidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadRecibidaKeyReleased
+        if(!txtCantidadRecibida.getText().isEmpty())
+        {
+            double total = Double.parseDouble(lblTotalPagar.getText());
+            double recibido = Double.parseDouble(txtCantidadRecibida.getText());
+            
+            if(recibido >= total)
+            {
+                txtCambioEfectivo.setText("" + df.format(recibido - total));
+                btnPagar.setEnabled(true);
+            }
+            else
+            {
+                txtCambioEfectivo.setText("ERROR");
+                btnPagar.setEnabled(false);
+            }
+            
+        }
+        else
+        {
+            txtCambioEfectivo.setText("0.00");
+            btnPagar.setEnabled(false);
+        }
+    }//GEN-LAST:event_txtCantidadRecibidaKeyReleased
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        this.dispose();
+        switch (variablesViaje.getNivelBarco()) {
+            case 1:
+                new frmVistaCamarotesN4().setVisible(true);
+                break;
+            case 2:
+                new frmVistaCamarotesN3().setVisible(true);
+                break;
+            case 3:
+                new frmVistaCamarotes().setVisible(true);
+                break;
+            case 4:
+                new frmVistaCamarotesN2().setVisible(true);
+                break;
+            default:
+                break;
+        }
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void cargarDatos(String identidadCliente, int idViaje) {
         
@@ -505,6 +845,7 @@ public class frmPagos extends javax.swing.JFrame {
                 txtNombre2.setText(rs.getString("n2"));
                 txtTel.setText(rs.getString("tl"));
                 txtCorreo.setText(rs.getString("ce"));
+                txtEdad.setText("" + pago.getEdadCliente());
             }
             
             //se obtienen los datos de factura
@@ -536,6 +877,245 @@ public class frmPagos extends javax.swing.JFrame {
 
     }
 
+    /*private void generarImagen() {
+        Rectangle rec = this.getBounds();
+        BufferedImage bufferedImage = new BufferedImage(rec.width, rec.height, BufferedImage.TYPE_INT_ARGB);
+        this.paint(bufferedImage.getGraphics());
+
+        try {
+            File temp = File.createTempFile("imgFormFactura", ".png");
+
+            // Use the ImageIO API to write the bufferedImage to a temporary file
+            ImageIO.write(bufferedImage, "png", temp);
+
+            Document document = new Document();
+            //String input = "c:/temp/capture.png"; // .gif and .jpg are ok too!
+            //String output = "c:/temp/capture.pdf";
+            try {
+                FileOutputStream fos = new FileOutputStream(temp.getParent() + "final.pdf");
+                PdfWriter writer = PdfWriter.getInstance(document, fos);
+                writer.open();
+                document.open();
+                document.add(Image.getInstance(temp.getPath()));
+                document.close();
+                writer.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Delete temp file when program exits
+            temp.deleteOnExit();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }*/
+    
+    private void generarFactura(){
+        /*JFileChooser jfc = new JFileChooser();
+        
+        jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        
+        int x = jfc.showSaveDialog(this);
+        if (x == JFileChooser.APPROVE_OPTION) {
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "DEBE SELECCIONAR DONDE GUARDAR LA FACTURA");
+        }*/
+        
+        /*if (pago.insertarViajeBD(Integer.parseInt(txtNumFactura.getText()), identidadC, "1001200100363", variablesViaje.getCodigoBuque(), variablesViaje.getCodigoViaje(), variablesViaje.getNumeroCamarote())) {
+                JOptionPane.showMessageDialog(this, "GENERACIÓN DE VIAJE CORRECTA IMPRIMIENDO FACTURA...");
+                //FILE_NAME = jfc.getSelectedFile().getPath() + "BonVoyage Factura 0000" + txtNumFactura.getText();
+            }*/
+        
+        Document document = new Document(PageSize.LETTER);
+        try {
+            String DOPPIOONE = getClass().getResource("/Resources/DoppioOne-Regular.ttf").toString();
+            BaseFont baseFont = BaseFont.createFont(DOPPIOONE, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(temp));
+            document.open();
+            
+            Image img = new Image(Image.getInstance(getClass().getResource("/Resources/Logo BonVoyage Peq.png"))) {
+            };
+            //img.setAlignment(Element.ALIGN_CENTER);
+            //document.add(img);
+            
+            PdfContentByte canvas = writer.getDirectContentUnder();
+            img.setAbsolutePosition(210, 10);
+            canvas.saveState();
+            PdfGState state = new PdfGState();
+            state.setFillOpacity(0.3f);
+            canvas.setGState(state);
+            canvas.addImage(img);
+            canvas.restoreState();
+            
+            //NumFactura
+            Font DoppioN = new Font(baseFont, 13);
+            Font DoppioNN = new Font(baseFont, 16);
+            DoppioNN.setStyle(Font.UNDERLINE);
+            Paragraph numeroFactura = new Paragraph("Número de Factura: 0000" + txtNumFactura.getText(), DoppioN);
+            numeroFactura.setAlignment(Element.ALIGN_LEFT);
+            document.add(numeroFactura);
+            
+            //Titulo
+            Font DoppioT = new Font(baseFont, 18);
+            DoppioT.setStyle(Font.BOLD);
+            Paragraph titulo = new Paragraph("FACTURA DE VIAJE\n\n", DoppioT);
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            document.add(titulo);
+            
+            /*Paragraph comprador = new Paragraph("COMPRADOR\n\n", DoppioN);
+            comprador.setAlignment(Element.ALIGN_CENTER);
+            document.add(comprador);*/
+            
+            //DatosClienteComprado
+            document.add(new Paragraph("Identidad:                         " + identidadC.toString(), DoppioN));
+            document.add(new Paragraph("Nombre Cliente:              " + txtNombre1.getText() + " " + txtNombre2.getText(), DoppioN));
+            document.add(new Paragraph("Teléfono:                           " + txtTel.getText(), DoppioN));
+            document.add(new Paragraph("Correo Electrónico:         " + txtCorreo.getText(), DoppioN));
+            document.add(new Paragraph("Edad:                                  " + txtEdad.getText() + " Años", DoppioN));
+            
+            Paragraph integrantes = new Paragraph("\nINTEGRANTES\n\n", DoppioN);
+            integrantes.setAlignment(Element.ALIGN_CENTER);
+            document.add(integrantes);
+            
+            //Tabla de integrantes
+            PdfPTable pdfTable = new PdfPTable(modelCliente.getColumnCount());
+            pdfTable.setTotalWidth(530);
+            pdfTable.setLockedWidth(true);
+            for(int i=0; i < modelCliente.getColumnCount();i++){
+                //pdfTable.addCell(modelCliente.getColumnName(i));
+                PdfPCell cell = new PdfPCell(new Paragraph(modelCliente.getColumnName(i), DoppioN));
+                cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                pdfTable.addCell(cell);
+            }
+            for(int j=0; j < modelCliente.getRowCount(); j++){
+                for(int k=0;k < modelCliente.getColumnCount(); k++){
+                    PdfPCell cell2 = new PdfPCell(new Paragraph(modelCliente.getValueAt(j, k).toString(), DoppioN));
+                    cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    pdfTable.addCell(cell2);
+                }
+            }
+            document.add(pdfTable);
+            
+            //Detalles del camarote
+            Paragraph detalleFactura = new Paragraph("\nDETALLES DE FACTURA\n\n", DoppioN);
+            detalleFactura.setAlignment(Element.ALIGN_CENTER);
+            document.add(detalleFactura);
+            
+            document.add(new Paragraph("Crucero:                               " + txtNombreCrucero.getText(), DoppioN));
+            document.add(new Paragraph("Cubierta Nivel:                   " + txtNivelCubierta.getText(), DoppioN));
+            document.add(new Paragraph("Camarote Número:           " + txtNumeroCamarote.getText(), DoppioN));
+            
+            //Detalles de factura
+            document.add(new Paragraph("\nPrecio del Camarote:         " + lblPrecioCamarote.getText() + " Por Persona", DoppioN));
+            document.add(new Paragraph("Cantidad de Personas:      " + lblCantPersonas.getText(), DoppioN));
+            document.add(new Paragraph("\nSubtotal:                               " + lblSubTotal.getText(), DoppioN));
+            document.add(new Paragraph("Impuesto Portuario:           " + lblImpuestoPort.getText() + "          (5%)", DoppioN));
+            document.add(new Paragraph("ISV:                                          " + lblISV.getText() + "          (7%)", DoppioN));
+            document.add(new Paragraph("Descuento:                             " + lblDescuento.getText() + "          (25%) Mayores de 60 Años", DoppioN));
+            document.add(new Paragraph("Propina:                                  " + lblPropina.getText() + "          (10%)", DoppioN));
+            document.add(new Paragraph("Método de Pago:                  " + msgMetodoPago, DoppioN));
+            
+            document.add(new Paragraph("\nTotal Pagado:                    " + lblTotalPagar.getText(), DoppioNN));
+            
+            //ITINEARIO
+            document.newPage();
+            Image imgIti = new Image(Image.getInstance(getClass().getResource("/Resources/vonVoyageIModeloItinerario.png"))) {
+            };
+            PdfContentByte canvas2 = writer.getDirectContentUnder();
+            imgIti.scaleToFit(PageSize.LETTER.getWidth(), PageSize.LETTER.getHeight());
+            imgIti.setAbsolutePosition(0, 0);
+            canvas2.saveState();
+            PdfGState state2 = new PdfGState();
+            state2.setFillOpacity(0.9f);
+            canvas2.setGState(state2);
+            canvas2.addImage(imgIti);
+            canvas2.restoreState();
+            
+            PdfContentByte canvas3 = writer.getDirectContentUnder();
+            
+            canvas3.saveState();
+            canvas3.beginText();
+            canvas3.moveText(100, 535);
+            canvas3.setFontAndSize(baseFont, 16);
+            canvas3.showText("" + txtPuertoPartida.getText());
+            canvas3.endText();
+            canvas3.beginText();
+            canvas3.moveText(110, 515);
+            canvas3.setFontAndSize(baseFont, 16);
+            canvas3.showText("" + txtFechaInicio.getText());
+            canvas3.endText();
+            
+            canvas3.beginText();
+            canvas3.moveText(240, 460);
+            canvas3.setFontAndSize(baseFont, 16);
+            canvas3.showText("¡TIEMPO DE DIVERSIÓN!");
+            canvas3.endText();
+            
+            canvas3.beginText();
+            canvas3.moveText(90, 230);
+            canvas3.setFontAndSize(baseFont, 16);
+            canvas3.showText("" + txtPuertoDestino.getText());
+            canvas3.endText();
+            canvas3.beginText();
+            canvas3.moveText(85, 210);
+            canvas3.setFontAndSize(baseFont, 16);
+            canvas3.showText("" + txtFechaFin.getText());
+            canvas3.endText();
+            
+            canvas3.restoreState();
+            
+            
+            
+            document.close();
+            System.out.println("Done");
+        } catch (Exception e) {
+            e.printStackTrace();
+            temp.deleteOnExit();
+        } 
+        
+    }
+    
+    private void imprimirFactura() {
+        //String filename;
+        //filename = "C:/Users/Hacknel/Downloads/Microsoft%20Edge/Presupuesto%202021-00020.pdf";
+        try {
+            PrinterJob job = PrinterJob.getPrinterJob();
+
+            if (job.printDialog() == true) {
+                if (pago.insertarViajeBD(Integer.parseInt(txtNumFactura.getText()), identidadC, frmInicioSesion.identidadEmpleado, variablesViaje.getCodigoBuque(), variablesViaje.getCodigoViaje(), variablesViaje.getNumeroCamarote())) {
+                    temp = File.createTempFile("tempFactura00000" + txtNumFactura.getText(), ".pdf");
+                    generarFactura();
+                    JOptionPane.showMessageDialog(this, "GENERACIÓN DE VIAJE CORRECTA IMPRIMIENDO FACTURA...");
+                    PDDocument document = PDDocument.load(temp);
+                    job.setPageable(new PDFPageable(document));
+                    job.print();
+                    temp.deleteOnExit();
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "DEBE SELECCIONAR DONDE IMPRIMIR LA FACTURA");
+                imprimirFactura();
+            }
+        } catch (Exception ex) {
+            temp.deleteOnExit();
+        }
+    }
+    
+    private void limpiarTextBox(){
+        txtTitularTarjeta.setText(null);
+            cmbMesVencimiento.setSelectedIndex(0);
+            cmbAnioVencimiento.setSelectedIndex(0);
+            txtNumeroTarjeta.setText(null);
+            txtCVC.setText(null);
+            txtCantidadRecibida.setText(null);
+            txtCambioEfectivo.setText(null);
+    }
     
     /**
      * @param args the command line arguments
@@ -573,15 +1153,16 @@ public class frmPagos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnConsultarPersonas;
-    private javax.swing.JButton btnIniciarSesion1;
-    private javax.swing.JButton btnIniciarSesion3;
+    private javax.swing.JButton btnPagar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> cmbAnioVencimiento;
+    private javax.swing.JComboBox<String> cmbMesVencimiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -594,11 +1175,14 @@ public class frmPagos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
@@ -608,22 +1192,24 @@ public class frmPagos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
+    private javax.swing.JRadioButton jrbEfectivo;
+    private javax.swing.JRadioButton jrbMasterCard;
+    private javax.swing.JRadioButton jrbVisa;
+    private javax.swing.JLabel lblCantPersonas;
     private javax.swing.JLabel lblDescuento;
     private javax.swing.JLabel lblISV;
+    private javax.swing.JLabel lblImpuestoPort;
+    private javax.swing.JLabel lblPrecioCamarote;
     private javax.swing.JLabel lblPropina;
     private javax.swing.JLabel lblSubTotal;
     private javax.swing.JLabel lblTotalPagar;
+    private javax.swing.JTextField txtCVC;
+    private javax.swing.JTextField txtCambioEfectivo;
+    private javax.swing.JTextField txtCantidadRecibida;
     private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtEdad;
     private javax.swing.JTextField txtFechaFin;
     private javax.swing.JTextField txtFechaInicio;
     private javax.swing.JTextField txtNivelCubierta;
@@ -632,8 +1218,10 @@ public class frmPagos extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreCrucero;
     private javax.swing.JTextField txtNumFactura;
     private javax.swing.JTextField txtNumeroCamarote;
+    private javax.swing.JTextField txtNumeroTarjeta;
     private javax.swing.JTextField txtPuertoDestino;
     private javax.swing.JTextField txtPuertoPartida;
     private javax.swing.JTextField txtTel;
+    private javax.swing.JTextField txtTitularTarjeta;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,7 +6,6 @@
 package Formularios.InicioSesion;
 
 import Clases.ClsValidaciones;
-import Clases.InicioSesion.ClsInicioSesion;
 import Clases.dbConnection;
 import javax.swing.JOptionPane;
 
@@ -25,6 +24,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
 
     ClsInicioSesion clase = new ClsInicioSesion();
     ClsValidaciones v = new ClsValidaciones();
+    public static String identidadEmpleado;
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -159,14 +159,15 @@ public class frmInicioSesion extends javax.swing.JFrame {
             if (v.isEntero(txtUsuario.getText()) && txtUsuario.getText().length() == 13) {
                 if (clase.verificarInicio(txtUsuario.getText(), txtContra.getPassword())) {
                     JOptionPane.showMessageDialog(this, "ola q ase");
+                    identidadEmpleado = txtUsuario.getText();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
+                    JOptionPane.showMessageDialog(this, "USUARIO O CONTRASEÑA INCORRECTOS");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Verifique valores");
+                JOptionPane.showMessageDialog(this, "VERIFIQUE VALORES");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Ingrese valores");
+            JOptionPane.showMessageDialog(this, "INGRESE VALORES");
         }
 
 
