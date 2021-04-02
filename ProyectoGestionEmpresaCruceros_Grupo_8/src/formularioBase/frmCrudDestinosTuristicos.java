@@ -5,7 +5,7 @@
  */
 package formularioBase;
 
-import Formularios.frmPrincipal;
+import FormularioIGP.frmPrincipal;
 import javax.swing.JOptionPane;
 
 /**

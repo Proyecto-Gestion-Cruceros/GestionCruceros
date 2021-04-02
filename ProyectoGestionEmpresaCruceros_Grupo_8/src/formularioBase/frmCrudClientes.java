@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import Clases.ClsValidaciones;
 import Clases.Personas.ClsPersona;
 import Clases.dbConnection;
-import Formularios.frmPrincipal;
+import FormularioIGP.frmPrincipal;
 import javax.swing.JOptionPane;
 
 /**

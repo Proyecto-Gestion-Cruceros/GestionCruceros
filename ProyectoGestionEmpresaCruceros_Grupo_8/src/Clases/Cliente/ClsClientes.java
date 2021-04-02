@@ -30,7 +30,7 @@ public class ClsClientes extends ClsPersona{
     
     
     //METODOS
-    /*
+    
     @Override
     public boolean AgregarPersona()
     {
