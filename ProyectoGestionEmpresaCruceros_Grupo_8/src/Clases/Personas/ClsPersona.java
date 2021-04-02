@@ -6,7 +6,7 @@ public class ClsPersona {
     protected static String Apellidos;
     protected static String Telefono;
     protected static String CorreoElectronico;
-    protected static int Estado;
+    protected static String Estado;
 
     //Encapsulamiento de variables
     public static String getIdentidad() {
@@ -49,13 +49,15 @@ public class ClsPersona {
         ClsPersona.CorreoElectronico = CorreoElectronico;
     }
 
-    public static int getEstado() {
+    public static String getEstado() {
         return Estado;
     }
 
-    public static void setEstado(int Estado) {
+    public static void setEstado(String Estado) {
         ClsPersona.Estado = Estado;
     }
+
+
     
     
     //Metodos deL Crud
