@@ -120,11 +120,11 @@ public class ClsPagos {
             ps3.setInt(2, cBuque);
             
             if (ps.executeUpdate() == 1 && ps3.executeUpdate() == 1) {
-                for (int i = 0; i < frmSeleccionClientes.model1.getRowCount(); i++) 
+                for (int i = 0; i < variablesViaje.getModel1().getRowCount(); i++) 
                 {
                     ps2 = dbConnection.dbConexion().prepareStatement("INSERT INTO detalleClientes VALUES (?, ?)");
                     ps2.setInt(1, cFactura);
-                    ps2.setString(2, frmSeleccionClientes.model1.getValueAt(i, 0).toString());
+                    ps2.setString(2, variablesViaje.getModel().getValueAt(i, 0).toString());
                     if (ps2.executeUpdate() == 1) 
                     {
                         isComplete = true;

@@ -52,11 +52,10 @@ public class frmPagos extends javax.swing.JFrame {
     clsVariablesViaje variablesViaje = new clsVariablesViaje();
     ClsPagos pago = new ClsPagos();
     ClsValidaciones v = new ClsValidaciones();
+    DefaultTableModel modelCliente = variablesViaje.getModel1();
     String identidadC = modelCliente.getValueAt(0, 0).toString();
     File temp;
     String msgMetodoPago = null;
-    
-    DefaultTableModel modelCliente = variablesViaje.getModel1();
 
     /**
      * This method is called from within the constructor to initialize the form.

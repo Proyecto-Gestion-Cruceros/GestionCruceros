@@ -124,9 +124,9 @@ public class frmClientesFactura extends javax.swing.JFrame {
         clientes.setRowCount(0);
         try{
             
-            for(int i = 0; i< frmSeleccionClientes.model1.getRowCount(); i++){
+            for(int i = 0; i< variablesViaje.getModel1().getRowCount(); i++){
                 ps = dbConnection.dbConexion().prepareStatement("select identidadCliente, CONCAT(nombres, ' ', apellidos), telefono, correoElectronico from clientes WHERE identidadCliente = ?");
-                ps.setString(1, frmSeleccionClientes.model1.getValueAt(i, 0).toString());
+                ps.setString(1, variablesViaje.getModel1().getValueAt(i, 0).toString());
                 ResultSet rs = ps.executeQuery();
                 rsmd = rs.getMetaData();
                 int columnas = rsmd.getColumnCount();
