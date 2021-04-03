@@ -17,6 +17,7 @@ public class ClsClientes extends ClsPersona{
     
     ClsPersona per = new ClsPersona();
     public static String direccionCliente;
+    public static String fechaNacimiento;
     PreparedStatement ps;
     ResultSet rs = null;
 
@@ -27,6 +28,15 @@ public class ClsClientes extends ClsPersona{
     public static void setDireccionCliente(String direccionCliente) {
         ClsClientes.direccionCliente = direccionCliente;
     }
+
+    public static String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public static void setFechaNacimiento(String fechaNacimiento) {
+        ClsClientes.fechaNacimiento = fechaNacimiento;
+    }
+   
     
     
     //METODOS
@@ -39,14 +49,15 @@ public class ClsClientes extends ClsPersona{
         
         try{
             
-            ps = dbConnection.dbConexion().prepareStatement("Execute agregarCliente ?,?,?,?,?,?,?");
+            ps = dbConnection.dbConexion().prepareStatement("Execute agregarCliente ?,?,?,?,?,?,?,?");
             ps.setString(1, Identidad);
             ps.setString(2, Nombres);
             ps.setString(3, Apellidos);
             ps.setString(4, Telefono);
             ps.setString(5, CorreoElectronico);
-            ps.setString(6, direccionCliente);
-            ps.setString(7, Estado);
+            ps.setString(6, fechaNacimiento);
+            ps.setString(7, direccionCliente);
+            ps.setString(8, Estado);
             
              resultado = ps.executeUpdate();
              
@@ -76,14 +87,15 @@ public class ClsClientes extends ClsPersona{
         
         try{
             
-            ps = dbConnection.dbConexion().prepareStatement("Execute modificarCliente ?,?,?,?,?,?,?");
+            ps = dbConnection.dbConexion().prepareStatement("Execute modificarCliente ?,?,?,?,?,?,?,?");
             ps.setString(1, Identidad);
             ps.setString(2, Nombres);
             ps.setString(3, Apellidos);
             ps.setString(4, Telefono);
             ps.setString(5, CorreoElectronico);
-            ps.setString(6, direccionCliente);
-            ps.setString(7, Estado);
+            ps.setString(6, fechaNacimiento);
+            ps.setString(7, direccionCliente);
+            ps.setString(8, Estado);
             
              resultado = ps.executeUpdate();
              
