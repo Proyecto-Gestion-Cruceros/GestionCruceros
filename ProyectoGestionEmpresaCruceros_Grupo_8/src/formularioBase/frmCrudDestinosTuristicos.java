@@ -3,7 +3,8 @@ package formularioBase;
 import Clases.ClsValidaciones;
 import Clases.DestinosTuristicos.ClsDestinosTuristicos;
 import Clases.dbConnection;
-import FormularioIGP.frmPrincipal;
+import FormularioIGP.frmIGP;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -236,7 +237,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
         {
             this.dispose();
             
-            frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
        

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -89,10 +89,7 @@
                                   <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txtDireccionCliente" min="-2" pref="347" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="cmbEstadoCliente" min="-2" pref="193" max="-2" attributes="0"/>
-                                          <EmptySpace min="97" pref="97" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="cmbEstadoCliente" alignment="0" min="-2" pref="193" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -633,15 +630,6 @@
               <Image iconType="3" name="/Resources/refresh_30px.png"/>
             </Property>
             <Property name="iconTextGap" type="int" value="2"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[30, 30]"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[30, 30]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[30, 30]"/>
-            </Property>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbActualizarMouseClicked"/>

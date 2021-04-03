@@ -8,7 +8,8 @@ import java.sql.ResultSet;
 import Clases.ClsValidaciones;
 import Clases.Personas.ClsPersona;
 import Clases.dbConnection;
-import FormularioIGP.frmPrincipal;
+import FormularioIGP.frmIGP;
+
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -645,7 +646,8 @@ public class frmCrudClientes extends javax.swing.JFrame {
         {
             this.dispose();
             
-            frmPrincipal igp = new frmPrincipal();
+
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
         

@@ -10,7 +10,7 @@ import Clases.Personas.ClsPersona;
 import javax.swing.JOptionPane;
 import Clases.ClsValidaciones;
 import Clases.dbConnection;
-import FormularioIGP.frmPrincipal;
+import FormularioIGP.frmIGP;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -519,7 +519,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                 JOptionPane.QUESTION_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
-            frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed

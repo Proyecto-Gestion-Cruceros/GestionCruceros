@@ -3,7 +3,7 @@ package formularioBase;
 import Clases.BuquesyViajesDisponibles.ClsBuques;
 import Clases.ClsValidaciones;
 import Clases.dbConnection;
-import FormularioIGP.frmPrincipal;
+import FormularioIGP.frmIGP;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -454,7 +454,7 @@ public class frmCrudBuques extends javax.swing.JFrame {
         {
             this.dispose();
 
-            frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
     }//GEN-LAST:event_btnMenuMouseClicked

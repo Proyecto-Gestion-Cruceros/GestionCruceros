@@ -7,7 +7,8 @@ package formularioBase;
 
 import Clases.Personas.clsUsuarios;
 import Clases.Personas.ClsPersona;
-import FormularioIGP.frmPrincipal;
+import FormularioIGP.frmIGP;
+
 import javax.swing.JOptionPane;
 
 public class frmCrudUsuarios extends javax.swing.JFrame {
@@ -138,7 +139,7 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
             JOptionPane.QUESTION_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
-            frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed

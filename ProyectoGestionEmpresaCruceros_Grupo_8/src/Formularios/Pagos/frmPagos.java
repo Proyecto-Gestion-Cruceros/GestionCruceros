@@ -7,7 +7,8 @@ package Formularios.Pagos;
 
 import Clases.ClsValidaciones;
 import Clases.dbConnection;
-import FormularioIGP.frmPrincipal;
+import FormularioIGP.frmIGP;
+
 import Formularios.InicioSesion.frmInicioSesion;
 import FormulariosCrucero.clsVariablesViaje;
 import FormulariosCrucero.frmSeleccionClientes;
@@ -636,7 +637,8 @@ public class frmPagos extends javax.swing.JFrame {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         this.setVisible(false);
-        new frmPrincipal().setVisible(true);
+            frmIGP igp = new frmIGP();
+            igp.setVisible(true);
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed

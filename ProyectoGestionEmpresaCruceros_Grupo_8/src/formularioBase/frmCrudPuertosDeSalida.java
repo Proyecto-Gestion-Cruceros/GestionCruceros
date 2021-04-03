@@ -8,7 +8,7 @@ package formularioBase;
 import Clases.ClsValidaciones;
 import Clases.PuertosSalida.clsPuertosSalidas;
 import Clases.dbConnection;
-import FormularioIGP.frmPrincipal;
+import FormularioIGP.frmIGP;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -304,7 +304,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
             JOptionPane.QUESTION_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
-            frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed

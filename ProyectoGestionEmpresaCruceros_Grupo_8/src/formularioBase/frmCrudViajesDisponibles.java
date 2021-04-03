@@ -3,7 +3,7 @@ package formularioBase;
 import Clases.BuquesyViajesDisponibles.ClsViajesDisponibles;
 import Clases.ClsValidaciones;
 import Clases.dbConnection;
-import FormularioIGP.frmPrincipal;
+import FormularioIGP.frmIGP;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -38,8 +38,6 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
         cmbBuques = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtViajesDisp = new javax.swing.JTable();
-        jdcFechaSalida = new com.toedter.calendar.JDateChooser();
-        jdcFechaRegreso = new com.toedter.calendar.JDateChooser();
         btnAgregar1 = new javax.swing.JButton();
         btnActualizar1 = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -120,11 +118,6 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jtViajesDisp);
-
-        jdcFechaSalida.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
-        jdcFechaSalida.setPreferredSize(new java.awt.Dimension(88, 30));
-
-        jdcFechaRegreso.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
 
         btnAgregar1.setBackground(new java.awt.Color(255, 204, 51));
         btnAgregar1.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -231,13 +224,9 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(cmbDestinos, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(45, 45, 45)
-                                        .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jdcFechaSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jdcFechaRegreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(cmbDestinos, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(151, 151, 151)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 946, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(107, 107, 107))))
@@ -279,13 +268,9 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                                 .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel9))
                         .addGap(76, 76, 76)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jdcFechaSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(79, 79, 79)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(jdcFechaRegreso, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel7)
+                        .addGap(83, 83, 83)
+                        .addComponent(jLabel8)
                         .addGap(89, 89, 89))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -536,7 +521,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
         {
             this.dispose();
             
-            frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
     }//GEN-LAST:event_btnMenuMouseClicked
@@ -684,8 +669,6 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.toedter.calendar.JDateChooser jdcFechaRegreso;
-    private com.toedter.calendar.JDateChooser jdcFechaSalida;
     private javax.swing.JTable jtViajesDisp;
     private javax.swing.JTextField txtBuque;
     private javax.swing.JTextField txtDestino;
