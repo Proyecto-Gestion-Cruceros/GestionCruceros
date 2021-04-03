@@ -6,7 +6,8 @@
 package FormulariosCrucero;
 
 import Clases.dbConnection;
-import FormularioIGP.frmPrincipal;
+import FormularioIGP.frmIGP;
+
 import java.awt.Color;
 import java.beans.Statement;
 import java.sql.PreparedStatement;
@@ -230,7 +231,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             variables.resetVariables();
-            frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed

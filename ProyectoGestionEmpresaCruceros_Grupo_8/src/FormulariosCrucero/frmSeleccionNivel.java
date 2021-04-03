@@ -5,7 +5,8 @@
  */
 package FormulariosCrucero;
 
-import FormularioIGP.frmPrincipal;
+
+import FormularioIGP.frmIGP;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -210,7 +211,7 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             variables.resetVariables();
-            frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed

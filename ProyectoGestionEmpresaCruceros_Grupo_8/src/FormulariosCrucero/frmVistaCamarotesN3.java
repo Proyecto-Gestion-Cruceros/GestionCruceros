@@ -6,7 +6,8 @@
 package FormulariosCrucero;
 
 import Clases.dbConnection;
-import FormularioIGP.frmPrincipal;
+import FormularioIGP.frmIGP;
+
 import Formularios.Pagos.frmPagos;
 import static FormulariosCrucero.frmVistaCamarotesN2.conn;
 import static FormulariosCrucero.frmVistaCamarotesN4.dbConexion;
@@ -1326,7 +1327,7 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             variables.resetVariables();
-            frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
