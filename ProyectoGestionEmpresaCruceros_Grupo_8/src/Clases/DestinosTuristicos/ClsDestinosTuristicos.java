@@ -35,6 +35,16 @@ public class ClsDestinosTuristicos {
     public static void setDescripcion(String Descripcion) {
         ClsDestinosTuristicos.Descripcion = Descripcion;
     }
+
+    public static String getEstado() {
+        return Estado;
+    }
+
+    public static void setEstado(String Estado) {
+        ClsDestinosTuristicos.Estado = Estado;
+    }
+    
+    
     
     
     public boolean AgregarDestino()
@@ -44,11 +54,10 @@ public class ClsDestinosTuristicos {
         
         try{
             
-            ps = dbConnection.dbConexion().prepareStatement("Execute agregarDestino ?,?,?");
+            ps = dbConnection.dbConexion().prepareStatement("Execute agregarDestino ?,?");
             
-            ps.setString(2, Nombre_Destino);
-            ps.setString(3, Descripcion);
-            ps.setString(4, Estado);
+            ps.setString(1, Nombre_Destino);
+            ps.setString(2, Estado);
             
             resultado = ps.executeUpdate();
 
@@ -76,11 +85,10 @@ public class ClsDestinosTuristicos {
         
         try{
             
-            ps = dbConnection.dbConexion().prepareStatement("Execute modificarDestino ?,?,?");
+            ps = dbConnection.dbConexion().prepareStatement("Execute modificarDestino ?, ?");
             
-            ps.setString(2, Nombre_Destino);
-            ps.setString(3, Descripcion);
-            ps.setString(4, Estado);
+            ps.setString(1, Nombre_Destino);
+            ps.setString(2, Estado);
             
             resultado = ps.executeUpdate();
 
@@ -102,7 +110,7 @@ public class ClsDestinosTuristicos {
     }
     
     
-    public boolean EliminarDestino()
+    /*public boolean EliminarDestino()
     {
         
         int resultado = 0;
@@ -131,7 +139,7 @@ public class ClsDestinosTuristicos {
             
         }
         return false;
-    }
+    }*/
     
     
 }
