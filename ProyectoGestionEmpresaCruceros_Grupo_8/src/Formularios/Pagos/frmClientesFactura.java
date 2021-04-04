@@ -8,6 +8,8 @@ package Formularios.Pagos;
 import Clases.dbConnection;
 import FormulariosCrucero.clsVariablesViaje;
 import FormulariosCrucero.frmSeleccionClientes;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -51,7 +53,7 @@ public class frmClientesFactura extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 79, 150));
 
-        tablaClientes.setFont(new java.awt.Font("Doppio One", 0, 14)); // NOI18N
+        tablaClientes.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -118,6 +120,10 @@ public class frmClientesFactura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        tablaClientes.getTableHeader().setReorderingAllowed(false);
+        tablaClientes.getTableHeader().setForeground(Color.BLACK);
+        tablaClientes.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
+        
         PreparedStatement ps;
         DefaultTableModel clientes = (DefaultTableModel) tablaClientes.getModel();
         ResultSetMetaData rsmd;

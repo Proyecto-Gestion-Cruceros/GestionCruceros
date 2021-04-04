@@ -23,6 +23,10 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
     PreparedStatement ps;
     ResultSet result = null;
 
+    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
+    Icon Icono = new ImageIcon(getClass().getResource("/Resources/Check.png"));
+    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
+    
     private int retornarCodigoCamarote;
 
     public frmRegistrarCamarote() {
@@ -35,7 +39,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
         cmbCodigoBuque.setSelectedIndex(0);
         txtNombreBuque.setText(null);
         txtCodigoCamarote.setText(null);
-        spNivel.setValue(1);
+        cmbNivel.setSelectedIndex(0);
         cmbTipoCamarote.setSelectedIndex(0);
         cmbPrecio.setSelectedIndex(0);
         spCapacidadPersonas.setValue(1);
@@ -58,7 +62,6 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtNombreBuque = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        spNivel = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
         cmbTipoCamarote = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
@@ -69,6 +72,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
         spCapacidadPersonas = new javax.swing.JSpinner();
         cmbPrecio = new javax.swing.JComboBox<>();
         btnRegresar = new javax.swing.JButton();
+        cmbNivel = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -91,7 +95,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
         btnAgregar.setBackground(new java.awt.Color(255, 204, 51));
         btnAgregar.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
         btnAgregar.setForeground(new java.awt.Color(0, 0, 0));
-        btnAgregar.setText("AGREGAR");
+        btnAgregar.setText("REGISTRAR");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -121,7 +125,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Nombre de Buque");
+        jLabel6.setText("Nombre del Buque");
 
         txtNombreBuque.setEditable(false);
         txtNombreBuque.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
@@ -130,10 +134,6 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Tipo de Camarote");
-
-        spNivel.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        spNivel.setModel(new javax.swing.SpinnerNumberModel(1, 1, 4, 1));
-        spNivel.setVerifyInputWhenFocusTarget(false);
 
         jLabel8.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -155,7 +155,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Código de Buque");
+        jLabel9.setText("Código del Buque");
 
         cmbCodigoBuque.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         cmbCodigoBuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Opción" }));
@@ -227,72 +227,79 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
             }
         });
 
+        cmbNivel.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        cmbNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "----" }));
+        cmbNivel.setEnabled(false);
+        cmbNivel.setFocusable(false);
+        cmbNivel.setInheritsPopupMenu(true);
+        cmbNivel.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbNivelItemStateChanged(evt);
+            }
+        });
+        cmbNivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbNivelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CamaroteLayout = new javax.swing.GroupLayout(Camarote);
         Camarote.setLayout(CamaroteLayout);
         CamaroteLayout.setHorizontalGroup(
             CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CamaroteLayout.createSequentialGroup()
-                .addGap(734, 734, 734)
+                .addGap(622, 622, 622)
+                .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(CamaroteLayout.createSequentialGroup()
+                        .addComponent(btnLimpiaar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(301, 301, 301)
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(CamaroteLayout.createSequentialGroup()
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(513, 513, 513)
                 .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CamaroteLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCodigoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(CamaroteLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addGap(314, 314, 314)
                         .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(CamaroteLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cmbCodigoBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtCodigoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(149, 922, Short.MAX_VALUE))
                             .addGroup(CamaroteLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmbCodigoBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 774, Short.MAX_VALUE))))
+                    .addGroup(CamaroteLayout.createSequentialGroup()
+                        .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CamaroteLayout.createSequentialGroup()
+                                .addGap(314, 314, 314)
                                 .addComponent(txtNombreBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 761, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CamaroteLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CamaroteLayout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(jLabel7)
-                        .addGap(16, 16, 16)
-                        .addComponent(cmbTipoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(CamaroteLayout.createSequentialGroup()
-                        .addGap(229, 229, 229)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmbEstadoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CamaroteLayout.createSequentialGroup()
-                            .addGap(240, 240, 240)
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(cmbPrecio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CamaroteLayout.createSequentialGroup()
-                            .addComponent(jLabel8)
-                            .addGap(13, 13, 13)
-                            .addComponent(spCapacidadPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(773, 773, 773))
-            .addGroup(CamaroteLayout.createSequentialGroup()
-                .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CamaroteLayout.createSequentialGroup()
-                        .addGap(710, 710, 710)
-                        .addComponent(btnLimpiaar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(173, 173, 173)
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(CamaroteLayout.createSequentialGroup()
-                        .addGap(870, 870, 870)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(spNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(CamaroteLayout.createSequentialGroup()
-                        .addGap(610, 610, 610)
-                        .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel6)
+                            .addGroup(CamaroteLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbEstadoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(spCapacidadPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel2)
+                            .addGroup(CamaroteLayout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel9)
+                            .addGroup(CamaroteLayout.createSequentialGroup()
+                                .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel3))
+                                .addGap(150, 150, 150)
+                                .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmbTipoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(CamaroteLayout.createSequentialGroup()
+                                        .addComponent(cmbPrecio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(149, 149, 149))
+                                    .addComponent(cmbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap())))
         );
         CamaroteLayout.setVerticalGroup(
             CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,42 +310,42 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
                 .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(cmbCodigoBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtNombreBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(29, 29, 29)
                 .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtCodigoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(cmbTipoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbTipoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addGap(26, 26, 26)
                 .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cmbPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(spCapacidadPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
                 .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbEstadoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addGap(26, 26, 26)
+                    .addComponent(jLabel3)
+                    .addComponent(cmbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spCapacidadPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(33, 33, 33)
+                .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(cmbEstadoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
                 .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(68, 68, 68)
                 .addGroup(CamaroteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiaar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
+                .addGap(3, 3, 3)
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -361,28 +368,24 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
                 ps = dbConexion().prepareStatement("INSERT INTO camarotes VALUES (?, ?, ?, ?, ?, ?, ?)");
                 ps.setString(1, String.valueOf(txtCodigoCamarote.getText()));
                 ps.setString(2, String.valueOf(cmbCodigoBuque.getSelectedItem()));
-                ps.setString(3, String.valueOf(spNivel.getValue()));
+                ps.setString(3, String.valueOf(cmbNivel.getSelectedItem()));   
                 ps.setString(4, String.valueOf(cmbTipoCamarote.getSelectedItem()));
                 ps.setString(5, String.valueOf(spCapacidadPersonas.getValue()));
                 ps.setString(6, String.valueOf(cmbPrecio.getSelectedItem()));
                 ps.setString(7, String.valueOf(cmbEstadoCamarote.getSelectedItem()));
                 ps.executeUpdate();
-                 Icon icono = new ImageIcon(getClass().getResource("/Resources/Check.png"));
-                 JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\">Registrado Correctamente</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                 JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CAMAROTE REGISTRADO CORRECTAMENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
                 limpiarCampos();
             } else {
-                Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
-                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\">Verifique que todos los campos esten llenos</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
-           
-
+                
+                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> VERIFIQUE QUE TODOS LOS CAMPOS ESTEN LLENOS</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
             }
 
         } catch (SQLException ex) {
-           
-           JOptionPane.showMessageDialog(null, "Error al Registrar los datos" + ex);
+            JOptionPane.showMessageDialog(null, "Error al Registrar los datos " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
         } finally {
             retornarCodigoCamarote = retornarUltimoIdCamarote() + 1;
-            txtCodigoCamarote.setText(Integer.toString(retornarCodigoCamarote));
+           // txtCodigoCamarote.setText(Integer.toString(retornarCodigoCamarote));
 
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -392,16 +395,17 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
         String ubicacion;
         URL url = null;
         cargarPrecios();
+        cargarNivel();
 
         switch (selectedIndex) {
 
             case 0:
-
                 ubicacion = "/Resources/fondo.PNG";
                 url = this.getClass().getResource(ubicacion);
                 ImageIcon Imagen = new ImageIcon(url);
                 lblImagen.setIcon(Imagen);
                 cmbPrecio.setSelectedItem("----");
+                cmbNivel.setSelectedItem("----");
                 break;
 
             case 1:
@@ -410,6 +414,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
                 ImageIcon imagen = new ImageIcon(url);
                 lblImagen.setIcon(imagen);
                 cmbPrecio.setSelectedItem("50");
+                cmbNivel.setSelectedItem("4");
                 break;
 
             case 2:
@@ -418,6 +423,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
                 ImageIcon imagenes = new ImageIcon(url);
                 lblImagen.setIcon(imagenes);
                 cmbPrecio.setSelectedItem("75");
+                cmbNivel.setSelectedItem("3");
                 break;
 
             case 3:
@@ -426,6 +432,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
                 ImageIcon image = new ImageIcon(url);
                 lblImagen.setIcon(image);
                 cmbPrecio.setSelectedItem("100");
+                cmbNivel.setSelectedItem("2");
                 break;
 
             case 4:
@@ -434,6 +441,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
                 ImageIcon Image = new ImageIcon(url);
                 lblImagen.setIcon(Image);
                 cmbPrecio.setSelectedItem("150");
+                cmbNivel.setSelectedItem("1");
                 break;
 
         }
@@ -446,6 +454,15 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
         cmbPrecio.addItem("75");
         cmbPrecio.addItem("100");
         cmbPrecio.addItem("150");
+    }
+    
+    private void cargarNivel() {
+        cmbNivel.removeAllItems();
+        cmbNivel.addItem("----");
+        cmbNivel.addItem("1");
+        cmbNivel.addItem("2");
+        cmbNivel.addItem("3");
+        cmbNivel.addItem("4");
     }
 
     private void cmbTipoCamaroteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoCamaroteActionPerformed
@@ -464,7 +481,8 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
+            
         }
     }//GEN-LAST:event_cmbTipoCamaroteActionPerformed
 
@@ -488,13 +506,14 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
                 }
 
             } else {
-                txtNombreBuque.setText(null);
-                txtCodigoCamarote.setText(null);
+                //txtNombreBuque.setText(null);
+                //txtCodigoCamarote.setText(null);
+                limpiarCampos();
                 btnAgregar.setEnabled(false);
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon);   
         }
     }//GEN-LAST:event_cmbCodigoBuqueActionPerformed
 
@@ -517,7 +536,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
             return ultimoCamarote;
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
 
         }
         return 0;
@@ -534,7 +553,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbEstadoCamaroteActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-    ((JSpinner.DefaultEditor) spNivel.getEditor()).getTextField().setEditable(false);
+
     ((JSpinner.DefaultEditor) spCapacidadPersonas.getEditor()).getTextField().setEditable(false);
     btnAgregar.setEnabled(false);
     
@@ -565,6 +584,14 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
     private void spCapacidadPersonasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_spCapacidadPersonasKeyPressed
 
     }//GEN-LAST:event_spCapacidadPersonasKeyPressed
+
+    private void cmbNivelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNivelItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbNivelItemStateChanged
+
+    private void cmbNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNivelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbNivelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -608,6 +635,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cmbCodigoBuque;
     private javax.swing.JComboBox<String> cmbEstadoCamarote;
+    private javax.swing.JComboBox<String> cmbNivel;
     private javax.swing.JComboBox<String> cmbPrecio;
     private javax.swing.JComboBox<String> cmbTipoCamarote;
     private javax.swing.JLabel jLabel1;
@@ -621,7 +649,6 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JSpinner spCapacidadPersonas;
-    private javax.swing.JSpinner spNivel;
     private javax.swing.JTextField txtCodigoCamarote;
     private javax.swing.JTextField txtNombreBuque;
     // End of variables declaration//GEN-END:variables

@@ -9,10 +9,14 @@ import Clases.ClsValidaciones;
 import Clases.Personas.ClsPersona;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
+import java.awt.Color;
+import java.awt.Font;
 
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -43,6 +47,10 @@ public class frmCrudClientes extends javax.swing.JFrame {
     DefaultTableModel dtm;
     DefaultTableModel temp;
     
+    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
+    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
+    Icon Icono = new ImageIcon(getClass().getResource("/Resources/Check.png"));
+     
     String fecha = "";
     
     
@@ -81,6 +89,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
         lbActualizar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -92,7 +101,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Avenir LT Std 45 Book", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel1.setText("Clientes:");
+        jLabel1.setText("Clientes");
 
         jLabel2.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -173,7 +182,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
         txtIdentidadCliente.setForeground(new java.awt.Color(0, 0, 0));
         txtIdentidadCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jTClientes.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jTClientes.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
         jTClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -244,9 +253,6 @@ public class frmCrudClientes extends javax.swing.JFrame {
 
         lbActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/refresh_30px.png"))); // NOI18N
         lbActualizar.setIconTextGap(2);
-        lbActualizar.setMaximumSize(new java.awt.Dimension(30, 30));
-        lbActualizar.setMinimumSize(new java.awt.Dimension(30, 30));
-        lbActualizar.setPreferredSize(new java.awt.Dimension(30, 30));
         lbActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbActualizarMouseClicked(evt);
@@ -257,22 +263,6 @@ public class frmCrudClientes extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(757, 757, 757))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(180, 180, 180)
-                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(188, 188, 188)
-                .addComponent(btnEliminarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(191, 191, 191)
-                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(284, 284, 284))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(298, 298, 298)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,9 +283,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
                                 .addGap(155, 155, 155)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtDireccionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(cmbEstadoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(97, 97, 97)))))
+                                    .addComponent(cmbEstadoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,21 +308,36 @@ public class frmCrudClientes extends javax.swing.JFrame {
                         .addGap(103, 103, 103)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 846, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbActualizar))
                         .addContainerGap(58, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(757, 757, 757))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(180, 180, 180)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(188, 188, 188)
+                        .addComponent(btnEliminarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(191, 191, 191)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(284, 284, 284))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel1)
                 .addGap(48, 48, 48)
-                .addComponent(lbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbActualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -432,13 +435,13 @@ public class frmCrudClientes extends javax.swing.JFrame {
 
                                     if(cliente.AgregarPersona())
                                     {
-                                        JOptionPane.showMessageDialog(this, "Se Ingresó el Cliente correctamente");
+                                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CLIENTE REGISTRADO CORRECTAMENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
                                         jdcFecha.setCalendar(null);
                                         fecha = "";
                                     }
                                     else 
                                     {
-                                        JOptionPane.showMessageDialog(this, "Error al intentar Ingresar Cliente");
+                                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL INTENTAR INGRESAR EL CLIENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
                                         jdcFecha.setCalendar(null);
                                         fecha = "";
                                     }
@@ -452,40 +455,43 @@ public class frmCrudClientes extends javax.swing.JFrame {
                            }
                            else{
                                
-                               JOptionPane.showMessageDialog(this, "Ingrese una Fecha válida");
-                               
+                               JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UNA FECHA VALIDA </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+
                            }
                            
                       
                         }
                         else{
                             
-                            JOptionPane.showMessageDialog(this, "Ingrese un Correo válido");
-                            
+                             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN CORREO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+
                         }
 
                     }   
                     else {
                         
-                        JOptionPane.showMessageDialog(this, "Ingrese un Teléfono válido");
-                        
+                         JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN TELEFONO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+
                     }
   
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(this, "Revise Nombres y Apellidos");
+                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> REVISE NOMBRES Y APELLIDOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+
                 }
             }
             else
             {
-                JOptionPane.showConfirmDialog(this, "La identidad no tiene un formato válido");
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL NUMERO DE IDENTIDAD NO TIENE UN FORMATO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+
             }
             
         }
         else
         {
-            JOptionPane.showConfirmDialog(this, "Debe Ingresar todos los Datos");
+             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> DEBE INGRESAR TODOS LOS DATOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+
         }
         
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -523,7 +529,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
 
                                     if(cliente.ActualizarPersona())
                                     {
-                                        JOptionPane.showMessageDialog(this, "Se Modificó el Cliente correctamente");
+                                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CLIENTE ACTUALIZADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
                                         LimpiarTabla();
                                         LlenarTabla();
                                         jdcFecha.setCalendar(null);
@@ -532,7 +538,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
                                     }
                                     else 
                                     {
-                                        JOptionPane.showMessageDialog(this, "Error al intentar Modificar Cliente");
+                                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL INTENTAR MODIFICAR UN CLIENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
                                         jdcFecha.setCalendar(null);
                                         fecha = "";
                                     }
@@ -546,41 +552,42 @@ public class frmCrudClientes extends javax.swing.JFrame {
                            }
                            else{
                                
-                               JOptionPane.showMessageDialog(this, "Ingrese una Fecha válida");
-                               
+                               JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UNA FECHA VALIDA </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+
                            }
                            
                       
                         }
                         else{
                             
-                            JOptionPane.showMessageDialog(this, "Ingrese un Correo válido");
-                            
+                             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN CORREO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+
                         }
 
                     }   
                     else {
                         
-                        JOptionPane.showMessageDialog(this, "Ingrese un Teléfono válido");
-                        
+                         JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN TELEFONO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+
                     }
-                    
-                    
+  
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(this, "Revise Nombres y Apellidos");
+                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> REVISE NOMBRES Y APELLIDOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+
                 }
             }
             else
             {
-                JOptionPane.showConfirmDialog(this, "La identidad no tiene un formato válido");
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL NUMERO DE IDENTIDAD NO TIENE UN FORMATO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+
             }
             
         }
         else
         {
-            JOptionPane.showConfirmDialog(this, "Deben de estar todos los datos");
+             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> DEBE INGRESAR TODOS LOS DATOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
         }
         
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -624,7 +631,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
         }
         catch(Exception ex)
         {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
         }
         
     }
@@ -632,7 +639,9 @@ public class frmCrudClientes extends javax.swing.JFrame {
     
     
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+       jTClientes.getTableHeader().setReorderingAllowed(false); 
+       jTClientes.getTableHeader().setForeground(Color.BLACK);
+       jTClientes.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
        LlenarTabla();
        //txtFechaNacimiento.setVisible(false);
         
@@ -640,8 +649,10 @@ public class frmCrudClientes extends javax.swing.JFrame {
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
         
-        int result = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         
+        int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.QUESTION_MESSAGE, icono);
         if(result == JOptionPane.YES_NO_OPTION)
         {
             this.dispose();
@@ -716,14 +727,14 @@ public class frmCrudClientes extends javax.swing.JFrame {
                      
                      if(cliente.EliminarPersona())
                      {
-                         JOptionPane.showConfirmDialog(this, "Se eliminó Correctamente");
+                         JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> ELIMINADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
                          LimpiarTabla();
                          LlenarTabla();
                          txtIdentidadCliente.setText(null);
                      }
                      else 
                      {
-                         JOptionPane.showConfirmDialog(this, "Error al Eliminar Cliente");
+                         JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL INTENTAR ELIMINAR EL CLIENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
                      }
                      
                 }
@@ -734,12 +745,12 @@ public class frmCrudClientes extends javax.swing.JFrame {
             }
             else 
             {
-                JOptionPane.showConfirmDialog(this, "La identidad no tiene un formato válido");
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL NUMERO DE IDENTIDAD NO TIENE UN FORMATO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
             }
         }
         else
         {
-            JOptionPane.showConfirmDialog(this, "Ingrese una identidad");
+            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> INGRESE UN NUMERO DE IDENTIDAD </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
         }
         
     }//GEN-LAST:event_btnEliminarClienteActionPerformed

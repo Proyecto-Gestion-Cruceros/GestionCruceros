@@ -9,6 +9,7 @@ import Clases.dbConnection;
 import FormularioIGP.frmIGP;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.beans.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +18,8 @@ import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.HashSet;
 import javax.swing.AbstractButton;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
@@ -44,6 +47,9 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
     DefaultTableModel model;
     ResultSet result = null;
     public static int codigoViajeSeleccionado = 0;
+    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
+    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -86,7 +92,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
         btnAtras.setBackground(new java.awt.Color(255, 204, 51));
         btnAtras.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
         btnAtras.setForeground(new java.awt.Color(0, 0, 0));
-        btnAtras.setText("ATRAS");
+        btnAtras.setText("REGRESAR");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtrasActionPerformed(evt);
@@ -107,7 +113,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
         jPanel1.add(btnSiguiente);
         btnSiguiente.setBounds(1710, 1020, 210, 60);
 
-        tablaViajes.setFont(new java.awt.Font("Doppio One", 0, 14)); // NOI18N
+        tablaViajes.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
         tablaViajes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -164,7 +170,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnMenuPrincipal);
-        btnMenuPrincipal.setBounds(1848, 2, 75, 70);
+        btnMenuPrincipal.setBounds(1843, 4, 80, 70);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -199,7 +205,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
             this.dispose();
             
         }else{
-        JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN VIAJE!");
+        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR UN VIAJE!</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
         }
 
     }//GEN-LAST:event_btnSiguienteActionPerformed
@@ -213,6 +219,10 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaViajesMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        tablaViajes.getTableHeader().setReorderingAllowed(false);
+        tablaViajes.getTableHeader().setForeground(Color.BLACK);
+        tablaViajes.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
+        
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);      
         cargarDatos();
         
@@ -225,9 +235,9 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-        int result = JOptionPane.showConfirmDialog(null, "Esta seguro de volver al Menu Principal?", "Salir del Módulo",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Esta seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.QUESTION_MESSAGE, icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             variables.resetVariables();
@@ -271,7 +281,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            System.out.println("" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
         }
     }
 
@@ -295,8 +305,8 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
                 }
                 model.addRow(fil);
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla" + ex);
+        } catch (Exception ex) {     
+            JOptionPane.showMessageDialog(null, "Error al cargar datos en la tabla " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
         }
     }
     /**

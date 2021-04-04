@@ -4,12 +4,16 @@ import Clases.ClsValidaciones;
 import Clases.DestinosTuristicos.ClsDestinosTuristicos;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
+import java.awt.Color;
+import java.awt.Font;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,6 +34,10 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
     }
 
 
+    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
+    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
+    Icon Icono = new ImageIcon(getClass().getResource("/Resources/Check.png"));
+     
     ClsValidaciones validar = new ClsValidaciones();
     ClsDestinosTuristicos destinos = new ClsDestinosTuristicos();
     dbConnection dbConn =  new dbConnection();
@@ -60,6 +68,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -71,7 +80,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Avenir LT Std 45 Book", 1, 50)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel1.setText("Destinos Turisticos:");
+        jLabel1.setText("Destinos Turisticos");
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
@@ -120,7 +129,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
             }
         });
 
-        jTDestinos.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        jTDestinos.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
         jTDestinos.setForeground(new java.awt.Color(0, 0, 0));
         jTDestinos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -152,25 +161,9 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(398, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNombreDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(242, 242, 242)
-                        .addComponent(cmbEstadoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(122, 122, 122)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(562, 562, 562)
+                        .addGap(800, 800, 800)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(409, 409, 409)
@@ -179,18 +172,34 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(229, 229, 229)
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(586, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNombreDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(242, 242, 242)
+                                .addComponent(cmbEstadoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(122, 122, 122)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(86, 86, 86))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(jLabel1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(183, 183, 183)
@@ -231,7 +240,9 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
         
-        int result = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.QUESTION_MESSAGE, icono);
         
         if(result == JOptionPane.YES_NO_OPTION)
         {
@@ -245,7 +256,9 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+        jTDestinos.getTableHeader().setReorderingAllowed(false);
+        jTDestinos.getTableHeader().setForeground(Color.BLACK);
+        jTDestinos.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
         LimpiarTabla();
         LlenarTabla();
         
@@ -260,7 +273,8 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
                 
                 if(cmbEstadoDestino.getSelectedIndex() == 0 || txtNombreDestino.getText().isEmpty())
                 {
-                    JOptionPane.showMessageDialog(this, "Ingrese un Nombre y un Estado");
+                    JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> INGRESE UN NOMBRE Y UN ESTADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+
                 }
                 else 
                 {
@@ -271,30 +285,31 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
                 
                     if(destinos.AgregarDestino())
                     {
-                        JOptionPane.showMessageDialog(this, "Se Ingresó el Destino correctamente");
+                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> SE REGISTRO CORRECTAMENTE EL DESTINO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
                         LimpiarTabla();
                         LlenarTabla();
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(this, "Error al intentar Ingresar el Destino");
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL INTENTAR REGISTRAR EL DESTINO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+
                     }
                 
                     }
                     catch(Exception ex)
                     {
-                        JOptionPane.showMessageDialog(null, ex);
+                       JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
                     }
                 }  
             }
             else
             {
-                JOptionPane.showMessageDialog(this, "Ingrese un Nombre válido");
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN NOMBRE VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
             }
         }
         else
         {
-            JOptionPane.showConfirmDialog(this, "Debe Ingresar todos los Datos");
+           JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE INGRESAR TODOS LOS DATOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
         } 
                 
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -308,7 +323,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
                              
                 if(cmbEstadoDestino.getSelectedIndex() == 0)
                 {
-                    JOptionPane.showMessageDialog(this, "Seleccione un Estado válido");
+                    JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN ESTADO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
                 }
                 else 
                 {
@@ -319,31 +334,32 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
                 
                     if(destinos.ActualizarDestino())
                     {
-                        JOptionPane.showMessageDialog(this, "Se Modificó el Destino correctamente");
+                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DESTINO ACTUALIZADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
                         LimpiarTabla();
                         LlenarTabla();
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(this, "Error al intentar Modificar el Destino");
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL INTENTAR ACTUALIZAR EL DESTINO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+
                     }
                 
                     }
                     catch(Exception ex)
                     {
-                        JOptionPane.showMessageDialog(null, ex);
+                        JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
                     }
                     
                 }
             }
             else
             {
-                JOptionPane.showMessageDialog(this, "Ingrese un Nombre válido");
+                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN NOMBRE VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
             }
         }
         else
         {
-            JOptionPane.showConfirmDialog(this, "Debe Ingresar todos los Datos");
+           JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE INGRESAR TODOS LOS DATOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
         }
         
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -372,7 +388,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
         }
         catch(Exception ex)
         {
-            System.out.print(ex);
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
         }
         
     }
@@ -404,7 +420,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
         }
         catch(Exception ex)
         {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
         }
         
     }

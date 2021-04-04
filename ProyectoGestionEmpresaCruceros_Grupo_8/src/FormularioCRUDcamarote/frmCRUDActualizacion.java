@@ -11,6 +11,7 @@ import Clases.dbConnection;
 
 import static Clases.dbConnection.dbConexion;
 import java.awt.Color;
+import java.awt.Font;
 import java.beans.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,10 +19,13 @@ import java.sql.SQLException;
 import java.sql.ResultSetMetaData;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class frmCRUDActualizacion extends javax.swing.JFrame {
 
@@ -36,7 +40,12 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
     ResultSetMetaData rsmd;
     DefaultTableModel model;
 
+
     private int retornarCodigoCamarote;
+    
+    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
+    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
+    Icon Icono = new ImageIcon(getClass().getResource("/Resources/Check.png"));
 
     public frmCRUDActualizacion() {
         initComponents();
@@ -82,18 +91,13 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         });
 
         panActualizar.setBackground(new java.awt.Color(0, 79, 129));
-        panActualizar.setLayout(null);
 
         lblPrecio.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         lblPrecio.setForeground(new java.awt.Color(255, 255, 255));
         lblPrecio.setText("Precio");
-        panActualizar.add(lblPrecio);
-        lblPrecio.setBounds(880, 470, 57, 26);
 
         txtPrecioCamarote.setEditable(false);
         txtPrecioCamarote.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        panActualizar.add(txtPrecioCamarote);
-        txtPrecioCamarote.setBounds(950, 470, 89, 29);
 
         btnActualizarCamarote.setBackground(new java.awt.Color(255, 204, 51));
         btnActualizarCamarote.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -104,14 +108,10 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 btnActualizarCamaroteActionPerformed(evt);
             }
         });
-        panActualizar.add(btnActualizarCamarote);
-        btnActualizarCamarote.setBounds(1120, 910, 195, 63);
 
         lblNivel.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         lblNivel.setForeground(new java.awt.Color(255, 255, 255));
         lblNivel.setText("Nivel");
-        panActualizar.add(lblNivel);
-        lblNivel.setBounds(890, 350, 48, 26);
 
         txtIDCamarote.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         txtIDCamarote.addActionListener(new java.awt.event.ActionListener() {
@@ -130,51 +130,35 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 txtIDCamaroteKeyTyped(evt);
             }
         });
-        panActualizar.add(txtIDCamarote);
-        txtIDCamarote.setBounds(950, 290, 80, 26);
 
         lblCodigo.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         lblCodigo.setForeground(new java.awt.Color(255, 255, 255));
         lblCodigo.setText("Código de Camarote");
-        panActualizar.add(lblCodigo);
-        lblCodigo.setBounds(750, 290, 189, 26);
 
         lblCRUD.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
         lblCRUD.setForeground(new java.awt.Color(255, 204, 51));
         lblCRUD.setText("CRUD CAMAROTES");
-        panActualizar.add(lblCRUD);
-        lblCRUD.setBounds(730, 50, 390, 68);
 
         lblNombreBuque.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         lblNombreBuque.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreBuque.setText("Nombre de Buque");
-        panActualizar.add(lblNombreBuque);
-        lblNombreBuque.setBounds(740, 230, 166, 26);
 
         lblTipo.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         lblTipo.setForeground(new java.awt.Color(255, 255, 255));
         lblTipo.setText("Tipo de Camarote");
-        panActualizar.add(lblTipo);
-        lblTipo.setBounds(770, 410, 164, 26);
 
         spNiveel.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         spNiveel.setModel(new javax.swing.SpinnerNumberModel(1, 1, 4, 1));
         spNiveel.setEnabled(false);
         spNiveel.setVerifyInputWhenFocusTarget(false);
-        panActualizar.add(spNiveel);
-        spNiveel.setBounds(950, 350, 62, 26);
 
         lblCapacidad.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         lblCapacidad.setForeground(new java.awt.Color(255, 255, 255));
         lblCapacidad.setText("Capacidad Máxima de Personas");
-        panActualizar.add(lblCapacidad);
-        lblCapacidad.setBounds(640, 530, 297, 26);
 
         lblBuque.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         lblBuque.setForeground(new java.awt.Color(255, 255, 255));
         lblBuque.setText("Código de Buque");
-        panActualizar.add(lblBuque);
-        lblBuque.setBounds(750, 170, 156, 26);
 
         btnLimpiar.setBackground(new java.awt.Color(255, 204, 51));
         btnLimpiar.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -185,14 +169,10 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        panActualizar.add(btnLimpiar);
-        btnLimpiar.setBounds(660, 910, 195, 60);
 
         lblEstado.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         lblEstado.setForeground(new java.awt.Color(255, 255, 255));
         lblEstado.setText("Estado ");
-        panActualizar.add(lblEstado);
-        lblEstado.setBounds(870, 580, 69, 26);
 
         cmbEstado.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Desocupado", "Ocupado" }));
@@ -202,22 +182,19 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 cmbEstadoActionPerformed(evt);
             }
         });
-        panActualizar.add(cmbEstado);
-        cmbEstado.setBounds(950, 580, 290, 30);
 
         spCapacidad.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         spCapacidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, 6, 1));
         spCapacidad.setVerifyInputWhenFocusTarget(false);
-        panActualizar.add(spCapacidad);
-        spCapacidad.setBounds(950, 530, 62, 26);
 
-        tablaDatos.setFont(new java.awt.Font("Doppio One", 0, 14)); // NOI18N
+        tablaDatos.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
+        tablaDatos.setForeground(new java.awt.Color(0, 0, 0));
         tablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Códiigo Camarote", "Nivel", "Tipo de Camarote", "Capacidad Máxima de Personas", "Precio", "Estado"
+                "Código Camarote", "Nivel", "Tipo de Camarote", "Capacidad Máxima de Personas", "Precio", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -235,9 +212,6 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaDatos);
 
-        panActualizar.add(jScrollPane1);
-        jScrollPane1.setBounds(300, 660, 1330, 190);
-
         btnBuscar.setBackground(new java.awt.Color(255, 204, 51));
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/lupa (2).png"))); // NOI18N
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -245,18 +219,12 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        panActualizar.add(btnBuscar);
-        btnBuscar.setBounds(1040, 280, 40, 40);
 
         txtTipoCamarote.setEditable(false);
         txtTipoCamarote.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        panActualizar.add(txtTipoCamarote);
-        txtTipoCamarote.setBounds(950, 410, 211, 26);
 
         txtNombreBuque.setEditable(false);
         txtNombreBuque.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        panActualizar.add(txtNombreBuque);
-        txtNombreBuque.setBounds(920, 230, 211, 26);
 
         btnRegreesar.setBackground(new java.awt.Color(255, 204, 51));
         btnRegreesar.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -267,8 +235,6 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 btnRegreesarActionPerformed(evt);
             }
         });
-        panActualizar.add(btnRegreesar);
-        btnRegreesar.setBounds(0, 1030, 195, 50);
 
         cmbCodigoBuque.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         cmbCodigoBuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Opción" }));
@@ -283,34 +249,137 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 cmbCodigoBuqueActionPerformed(evt);
             }
         });
-        panActualizar.add(cmbCodigoBuque);
-        cmbCodigoBuque.setBounds(920, 170, 230, 31);
+
+        javax.swing.GroupLayout panActualizarLayout = new javax.swing.GroupLayout(panActualizar);
+        panActualizar.setLayout(panActualizarLayout);
+        panActualizarLayout.setHorizontalGroup(
+            panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panActualizarLayout.createSequentialGroup()
+                .addGap(598, 598, 598)
+                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(269, 269, 269)
+                .addComponent(btnActualizarCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panActualizarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panActualizarLayout.createSequentialGroup()
+                        .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCapacidad)
+                            .addComponent(lblBuque)
+                            .addComponent(lblNombreBuque)
+                            .addComponent(lblCodigo)
+                            .addComponent(lblNivel)
+                            .addComponent(lblTipo)
+                            .addComponent(lblPrecio))
+                        .addGap(26, 26, 26))
+                    .addGroup(panActualizarLayout.createSequentialGroup()
+                        .addComponent(lblEstado)
+                        .addGap(254, 254, 254)))
+                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panActualizarLayout.createSequentialGroup()
+                        .addComponent(txtIDCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbCodigoBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spNiveel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTipoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrecioCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(637, 637, 637))
+            .addGroup(panActualizarLayout.createSequentialGroup()
+                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panActualizarLayout.createSequentialGroup()
+                        .addGap(730, 730, 730)
+                        .addComponent(lblCRUD, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegreesar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panActualizarLayout.createSequentialGroup()
+                        .addGap(233, 233, 233)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1437, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(250, Short.MAX_VALUE))
+        );
+        panActualizarLayout.setVerticalGroup(
+            panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panActualizarLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panActualizarLayout.createSequentialGroup()
+                        .addComponent(lblCRUD, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblBuque)
+                            .addComponent(cmbCodigoBuque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNombreBuque)
+                            .addComponent(txtNombreBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCodigo)
+                            .addComponent(txtIDCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnBuscar))
+                .addGap(26, 26, 26)
+                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spNiveel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNivel))
+                .addGap(33, 33, 33)
+                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTipoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTipo))
+                .addGap(30, 30, 30)
+                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPrecioCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPrecio))
+                .addGap(31, 31, 31)
+                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCapacidad)
+                    .addComponent(spCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEstado)
+                    .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnActualizarCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addComponent(btnRegreesar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 1920, Short.MAX_VALUE)
+            .addComponent(panActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addComponent(panActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        tablaDatos.getTableHeader().setReorderingAllowed(false);
+        tablaDatos.getTableHeader().setForeground(Color.BLACK);
+        tablaDatos.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
+        
         cmbEstado.setEnabled(false);
         spCapacidad.setEnabled(false);
         btnActualizarCamarote.setEnabled(false);
         ((JSpinner.DefaultEditor) spCapacidad.getEditor()).getTextField().setEditable(false);
         txtIDCamarote.setEnabled(false);
+        btnBuscar.setEnabled(false);
     }//GEN-LAST:event_formWindowOpened
 
     private void limpiarCampos() {
-        txtIDCamarote.setText(null);
         txtNombreBuque.setText(null);
+        txtIDCamarote.setText(null);
         spNiveel.setValue(1);
         txtTipoCamarote.setText(null);
         spCapacidad.setValue(1);
@@ -337,7 +406,9 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         spCapacidad.setValue(1);
         txtPrecioCamarote.setText(null);
         cmbEstado.setSelectedIndex(0);
-        //model.setRowCount(0);
+        cmbEstado.setEnabled(false);
+        spCapacidad.setEnabled(false);
+        btnBuscar.setEnabled(false);
     }
 
     private void buscarCamarote() {
@@ -365,7 +436,7 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 btnActualizarCamarote.setEnabled(true);
 
             } else {
-                JOptionPane.showMessageDialog(null, "Registro No encontrado");
+                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> REGISTRO DE CAMAROTE NO ENCONTRADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
                 cmbEstado.setEnabled(false);
                 spCapacidad.setEnabled(false);
                 txtIDCamarote.setText(null);
@@ -373,7 +444,7 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
 
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, "Error al Buscar " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
         }
     }
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -390,7 +461,6 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
 
     private void btnActualizarCamaroteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarCamaroteActionPerformed
         try {
-
             ps = dbConexion().prepareStatement("UPDATE camarotes SET capacidadMaxima=?, estadoCamarote=?  WHERE codigoCamarote = ?");
             ps.setString(1, String.valueOf(spCapacidad.getValue()));
             ps.setString(2, String.valueOf(cmbEstado.getSelectedItem()));
@@ -398,19 +468,16 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
 
             int llenado = ps.executeUpdate();
 
-            if (llenado > 0) {
-                  Icon icono = new ImageIcon(getClass().getResource("/Resources/Check.png"));
-                  JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> Actualizado Correctamente</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+            if (llenado > 0) { 
+                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CAMAROTE ACTUALIZADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
                 cargarDatos();
                 limpiarCambio();
-            } else {
-                Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
-                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> Insertar código del Camarote</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
- 
+            } else {     
+                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> INSERTAR CODIGO DEL CAMAROTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al Actualizar los datos" + ex);
+            JOptionPane.showMessageDialog(null, "Error al Actualizar los datos " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
         }
     }//GEN-LAST:event_btnActualizarCamaroteActionPerformed
 
@@ -420,9 +487,9 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
 
     private void tablaDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDatosMouseClicked
         int llenar = this.tablaDatos.getSelectedRow();
-
         this.txtIDCamarote.setText(String.valueOf(tablaDatos.getValueAt(llenar, 0)));
         limpiar();
+        btnBuscar.setEnabled(true);
         buscarCamarote();
 
     }//GEN-LAST:event_tablaDatosMouseClicked
@@ -431,9 +498,9 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
 
         try {
             limpiarCambio();
-            if (cmbCodigoBuque.getSelectedIndex() != 0) {
-
+            if (cmbCodigoBuque.getSelectedIndex() != 0) {               
                 cargarDatos();
+                
                 ps = dbConexion().prepareStatement("SELECT nombreBuque FROM buques WHERE codigoBuque = '" + this.cmbCodigoBuque.getSelectedItem() + "'");
                 ResultSet result = ps.executeQuery();
                 result.next();
@@ -446,10 +513,11 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 btnActualizarCamarote.setEnabled(false);
                 txtNombreBuque.setText(null);
                 txtIDCamarote.setEnabled(false);
+                btnBuscar.setEnabled(false);
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
         }
     }//GEN-LAST:event_cmbCodigoBuqueActionPerformed
 
@@ -471,19 +539,19 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
             if (validar.isEntero(txtIDCamarote.getText())) {
                 txtIDCamarote.setForeground(Color.black);
                 btnActualizarCamarote.setEnabled(true);
+                btnBuscar.setEnabled(true);
 
             } else {
                 txtIDCamarote.setText("");
-
+                btnBuscar.setEnabled(false);
                 btnActualizarCamarote.setEnabled(false);
             }
 
         } else {
             txtIDCamarote.setForeground(Color.black);
             btnActualizarCamarote.setEnabled(false);
+            btnBuscar.setEnabled(false);
         }
-
-
     }//GEN-LAST:event_txtIDCamaroteKeyReleased
 
     private void cmbCodigoBuqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbCodigoBuqueMouseClicked
@@ -509,7 +577,7 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 model.addRow(fil);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla" + ex);
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
         }
     }
 

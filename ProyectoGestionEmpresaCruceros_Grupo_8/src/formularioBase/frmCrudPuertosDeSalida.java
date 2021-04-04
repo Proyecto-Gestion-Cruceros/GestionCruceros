@@ -9,12 +9,16 @@ import Clases.ClsValidaciones;
 import Clases.PuertosSalida.clsPuertosSalidas;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,6 +43,10 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
 
     ClsValidaciones validar = new ClsValidaciones();
     clsPuertosSalidas puerto = new clsPuertosSalidas();
+    
+    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
+    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
+    Icon Icono = new ImageIcon(getClass().getResource("/Resources/Check.png"));
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -113,7 +121,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
             }
         });
 
-        jPuertosSalida.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        jPuertosSalida.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
         jPuertosSalida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -231,23 +239,24 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
                         puerto.setCodigoPuerto(Integer.parseInt(txtCodigoPuertoSalida.getText()));
                         puerto.setNombrePuerto(txtNombrePuertoSalida.getText());
                         if (puerto.ActualizarPuertoSalida()) {
-                            JOptionPane.showMessageDialog(null, "Puerto Actualizado Correctamente");
+                            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> PUERTO REGISTRADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
                             Limpiar();
                             MostrarPuertosSalida();
                         } else {
-                            JOptionPane.showMessageDialog(null, "Error al Actualizar");
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL ACTUALIZAR </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+
                         }
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, ex);
+                        JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Ingrese correctamente El nombre del puerto");
+                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NOMBRE DEL PUERTO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "No puede dejar en blanco el nombre del puerto");
+                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> NO PUEDE DEJAR EN BLANCO EL NOMBRE DEL PUERTO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un puerto a modificar");
+            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR UN PUERTO A MODIFICAR </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
         }
 
     }//GEN-LAST:event_btnActualizarPuertoSalidaActionPerformed
@@ -259,7 +268,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
             Limpiar();
             MostrarPuertosSalida();
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar el puerto a eliminar");
+            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR EL PUERTO A ELIMINAR </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -269,25 +278,29 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
                 puerto.setNombrePuerto(txtNombrePuertoSalida.getText());
                 try {
                     if (puerto.AgregarPuertoSalida()) {
-                        JOptionPane.showMessageDialog(null, "Puerto Ingresado Correctamente");
+                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> PUERTO REGISTRADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
                         Limpiar();
                         MostrarPuertosSalida();
                     } else {
-                        JOptionPane.showMessageDialog(null, "Error al ingresar");
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL REGISTRAR </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
                     }
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex);
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null, "Ingrese correctamente El nombre del puerto");
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NOMBRE DEL PUERTO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
             }
         else {
-            JOptionPane.showMessageDialog(null, "Ingrese los datos necesarios");
+            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> INGRESE LOS DATOS NECESARIOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+
         }
     }//GEN-LAST:event_btnAgregarPuertoSalidaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        jPuertosSalida.getTableHeader().setReorderingAllowed(false);
+        jPuertosSalida.getTableHeader().setForeground(Color.BLACK);
+        jPuertosSalida.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
         MostrarPuertosSalida();
         CodigoNuevoPuerto();
     }//GEN-LAST:event_formWindowOpened
@@ -299,9 +312,9 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
     }//GEN-LAST:event_jPuertosSalidaMouseClicked
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-        int result = JOptionPane.showConfirmDialog(null, "Esta seguro de volver al Menu Principal?", "Salir del Módulo",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE);
+       int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.QUESTION_MESSAGE, icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             frmIGP igp = new frmIGP();
@@ -314,7 +327,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
             temp = (DefaultTableModel) jPuertosSalida.getModel();
             temp.setRowCount(0);
         } catch (Exception e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e, "",JOptionPane.INFORMATION_MESSAGE, icon); 
         }
     }
 
@@ -340,7 +353,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e, "",JOptionPane.INFORMATION_MESSAGE, icon); 
         }
 
     }
@@ -359,7 +372,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
 
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e, "",JOptionPane.INFORMATION_MESSAGE, icon); 
         }
 
     }
