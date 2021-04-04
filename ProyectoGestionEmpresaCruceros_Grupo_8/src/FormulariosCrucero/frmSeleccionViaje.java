@@ -291,7 +291,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
         model.setRowCount(0);
 
         try {
-            ps = conexion.dbConexion().prepareStatement("SELECT A.idViaje, B.nombreBuque, C.nombrePuerto, D.nombreDestino, A.fechaSalida, A.fechaRegreso FROM [dbo].[viajesDisponibles] A INNER JOIN [dbo].[buques] B  ON A.codigoBuque = B.codigoBuque INNER JOIN [dbo].[puertosSalida] C ON A.codigoPuertoSalida = C.codigoPuerto INNER JOIN [dbo].[destinosTuristicos] D ON A.codigoDestino = D.codigoDestino");
+            ps = conexion.dbConexion().prepareStatement("SELECT A.idViaje, B.nombreBuque, C.nombrePuerto, D.nombreDestino, A.fechaSalida, A.fechaRegreso FROM [dbo].[viajesDisponibles] A INNER JOIN [dbo].[buques] B  ON A.codigoBuque = B.codigoBuque INNER JOIN [dbo].[puertosSalida] C ON A.codigoPuertoSalida = C.codigoPuerto INNER JOIN [dbo].[destinosTuristicos] D ON A.codigoDestino = D.codigoDestino WHERE A.estado = 'Activo'");
 
             ResultSet result = ps.executeQuery();
             rsmd = result.getMetaData();

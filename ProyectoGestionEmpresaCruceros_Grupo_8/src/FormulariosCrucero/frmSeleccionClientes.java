@@ -9,6 +9,7 @@ import Clases.ClsValidaciones;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
 import com.sun.jdi.Value;
+import formularioBase.frmCrudClientes;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -415,7 +416,9 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarClienteActionPerformed
 
     private void btnRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarClienteActionPerformed
-        // TODO add your handling code here:
+       dispose();
+       variables.resetVariables();
+      new frmCrudClientes().setVisible(true);
     }//GEN-LAST:event_btnRegistrarClienteActionPerformed
 
     private void txtBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyTyped
@@ -504,7 +507,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         variables.model.setRowCount(0);
 
         try {
-            ps = conexion.dbConexion().prepareStatement("select identidadCliente, CONCAT(nombres, ' ', apellidos), telefono, correoElectronico from clientes");
+            ps = conexion.dbConexion().prepareStatement("select identidadCliente, CONCAT(nombres, ' ', apellidos), telefono, correoElectronico from clientes WHERE estado = 'Activo'");
 
             ResultSet result = ps.executeQuery();
             rsmd = result.getMetaData();

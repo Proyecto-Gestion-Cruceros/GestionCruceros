@@ -124,7 +124,7 @@ public class ClsPagos {
                 {
                     ps2 = dbConnection.dbConexion().prepareStatement("INSERT INTO detalleClientes VALUES (?, ?)");
                     ps2.setInt(1, cFactura);
-                    ps2.setString(2, variablesViaje.getModel().getValueAt(i, 0).toString());
+                    ps2.setString(2, variablesViaje.getModel1().getValueAt(i, 0).toString());
                     if (ps2.executeUpdate() == 1) 
                     {
                         isComplete = true;
