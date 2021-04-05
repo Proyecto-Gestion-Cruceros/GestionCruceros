@@ -249,7 +249,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
-                .addGap(620, 620, 620)
+                .addGap(599, 599, 599)
                 .addComponent(btnMenu)
                 .addGap(60, 60, 60))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -541,7 +541,6 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Error al verificar buque " + ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
-
             return false;
         }
     }
