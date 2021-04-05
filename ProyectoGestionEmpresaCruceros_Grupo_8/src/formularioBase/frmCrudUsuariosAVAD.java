@@ -57,7 +57,6 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
         txtTelefonoUsuario = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtCorreoElectronicoUsuario = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtCargoUsuario = new javax.swing.JTextField();
         btnActualizarUsuario = new javax.swing.JButton();
@@ -113,10 +112,6 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
         jLabel6.setText("Correo electronico");
 
         txtCorreoElectronicoUsuario.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-
-        jLabel8.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel8.setText("CRUD ");
 
         jLabel9.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -217,6 +212,10 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
             }
         });
 
+        txtContraseñaUsuario.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+
+        txtConfirmarContraseñaUsuario.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+
         btnLimpiar.setBackground(new java.awt.Color(255, 204, 51));
         btnLimpiar.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
         btnLimpiar.setForeground(new java.awt.Color(0, 0, 0));
@@ -272,7 +271,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                                     .addComponent(txtCargoUsuario)
                                     .addComponent(txtContraseñaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                                     .addComponent(txtConfirmarContraseñaUsuario))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(121, 121, 121))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -280,13 +279,11 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(622, 622, 622)
                                 .addComponent(btnActualizarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1022, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(466, 466, 466)))
+                                .addGap(543, 543, 543)))
                         .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,10 +299,8 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                         .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(70, 70, 70))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(lblCargo))
-                        .addGap(44, 44, 44)))
+                        .addComponent(lblCargo)
+                        .addGap(43, 43, 43)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -500,25 +495,52 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarUsuario1ActionPerformed
 
     private void btnEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioActionPerformed
+        String User;
+
+        User = Usuario.getUsuario().toUpperCase();
+
         if (!txtIdentidadUsuario.getText().isBlank()) {
             if (validar.isEntero(txtIdentidadUsuario.getText()) && txtIdentidadUsuario.getText().length() == 13) {
                 try {
-                    Persona.setIdentidad(txtIdentidadUsuario.getText());
-                    if (Usuario.EliminarPersona()) {
+                    if (User.equals("AGENTE DE VENTAS")) {
+                        Persona.setIdentidad(txtIdentidadUsuario.getText());
+                        if (Usuario.EliminarPersona()) {
 
-                        int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Está Seguro de Eliminar El Usuario?</b></html>", "Salir del Módulo",
-                                JOptionPane.YES_NO_OPTION,
-                                JOptionPane.QUESTION_MESSAGE, icono);
-                        if (result == JOptionPane.YES_OPTION) {
-                            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> USUARIO ELIMINADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
-                            MostrarUsuarios();
+                            int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Está Seguro de Eliminar El Usuario?</b></html>", "Salir del Módulo",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.QUESTION_MESSAGE, icono);
+                            if (result == JOptionPane.YES_OPTION) {
+                                JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> USUARIO ELIMINADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                MostrarUsuarios();
+                            }
+
+                        } else {
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL ELIMINAR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
                         }
+                    } else if (User.equals("ADMINISTRADOR")) {
+                        if (VerificarCantidadAdmins() > 1) {
+                            Persona.setIdentidad(txtIdentidadUsuario.getText());
+                            if (Usuario.EliminarPersona()) {
 
-                    } else {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL ELIMINAR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Está Seguro de Eliminar El Usuario?</b></html>", "Salir del Módulo",
+                                        JOptionPane.YES_NO_OPTION,
+                                        JOptionPane.QUESTION_MESSAGE, icono);
+                                if (result == JOptionPane.YES_OPTION) {
+                                    JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> USUARIO ELIMINADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                    MostrarUsuarios();
+                                }
+
+                            } else {
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL ELIMINAR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                            }
+
+                        } else {
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> NO SE PUEDE ELIMINAR EL ULTIMO ADMINISTRADOR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                        }
                     }
+
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex);
+                    JOptionPane.showMessageDialog(null, ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NUMERO DE IDENTIDAD </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -540,7 +562,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
             String obtenerContrasenia;
             int UltimoCodigo;
             ps = dbConnection.dbConexion().prepareStatement("  SELECT [contraseniaUsuario] FROM [agenciaCruceros].[dbo].[usuarios] where [identidadUsuario] = ?");
-            ps.setString(1,  txtIdentidadUsuario.getText());
+            ps.setString(1, txtIdentidadUsuario.getText());
             rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -588,7 +610,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
 
     }//GEN-LAST:event_chkMostrarContra1ActionPerformed
 
-    void limpiaTabla() {
+    private void limpiaTabla() {
         try {
             temp = (DefaultTableModel) JUsuarios.getModel();
             temp.setRowCount(0);
@@ -597,7 +619,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
         }
     }
 
-    public void MostrarUsuarios() {
+    private void MostrarUsuarios() {
         try {
             limpiaTabla();
             int Cargo;
@@ -631,6 +653,26 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
         }
 
+    }
+
+    private int VerificarCantidadAdmins() {
+        try {
+            String obtenerCantAdmins;
+            int CantidadAdmins;
+            ps = dbConnection.dbConexion().prepareStatement("  SELECT count(*) as cantidad FROM [agenciaCruceros].[dbo].[usuarios] where [cargo] = 1 and estado = 'Activo'");
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                obtenerCantAdmins = rs.getString("cantidad").trim();
+                CantidadAdmins = Integer.parseInt(obtenerCantAdmins);
+                return CantidadAdmins;
+
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
+            return 0;
+        }
+        return 0;
     }
 
     public static void main(String args[]) {
@@ -682,7 +724,6 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

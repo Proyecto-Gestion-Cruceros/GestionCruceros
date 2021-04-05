@@ -47,27 +47,6 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="682" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="307" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="txtNombrePuertoSalida" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
-                              <Component id="txtCodigoPuertoSalida" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace pref="695" max="32767" attributes="0"/>
-              </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -82,7 +61,7 @@
                   </Group>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="341" max="32767" attributes="0"/>
                   <Component id="btnAgregarPuertoSalida" min="-2" pref="195" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
                   <Component id="btnActualizarPuertoSalida" min="-2" pref="195" max="-2" attributes="0"/>
@@ -91,6 +70,27 @@
                   <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
                   <Component id="btnLimpiar" min="-2" pref="195" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="300" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="307" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="txtNombrePuertoSalida" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
+                              <Component id="txtCodigoPuertoSalida" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="746" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" pref="430" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -141,7 +141,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="cc" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="CRUD PUERTOS DE SALIDA"/>
+            <Property name="text" type="java.lang.String" value="PUERTOS DE SALIDA"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">

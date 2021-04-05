@@ -77,7 +77,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel2.setText("CRUD PUERTOS DE SALIDA");
+        jLabel2.setText("PUERTOS DE SALIDA");
 
         jLabel3.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -174,21 +174,6 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(682, 682, 682)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(307, 307, 307)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtNombrePuertoSalida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodigoPuertoSalida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(695, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +184,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
                         .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 341, Short.MAX_VALUE)
                 .addComponent(btnAgregarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(158, 158, 158)
                 .addComponent(btnActualizarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,6 +193,21 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
                 .addGap(172, 172, 172)
                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(300, 300, 300))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(307, 307, 307)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtNombrePuertoSalida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodigoPuertoSalida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(746, 746, 746)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,7 +359,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_txtNombrePuertoSalidaKeyTyped
 
-    void limpiaTabla() {
+    private void limpiaTabla() {
         try {
             temp = (DefaultTableModel) jPuertosSalida.getModel();
             temp.setRowCount(0);
@@ -368,7 +368,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
         }
     }
 
-    public void MostrarPuertosSalida() {
+    private void MostrarPuertosSalida() {
         try {
             limpiaTabla();
             ps = dbConnection.dbConexion().prepareStatement("SELECT [codigoPuerto], [nombrePuerto], [estado] FROM [agenciaCruceros].[dbo].[puertosSalida]");
@@ -396,7 +396,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
 
     }
 
-    public void CodigoNuevoPuerto() {
+    private void CodigoNuevoPuerto() {
         try {
             String obtenerUltimoCodigo;
             int UltimoCodigo;
@@ -415,7 +415,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
 
     }
 
-    public void Limpiar() {
+    private void Limpiar() {
         txtCodigoPuertoSalida.setText(null);
         txtNombrePuertoSalida.setText(null);
         CodigoNuevoPuerto();

@@ -51,21 +51,24 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="296" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
                   <Component id="btnAdministrador" min="-2" pref="430" max="-2" attributes="0"/>
-                  <EmptySpace pref="469" max="32767" attributes="0"/>
+                  <EmptySpace pref="552" max="32767" attributes="0"/>
                   <Component id="btnAgenteVenta" min="-2" pref="429" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="296" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="249" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnMenuPrincipal" min="-2" pref="75" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="763" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" pref="345" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btnMenuPrincipal" min="-2" pref="75" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabel2" min="-2" pref="345" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="786" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
