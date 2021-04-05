@@ -96,8 +96,12 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         lblPrecio.setForeground(new java.awt.Color(255, 255, 255));
         lblPrecio.setText("Precio");
 
-        txtPrecioCamarote.setEditable(false);
         txtPrecioCamarote.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        txtPrecioCamarote.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPrecioCamaroteKeyReleased(evt);
+            }
+        });
 
         btnActualizarCamarote.setBackground(new java.awt.Color(255, 204, 51));
         btnActualizarCamarote.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -283,11 +287,11 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cmbCodigoBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombreBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spNiveel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTipoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrecioCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(637, 637, 637))
             .addGroup(panActualizarLayout.createSequentialGroup()
                 .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,50 +308,53 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
             panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panActualizarLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(lblCRUD, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBuque)
+                    .addComponent(cmbCodigoBuque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panActualizarLayout.createSequentialGroup()
-                        .addComponent(lblCRUD, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblBuque)
-                            .addComponent(cmbCodigoBuque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNombreBuque)
-                            .addComponent(txtNombreBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCodigo)
-                            .addComponent(txtIDCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnBuscar))
+                        .addComponent(lblNombreBuque)
+                        .addGap(34, 34, 34))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panActualizarLayout.createSequentialGroup()
+                        .addComponent(txtNombreBuque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)))
+                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCodigo)
+                        .addComponent(txtIDCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(26, 26, 26)
                 .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(spNiveel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNivel))
                 .addGap(33, 33, 33)
                 .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTipoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTipoCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTipo))
                 .addGap(30, 30, 30)
                 .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPrecioCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPrecio))
                 .addGap(31, 31, 31)
-                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCapacidad)
-                    .addComponent(spCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblCapacidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spCapacidad))
                 .addGap(36, 36, 36)
                 .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEstado)
-                    .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                    .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(panActualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnActualizarCamarote, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addComponent(btnRegreesar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addComponent(btnRegreesar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -371,6 +378,7 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         
         cmbEstado.setEnabled(false);
         spCapacidad.setEnabled(false);
+        txtPrecioCamarote.setEnabled(false);
         btnActualizarCamarote.setEnabled(false);
         ((JSpinner.DefaultEditor) spCapacidad.getEditor()).getTextField().setEditable(false);
         txtIDCamarote.setEnabled(false);
@@ -380,6 +388,7 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
     private void limpiarCampos() {
         txtNombreBuque.setText(null);
         txtIDCamarote.setText(null);
+        txtPrecioCamarote.setEnabled(false);
         spNiveel.setValue(1);
         txtTipoCamarote.setText(null);
         spCapacidad.setValue(1);
@@ -396,6 +405,7 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         txtTipoCamarote.setText(null);
         spCapacidad.setValue(1);
         txtPrecioCamarote.setText(null);
+        txtPrecioCamarote.setEnabled(false);
         cmbEstado.setSelectedIndex(0);
     }
 
@@ -409,6 +419,7 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         cmbEstado.setEnabled(false);
         spCapacidad.setEnabled(false);
         btnBuscar.setEnabled(false);
+        txtPrecioCamarote.setEnabled(false);
     }
 
     private void buscarCamarote() {
@@ -434,13 +445,16 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 cmbEstado.setEnabled(true);
                 spCapacidad.setEnabled(true);
                 btnActualizarCamarote.setEnabled(true);
-
+                txtPrecioCamarote.setEnabled(true);
+                cargarDatosSeleccionados(Integer.parseInt(txtIDCamarote.getText()));
+                
             } else {
                 JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> REGISTRO DE CAMAROTE NO ENCONTRADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
                 cmbEstado.setEnabled(false);
                 spCapacidad.setEnabled(false);
                 txtIDCamarote.setText(null);
                 btnActualizarCamarote.setEnabled(false);
+                txtPrecioCamarote.setEnabled(false);
 
             }
         } catch (SQLException ex) {
@@ -449,6 +463,7 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
     }
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscarCamarote();
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
@@ -461,10 +476,11 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
 
     private void btnActualizarCamaroteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarCamaroteActionPerformed
         try {
-            ps = dbConexion().prepareStatement("UPDATE camarotes SET capacidadMaxima=?, estadoCamarote=?  WHERE codigoCamarote = ?");
+            ps = dbConexion().prepareStatement("UPDATE camarotes SET capacidadMaxima=?, estadoCamarote=?, precioCamarote = ?  WHERE codigoCamarote = ?");
             ps.setString(1, String.valueOf(spCapacidad.getValue()));
             ps.setString(2, String.valueOf(cmbEstado.getSelectedItem()));
-            ps.setString(3, txtIDCamarote.getText());
+            ps.setString(3, txtPrecioCamarote.getText());
+            ps.setString(4, txtIDCamarote.getText());
 
             int llenado = ps.executeUpdate();
 
@@ -513,6 +529,7 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 btnActualizarCamarote.setEnabled(false);
                 txtNombreBuque.setText(null);
                 txtIDCamarote.setEnabled(false);
+                txtPrecioCamarote.setEnabled(false);
                 btnBuscar.setEnabled(false);
             }
 
@@ -541,16 +558,49 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 btnActualizarCamarote.setEnabled(true);
                 btnBuscar.setEnabled(true);
 
+                txtPrecioCamarote.setEnabled(true);
+                cmbEstado.setEnabled(true);
+                spCapacidad.setEnabled(true);
+                txtTipoCamarote.setEnabled(true);
+
             } else {
                 txtIDCamarote.setText("");
                 btnBuscar.setEnabled(false);
                 btnActualizarCamarote.setEnabled(false);
+                
+                txtPrecioCamarote.setEnabled(false);
+                cmbEstado.setEnabled(false);
+                spCapacidad.setEnabled(false);
+                txtTipoCamarote.setEnabled(false);
+                
+                
+                spNiveel.setValue(1);
+                spCapacidad.setValue(1);
+                txtTipoCamarote.setText(null);
+                txtPrecioCamarote.setText(null);
+                cmbEstado.setSelectedIndex(0);
+                
+                cargarDatos();
+            
             }
 
         } else {
             txtIDCamarote.setForeground(Color.black);
             btnActualizarCamarote.setEnabled(false);
             btnBuscar.setEnabled(false);
+            
+            txtPrecioCamarote.setEnabled(false);
+            cmbEstado.setEnabled(false);
+            spCapacidad.setEnabled(false);
+            txtTipoCamarote.setEnabled(false);
+
+            spNiveel.setValue(1);
+            spCapacidad.setValue(1);
+            txtTipoCamarote.setText(null);
+            txtPrecioCamarote.setText(null);
+            cmbEstado.setSelectedIndex(0);
+            
+            cargarDatos();
         }
     }//GEN-LAST:event_txtIDCamaroteKeyReleased
 
@@ -558,12 +608,53 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cmbCodigoBuqueMouseClicked
 
+    private void txtPrecioCamaroteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioCamaroteKeyReleased
+         if (txtPrecioCamarote.getText() != "") {
+
+            if (validar.isDecimal(txtPrecioCamarote.getText())) {
+                txtPrecioCamarote.setForeground(Color.black);
+                btnActualizarCamarote.setEnabled(true);
+ 
+            } else {
+                txtPrecioCamarote.setForeground(Color.red);
+                btnActualizarCamarote.setEnabled(false);
+            }
+
+        } else {
+            txtPrecioCamarote.setForeground(Color.black);
+            btnActualizarCamarote.setEnabled(false);
+        }
+    }//GEN-LAST:event_txtPrecioCamaroteKeyReleased
+
     private void cargarDatos() {
         model = (DefaultTableModel) tablaDatos.getModel();
         model.setRowCount(0);
 
         try {
             ps = dbConexion().prepareStatement("SELECT codigoCamarote, nivel, tipoCamarote, capacidadMaxima, precioCamarote, estadoCamarote FROM camarotes WHERE codigoBuque = '" + this.cmbCodigoBuque.getSelectedItem() + "'");
+            ResultSet result = ps.executeQuery();
+            rsmd = result.getMetaData();
+
+            int columna = rsmd.getColumnCount();
+
+            while (result.next()) {
+                Object fil[] = new Object[columna];
+                for (int i = 0; i < columna; i++) {
+                    fil[i] = result.getObject(i + 1);
+                }
+                model.addRow(fil);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
+        }
+    }
+    
+     private void cargarDatosSeleccionados(int codigoCamarote) {
+        model = (DefaultTableModel) tablaDatos.getModel();
+        model.setRowCount(0);
+
+        try {
+            ps = dbConexion().prepareStatement("SELECT codigoCamarote, nivel, tipoCamarote, capacidadMaxima, precioCamarote, estadoCamarote FROM camarotes WHERE codigoBuque = '" + this.cmbCodigoBuque.getSelectedItem() + "' AND codigoCamarote = " + codigoCamarote);
             ResultSet result = ps.executeQuery();
             rsmd = result.getMetaData();
 

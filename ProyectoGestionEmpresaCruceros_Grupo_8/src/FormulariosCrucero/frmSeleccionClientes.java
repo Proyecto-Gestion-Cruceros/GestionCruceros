@@ -338,7 +338,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR AL MENOS UN CLIENTE!</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
-            
+
         }
 
     }//GEN-LAST:event_btnSiguienteActionPerformed

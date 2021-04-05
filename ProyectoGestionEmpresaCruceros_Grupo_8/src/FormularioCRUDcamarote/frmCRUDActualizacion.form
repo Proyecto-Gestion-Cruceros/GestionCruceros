@@ -82,11 +82,11 @@
                           <Component id="btnBuscar" min="-2" pref="46" max="-2" attributes="0"/>
                       </Group>
                       <Component id="cmbCodigoBuque" min="-2" pref="230" max="-2" attributes="0"/>
-                      <Component id="txtNombreBuque" min="-2" pref="211" max="-2" attributes="0"/>
                       <Component id="spNiveel" alignment="0" min="-2" pref="62" max="-2" attributes="0"/>
                       <Component id="txtTipoCamarote" alignment="0" min="-2" pref="211" max="-2" attributes="0"/>
                       <Component id="txtPrecioCamarote" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
                       <Component id="spCapacidad" alignment="0" min="-2" pref="62" max="-2" attributes="0"/>
+                      <Component id="txtNombreBuque" alignment="0" min="-2" pref="211" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="637" max="-2" attributes="0"/>
               </Group>
@@ -110,26 +110,29 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="lblCRUD" min="-2" pref="68" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblBuque" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbCodigoBuque" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="25" pref="25" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="lblCRUD" min="-2" pref="68" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblBuque" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmbCodigoBuque" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="25" pref="25" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblNombreBuque" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNombreBuque" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtIDCamarote" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblNombreBuque" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="txtNombreBuque" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                          <Component id="lblCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIDCamarote" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="btnBuscar" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -138,7 +141,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtTipoCamarote" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="txtTipoCamarote" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblTipo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -147,24 +150,25 @@
                       <Component id="lblPrecio" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblCapacidad" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="spCapacidad" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="lblCapacidad" max="32767" attributes="0"/>
+                      <Component id="spCapacidad" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblEstado" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cmbEstado" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="cmbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="47" max="32767" attributes="0"/>
+                  <EmptySpace pref="38" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="238" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnActualizarCamarote" alignment="3" min="-2" pref="63" max="-2" attributes="0"/>
                       <Component id="btnLimpiar" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                  <Component id="btnRegreesar" min="-2" pref="55" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="btnRegreesar" min="-2" pref="54" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -183,11 +187,13 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtPrecioCamarote">
           <Properties>
-            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Doppio One" size="16" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPrecioCamaroteKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnActualizarCamarote">
           <Properties>
