@@ -8,11 +8,10 @@ import javax.swing.JOptionPane;
 public class ClsViajesDisponibles extends dbConnection {
      
    PreparedStatement ps;
-    
-    int idViaje, codBuque, codPuertoSalida, codDestino, codigoBuque, codigoSalida, codigoDestino;
-    String estado, estadoIn, fechaPartida, fechaRegreso, nombreBuque, nombreDestino, nombreSalida;
 
-    
+    int idViaje, codBuque, codPuertoSalida, codDestino, codigoBuque, codigoSalida, codigoDestino, idBuque, buque;
+    String estado, estadoIn, fechaPartida, fechaRegreso, nombreBuque, nombreDestino, nombreSalida, estadoBuque;
+
     //Método
     public int getIdViaje() {
         return idViaje;
@@ -93,7 +92,19 @@ public class ClsViajesDisponibles extends dbConnection {
     public void setNombreSalida(String nombreSalida) {
         this.nombreSalida = nombreSalida;
     }
-    
+
+    public void setEstadoBuque(String estadoBuque) {
+        this.estadoBuque = estadoBuque;
+    }
+
+    public void setIdBuque(int idBuque) {
+        this.idBuque = idBuque;
+    }
+
+    public void setBuque(int buque) {
+        this.buque = buque;
+    }
+
     
     
     public void llenarJCombobox(JComboBox Jcmb, String instruccion, String campo) {
@@ -120,12 +131,12 @@ public class ClsViajesDisponibles extends dbConnection {
 
         }
     }
-    
+
     public boolean RegistrarViajeDisponible() {
-        
+
         int resultado = 0;
-            
-            try {
+
+        try {
             ps = dbConnection.dbConexion().prepareStatement("EXEC [PARegistroViaje] ?,?,?,?,?,?");
             ps.setInt(1, codBuque);
             ps.setInt(2, codPuertoSalida);
@@ -148,12 +159,11 @@ public class ClsViajesDisponibles extends dbConnection {
         }
     }
 
-    
     public boolean ActualizarViajeDisponible() {
-        
+
         int resultado = 0;
-            
-            try {
+
+        try {
             ps = dbConnection.dbConexion().prepareStatement("EXEC PAActualizarViaje ?,?,?,?,?,?");
             ps.setInt(1, idViaje);
             ps.setInt(2, codBuque);
@@ -174,10 +184,10 @@ public class ClsViajesDisponibles extends dbConnection {
             return false;
         }
     }
-    
+
     public boolean EliminarViaje() {
         int resultado = 0;
-        
+
         try {
             ps = dbConnection.dbConexion().prepareStatement("UPDATE [dbo].[viajesDisponibles] SET [estado] = ? WHERE [idViaje] = ?");
             ps.setString(1, estado);
@@ -197,29 +207,84 @@ public class ClsViajesDisponibles extends dbConnection {
             return false;
         }
     }
-    
-    public boolean verificarEstadoDisp() {
-    
-        if(estadoIn.equals("Disponible")){
+
+    public boolean verificarEstadoAct() {
+
+        if (estadoIn.equals("Activo")) {
             return true;
-            
-        }else{
+
+        } else {
             return false;
-            
+
         }
-        
+
+    }
+
+    public boolean verificarEstadoInac() {
+
+        if (estadoIn.equals("Inactivo")) {
+            return true;
+
+        } else {
+            return false;
+
+        }
+
     }
     
-    public boolean verificarEstadoCanc() {
-    
-        if(estadoIn.equals("Cancelado")){
-            return true;
-            
-        }else{
+    public boolean actulizarEstadoBuque() {
+        int resultado = 0;
+
+        try {
+            ps = dbConnection.dbConexion().prepareStatement("UPDATE [dbo].[buques] SET [estado] = ? WHERE [codigoBuque] = ?");
+            ps.setString(1, estadoBuque);
+            ps.setInt(2, idBuque);
+
+            resultado = ps.executeUpdate();
+
+            if (resultado > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+
             return false;
-            
         }
-        
+    }
+    
+    public boolean verificarEstadoBuqueOcu(){
+        if (estadoBuque.equals("Ocupado")) {
+            return false;
+
+        } else {
+            return true;
+
+        }
+    }
+
+    public String obtenerFechaRegresoBuque(){
+        try {
+
+            String fechaRegreso;
+
+            ps = dbConnection.dbConexion().prepareStatement("SELECT vd.fechaRegreso FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque WHERE b.[codigoBuque] = ?");
+            ps.setInt(1, buque);
+            ResultSet result = ps.executeQuery();
+            if (result.next()) {
+                fechaRegreso = result.getString("fechaRegreso");
+            } else {
+                fechaRegreso = null;
+            }
+            return fechaRegreso;
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+
+        }
+        return null;
     }
     
     public String obtenerNombreBuque() {
@@ -243,7 +308,7 @@ public class ClsViajesDisponibles extends dbConnection {
         }
         return null;
     }
-    
+
     public int obtenerIdBuque() {
         try {
 
@@ -265,7 +330,7 @@ public class ClsViajesDisponibles extends dbConnection {
         }
         return 0;
     }
-    
+
     public String obtenerNombreSalida() {
         try {
 
@@ -287,8 +352,8 @@ public class ClsViajesDisponibles extends dbConnection {
         }
         return null;
     }
-    
-        public int obtenerIdSalida() {
+
+    public int obtenerIdSalida() {
         try {
 
             int idSalida;
@@ -309,7 +374,7 @@ public class ClsViajesDisponibles extends dbConnection {
         }
         return 0;
     }
-    
+
     public String obtenerNombreDestino() {
         try {
 
@@ -331,8 +396,8 @@ public class ClsViajesDisponibles extends dbConnection {
         }
         return null;
     }
-    
-        public int obtenerIdDestino() {
+
+    public int obtenerIdDestino() {
         try {
 
             int idDestino;
