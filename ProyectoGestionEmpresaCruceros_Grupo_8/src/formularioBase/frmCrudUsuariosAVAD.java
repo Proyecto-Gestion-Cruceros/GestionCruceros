@@ -74,6 +74,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
         txtContraseñaUsuario = new javax.swing.JPasswordField();
         txtConfirmarContraseñaUsuario = new javax.swing.JPasswordField();
         btnLimpiar = new javax.swing.JButton();
+        chkMostrarContra1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -226,6 +227,15 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
             }
         });
 
+        chkMostrarContra1.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        chkMostrarContra1.setForeground(new java.awt.Color(255, 255, 255));
+        chkMostrarContra1.setText("Mostrar Contraseñas");
+        chkMostrarContra1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkMostrarContra1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -252,16 +262,18 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel3))
                                 .addGap(116, 116, 116)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtApellidosUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCorreoElectronicoUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTelefonoUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtIdentidadUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombresUsuarios, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCargoUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtContraseñaUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                                    .addComponent(txtConfirmarContraseñaUsuario, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(chkMostrarContra1, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtApellidosUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtCorreoElectronicoUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtTelefonoUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtIdentidadUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtNombresUsuarios, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtCargoUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtContraseñaUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                                        .addComponent(txtConfirmarContraseñaUsuario, javax.swing.GroupLayout.Alignment.LEADING)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(121, 121, 121))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -269,7 +281,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(622, 622, 622)
                                 .addComponent(btnActualizarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1022, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel8)
@@ -334,7 +346,9 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
                             .addComponent(txtConfirmarContraseñaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addComponent(chkMostrarContra1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -364,7 +378,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
 
     private void btnActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarUsuarioActionPerformed
         if (!txtIdentidadUsuario.getText().isBlank() || !txtNombresUsuarios.getText().isBlank() || !txtApellidosUsuario.getText().isBlank() || !txtTelefonoUsuario.getText().isBlank()
-                || !txtCorreoElectronicoUsuario.getText().isBlank() || !String.valueOf(txtContraseñaUsuario.getPassword()).isBlank() || !String.valueOf(txtConfirmarContraseñaUsuario.getPassword()).isBlank()) {
+                || !txtCorreoElectronicoUsuario.getText().isBlank() || !String.valueOf(txtContraseñaUsuario.getPassword()).equals("") || !String.valueOf(txtConfirmarContraseñaUsuario.getPassword()).equals("")) {
             if (validar.isEntero(txtIdentidadUsuario.getText()) && txtIdentidadUsuario.getText().length() == 13) {
                 if (validar.isLetras(txtNombresUsuarios.getText()) || validar.isLetras(txtApellidosUsuario.getText())) {
                     if (validar.isEntero(txtTelefonoUsuario.getText()) && txtTelefonoUsuario.getText().length() == 8) {
@@ -401,7 +415,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE LA CONTRASEÑA </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMNETE EL NUMERO DE TELEFONICO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NUMERO DE TELEFONICO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NOMBRE O APELLIDO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -434,7 +448,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
 
     private void btnAgregarUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarUsuario1ActionPerformed
         if (!txtIdentidadUsuario.getText().isBlank() || !txtNombresUsuarios.getText().isBlank() || !txtApellidosUsuario.getText().isBlank() || !txtTelefonoUsuario.getText().isBlank()
-                || !txtCorreoElectronicoUsuario.getText().isBlank() || !String.valueOf(txtContraseñaUsuario.getPassword()).isBlank() || !String.valueOf(txtConfirmarContraseñaUsuario.getPassword()).isBlank()) {
+                || !txtCorreoElectronicoUsuario.getText().isBlank() || !String.valueOf(txtContraseñaUsuario.getPassword()).equals("") || !String.valueOf(txtConfirmarContraseñaUsuario.getPassword()).equals("")) {
             if (validar.isEntero(txtIdentidadUsuario.getText()) && txtIdentidadUsuario.getText().length() == 13) {
                 if (validar.isLetras(txtNombresUsuarios.getText()) || validar.isLetras(txtApellidosUsuario.getText())) {
                     if (validar.isEntero(txtTelefonoUsuario.getText()) && txtTelefonoUsuario.getText().length() == 8) {
@@ -472,7 +486,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL CORREO ELECTRONICO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMNETE EL NUMERO DE TELEFONICO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NUMERO DE TELEFONICO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NOMBRE O APELLIDO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -547,6 +561,17 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
         txtContraseñaUsuario.setText(null);
         txtConfirmarContraseñaUsuario.setText(null);
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void chkMostrarContra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMostrarContra1ActionPerformed
+        if (chkMostrarContra1.isSelected()) {
+            txtConfirmarContraseñaUsuario.setEchoChar((char) 0);
+            txtContraseñaUsuario.setEchoChar((char) 0);
+        } else {
+            txtConfirmarContraseñaUsuario.setEchoChar('*');
+            txtContraseñaUsuario.setEchoChar('*');
+        }
+
+    }//GEN-LAST:event_chkMostrarContra1ActionPerformed
 
     void limpiaTabla() {
         try {
@@ -634,6 +659,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnMenuPrincipal;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JCheckBox chkMostrarContra1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

@@ -242,7 +242,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
                         puerto.setCodigoPuerto(Integer.parseInt(txtCodigoPuertoSalida.getText()));
                         puerto.setNombrePuerto(txtNombrePuertoSalida.getText());
                         if (puerto.ActualizarPuertoSalida()) {
-                            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> PUERTO REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> PUERTO ACTUALIZADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
                             Limpiar();
                             MostrarPuertosSalida();
                         } else {
