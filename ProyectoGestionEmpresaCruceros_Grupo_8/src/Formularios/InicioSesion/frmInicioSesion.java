@@ -52,6 +52,8 @@ public class frmInicioSesion extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         txtContra = new javax.swing.JPasswordField();
         chkMostrarContra = new javax.swing.JCheckBox();
+        btnCerrar = new javax.swing.JButton();
+        btnMinimizar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INICIO DE SESIÓN");
@@ -67,12 +69,12 @@ public class frmInicioSesion extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 1080));
         jPanel1.setLayout(null);
 
-        jLabel7.setFont(new java.awt.Font("Doppio One", 1, 40)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 204, 51));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("BON VOYAGE CRUISE LINE");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(130, 70, 1539, 51);
+        jLabel7.setBounds(130, 70, 1539, 49);
 
         jLabel2.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,11 +112,11 @@ public class frmInicioSesion extends javax.swing.JFrame {
         jPanel1.add(jLabel8);
         jLabel8.setBounds(320, 330, 400, 443);
 
-        jLabel9.setFont(new java.awt.Font("Doppio One", 1, 40)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 204, 51));
         jLabel9.setText("¡BIENVENIDO!");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(1180, 320, 270, 51);
+        jLabel9.setBounds(1150, 320, 300, 49);
 
         jSeparator1.setBackground(new java.awt.Color(255, 204, 51));
         jSeparator1.setForeground(new java.awt.Color(255, 204, 51));
@@ -137,6 +139,28 @@ public class frmInicioSesion extends javax.swing.JFrame {
         });
         jPanel1.add(chkMostrarContra);
         chkMostrarContra.setBounds(1430, 530, 230, 30);
+
+        btnCerrar.setBackground(new java.awt.Color(13, 54, 118));
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/exitButton45.png"))); // NOI18N
+        btnCerrar.setBorder(null);
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCerrar);
+        btnCerrar.setBounds(1860, 10, 40, 35);
+
+        btnMinimizar1.setBackground(new java.awt.Color(13, 54, 118));
+        btnMinimizar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/minimize40.png"))); // NOI18N
+        btnMinimizar1.setBorder(null);
+        btnMinimizar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMinimizar1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMinimizar1);
+        btnMinimizar1.setBounds(1810, 30, 40, 12);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,6 +213,22 @@ public class frmInicioSesion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chkMostrarContraActionPerformed
 
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+
+        int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Está seguro que desea Salir?</b></html>" , "Salir del Programa",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE, icono);
+        if (result == JOptionPane.YES_OPTION) {
+            frmInicioSesion inicioSesion = new frmInicioSesion();
+            inicioSesion.setVisible(false);
+            dispose();
+        }
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void btnMinimizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizar1ActionPerformed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_btnMinimizar1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -225,7 +265,9 @@ public class frmInicioSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnIniciarSesion;
+    private javax.swing.JButton btnMinimizar1;
     private javax.swing.JCheckBox chkMostrarContra;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

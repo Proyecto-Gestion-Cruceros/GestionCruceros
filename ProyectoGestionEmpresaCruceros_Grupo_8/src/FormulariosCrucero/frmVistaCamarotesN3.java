@@ -1314,7 +1314,7 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         retornarEstadoCamarote();
-        //verificarBotones();
+        verificarBotones();
 
     }//GEN-LAST:event_formWindowOpened
 

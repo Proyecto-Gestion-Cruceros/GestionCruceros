@@ -26,6 +26,7 @@ public class ClsPagos {
     private PreparedStatement ps3;
     private double precioCamarote;
     private int edadCliente;
+    private int cantDias;
 
     public double getPrecioCamarote() {
         return precioCamarote;
@@ -34,7 +35,14 @@ public class ClsPagos {
     public int getEdadCliente() {
         return edadCliente;
     }
-    
+
+    public int getCantDias() {
+        return cantDias;
+    }
+
+    public double getTotal() {
+        return total;
+    }
     
     protected void obtenerDatosClase(String identidadC){
         try {
@@ -56,6 +64,16 @@ public class ClsPagos {
             if(rs.next()){
                 edadCliente = rs.getInt("edad");
             }
+            rs = null;
+            
+            //Obtiene los dias de viaje
+            ps = dbConnection.dbConexion().prepareStatement("SELECT DATEDIFF(DAY, fechaSalida, fechaRegreso)dias FROM viajesDisponibles WHERE idViaje = ?");
+            ps.setInt(1, variablesViaje.getCodigoViaje());
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                cantDias = rs.getInt("dias");
+            }
             
         } catch (SQLException e) {
             System.out.println("");
@@ -63,7 +81,7 @@ public class ClsPagos {
     }
     
     protected double calcSubTotal(){
-        subtotal = precioCamarote * variablesViaje.getNumeroPersonas();
+        subtotal = precioCamarote * variablesViaje.getNumeroPersonas() * cantDias;
         return subtotal;
     }
     

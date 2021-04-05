@@ -654,7 +654,7 @@ public class frmVistaCamarotesN4 extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         verificarBotones();
-        //retornarEstadoCamarote();
+        retornarEstadoCamarote();
     }//GEN-LAST:event_formWindowOpened
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
