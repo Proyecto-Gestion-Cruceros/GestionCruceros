@@ -72,7 +72,7 @@ public class ClsClientes extends ClsPersona{
         }
         catch(SQLException ex){
             
-            JOptionPane.showMessageDialog(null, ex);
+            System.out.println(ex);
             
         }
         return false;
@@ -110,7 +110,7 @@ public class ClsClientes extends ClsPersona{
         }
         catch(SQLException ex){
             
-            JOptionPane.showMessageDialog(null, ex);
+            System.out.println(ex);
             
         }
         return false;
@@ -142,7 +142,7 @@ public class ClsClientes extends ClsPersona{
         }
         catch(SQLException ex)
         {
-            JOptionPane.showMessageDialog(null, ex);
+            System.out.println(ex);
         }
         return false;
     }

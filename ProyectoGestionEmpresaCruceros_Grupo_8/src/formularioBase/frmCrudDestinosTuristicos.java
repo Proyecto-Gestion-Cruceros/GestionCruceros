@@ -110,7 +110,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
         btnModificar.setBackground(new java.awt.Color(255, 204, 51));
         btnModificar.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 22)); // NOI18N
         btnModificar.setForeground(new java.awt.Color(0, 0, 0));
-        btnModificar.setText("Modificar");
+        btnModificar.setText("Actializar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarActionPerformed(evt);
@@ -295,7 +295,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL INTENTAR REGISTRAR EL DESTINO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> YA EXISTE UN DESTINO CON ESE NOMBRE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
 
                     }
                 
@@ -434,6 +434,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
         
         txtNombreDestino.setText(null);
         cmbEstadoDestino.setSelectedIndex(0);
+        
         
     }
     

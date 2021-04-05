@@ -72,7 +72,7 @@ public class ClsDestinosTuristicos {
         }
         catch(SQLException ex)
         {
-            JOptionPane.showMessageDialog(null, ex);
+            System.out.println(ex);
         }
         return false;
     }
@@ -103,7 +103,7 @@ public class ClsDestinosTuristicos {
         }
         catch(SQLException ex)
         {
-            JOptionPane.showMessageDialog(null, ex);
+            System.out.println(ex);
         }
         return false;
         
