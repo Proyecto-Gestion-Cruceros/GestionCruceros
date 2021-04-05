@@ -128,7 +128,15 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
             new String [] {
                 "Nombre Destino", "Estado"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTDestinos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTDestinosMouseClicked(evt);
@@ -257,7 +265,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
             if(validar.isLetras(txtNombreDestino.getText()))
             { 
                 
-                if(cmbEstadoDestino.getSelectedIndex() == 0 || txtNombreDestino.getText().isEmpty())
+                if(cmbEstadoDestino.getSelectedIndex() == 0 || txtNombreDestino.getText().isEmpty() || txtNombreDestino.getText() == null)
                 {
                     JOptionPane.showMessageDialog(this, "Ingrese un Nombre y un Estado");
                 }
@@ -305,7 +313,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
             if(validar.isLetras(txtNombreDestino.getText()))
             {
                              
-                if(cmbEstadoDestino.getSelectedIndex() == 0)
+                if(cmbEstadoDestino.getSelectedIndex() == 0 || txtNombreDestino.getText() == null)
                 {
                     JOptionPane.showMessageDialog(this, "Seleccione un Estado válido");
                 }
@@ -412,7 +420,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
     {
         
         txtNombreDestino.setText(null);
-        cmbEstadoDestino.setSelectedIndex(-1);
+        cmbEstadoDestino.setSelectedIndex(0);
         
     }
     
