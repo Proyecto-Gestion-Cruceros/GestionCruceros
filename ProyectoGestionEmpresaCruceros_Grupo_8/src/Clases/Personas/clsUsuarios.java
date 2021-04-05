@@ -56,11 +56,7 @@ public class clsUsuarios extends ClsPersona {
 
             resultado = ps.executeUpdate();
 
-            if (resultado > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return resultado > 0;
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -87,11 +83,7 @@ public class clsUsuarios extends ClsPersona {
 
             resultado = ps.executeUpdate();
 
-            if (resultado > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return resultado > 0;
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -105,17 +97,13 @@ public class clsUsuarios extends ClsPersona {
     public boolean EliminarPersona() {
         int resultado = 0;
         try {
-            ps = dbConnection.dbConexion().prepareStatement("update usuarios set estado = 'Inactivo' where identidadUsuario =?");
+            ps = dbConnection.dbConexion().prepareStatement("update usuarios set estado = 'Inactivo' where identidadUsuario =? and estado = 'Activo'");
             ps.setString(1, Identidad);
        
 
             resultado = ps.executeUpdate();
 
-            if (resultado > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return resultado > 0;
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
