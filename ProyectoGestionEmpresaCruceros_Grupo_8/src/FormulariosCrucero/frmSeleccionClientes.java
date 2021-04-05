@@ -375,7 +375,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
     private void tablaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClientesMouseClicked
         int row = tablaClientes.rowAtPoint(evt.getPoint());
         int col = tablaClientes.columnAtPoint(evt.getPoint());
-
+        identidadCliente = null;
         identidadCliente = tablaClientes.getModel().getValueAt(row, 0).toString();
         nombreCliente = tablaClientes.getModel().getValueAt(row, 1).toString();
 

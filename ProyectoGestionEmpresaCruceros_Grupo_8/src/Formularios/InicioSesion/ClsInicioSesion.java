@@ -19,7 +19,7 @@ public class ClsInicioSesion extends dbConnection {
 
     public boolean verificarInicio(String user, char[] pass) {
         try {
-            ps = dbConnection.dbConexion().prepareStatement("SELECT identidadUsuario, cargo c FROM dbo.usuarios WHERE identidadUsuario = ? AND contraseniaUsuario = ?");
+            ps = dbConnection.dbConexion().prepareStatement("SELECT identidadUsuario, cargo c FROM dbo.usuarios WHERE identidadUsuario = ? AND contraseniaUsuario = ? AND estado <> 'Inactivo'");
             ps.setString(1, user);
             ps.setString(2, String.valueOf(pass));
             ResultSet rs = ps.executeQuery();
