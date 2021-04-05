@@ -5,7 +5,10 @@
  */
 package FormulariosCrucero;
 
-import FormularioIGP.frmPrincipal;
+
+import FormularioIGP.frmIGP;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -23,6 +26,8 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
     }
     
         clsVariablesViaje variables = new clsVariablesViaje();
+        
+        Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -116,7 +121,7 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
         btnAtras.setBackground(new java.awt.Color(255, 204, 51));
         btnAtras.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
         btnAtras.setForeground(new java.awt.Color(0, 0, 0));
-        btnAtras.setText("ATRAS");
+        btnAtras.setText("REGRESAR");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtrasActionPerformed(evt);
@@ -204,13 +209,13 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-        int result = JOptionPane.showConfirmDialog(null, "Esta seguro de volver al Menu Principal?", "Salir del Módulo",
+        int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Esta seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
                 JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                JOptionPane.QUESTION_MESSAGE, icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             variables.resetVariables();
-            frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed

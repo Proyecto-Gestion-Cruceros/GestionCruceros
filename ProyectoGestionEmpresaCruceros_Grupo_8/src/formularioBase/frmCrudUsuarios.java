@@ -7,7 +7,10 @@ package formularioBase;
 
 import Clases.Personas.clsUsuarios;
 import Clases.Personas.ClsPersona;
-import FormularioIGP.frmPrincipal;
+import FormularioIGP.frmIGP;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 import javax.swing.JOptionPane;
 
 public class frmCrudUsuarios extends javax.swing.JFrame {
@@ -19,6 +22,7 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
     clsUsuarios Usuario = new clsUsuarios(); 
     ClsPersona Persona = new ClsPersona(); 
     
+    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -42,7 +46,7 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
         jLabel2.setText("      USUARIOS");
 
         btnAgenteVenta.setBackground(new java.awt.Color(255, 204, 51));
-        btnAgenteVenta.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
+        btnAgenteVenta.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 24)); // NOI18N
         btnAgenteVenta.setForeground(new java.awt.Color(0, 0, 0));
         btnAgenteVenta.setText("AGENTE DE VENTAS");
         btnAgenteVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -52,7 +56,7 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
         });
 
         btnAdministrador.setBackground(new java.awt.Color(255, 204, 51));
-        btnAdministrador.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
+        btnAdministrador.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 24)); // NOI18N
         btnAdministrador.setForeground(new java.awt.Color(0, 0, 0));
         btnAdministrador.setText("ADMINISTRADOR");
         btnAdministrador.setPreferredSize(new java.awt.Dimension(192, 32));
@@ -77,31 +81,31 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
             plSeleccionUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plSeleccionUsuarioLayout.createSequentialGroup()
                 .addGap(296, 296, 296)
-                .addComponent(btnAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 748, Short.MAX_VALUE)
-                .addComponent(btnAgenteVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 469, Short.MAX_VALUE)
+                .addComponent(btnAgenteVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(296, 296, 296))
-            .addGroup(plSeleccionUsuarioLayout.createSequentialGroup()
-                .addGap(777, 777, 777)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plSeleccionUsuarioLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(plSeleccionUsuarioLayout.createSequentialGroup()
+                .addGap(763, 763, 763)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         plSeleccionUsuarioLayout.setVerticalGroup(
             plSeleccionUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plSeleccionUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89)
+                .addGap(169, 169, 169)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(321, 321, 321)
+                .addGap(241, 241, 241)
                 .addGroup(plSeleccionUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgenteVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(401, Short.MAX_VALUE))
+                    .addComponent(btnAgenteVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(316, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,12 +137,12 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgenteVentaActionPerformed
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-        int result = JOptionPane.showConfirmDialog(null, "Esta seguro de volver al Menu Principal?", "Salir del Módulo",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.QUESTION_MESSAGE, icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
-            frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed

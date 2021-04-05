@@ -6,7 +6,8 @@
 package FormulariosCrucero;
 
 import Clases.dbConnection;
-import FormularioIGP.frmPrincipal;
+import FormularioIGP.frmIGP;
+
 import Formularios.Pagos.frmPagos;
 import java.awt.Color;
 import java.awt.Component;
@@ -15,6 +16,8 @@ import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.sql.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -40,6 +43,8 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
     PreparedStatement ps;
     ResultSet result = null;
 
+    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
+    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,7 +100,6 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         indicador18 = new javax.swing.JButton();
         indicador30 = new javax.swing.JButton();
         indicador34 = new javax.swing.JButton();
-        indicadorVacio = new javax.swing.JButton();
         indicador32 = new javax.swing.JButton();
         indicador45 = new javax.swing.JButton();
         indicador51 = new javax.swing.JButton();
@@ -136,7 +140,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         btnAtras.setBackground(new java.awt.Color(255, 204, 51));
         btnAtras.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
         btnAtras.setForeground(new java.awt.Color(0, 0, 0));
-        btnAtras.setText("ATRAS");
+        btnAtras.setText("REGRESAR");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtrasActionPerformed(evt);
@@ -787,15 +791,6 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         jPanel1.add(indicador34);
         indicador34.setBounds(1264, 552, 40, 40);
 
-        indicadorVacio.setBackground(new java.awt.Color(102, 255, 0));
-        indicadorVacio.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
-        indicadorVacio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        group.add(indicadorVacio);
-        indicadorVacio.setHideActionText(true);
-        indicadorVacio.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(indicadorVacio);
-        indicadorVacio.setBounds(1380, 552, 40, 40);
-
         indicador32.setBackground(new java.awt.Color(102, 255, 0));
         indicador32.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N
         indicador32.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -908,7 +903,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(indicador35);
-        indicador35.setBounds(1320, 552, 40, 40);
+        indicador35.setBounds(1349, 552, 40, 40);
 
         indicador43.setBackground(new java.awt.Color(102, 255, 0));
         indicador43.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -953,7 +948,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
         indicador44.setBounds(1156, 430, 40, 20);
 
         lblBackground.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/mapaNivel1FinalDef.png"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/mapaPrimerNivelCompleto (1).png"))); // NOI18N
         jPanel1.add(lblBackground);
         lblBackground.setBounds(170, 270, 1700, 410);
 
@@ -1605,13 +1600,13 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-        int result = JOptionPane.showConfirmDialog(null, "Esta seguro de volver al Menu Principal?", "Salir del Módulo",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.QUESTION_MESSAGE, icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             variables.resetVariables();
-            frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
@@ -1739,7 +1734,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            System.out.println("" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
         }
     }
 
@@ -1776,7 +1771,7 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            System.out.println("" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
         }
     }
 
@@ -1837,7 +1832,6 @@ public class frmVistaCamarotesN2 extends javax.swing.JFrame {
     private javax.swing.JButton indicador7;
     private javax.swing.JButton indicador8;
     private javax.swing.JButton indicador9;
-    private javax.swing.JButton indicadorVacio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

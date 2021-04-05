@@ -7,10 +7,12 @@ package FormulariosCrucero;
 
 import Clases.ClsValidaciones;
 import Clases.dbConnection;
-import FormularioIGP.frmPrincipal;
+import FormularioIGP.frmIGP;
 import com.sun.jdi.Value;
+import formularioBase.frmCrudClientes;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.Statement;
@@ -20,6 +22,9 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSetMetaData;
 import java.util.HashSet;
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -79,6 +84,9 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
     String nombreCliente;
     private TableRowSorter trsfiltro;
     String filtro;
+    
+    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
+    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -130,7 +138,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         btnAtras.setBackground(new java.awt.Color(255, 204, 51));
         btnAtras.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
         btnAtras.setForeground(new java.awt.Color(0, 0, 0));
-        btnAtras.setText("ATRAS");
+        btnAtras.setText("REGRESAR");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtrasActionPerformed(evt);
@@ -151,7 +159,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         jPanel1.add(btnSiguiente);
         btnSiguiente.setBounds(1710, 1020, 210, 60);
 
-        tablaClientes.setFont(new java.awt.Font("Doppio One", 0, 14)); // NOI18N
+        tablaClientes.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -180,7 +188,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         jScrollPane1.setBounds(110, 230, 1480, 440);
 
         btnAgregarCliente.setBackground(new java.awt.Color(255, 204, 51));
-        btnAgregarCliente.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
+        btnAgregarCliente.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
         btnAgregarCliente.setText("AGREGAR CLIENTE");
         btnAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,16 +206,18 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         txtCantidadClientes.setBounds(1320, 800, 170, 50);
 
         jLabel2.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("CANTIDAD DE CLIENTES SELECCIONADOS");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(1230, 760, 350, 24);
 
         jLabel3.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("LISTA DE CLIENTES SELECCIONADOS");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(470, 690, 300, 24);
 
-        tablaSeleccionados.setFont(new java.awt.Font("Doppio One", 0, 14)); // NOI18N
+        tablaSeleccionados.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
         tablaSeleccionados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -235,7 +245,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         jScrollPane2.setBounds(110, 730, 1010, 180);
 
         btnEliminarCliente.setBackground(new java.awt.Color(255, 153, 51));
-        btnEliminarCliente.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
+        btnEliminarCliente.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
         btnEliminarCliente.setText("ELIMINAR CLIENTE");
         btnEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,10 +253,10 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnEliminarCliente);
-        btnEliminarCliente.setBounds(880, 930, 240, 40);
+        btnEliminarCliente.setBounds(880, 930, 240, 50);
 
         btnRegistrarCliente.setBackground(new java.awt.Color(255, 204, 51));
-        btnRegistrarCliente.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
+        btnRegistrarCliente.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
         btnRegistrarCliente.setText("REGISTRAR CLIENTE");
         btnRegistrarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,7 +282,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         txtBusqueda.setBounds(110, 170, 250, 40);
 
         btnLimpiar.setBackground(new java.awt.Color(255, 204, 51));
-        btnLimpiar.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
+        btnLimpiar.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
         btnLimpiar.setText("LIMPIAR");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,7 +290,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnLimpiar);
-        btnLimpiar.setBounds(1640, 400, 220, 80);
+        btnLimpiar.setBounds(1640, 400, 220, 70);
 
         btnMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/imgBotonHome (2).png"))); // NOI18N
         btnMenuPrincipal.setBorderPainted(false);
@@ -327,15 +337,15 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
 
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR AL MENOS UN CLIENTE!");
-
+            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR AL MENOS UN CLIENTE!</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+            
         }
 
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-        frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
         igp.setVisible(true);
         this.dispose();
 
@@ -343,7 +353,14 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        tablaClientes.getTableHeader().setReorderingAllowed(false);
+        tablaClientes.getTableHeader().setForeground(Color.BLACK);
+        tablaClientes.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
        
+        tablaSeleccionados.getTableHeader().setReorderingAllowed(false);
+        tablaSeleccionados.getTableHeader().setForeground(Color.BLACK);
+        tablaSeleccionados.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
+                
         if(variables.getCodigoOperacion() == 1){
                 cargarDatos();
         }
@@ -374,7 +391,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
             cantidadClientes += 1;
             txtCantidadClientes.setText(""+cantidadClientes);
         } else {
-            JOptionPane.showMessageDialog(null, "SELECCIONE UN CLIENTE");
+            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN CLIENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
         }
     }//GEN-LAST:event_btnAgregarClienteActionPerformed
 
@@ -393,13 +410,15 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
             cantidadClientes -= 1;
             txtCantidadClientes.setText("" + cantidadClientes);
         }else{
-                    JOptionPane.showMessageDialog(null, "SELECCIONE UN CLIENTE");
+            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN CLIENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);        
         }
 
     }//GEN-LAST:event_btnEliminarClienteActionPerformed
 
     private void btnRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarClienteActionPerformed
-        // TODO add your handling code here:
+       dispose();
+       variables.resetVariables();
+      new frmCrudClientes().setVisible(true);
     }//GEN-LAST:event_btnRegistrarClienteActionPerformed
 
     private void txtBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyTyped
@@ -422,14 +441,14 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBusquedaActionPerformed
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-
-        int result = JOptionPane.showConfirmDialog(null, "Esta seguro de volver al Menu Principal?", "Salir del Módulo",
+       
+        int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Esta seguro de volver al Menú Principal?</b></html>", "Salir del Módulo",
                 JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                JOptionPane.QUESTION_MESSAGE, icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             variables.resetVariables();
-            frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
@@ -488,7 +507,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         variables.model.setRowCount(0);
 
         try {
-            ps = conexion.dbConexion().prepareStatement("select identidadCliente, CONCAT(nombres, ' ', apellidos), telefono, correoElectronico from clientes");
+            ps = conexion.dbConexion().prepareStatement("select identidadCliente, CONCAT(nombres, ' ', apellidos), telefono, correoElectronico from clientes WHERE estado = 'Activo'");
 
             ResultSet result = ps.executeQuery();
             rsmd = result.getMetaData();
@@ -503,7 +522,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
                 variables.model.addRow(fil);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla" + ex);
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
         }
     }
 
@@ -525,7 +544,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
                 variables.model.addRow(fil);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla" + ex);
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
         }
     }
 

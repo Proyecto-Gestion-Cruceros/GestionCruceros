@@ -6,7 +6,7 @@
 package FormulariosCrucero;
 
 import Clases.dbConnection;
-import FormularioIGP.frmPrincipal;
+import FormularioIGP.frmIGP;
 import Formularios.Pagos.frmPagos;
 import static FormulariosCrucero.frmVistaCamarotesN2.conn;
 
@@ -18,6 +18,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -42,6 +44,10 @@ public class frmVistaCamarotesN4 extends javax.swing.JFrame {
     int numeroCamaroteSeleccionado = 0;
     PreparedStatement ps;
     ResultSet result = null;
+    
+    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
+    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
+    Icon Icon = new ImageIcon(getClass().getResource("/Resources/informacion.png"));
 
     public static Connection dbConexion() {
         String url = "jdbc:sqlserver://DESKTOP-P4A3L4O:1433;databaseName=agenciaCruceros";
@@ -123,7 +129,7 @@ public class frmVistaCamarotesN4 extends javax.swing.JFrame {
         btnAtras.setBackground(new java.awt.Color(255, 204, 51));
         btnAtras.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
         btnAtras.setForeground(new java.awt.Color(0, 0, 0));
-        btnAtras.setText("ATRAS");
+        btnAtras.setText("REGRESAR");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtrasActionPerformed(evt);
@@ -653,13 +659,13 @@ public class frmVistaCamarotesN4 extends javax.swing.JFrame {
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         if (numeroCamaroteSeleccionado != 0) {
-            JOptionPane.showMessageDialog(null, "EL CAMAROTE SELECCIONADO ES: " + numeroCamaroteSeleccionado);
+            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> EL CAMAROTE SELECCIONADO ES:</b></html>" + numeroCamaroteSeleccionado, "",JOptionPane.INFORMATION_MESSAGE, Icon);
             variables.setNumeroCamarote(numeroCamaroteSeleccionado);
             this.dispose();
             new frmPagos().setVisible(true);
             
         } else {
-            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN CAMAROTE");
+            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR UN CAMAROTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
         }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
@@ -672,13 +678,13 @@ public class frmVistaCamarotesN4 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-        int result = JOptionPane.showConfirmDialog(null, "Esta seguro de volver al Menu Principal?", "Salir del Módulo",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.QUESTION_MESSAGE, icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             variables.resetVariables();
-            frmPrincipal igp = new frmPrincipal();
+            frmIGP igp = new frmIGP();
             igp.setVisible(true);
         }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
@@ -805,7 +811,7 @@ public class frmVistaCamarotesN4 extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            System.out.println("" + ex.getMessage());
+           JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
         }
     }
 
@@ -834,8 +840,7 @@ public class frmVistaCamarotesN4 extends javax.swing.JFrame {
                     txtDatosCamarote.append("\n Nivel: " + nivel);
                     txtDatosCamarote.append("\n Tipo: " + tipoCamarote);
                     txtDatosCamarote.append("\n Capacidad Maxima: " + capacidadMaxima + " Personas");
-                    txtDatosCamarote.append("\n Precio: $ " + precioCamarote);
-                    
+                    txtDatosCamarote.append("\n Precio: $ " + precioCamarote);      
                 }
 
             } else {
@@ -843,7 +848,7 @@ public class frmVistaCamarotesN4 extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            System.out.println("" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
         }
     }
 

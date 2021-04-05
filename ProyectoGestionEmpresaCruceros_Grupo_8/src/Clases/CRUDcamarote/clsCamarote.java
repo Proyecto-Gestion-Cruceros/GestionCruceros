@@ -41,30 +41,6 @@ public class clsCamarote extends dbConnection {
         }
     }
     
-    //Metodo para retornar el ultimo codigoCamarote 
-    public int retornarUltimoIdCamarote() {
-        try {
-
-            int ultimoCamarote;
-
-            ps = dbConexion().prepareStatement("SELECT MAX(codigoCamarote) as ultimoCamarote FROM camarotes");
-            ResultSet result = ps.executeQuery();
-            if (result.next()) {
-                ultimoCamarote = Integer.parseInt(result.getString("ultimoCamarote"));
-            } else {
-                ultimoCamarote = 0;
-            }
-            return ultimoCamarote;
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-
-        }
-        return 0;
-    }
-
-  
-    
   
 }
     

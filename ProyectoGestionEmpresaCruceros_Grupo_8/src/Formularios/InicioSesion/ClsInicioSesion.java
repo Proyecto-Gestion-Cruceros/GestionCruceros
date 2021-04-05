@@ -15,14 +15,17 @@ import java.sql.*;
 public class ClsInicioSesion extends dbConnection {
 
     PreparedStatement ps;
+    protected int codigoEntra;
 
     public boolean verificarInicio(String user, char[] pass) {
         try {
-            ps = dbConnection.dbConexion().prepareStatement("SELECT identidadUsuario FROM dbo.usuarios WHERE identidadUsuario = ? AND contraseniaUsuario = ?");
+            ps = dbConnection.dbConexion().prepareStatement("SELECT identidadUsuario, cargo c FROM dbo.usuarios WHERE identidadUsuario = ? AND contraseniaUsuario = ?");
             ps.setString(1, user);
             ps.setString(2, String.valueOf(pass));
+            ResultSet rs = ps.executeQuery();
             
-            if (ps.executeUpdate() == 1) {
+            if (rs.next()) {
+                codigoEntra = rs.getInt("c");
                 return true;
             } else {
                 return false;

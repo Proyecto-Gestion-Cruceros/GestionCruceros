@@ -7,6 +7,9 @@ package Formularios.InicioSesion;
 
 import Clases.ClsValidaciones;
 import Clases.dbConnection;
+import FormularioIGP.frmIGP;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,7 +28,10 @@ public class frmInicioSesion extends javax.swing.JFrame {
     ClsInicioSesion clase = new ClsInicioSesion();
     ClsValidaciones v = new ClsValidaciones();
     public static String identidadEmpleado;
+    public static int tipoInicio;
     
+     Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
+     Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +56,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INICIO DE SESIÓN");
         setName("frmInicioLogin"); // NOI18N
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -57,7 +64,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(0, 79, 129));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1635, 1035));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1920, 1080));
         jPanel1.setLayout(null);
 
         jLabel7.setFont(new java.awt.Font("Doppio One", 1, 40)); // NOI18N
@@ -65,24 +72,24 @@ public class frmInicioSesion extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("BON VOYAGE CRUISE LINE");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(46, 70, 1539, 51);
+        jLabel7.setBounds(130, 70, 1539, 51);
 
         jLabel2.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Usuario");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(1040, 450, 73, 26);
+        jLabel2.setBounds(1120, 450, 73, 26);
 
         jLabel3.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Contraseña");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(1010, 530, 108, 26);
+        jLabel3.setBounds(1090, 530, 108, 26);
 
         txtUsuario.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         txtUsuario.setToolTipText("Ingrese su identidad");
         jPanel1.add(txtUsuario);
-        txtUsuario.setBounds(1130, 450, 203, 30);
+        txtUsuario.setBounds(1210, 450, 203, 30);
 
         btnIniciarSesion.setBackground(new java.awt.Color(255, 204, 51));
         btnIniciarSesion.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
@@ -94,31 +101,31 @@ public class frmInicioSesion extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnIniciarSesion);
-        btnIniciarSesion.setBounds(1090, 670, 195, 63);
+        btnIniciarSesion.setBounds(1210, 670, 195, 63);
 
         jLabel8.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 204, 51));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Logo BonVoyage Peq.png"))); // NOI18N
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(240, 330, 400, 443);
+        jLabel8.setBounds(320, 330, 400, 443);
 
         jLabel9.setFont(new java.awt.Font("Doppio One", 1, 40)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 204, 51));
         jLabel9.setText("¡BIENVENIDO!");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(1044, 320, 270, 51);
+        jLabel9.setBounds(1180, 320, 270, 51);
 
         jSeparator1.setBackground(new java.awt.Color(255, 204, 51));
         jSeparator1.setForeground(new java.awt.Color(255, 204, 51));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel1.add(jSeparator1);
-        jSeparator1.setBounds(810, 160, 10, 820);
+        jSeparator1.setBounds(890, 160, 10, 820);
 
         txtContra.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         txtContra.setToolTipText("Ingrese su contraseña");
         jPanel1.add(txtContra);
-        txtContra.setBounds(1130, 530, 200, 30);
+        txtContra.setBounds(1210, 530, 200, 30);
 
         chkMostrarContra.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         chkMostrarContra.setForeground(new java.awt.Color(255, 255, 255));
@@ -129,7 +136,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
             }
         });
         jPanel1.add(chkMostrarContra);
-        chkMostrarContra.setBounds(1350, 530, 230, 30);
+        chkMostrarContra.setBounds(1430, 530, 230, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,9 +146,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -158,16 +163,19 @@ public class frmInicioSesion extends javax.swing.JFrame {
         if (!txtUsuario.getText().isBlank() && !txtContra.getPassword().equals("")) {
             if (v.isEntero(txtUsuario.getText()) && txtUsuario.getText().length() == 13) {
                 if (clase.verificarInicio(txtUsuario.getText(), txtContra.getPassword())) {
-                    JOptionPane.showMessageDialog(this, "ola q ase");
+                    tipoInicio = clase.codigoEntra;        
                     identidadEmpleado = txtUsuario.getText();
-                } else {
-                    JOptionPane.showMessageDialog(this, "USUARIO O CONTRASEÑA INCORRECTOS");
+                    frmIGP IGP = new frmIGP();
+                    IGP.setVisible(true);
+                    this.dispose();
+                } else {      
+                    JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> USUARIO O CONTRASEÑA INCORRECTOS</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "VERIFIQUE VALORES");
+                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> VERIFIQUE VALORES</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "INGRESE VALORES");
+             JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> INGRESE VALORES</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
         }
 
 
