@@ -126,7 +126,7 @@ public class ClsViajesDisponibles extends dbConnection {
         int resultado = 0;
             
             try {
-            ps = dbConnection.dbConexion().prepareStatement("EXEC PARegistroViaje ?,?,?,?,?,?");
+            ps = dbConnection.dbConexion().prepareStatement("EXEC [PARegistroViaje] ?,?,?,?,?,?");
             ps.setInt(1, codBuque);
             ps.setInt(2, codPuertoSalida);
             ps.setInt(3, codDestino);

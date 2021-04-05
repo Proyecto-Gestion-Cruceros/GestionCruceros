@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -20,6 +19,7 @@ public class frmCrudBuques extends javax.swing.JFrame {
 
     public frmCrudBuques() {
         initComponents();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -61,21 +61,21 @@ public class frmCrudBuques extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 79, 129));
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 1080));
 
-        txtNumCamarotes.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        txtNumCamarotes.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
 
-        txtNumNIveles.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        txtNumNIveles.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Avenir LT Std 45 Book", 1, 40)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 204, 51));
         jLabel6.setText("BUQUES");
 
-        jLabel7.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Número de niveles:");
+        jLabel7.setText("Número de niveles");
 
-        jLabel8.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Número de camarotes:");
+        jLabel8.setText("Número de camarotes");
 
         btnActualizar.setBackground(new java.awt.Color(255, 204, 51));
         btnActualizar.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -97,11 +97,21 @@ public class frmCrudBuques extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Nombre de buque:");
+        jLabel3.setText("Nombre de buque");
 
-        txtNombreBuque.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        txtNombreBuque.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        txtNombreBuque.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtNombreBuquePropertyChange(evt);
+            }
+        });
+        txtNombreBuque.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreBuqueKeyPressed(evt);
+            }
+        });
 
         jtBuques.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
         jtBuques.setForeground(new java.awt.Color(0, 0, 0));
@@ -112,7 +122,15 @@ public class frmCrudBuques extends javax.swing.JFrame {
             new String [] {
                 "Codigo buque", "Nombre buque", "N. Camarotes", "N. De Niveles", "Estado"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jtBuques.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtBuquesMouseClicked(evt);
@@ -121,11 +139,11 @@ public class frmCrudBuques extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jtBuques);
 
         txtCodBuque.setEditable(false);
-        txtCodBuque.setFont(new java.awt.Font("Doppio One", 0, 18)); // NOI18N
+        txtCodBuque.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Código buque:");
+        jLabel4.setText("Código buque");
 
         btnEliminar.setBackground(new java.awt.Color(255, 204, 51));
         btnEliminar.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -159,7 +177,7 @@ public class frmCrudBuques extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(301, Short.MAX_VALUE)
+                .addContainerGap(345, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
@@ -176,24 +194,21 @@ public class frmCrudBuques extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(907, 907, 907)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMenu))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(69, 69, 69)
-                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(75, 75, 75)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(907, 907, 907)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMenu)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(406, 406, 406)
+                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
+                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,18 +240,18 @@ public class frmCrudBuques extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel7)
                             .addComponent(txtNumNIveles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(161, 161, 161))
+                        .addGap(218, 218, 218))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)))
-                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                        .addGap(104, 104, 104)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(54, 54, 54))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(69, 69, 69))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -270,34 +285,50 @@ public class frmCrudBuques extends javax.swing.JFrame {
         txtNombreBuque.setText(null);
         txtNumCamarotes.setText(null);
         txtNumNIveles.setText(null);
+        CodigoNuevoBuque();
     }
     
     private void LlenarJtable(){
-         try {
+        dtm = (DefaultTableModel) jtBuques.getModel();
+        dtm.setRowCount(0);
+        try {
             ps = dbConnection.dbConexion().prepareStatement("SELECT [codigoBuque], [nombreBuque], [numeroCamarotes], [numeroNiveles], [estado] FROM [dbo].[buques]");
             rs = ps.executeQuery();
             rsm = rs.getMetaData();
-            ArrayList<Object[]> data = new ArrayList<>();
-            
-            while (rs.next()){
-                Object[] rows = new Object[rsm.getColumnCount()];
-                for (int i = 0; i < rows.length; i++){
-                    rows[i] = rs.getObject(i+1);
+
+            int columna = rsm.getColumnCount();
+
+            while (rs.next()) {
+                Object fil[] = new Object[columna];
+                for (int i = 0; i < columna; i++) {
+                    fil[i] = rs.getObject(i + 1);
                 }
-                data.add(rows);
+                dtm.addRow(fil);
             }
-            
-            dtm = (DefaultTableModel)this.jtBuques.getModel();
-            for(int i = 0; i < data.size(); i++){
-                dtm.addRow(data.get(i));
-            }
-            
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null, e, "",JOptionPane.INFORMATION_MESSAGE, icon); 
-         //   JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
         }
     }
-    
+
+    public void CodigoNuevoBuque() {
+        try {
+            String obtenerUltimoCodigo;
+            int UltimoCodigo;
+            ps = dbConnection.dbConexion().prepareStatement("SELECT TOP 1 [codigoBuque] FROM [dbo].[buques] order by codigoBuque desc");
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                obtenerUltimoCodigo = rs.getString("codigoBuque").trim();
+                UltimoCodigo = Integer.parseInt(obtenerUltimoCodigo) + 1;
+                txtCodBuque.setText("" + UltimoCodigo);
+
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
+        }
+
+    }
+
     private boolean VerificarBuque() {
         int resultado = 0;
 
@@ -403,10 +434,7 @@ public class frmCrudBuques extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
                     }
-
                 }
-
-
             } else {
                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE LOS DATOS SOLICITADOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
                 limpiar();
@@ -422,7 +450,6 @@ public class frmCrudBuques extends javax.swing.JFrame {
         jtBuques.getTableHeader().setReorderingAllowed(false);
         jtBuques.getTableHeader().setForeground(Color.BLACK);
         jtBuques.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
-        
         LlenarJtable();
         
     }//GEN-LAST:event_formWindowOpened
@@ -489,6 +516,14 @@ public class frmCrudBuques extends javax.swing.JFrame {
         txtNumCamarotes.setText(String.valueOf(jtBuques.getValueAt(seleccionar, 2)));
         txtNumNIveles.setText(String.valueOf(jtBuques.getValueAt(seleccionar, 3)));
     }//GEN-LAST:event_jtBuquesMouseClicked
+
+    private void txtNombreBuquePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtNombreBuquePropertyChange
+    
+    }//GEN-LAST:event_txtNombreBuquePropertyChange
+
+    private void txtNombreBuqueKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreBuqueKeyPressed
+
+    }//GEN-LAST:event_txtNombreBuqueKeyPressed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

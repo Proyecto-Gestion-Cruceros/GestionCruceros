@@ -51,13 +51,12 @@ public class ClsBuques extends dbConnection {
         this.codigoBuque = codigoBuque;
     }
     
-    
     public boolean RegistrarBuque() {
         
         int resultado = 0;
             
             try {
-            ps = dbConnection.dbConexion().prepareStatement("EXEC PARegistroBuque ?,?,?,?");
+            ps = dbConnection.dbConexion().prepareStatement("EXEC [PARegistroBuque] ?,?,?,?");
             ps.setString(1, nombreBuque);
             ps.setInt(2, numCamarotes);
             ps.setInt(3, numNivel);
