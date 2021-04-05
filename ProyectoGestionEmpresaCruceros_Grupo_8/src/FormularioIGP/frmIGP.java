@@ -51,6 +51,7 @@ public class frmIGP extends javax.swing.JFrame {
         btnBuques = new javax.swing.JButton();
         btnCamarotes = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
+        btnCerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -85,11 +86,11 @@ public class frmIGP extends javax.swing.JFrame {
         panEncabezadoLayout.setHorizontalGroup(
             panEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panEncabezadoLayout.createSequentialGroup()
-                .addContainerGap(1779, Short.MAX_VALUE)
+                .addContainerGap(1826, Short.MAX_VALUE)
                 .addComponent(btnMinimizar1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCerrar)
-                .addGap(41, 41, 41))
+                .addContainerGap())
         );
         panEncabezadoLayout.setVerticalGroup(
             panEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,6 +211,16 @@ public class frmIGP extends javax.swing.JFrame {
             }
         });
 
+        btnCerrarSesion.setBackground(new java.awt.Color(13, 54, 118));
+        btnCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/cerrarS (1).png"))); // NOI18N
+        btnCerrarSesion.setBorder(null);
+        btnCerrarSesion.setContentAreaFilled(false);
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panSubMenuLayout = new javax.swing.GroupLayout(panSubMenu);
         panSubMenu.setLayout(panSubMenuLayout);
         panSubMenuLayout.setHorizontalGroup(
@@ -221,7 +232,11 @@ public class frmIGP extends javax.swing.JFrame {
             .addComponent(btnUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panSubMenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panSubMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panSubMenuLayout.createSequentialGroup()
+                        .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panSubMenuLayout.setVerticalGroup(
@@ -239,7 +254,9 @@ public class frmIGP extends javax.swing.JFrame {
                 .addComponent(btnCamarotes, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(btnPuertos, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -280,7 +297,7 @@ public class frmIGP extends javax.swing.JFrame {
     private void btnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaActionPerformed
         frmSeleccionClientes factura = new frmSeleccionClientes();
         factura.setVisible(true);
-        
+        dispose();
     }//GEN-LAST:event_btnFacturaActionPerformed
   
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -289,8 +306,7 @@ public class frmIGP extends javax.swing.JFrame {
             JOptionPane.YES_NO_OPTION, 
             JOptionPane.QUESTION_MESSAGE, icono);
         if (result == JOptionPane.YES_OPTION) {
-            frmInicioSesion inicioSesion = new frmInicioSesion();
-            inicioSesion.setVisible(false);
+
             dispose();   
         }
     }//GEN-LAST:event_btnCerrarActionPerformed
@@ -302,7 +318,7 @@ public class frmIGP extends javax.swing.JFrame {
     private void btnCamarotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCamarotesActionPerformed
         frmCRUDCamarote crudCamarote = new frmCRUDCamarote();
         crudCamarote.setVisible(true);
-       
+        dispose();
     }//GEN-LAST:event_btnCamarotesActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
@@ -315,25 +331,25 @@ public class frmIGP extends javax.swing.JFrame {
     private void btnBuquesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuquesActionPerformed
        frmCrudBuques crudBuques = new frmCrudBuques();
        crudBuques.setVisible(true);
-       
+        dispose();
     }//GEN-LAST:event_btnBuquesActionPerformed
 
     private void btnPuertosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuertosActionPerformed
        frmCrudPuertosDeSalida crudPuertoSalida = new frmCrudPuertosDeSalida();
        crudPuertoSalida.setVisible(true);
-      
+       dispose();
     }//GEN-LAST:event_btnPuertosActionPerformed
 
     private void btnViajesDisponiblesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViajesDisponiblesActionPerformed
        frmCrudViajesDisponibles crudViajesDisponibles = new frmCrudViajesDisponibles();
        crudViajesDisponibles.setVisible(true);
-      
+       dispose();
     }//GEN-LAST:event_btnViajesDisponiblesActionPerformed
 
     private void btnDestinosTuristicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDestinosTuristicosActionPerformed
        frmCrudDestinosTuristicos crudDestinosTuristicos = new frmCrudDestinosTuristicos();
        crudDestinosTuristicos.setVisible(true);
-       
+       dispose(); 
     }//GEN-LAST:event_btnDestinosTuristicosActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -351,11 +367,11 @@ public class frmIGP extends javax.swing.JFrame {
             else if (codigoAcceso == 2) {
                 btnUsuario.setEnabled(false);
                 btnClientes.setEnabled(true);
-                btnBuques.setEnabled(true);
-                btnCamarotes.setEnabled(true);
-                btnPuertos.setEnabled(true);
-                btnViajesDisponibles.setEnabled(true);
-                btnDestinosTuristicos.setEnabled(true);
+                btnBuques.setEnabled(false);
+                btnCamarotes.setEnabled(false);
+                btnPuertos.setEnabled(false);
+                btnViajesDisponibles.setEnabled(false);
+                btnDestinosTuristicos.setEnabled(false);
                 btnFactura.setEnabled(true);
             }
         } catch (Exception e) {
@@ -368,6 +384,19 @@ public class frmIGP extends javax.swing.JFrame {
        crudUsuarios.setVisible(true);
        dispose();
     }//GEN-LAST:event_btnUsuarioActionPerformed
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Está seguro que desea Cerrar Sesión?</b></html>", "Cerrar Sesión",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, icono);
+        if (result == JOptionPane.YES_OPTION) {
+            frmInicioSesion inicioSesion = new frmInicioSesion();
+            inicioSesion.setVisible(true);
+            dispose();
+        }
+
+     
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -408,6 +437,7 @@ public class frmIGP extends javax.swing.JFrame {
     private javax.swing.JButton btnBuques;
     private javax.swing.JButton btnCamarotes;
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnDestinosTuristicos;
     private javax.swing.JButton btnFactura;
