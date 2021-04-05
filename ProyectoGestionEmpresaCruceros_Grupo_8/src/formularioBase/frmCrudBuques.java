@@ -306,7 +306,7 @@ public class frmCrudBuques extends javax.swing.JFrame {
                 dtm.addRow(fil);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla " + ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
         }
     }
 
@@ -348,39 +348,60 @@ public class frmCrudBuques extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al verificar buque " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, "Error al verificar buque " + ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
             return false;
         }
     }
-    
+
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        
+
         if (!txtCodBuque.getText().isBlank() && !txtNombreBuque.getText().isBlank() && !txtNumCamarotes.getText().isBlank() && !txtNumNIveles.getText().isBlank()) {
 
             if (Validar.isLetras(txtNombreBuque.getText()) && Validar.isEntero(txtNumCamarotes.getText()) && Validar.isEntero(txtNumNIveles.getText())) {
-                
-                VerificarBuque();
-                if (buques.verificarEstadoAc()) {
 
-                    buques.setCodigoBuque(Integer.parseInt(txtCodBuque.getText()));
-                    buques.setNombreBuque(txtNombreBuque.getText());
-                    buques.setNumCamarotes(Integer.parseInt(txtNumCamarotes.getText()));
-                    buques.setNumNivel(Integer.parseInt(txtNumNIveles.getText()));
+                try {
+                    String obtenerUltimoCodigo;
+                    int UltimoCodigo;
+                    ps = dbConnection.dbConexion().prepareStatement("SELECT TOP 1 [codigoBuque] FROM [dbo].[buques] order by codigoBuque desc");
+                    rs = ps.executeQuery();
 
-                    if (buques.ActualizarBuque()) {
-                        
-                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> BUQUE ACTUALIZADO CORRECTAMENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
+                    if (rs.next()) {
+                        obtenerUltimoCodigo = rs.getString("codigoBuque").trim();
+                        UltimoCodigo = Integer.parseInt(obtenerUltimoCodigo) + 1;
 
-                        LlenarJtable();
-                        limpiar();
-                    } else {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                        if ((UltimoCodigo != Integer.parseInt(txtCodBuque.getText()))) {
+
+                            VerificarBuque();
+                            if (buques.verificarEstadoAc()) {
+
+                                buques.setCodigoBuque(Integer.parseInt(txtCodBuque.getText()));
+                                buques.setNombreBuque(txtNombreBuque.getText());
+                                buques.setNumCamarotes(Integer.parseInt(txtNumCamarotes.getText()));
+                                buques.setNumNivel(Integer.parseInt(txtNumNIveles.getText()));
+
+                                if (buques.ActualizarBuque()) {
+
+                                    JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> BUQUE ACTUALIZADO CORRECTAMENTE</b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+
+                                    LlenarJtable();
+                                    limpiar();
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                }
+
+                            } else {
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> NO SE PUEDE ACTUALIZAR UN BUQUE ELIMINADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                limpiar();
+                            }
+
+                        } else {
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN BUQUE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+
+                        }
+
                     }
-
-
-                } else {
-                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> NO SE PUEDE ACTUALIZAR UN BUQUE ELIMINADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
-                    limpiar();
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
                 }
 
             } else {
@@ -451,34 +472,54 @@ public class frmCrudBuques extends javax.swing.JFrame {
         jtBuques.getTableHeader().setForeground(Color.BLACK);
         jtBuques.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
         LlenarJtable();
-        
+        CodigoNuevoBuque();
     }//GEN-LAST:event_formWindowOpened
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-   
+
         if (!txtNombreBuque.getText().isBlank() && !txtNumCamarotes.getText().isBlank() && !txtNumNIveles.getText().isBlank()) {
             if (Validar.isLetras(txtNombreBuque.getText()) && Validar.isEntero(txtNumCamarotes.getText()) && Validar.isEntero(txtNumNIveles.getText())) {
+                
+                try {
+                    String obtenerUltimoCodigo;
+                    int UltimoCodigo;
+                    ps = dbConnection.dbConexion().prepareStatement("SELECT TOP 1 [codigoBuque] FROM [dbo].[buques] order by codigoBuque desc");
+                    rs = ps.executeQuery();
 
-                VerificarBuque();
+                    if (rs.next()) {
+                        obtenerUltimoCodigo = rs.getString("codigoBuque").trim();
+                        UltimoCodigo = Integer.parseInt(obtenerUltimoCodigo) + 1;
 
-                if (buques.verificarEstadoAc()) {
+                        if ((UltimoCodigo != Integer.parseInt(txtCodBuque.getText()))) {
+                            VerificarBuque();
 
-                    buques.setEstado("Inactivo");
-                    buques.setNombreBuque(txtNombreBuque.getText());
-                    
-                    if (buques.EliminarBuque()) {
-                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> BUQUE ELIMINADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
-                        LlenarJtable();
-                        limpiar();
-                        
-                    } else {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                            if (buques.verificarEstadoAc()) {
+
+                                buques.setEstado("Inactivo");
+                                buques.setNombreBuque(txtNombreBuque.getText());
+
+                                if (buques.EliminarBuque()) {
+                                    JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> BUQUE ELIMINADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                    LlenarJtable();
+                                    limpiar();
+
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                }
+
+                            } else {
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> YA SE ENCUENTRA ELIMINADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                limpiar();
+
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN BUQUE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+
+                        }
+
                     }
-
-                } else {
-                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> YA SE ENCUENTRA ELIMINADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
-                    limpiar();
-
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE LOS DATOS SOLICITADOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);

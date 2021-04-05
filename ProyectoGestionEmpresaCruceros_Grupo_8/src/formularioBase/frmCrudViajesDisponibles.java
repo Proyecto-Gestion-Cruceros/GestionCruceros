@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -401,33 +402,36 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
         Viaje.llenarJCombobox(cmbPuertoSalida, "SELECT [codigoPuerto] FROM [dbo].[puertosSalida] WHERE [estado] = 'Activo' ORDER BY [nombrePuerto] ASC", "codigoPuerto");
         Viaje.llenarJCombobox(cmbDestinos, "SELECT [codigoDestino] FROM [dbo].[destinosTuristicos] WHERE [estado] = 'Activo' ORDER BY [nombreDestino] ASC", "codigoDestino");
         LlenarJtable();
-
+        CodigoNuevoViaje();
+        
     }//GEN-LAST:event_formWindowOpened
 
-    private boolean validarFechas(String fechaPartida, String fechaRegreso) {
+    private boolean validarFechas(String fechaPartida, String fechaRegreso, String fechaActual) {
 
         try {
             SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaDate1 = formateador.parse(fechaPartida);
             Date fechaDate2 = formateador.parse(fechaRegreso);
+            Date fechaDate3 = formateador.parse(fechaActual);
 
-            if (fechaDate1.before(fechaDate2)) {
-                return true;
-            } else {
-                if (fechaDate2.before(fechaDate1)) {
-                    return false;
+            if ((fechaDate3.before(fechaDate1)) && (fechaDate3.before(fechaDate2))) {
+                if (fechaDate1.before(fechaDate2)) {
+                    return true;
                 } else {
                     return false;
                 }
             }
+            return false;
         } catch (Exception ex) {
             return false;
         }
-    }
 
+    }
+    
+    
     private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
 
-        if (cmbBuques.getSelectedIndex() != -1 && cmbPuertoSalida.getSelectedIndex() != -1 && cmbDestinos.getSelectedIndex() != -1 && jdcFechaSalida.getDate() != null && jdcFechaRegreso.getDate() != null) {
+        if ((cmbBuques.getSelectedIndex() != -1) && (cmbPuertoSalida.getSelectedIndex() != -1) && (cmbDestinos.getSelectedIndex() != -1) && (jdcFechaSalida.getDate() != null) && (jdcFechaRegreso.getDate() != null)) {
 
             int codBuque, codPuertoSalida, codDestino;
             String fechaPartida, fechaRegreso;
@@ -442,8 +446,14 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
             int diaRegreso = jdcFechaRegreso.getCalendar().get(Calendar.DAY_OF_MONTH);
 
             fechaRegreso = (anioRegreso + "-" + mesRegreso + "-" + diaRegreso);
-
-            if (validarFechas(fechaPartida, fechaRegreso)) {
+            
+            Calendar c = new GregorianCalendar();
+            String dia = Integer.toString(c.get(Calendar.DATE));
+            String mes = Integer.toString(c.get(Calendar.MONTH));
+            String anio = Integer.toString(c.get(Calendar.YEAR));
+            String fechaActual = (anio + "-" + mes + "-" + dia);
+            
+            if (validarFechas(fechaPartida, fechaRegreso, fechaActual)) {
                 if (VerificarViaje()) {
                     if (Viaje.verificarEstadoCanc()) {
 
@@ -506,6 +516,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
 
         } else {
             JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LOS DATOS SOLICITADOS </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icono);
+        
         }
 
     }//GEN-LAST:event_btnAgregar1ActionPerformed
@@ -537,51 +548,72 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
 
     private void btnActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizar1ActionPerformed
 
-        if (cmbBuques.getSelectedIndex() != -1 && cmbPuertoSalida.getSelectedIndex() != -1 && cmbDestinos.getSelectedIndex() != -1 && jdcFechaSalida.getDate() != null && jdcFechaRegreso.getDate() != null) {
+        if ((cmbBuques.getSelectedIndex() != -1) && (cmbPuertoSalida.getSelectedIndex() != -1) && (cmbDestinos.getSelectedIndex() != -1) && (jdcFechaSalida.getDate() != null) && (jdcFechaRegreso.getDate() != null)) {
 
-            VerificarViaje();
-            if (Viaje.verificarEstadoDisp()) {
+            try {
+                String obtenerUltimoCodigo;
+                int UltimoCodigo;
+                ps = dbConnection.dbConexion().prepareStatement("SELECT TOP 1 [idViaje] FROM [dbo].[viajesDisponibles] order by [idViaje] desc");
+                rs = ps.executeQuery();
 
-                int idViaje, codBuque, codPuertoSalida, codDestino;
-                String fechaPartida, fechaRegreso;
+                if (rs.next()) {
+                    obtenerUltimoCodigo = rs.getString("idViaje").trim();
+                    UltimoCodigo = Integer.parseInt(obtenerUltimoCodigo) + 1;
 
-                idViaje = Integer.parseInt(txtIdViaje.getText());
-                codBuque = Integer.parseInt(cmbBuques.getSelectedItem().toString());
-                codPuertoSalida = Integer.parseInt(cmbPuertoSalida.getSelectedItem().toString());
-                codDestino = Integer.parseInt(cmbDestinos.getSelectedItem().toString());
+                    if ((UltimoCodigo != Integer.parseInt(txtIdViaje.getText()))) {
 
-                Viaje.setIdViaje(idViaje);
-                Viaje.setCodBuque(codBuque);
-                Viaje.setCodPuertoSalida(codPuertoSalida);
-                Viaje.setCodDestino(codDestino);
+                        VerificarViaje();
+                        if (Viaje.verificarEstadoDisp()) {
 
-                int anioPartida = jdcFechaSalida.getCalendar().get(Calendar.YEAR);
-                int mesPartida = jdcFechaSalida.getCalendar().get(Calendar.MARCH);
-                int diaPartida = jdcFechaSalida.getCalendar().get(Calendar.DAY_OF_MONTH);
+                            int idViaje, codBuque, codPuertoSalida, codDestino;
+                            String fechaPartida, fechaRegreso;
 
-                fechaPartida = (anioPartida + "-" + mesPartida + "-" + diaPartida);
+                            idViaje = Integer.parseInt(txtIdViaje.getText());
+                            codBuque = Integer.parseInt(cmbBuques.getSelectedItem().toString());
+                            codPuertoSalida = Integer.parseInt(cmbPuertoSalida.getSelectedItem().toString());
+                            codDestino = Integer.parseInt(cmbDestinos.getSelectedItem().toString());
 
-                Viaje.setFechaPartida(fechaPartida);
+                            Viaje.setIdViaje(idViaje);
+                            Viaje.setCodBuque(codBuque);
+                            Viaje.setCodPuertoSalida(codPuertoSalida);
+                            Viaje.setCodDestino(codDestino);
 
-                int anioRegreso = jdcFechaRegreso.getCalendar().get(Calendar.YEAR);
-                int mesRegreso = jdcFechaRegreso.getCalendar().get(Calendar.MARCH);
-                int diaRegreso = jdcFechaRegreso.getCalendar().get(Calendar.DAY_OF_MONTH);
+                            int anioPartida = jdcFechaSalida.getCalendar().get(Calendar.YEAR);
+                            int mesPartida = jdcFechaSalida.getCalendar().get(Calendar.MARCH);
+                            int diaPartida = jdcFechaSalida.getCalendar().get(Calendar.DAY_OF_MONTH);
 
-                fechaRegreso = (anioRegreso + "-" + mesRegreso + "-" + diaRegreso);
+                            fechaPartida = (anioPartida + "-" + mesPartida + "-" + diaPartida);
 
-                Viaje.setFechaRegreso(fechaRegreso);
+                            Viaje.setFechaPartida(fechaPartida);
 
-                if (Viaje.ActualizarViajeDisponible()) {
-                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE ACTUALIZADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
-                    limpiar();
-                    LlenarJtable();
+                            int anioRegreso = jdcFechaRegreso.getCalendar().get(Calendar.YEAR);
+                            int mesRegreso = jdcFechaRegreso.getCalendar().get(Calendar.MARCH);
+                            int diaRegreso = jdcFechaRegreso.getCalendar().get(Calendar.DAY_OF_MONTH);
 
-                } else {
-                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                            fechaRegreso = (anioRegreso + "-" + mesRegreso + "-" + diaRegreso);
+
+                            Viaje.setFechaRegreso(fechaRegreso);
+
+                            if (Viaje.ActualizarViajeDisponible()) {
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE ACTUALIZADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                limpiar();
+                                LlenarJtable();
+
+                            } else {
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                            }
+
+                        } else {
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> NO SE PUEDE ACTUALIZAR UN VIAJE CANCELADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN VIAJE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+
+                    }
                 }
-
-            } else {
-                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> NO SE PUEDE ACTUALIZAR UN VIAJE CANCELADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
             }
 
         } else {
@@ -593,21 +625,42 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
 
         if (!txtIdViaje.getText().isBlank()) {
 
-            VerificarViaje();
+            try {
+                String obtenerUltimoCodigo;
+                int UltimoCodigo;
+                ps = dbConnection.dbConexion().prepareStatement("SELECT TOP 1 [idViaje] FROM [dbo].[viajesDisponibles] order by [idViaje] desc");
+                rs = ps.executeQuery();
 
-            if (Viaje.verificarEstadoDisp()) {
-                Viaje.setEstado("Cancelado");
-                Viaje.setIdViaje(Integer.parseInt(txtIdViaje.getText()));
-                if (Viaje.EliminarViaje()) {
-                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE CANCELADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
-                    limpiar();
-                    LlenarJtable();
+                if (rs.next()) {
+                    obtenerUltimoCodigo = rs.getString("idViaje").trim();
+                    UltimoCodigo = Integer.parseInt(obtenerUltimoCodigo) + 1;
 
-                } else {
-                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                    if ((UltimoCodigo != Integer.parseInt(txtIdViaje.getText()))) {
+
+                        VerificarViaje();
+                        if (Viaje.verificarEstadoDisp()) {
+                            Viaje.setEstado("Cancelado");
+                            Viaje.setIdViaje(Integer.parseInt(txtIdViaje.getText()));
+                            if (Viaje.EliminarViaje()) {
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE CANCELADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                limpiar();
+                                LlenarJtable();
+
+                            } else {
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL VIAJE YA SE ENCUENTRA CANCELADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN VIAJE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+
+                    }
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL VIAJE YA SE ENCUENTRA CANCELADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
             }
         } else {
             JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN VIAJE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icono);
@@ -691,24 +744,43 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbDestinosItemStateChanged
 
     private void jtViajesDispMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtViajesDispMouseClicked
+        
         int seleccionar = jtViajesDisp.rowAtPoint(evt.getPoint());
         String buque, salida, destino;
-
+        String JcmbBuque = cmbBuques.getEditor().getItem().toString();
         txtIdViaje.setText(String.valueOf(jtViajesDisp.getValueAt(seleccionar, 0)));
 
         buque = jtViajesDisp.getValueAt(seleccionar, 1).toString();
         salida = jtViajesDisp.getValueAt(seleccionar, 2).toString();
         destino = jtViajesDisp.getValueAt(seleccionar, 3).toString();
-
+        
         Viaje.setNombreBuque(buque);
-        cmbBuques.setSelectedItem(Viaje.obtenerIdBuque());
+        for(int i =0;i<cmbBuques.getItemCount();i++)
+        {
+            if(Integer.parseInt(cmbBuques.getItemAt(i)) == Viaje.obtenerIdBuque())
+            {
+                cmbBuques.setSelectedIndex(i);
+            }
+        }
 
         Viaje.setNombreSalida(salida);
-        cmbPuertoSalida.setSelectedItem(Viaje.obtenerIdSalida());
-
+        for(int i =0;i<cmbPuertoSalida.getItemCount();i++)
+        {
+            if(Integer.parseInt(cmbPuertoSalida.getItemAt(i)) == Viaje.obtenerIdBuque())
+            {
+                cmbPuertoSalida.setSelectedIndex(i);
+            }
+        }
+        
         Viaje.setNombreDestino(destino);
-        cmbDestinos.setSelectedItem(Viaje.obtenerIdDestino());
-
+        for(int i =0;i<cmbDestinos.getItemCount();i++)
+        {
+            if(Integer.parseInt(cmbDestinos.getItemAt(i)) == Viaje.obtenerIdBuque())
+            {
+                cmbDestinos.setSelectedIndex(i);
+            }
+        }
+        
         llenarFechaSal();
         llenarFechaRe();
 
