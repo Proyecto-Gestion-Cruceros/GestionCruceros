@@ -74,6 +74,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(0, 79, 129));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1920, 1080));
 
         jLabel2.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 51));
@@ -218,7 +219,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(200, 200, 200))
                     .addGroup(jPanel1Layout.createSequentialGroup()

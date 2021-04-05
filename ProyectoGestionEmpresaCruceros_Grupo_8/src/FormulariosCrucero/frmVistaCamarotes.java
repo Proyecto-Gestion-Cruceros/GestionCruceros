@@ -7,6 +7,7 @@ package FormulariosCrucero;
 
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
+import Formularios.Pagos.frmPagos;
 
 import static FormulariosCrucero.frmVistaCamarotesN2.conn;
 import java.awt.Color;
@@ -1311,6 +1312,8 @@ public class frmVistaCamarotes extends javax.swing.JFrame {
         if (numeroCamaroteSeleccionado != 0) {
             JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> EL CAMAROTE SELECCIONADO ES:</b></html>" + numeroCamaroteSeleccionado, "",JOptionPane.INFORMATION_MESSAGE, Icon);
             variables.setNumeroCamarote(numeroCamaroteSeleccionado);
+            this.dispose();
+            new frmPagos().setVisible(true);
 
         } else {
             JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR UN CAMAROTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);

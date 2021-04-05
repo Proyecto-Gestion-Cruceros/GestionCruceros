@@ -47,11 +47,12 @@ public class frmIGP extends javax.swing.JFrame {
         panSubMenu = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         btnClientes = new javax.swing.JButton();
-        btnPuertos = new javax.swing.JButton();
+        btnFacturas = new javax.swing.JButton();
         btnBuques = new javax.swing.JButton();
         btnCamarotes = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
         btnCerrarSesion = new javax.swing.JButton();
+        btnPuertos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -167,14 +168,14 @@ public class frmIGP extends javax.swing.JFrame {
             }
         });
 
-        btnPuertos.setBackground(new java.awt.Color(241, 209, 90));
-        btnPuertos.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 24)); // NOI18N
-        btnPuertos.setForeground(new java.awt.Color(0, 0, 0));
-        btnPuertos.setText("PUERTOS SALIDA");
-        btnPuertos.setBorder(null);
-        btnPuertos.addActionListener(new java.awt.event.ActionListener() {
+        btnFacturas.setBackground(new java.awt.Color(241, 209, 90));
+        btnFacturas.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 24)); // NOI18N
+        btnFacturas.setForeground(new java.awt.Color(0, 0, 0));
+        btnFacturas.setText("FACTURAS");
+        btnFacturas.setBorder(null);
+        btnFacturas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPuertosActionPerformed(evt);
+                btnFacturasActionPerformed(evt);
             }
         });
 
@@ -221,11 +222,21 @@ public class frmIGP extends javax.swing.JFrame {
             }
         });
 
+        btnPuertos.setBackground(new java.awt.Color(241, 209, 90));
+        btnPuertos.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 24)); // NOI18N
+        btnPuertos.setForeground(new java.awt.Color(0, 0, 0));
+        btnPuertos.setText("PUERTOS SALIDA");
+        btnPuertos.setBorder(null);
+        btnPuertos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPuertosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panSubMenuLayout = new javax.swing.GroupLayout(panSubMenu);
         panSubMenu.setLayout(panSubMenuLayout);
         panSubMenuLayout.setHorizontalGroup(
             panSubMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnPuertos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnBuques, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnCamarotes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -238,13 +249,15 @@ public class frmIGP extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addComponent(btnPuertos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnFacturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panSubMenuLayout.setVerticalGroup(
             panSubMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panSubMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96)
+                .addGap(26, 26, 26)
                 .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,9 +265,11 @@ public class frmIGP extends javax.swing.JFrame {
                 .addComponent(btnBuques, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(btnCamarotes, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(33, 33, 33)
                 .addComponent(btnPuertos, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
+                .addComponent(btnFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -334,11 +349,10 @@ public class frmIGP extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnBuquesActionPerformed
 
-    private void btnPuertosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuertosActionPerformed
-       frmCrudPuertosDeSalida crudPuertoSalida = new frmCrudPuertosDeSalida();
-       crudPuertoSalida.setVisible(true);
+    private void btnFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturasActionPerformed
+       new frmVerFacturas().setVisible(true);
        dispose();
-    }//GEN-LAST:event_btnPuertosActionPerformed
+    }//GEN-LAST:event_btnFacturasActionPerformed
 
     private void btnViajesDisponiblesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViajesDisponiblesActionPerformed
        frmCrudViajesDisponibles crudViajesDisponibles = new frmCrudViajesDisponibles();
@@ -359,7 +373,7 @@ public class frmIGP extends javax.swing.JFrame {
                 btnClientes.setEnabled(true);
                 btnBuques.setEnabled(true);
                 btnCamarotes.setEnabled(true);
-                btnPuertos.setEnabled(true);
+                btnFacturas.setEnabled(true);
                 btnViajesDisponibles.setEnabled(true);
                 btnDestinosTuristicos.setEnabled(true);
                 btnFactura.setEnabled(true);
@@ -369,7 +383,7 @@ public class frmIGP extends javax.swing.JFrame {
                 btnClientes.setEnabled(true);
                 btnBuques.setEnabled(false);
                 btnCamarotes.setEnabled(false);
-                btnPuertos.setEnabled(false);
+                btnFacturas.setEnabled(false);
                 btnViajesDisponibles.setEnabled(false);
                 btnDestinosTuristicos.setEnabled(false);
                 btnFactura.setEnabled(true);
@@ -397,6 +411,11 @@ public class frmIGP extends javax.swing.JFrame {
 
      
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void btnPuertosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuertosActionPerformed
+        new frmCrudPuertosDeSalida().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnPuertosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -441,6 +460,7 @@ public class frmIGP extends javax.swing.JFrame {
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnDestinosTuristicos;
     private javax.swing.JButton btnFactura;
+    private javax.swing.JButton btnFacturas;
     private javax.swing.JButton btnMinimizar1;
     private javax.swing.JButton btnPuertos;
     private javax.swing.JButton btnUsuario;
