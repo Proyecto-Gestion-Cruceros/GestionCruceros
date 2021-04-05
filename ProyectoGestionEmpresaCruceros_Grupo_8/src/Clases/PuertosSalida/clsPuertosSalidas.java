@@ -2,12 +2,15 @@ package Clases.PuertosSalida;
 
 import Clases.dbConnection;
 import java.sql.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class clsPuertosSalidas {
 
     PreparedStatement ps;
     ResultSet result = null;
+    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
 
     protected static String NombrePuerto;
     protected static int CodigoPuerto;
@@ -40,7 +43,7 @@ public class clsPuertosSalidas {
             return resultado > 0;
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
 
             return false;
         }
@@ -59,7 +62,7 @@ public class clsPuertosSalidas {
             return resultado > 0;
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
 
             return false;
         }
@@ -77,7 +80,7 @@ public class clsPuertosSalidas {
             return resultado > 0;
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
 
             return false;
         }

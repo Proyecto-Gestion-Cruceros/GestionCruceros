@@ -536,7 +536,23 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
         txtApellidosUsuario.setText(String.valueOf(JUsuarios.getValueAt(seleccionar, 2)));
         txtTelefonoUsuario.setText(String.valueOf(JUsuarios.getValueAt(seleccionar, 3)));
         txtCorreoElectronicoUsuario.setText(String.valueOf(JUsuarios.getValueAt(seleccionar, 4)));
-        txtContraseñaUsuario.setText(null);
+
+        try {
+            String obtenerContrasenia;
+            int UltimoCodigo;
+            ps = dbConnection.dbConexion().prepareStatement("  SELECT [contraseniaUsuario] FROM [agenciaCruceros].[dbo].[usuarios] where [identidadUsuario] = ?");
+            ps.setString(1,  txtIdentidadUsuario.getText());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                obtenerContrasenia = rs.getString("contraseniaUsuario").trim();
+                txtContraseñaUsuario.setText(obtenerContrasenia);
+
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
+        }
+
         txtConfirmarContraseñaUsuario.setText(null);
 
     }//GEN-LAST:event_JUsuariosMouseClicked

@@ -63,6 +63,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPuertosSalida = new javax.swing.JTable();
         btnMenuPrincipal = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -90,6 +91,11 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
         jLabel4.setText("Nombre del Puerto");
 
         txtNombrePuertoSalida.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
+        txtNombrePuertoSalida.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombrePuertoSalidaKeyTyped(evt);
+            }
+        });
 
         btnActualizarPuertoSalida.setBackground(new java.awt.Color(255, 204, 51));
         btnActualizarPuertoSalida.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -154,6 +160,16 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
             }
         });
 
+        btnLimpiar.setBackground(new java.awt.Color(255, 204, 51));
+        btnLimpiar.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
+        btnLimpiar.setForeground(new java.awt.Color(0, 0, 0));
+        btnLimpiar.setText("LIMPIAR");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,22 +181,14 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(307, 307, 307)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(50, 50, 50)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtNombrePuertoSalida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCodigoPuertoSalida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnAgregarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(312, 312, 312)
-                                .addComponent(btnActualizarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(311, 311, 311)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(405, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtNombrePuertoSalida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodigoPuertoSalida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(695, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,6 +198,16 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnAgregarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(158, 158, 158)
+                .addComponent(btnActualizarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(169, 169, 169)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(172, 172, 172)
+                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(300, 300, 300))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +220,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(219, 219, 219))
+                        .addGap(200, 200, 200))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(259, 259, 259)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -216,8 +234,9 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55))
+                    .addComponent(btnAgregarPuertoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(74, 74, 74))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -330,6 +349,16 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
 
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+       Limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void txtNombrePuertoSalidaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePuertoSalidaKeyTyped
+       if(txtNombrePuertoSalida.getText().equals("")){
+           Limpiar();
+       }
+    }//GEN-LAST:event_txtNombrePuertoSalidaKeyTyped
+
     void limpiaTabla() {
         try {
             temp = (DefaultTableModel) jPuertosSalida.getModel();
@@ -341,6 +370,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
 
     public void MostrarPuertosSalida() {
         try {
+            limpiaTabla();
             ps = dbConnection.dbConexion().prepareStatement("SELECT [codigoPuerto], [nombrePuerto], [estado] FROM [agenciaCruceros].[dbo].[puertosSalida]");
             rs = ps.executeQuery();
             rsm = rs.getMetaData();
@@ -388,7 +418,6 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
     public void Limpiar() {
         txtCodigoPuertoSalida.setText(null);
         txtNombrePuertoSalida.setText(null);
-        limpiaTabla();
         CodigoNuevoPuerto();
     }
 
@@ -431,6 +460,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
     private javax.swing.JButton btnActualizarPuertoSalida;
     private javax.swing.JButton btnAgregarPuertoSalida;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnMenuPrincipal;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

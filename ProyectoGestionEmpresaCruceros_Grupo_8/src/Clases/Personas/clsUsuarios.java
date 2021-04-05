@@ -4,6 +4,8 @@ import Clases.dbConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class clsUsuarios extends ClsPersona {
@@ -13,6 +15,7 @@ public class clsUsuarios extends ClsPersona {
     protected static String Contrasenia;
     PreparedStatement ps;
     ResultSet result = null;
+    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
 
     public static String getUsuario() {
         return Usuario;
@@ -59,11 +62,11 @@ public class clsUsuarios extends ClsPersona {
             return resultado > 0;
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
 
             return false;
         }
-        
+
     }
 
     @Override
@@ -86,7 +89,7 @@ public class clsUsuarios extends ClsPersona {
             return resultado > 0;
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
 
             return false;
         }
@@ -99,14 +102,13 @@ public class clsUsuarios extends ClsPersona {
         try {
             ps = dbConnection.dbConexion().prepareStatement("update usuarios set estado = 'Inactivo' where identidadUsuario =? and estado = 'Activo'");
             ps.setString(1, Identidad);
-       
 
             resultado = ps.executeUpdate();
 
             return resultado > 0;
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
 
             return false;
         }
