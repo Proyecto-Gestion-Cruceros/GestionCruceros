@@ -219,9 +219,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE, icono);
         if (result == JOptionPane.YES_OPTION) {
-            frmInicioSesion inicioSesion = new frmInicioSesion();
-            inicioSesion.setVisible(false);
-            dispose();
+            System.exit(0);
         }
     }//GEN-LAST:event_btnCerrarActionPerformed
 
