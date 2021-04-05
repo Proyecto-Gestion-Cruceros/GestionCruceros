@@ -46,7 +46,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         txtBusqueda.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(final KeyEvent e) {
-                String cadena = (txtBusqueda.getText()).toUpperCase();
+                String cadena = (txtBusqueda.getText());
                 txtBusqueda.setText(cadena);
                 repaint();
 
@@ -376,8 +376,8 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         int row = tablaClientes.rowAtPoint(evt.getPoint());
         int col = tablaClientes.columnAtPoint(evt.getPoint());
         identidadCliente = null;
-        identidadCliente = tablaClientes.getModel().getValueAt(row, 0).toString();
-        nombreCliente = tablaClientes.getModel().getValueAt(row, 1).toString();
+        identidadCliente = tablaClientes.getValueAt(row, 0).toString();
+        nombreCliente = tablaClientes.getValueAt(row, 1).toString();
 
     }//GEN-LAST:event_tablaClientesMouseClicked
 
