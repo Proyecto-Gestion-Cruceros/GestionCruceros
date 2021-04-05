@@ -366,6 +366,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
         
         dtEditorRe.setEditable(false);
         dtEditorRe.setBackground(Color.white);
+        
     }
 
     private void LlenarJtable() {
