@@ -149,7 +149,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnCerrar);
-        btnCerrar.setBounds(1860, 10, 40, 35);
+        btnCerrar.setBounds(1870, 10, 40, 35);
 
         btnMinimizar1.setBackground(new java.awt.Color(13, 54, 118));
         btnMinimizar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/minimize40.png"))); // NOI18N
@@ -160,7 +160,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnMinimizar1);
-        btnMinimizar1.setBounds(1810, 30, 40, 12);
+        btnMinimizar1.setBounds(1820, 30, 40, 12);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
