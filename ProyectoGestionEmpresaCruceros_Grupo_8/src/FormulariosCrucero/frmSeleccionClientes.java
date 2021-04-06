@@ -396,11 +396,11 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarClienteActionPerformed
 
     private void tablaSeleccionadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSeleccionadosMouseClicked
-        int row = tablaClientes.rowAtPoint(evt.getPoint());
-        int col = tablaClientes.columnAtPoint(evt.getPoint());
-        identidadCliente = null;
-        identidadCliente = tablaClientes.getValueAt(row, 0).toString();
-        nombreCliente = tablaClientes.getValueAt(row, 1).toString();
+         int row = tablaSeleccionados.rowAtPoint(evt.getPoint());
+        int col = tablaSeleccionados.columnAtPoint(evt.getPoint());
+
+        identidadClienteEliminar = tablaSeleccionados.getValueAt(row, 0).toString();
+        nombreCliente = tablaSeleccionados.getValueAt(row, 1).toString();
 
     }//GEN-LAST:event_tablaSeleccionadosMouseClicked
 

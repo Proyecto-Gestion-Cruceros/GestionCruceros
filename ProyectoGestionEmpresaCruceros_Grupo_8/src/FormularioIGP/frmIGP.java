@@ -376,7 +376,7 @@ public class frmIGP extends javax.swing.JFrame {
                 btnFacturas.setEnabled(true);
                 btnViajesDisponibles.setEnabled(true);
                 btnDestinosTuristicos.setEnabled(true);
-                btnFactura.setEnabled(true);
+                btnPuertos.setEnabled(true);
             } 
             else if (codigoAcceso == 2) {
                 btnUsuario.setEnabled(false);
@@ -386,7 +386,7 @@ public class frmIGP extends javax.swing.JFrame {
                 btnFacturas.setEnabled(false);
                 btnViajesDisponibles.setEnabled(false);
                 btnDestinosTuristicos.setEnabled(false);
-                btnFactura.setEnabled(true);
+                btnPuertos.setEnabled(true);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);

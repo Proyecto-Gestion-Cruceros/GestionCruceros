@@ -1310,7 +1310,6 @@ public class frmVistaCamarotes extends javax.swing.JFrame {
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         if (numeroCamaroteSeleccionado != 0) {
-            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> EL CAMAROTE SELECCIONADO ES:</b></html>" + numeroCamaroteSeleccionado, "",JOptionPane.INFORMATION_MESSAGE, Icon);
             variables.setNumeroCamarote(numeroCamaroteSeleccionado);
             this.dispose();
             new frmPagos().setVisible(true);
