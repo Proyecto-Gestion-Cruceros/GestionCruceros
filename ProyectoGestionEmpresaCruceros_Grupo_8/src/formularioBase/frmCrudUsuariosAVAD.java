@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package formularioBase;
 
+import Clases.ClsFuncionesDB;
 import Clases.Personas.clsUsuarios;
 import Clases.Personas.ClsPersona;
 import javax.swing.JOptionPane;
@@ -367,7 +363,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCargoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCargoUsuarioActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtCargoUsuarioActionPerformed
 
     private void btnActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarUsuarioActionPerformed
@@ -376,7 +372,6 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
             if (validar.isEntero(txtIdentidadUsuario.getText()) && txtIdentidadUsuario.getText().length() == 13) {
                 if (validar.isLetras(txtNombresUsuarios.getText()) || validar.isLetras(txtApellidosUsuario.getText())) {
                     if (validar.isEntero(txtTelefonoUsuario.getText()) && txtTelefonoUsuario.getText().length() == 8) {
-                        //VALIDACIONES PARA CORREO Y CONTRASEÑO LUEGO PROCEDIMIENTO
 
                         if (String.valueOf(txtContraseñaUsuario.getPassword()).equals(String.valueOf(txtConfirmarContraseñaUsuario.getPassword()))) {
 
@@ -446,7 +441,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
             if (validar.isEntero(txtIdentidadUsuario.getText()) && txtIdentidadUsuario.getText().length() == 13) {
                 if (validar.isLetras(txtNombresUsuarios.getText()) || validar.isLetras(txtApellidosUsuario.getText())) {
                     if (validar.isEntero(txtTelefonoUsuario.getText()) && txtTelefonoUsuario.getText().length() == 8) {
-                        //VALIDACIONES PARA CORREO Y CONTRASEÑO LUEGO PROCEDIMIENTO
+
                         if (validar.isemail(txtCorreoElectronicoUsuario.getText())) {
                             if (String.valueOf(txtContraseñaUsuario.getPassword()).equals(String.valueOf(txtConfirmarContraseñaUsuario.getPassword()))) {
 
@@ -560,7 +555,6 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
 
         try {
             String obtenerContrasenia;
-            int UltimoCodigo;
             ps = dbConnection.dbConexion().prepareStatement("  SELECT [contraseniaUsuario] FROM [agenciaCruceros].[dbo].[usuarios] where [identidadUsuario] = ?");
             ps.setString(1, txtIdentidadUsuario.getText());
             rs = ps.executeQuery();
@@ -579,7 +573,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     }//GEN-LAST:event_JUsuariosMouseClicked
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-        int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>", "Salir del Módulo",
+        int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">¿Está seguro de volver al Menú Principal?</b></html>", "Salir del Módulo",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, icono);
         if (result == JOptionPane.YES_OPTION) {
@@ -620,38 +614,18 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     }
 
     private void MostrarUsuarios() {
-        try {
-            limpiaTabla();
-            int Cargo;
-            if (txtCargoUsuario.getText().equals("Administrador")) {
-                Cargo = 1;
-            } else {
-                Cargo = 2;
-            }
-
-            ps = dbConnection.dbConexion().prepareStatement("SELECT [identidadUsuario], [nombres] ,[apellidos],[telefono] ,[correoElectronico] ,[estado] FROM [agenciaCruceros].[dbo].[usuarios] WHERE [cargo] = ?");
-            ps.setInt(1, Cargo);
-            rs = ps.executeQuery();
-            rsm = rs.getMetaData();
-
-            ArrayList<Object[]> data = new ArrayList<>();
-
-            while (rs.next()) {
-                Object[] rows = new Object[rsm.getColumnCount()];
-                for (int i = 0; i < rows.length; i++) {
-                    rows[i] = rs.getObject(i + 1);
-                }
-                data.add(rows);
-            }
-
-            dtm = (DefaultTableModel) this.JUsuarios.getModel();
-            for (int i = 0; i < data.size(); i++) {
-                dtm.addRow(data.get(i));
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
+        limpiaTabla();
+        int Cargo;
+        if (txtCargoUsuario.getText().equals("Administrador")) {
+            Cargo = 1;
+        } else {
+            Cargo = 2;
         }
+
+        conexion = new ClsFuncionesDB();
+        conexion.llenarJTable(JUsuarios, "SELECT [identidadUsuario], [nombres] ,[apellidos],[telefono] ,[correoElectronico] ,[estado] FROM [agenciaCruceros].[dbo].[usuarios] WHERE [cargo] = '" +Cargo+"'");
+        conexion = new dbConnection();
+
 
     }
 
@@ -675,38 +649,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
         return 0;
     }
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmCrudUsuariosAVAD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmCrudUsuariosAVAD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmCrudUsuariosAVAD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmCrudUsuariosAVAD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmCrudUsuariosAVAD().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JUsuarios;

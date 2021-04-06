@@ -41,7 +41,6 @@ public class clsUsuarios extends ClsPersona {
         clsUsuarios.Contrasenia = Contrasenia;
     }
 
-    //Metodos deL Crud
     @Override
     public boolean AgregarPersona() {
 
@@ -114,8 +113,4 @@ public class clsUsuarios extends ClsPersona {
         }
     }
 
-    @Override
-    public boolean VerPersonas() {
-        return false;
-    }
 }

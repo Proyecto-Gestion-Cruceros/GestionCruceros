@@ -8,7 +8,6 @@ public class ClsPersona {
     protected static String CorreoElectronico;
     protected static String Estado;
 
-    //Encapsulamiento de variables
     public static String getIdentidad() {
         return Identidad;
     }
@@ -57,10 +56,6 @@ public class ClsPersona {
         ClsPersona.Estado = Estado;
     }
 
-
-    
-    
-    //Metodos deL Crud
     public boolean AgregarPersona(){
         return false;
     }
@@ -71,9 +66,5 @@ public class ClsPersona {
     
     public boolean EliminarPersona(){
         return false;
-    }
-    
-    public boolean VerPersonas(){
-        return false;
-    }
+    }  
 }

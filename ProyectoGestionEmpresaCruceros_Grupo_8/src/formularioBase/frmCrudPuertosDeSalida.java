@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package formularioBase;
 
+import Clases.ClsFuncionesDB;
 import Clases.ClsValidaciones;
 import Clases.PuertosSalida.clsPuertosSalidas;
 import Clases.dbConnection;
@@ -21,15 +17,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
 public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmCrudPuertosDeSalida
-     */
     public frmCrudPuertosDeSalida() {
         initComponents();
     }
@@ -285,7 +274,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         if (!txtCodigoPuertoSalida.getText().isBlank()) {
-            int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Está seguro de Eliminar Este Puerto?</b></html>", "Salir del Módulo",
+            int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">¿Está seguro de Eliminar Este Puerto?</b></html>", "Salir del Módulo",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE, icono);
             if (result == JOptionPane.YES_OPTION) {
@@ -340,7 +329,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
     }//GEN-LAST:event_jPuertosSalidaMouseClicked
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-        int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>", "Salir del Módulo",
+        int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">¿Está seguro de volver al Menú Principal?</b></html>", "Salir del Módulo",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, icono);
         if (result == JOptionPane.YES_OPTION) {
@@ -351,13 +340,13 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-       Limpiar();
+        Limpiar();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void txtNombrePuertoSalidaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePuertoSalidaKeyTyped
-       if(txtNombrePuertoSalida.getText().equals("")){
-           Limpiar();
-       }
+        if (txtNombrePuertoSalida.getText().equals("")) {
+            Limpiar();
+        }
     }//GEN-LAST:event_txtNombrePuertoSalidaKeyTyped
 
     private void limpiaTabla() {
@@ -370,31 +359,11 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
     }
 
     private void MostrarPuertosSalida() {
-        try {
-            limpiaTabla();
-            ps = dbConnection.dbConexion().prepareStatement("SELECT [codigoPuerto], [nombrePuerto], [estado] FROM [agenciaCruceros].[dbo].[puertosSalida]");
-            rs = ps.executeQuery();
-            rsm = rs.getMetaData();
-
-            ArrayList<Object[]> data = new ArrayList<>();
-
-            while (rs.next()) {
-                Object[] rows = new Object[rsm.getColumnCount()];
-                for (int i = 0; i < rows.length; i++) {
-                    rows[i] = rs.getObject(i + 1);
-                }
-                data.add(rows);
-            }
-
-            dtm = (DefaultTableModel) this.jPuertosSalida.getModel();
-            for (int i = 0; i < data.size(); i++) {
-                dtm.addRow(data.get(i));
-            }
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
-        }
-
+        
+        conexion = new ClsFuncionesDB();
+        conexion.llenarJTable(jPuertosSalida, "SELECT [codigoPuerto], [nombrePuerto], [estado] FROM [agenciaCruceros].[dbo].[puertosSalida]");
+        conexion = new dbConnection();
+        
     }
 
     private void CodigoNuevoPuerto() {
@@ -422,40 +391,6 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
         CodigoNuevoPuerto();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmCrudPuertosDeSalida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmCrudPuertosDeSalida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmCrudPuertosDeSalida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmCrudPuertosDeSalida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmCrudPuertosDeSalida().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizarPuertoSalida;
