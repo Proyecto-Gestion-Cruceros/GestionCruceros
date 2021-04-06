@@ -151,7 +151,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
         btnAgregar.setBackground(new java.awt.Color(255, 204, 51));
         btnAgregar.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 22)); // NOI18N
         btnAgregar.setForeground(new java.awt.Color(0, 0, 0));
-        btnAgregar.setText("Agregar");
+        btnAgregar.setText("AGREGAR");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -161,7 +161,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
         btnModificar.setBackground(new java.awt.Color(255, 204, 51));
         btnModificar.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 22)); // NOI18N
         btnModificar.setForeground(new java.awt.Color(0, 0, 0));
-        btnModificar.setText("Actualizar");
+        btnModificar.setText("ACTUALIZAR");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarActionPerformed(evt);
@@ -212,7 +212,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
         btnEliminarCliente.setBackground(new java.awt.Color(255, 204, 51));
         btnEliminarCliente.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 22)); // NOI18N
         btnEliminarCliente.setForeground(new java.awt.Color(0, 0, 0));
-        btnEliminarCliente.setLabel("Eliminar");
+        btnEliminarCliente.setText("ELIMINAR");
         btnEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarClienteActionPerformed(evt);
@@ -295,7 +295,6 @@ public class frmCrudClientes extends javax.swing.JFrame {
                                     .addComponent(txtCorreoCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 0, 0)
                                         .addComponent(lbActualizar)
                                         .addGap(1226, 1226, 1226))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -384,11 +383,11 @@ public class frmCrudClientes extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1920, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1956, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

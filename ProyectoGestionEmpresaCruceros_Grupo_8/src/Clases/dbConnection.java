@@ -3,13 +3,13 @@ package Clases;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-//import javax.sql.DataSource;
+import javax.swing.JTable;
 
 public class dbConnection {
     
     public static Connection conn = null;
-    //public DataSource dataSoorce;
     
     public static Connection dbConexion(){
         String url = "jdbc:sqlserver://HACKNEL;databaseName=agenciaCruceros";
@@ -24,10 +24,18 @@ public class dbConnection {
         
         try{
            conn = DriverManager.getConnection(url, "sa", "15263");
-          //  JOptionPane.showMessageDialog(null, "Conexion Exitosa");
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Error de conexion");
         }  
         return conn;
     }
+    
+    public void llenarJCombobox(JComboBox Jcmb, String instruccion, String campo){
+        
+    }
+    
+    public void llenarJTable(JTable tabla, String instruccion){
+        
+    }
+    
 }

@@ -5,6 +5,7 @@
  */
 package FormulariosCrucero;
 
+import Clases.ClsFuncionesDB;
 import Clases.ClsValidaciones;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
@@ -362,7 +363,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         tablaSeleccionados.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
                 
         if(variables.getCodigoOperacion() == 1){
-                cargarDatos();
+            cargarDatos();
         }
         else if(variables.getCodigoOperacion() == 2){
                 tablaClientes.setModel(variables.model);
@@ -504,27 +505,9 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
     }
 
     private void cargarDatos() {
-        variables.model = (DefaultTableModel) tablaClientes.getModel();
-        variables.model.setRowCount(0);
-
-        try {
-            ps = conexion.dbConexion().prepareStatement("select identidadCliente, CONCAT(nombres, ' ', apellidos), telefono, correoElectronico from clientes WHERE estado = 'Activo'");
-
-            ResultSet result = ps.executeQuery();
-            rsmd = result.getMetaData();
-
-            int columna = rsmd.getColumnCount();
-
-            while (result.next()) {
-                Object fil[] = new Object[columna];
-                for (int i = 0; i < columna; i++) {
-                    fil[i] = result.getObject(i + 1);
-                }
-                variables.model.addRow(fil);
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
-        }
+        conexion = new ClsFuncionesDB();
+        conexion.llenarJTable(tablaClientes, "select identidadCliente, CONCAT(nombres, ' ', apellidos), telefono, correoElectronico from clientes WHERE estado = 'Activo'");
+        conexion = new dbConnection();
     }
 
     private void cargarDatosEspecificos(String identidad) {

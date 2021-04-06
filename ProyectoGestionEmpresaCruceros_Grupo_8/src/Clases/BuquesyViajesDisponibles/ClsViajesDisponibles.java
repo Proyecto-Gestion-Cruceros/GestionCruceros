@@ -1,11 +1,12 @@
 package Clases.BuquesyViajesDisponibles;
 
+import Clases.ClsFuncionesDB;
 import Clases.dbConnection;
 import java.sql.*;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
-public class ClsViajesDisponibles extends dbConnection {
+public class ClsViajesDisponibles extends ClsFuncionesDB {
      
    PreparedStatement ps;
 
@@ -103,33 +104,6 @@ public class ClsViajesDisponibles extends dbConnection {
 
     public void setBuque(int buque) {
         this.buque = buque;
-    }
-
-    
-    
-    public void llenarJCombobox(JComboBox Jcmb, String instruccion, String campo) {
-        //Declaración de variable resultado
-        ResultSet resultado = null;
-        //Consulta SQL
-        String SSQL = instruccion;
-
-        try {
-            //Establecemos conexión con la BD 
-            conn = dbConnection.dbConexion();
-
-            //Preparamos la consulta SQL
-            ps = conn.prepareStatement(SSQL);
-            //Ejecutamos la consulta
-            resultado = ps.executeQuery();
-
-            while (resultado.next()) {
-                Jcmb.addItem(resultado.getString(campo));
-            }
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-
-        }
     }
 
     public boolean RegistrarViajeDisponible() {

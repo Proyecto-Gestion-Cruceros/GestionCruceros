@@ -1,6 +1,7 @@
 package formularioBase;
 
 import Clases.BuquesyViajesDisponibles.ClsViajesDisponibles;
+import Clases.ClsFuncionesDB;
 import Clases.ClsValidaciones;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
@@ -370,30 +371,6 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
         
     }
 
-    private void LlenarJtable() {
-        dtm = (DefaultTableModel) jtViajesDisp.getModel();
-        dtm.setRowCount(0);
-        try {
-            ps = dbConnection.dbConexion().prepareStatement("SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
-
-            rs = ps.executeQuery();
-            rsm = rs.getMetaData();
-
-            int columna = rsm.getColumnCount();
-
-            while (rs.next()) {
-                Object fil[] = new Object[columna];
-                for (int i = 0; i < columna; i++) {
-                    fil[i] = rs.getObject(i + 1);
-                }
-                dtm.addRow(fil);
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> Error al cargar los datos en la tabla </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
-
-        }
-    }
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         jtViajesDisp.getTableHeader().setReorderingAllowed(false);
         jtViajesDisp.getTableHeader().setForeground(Color.BLACK);
@@ -401,7 +378,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
         Viaje.llenarJCombobox(cmbBuques, "SELECT [codigoBuque] FROM [dbo].[buques] WHERE [estado] = 'Activo' OR [estado] = 'Ocupado' ORDER BY [nombreBuque] ASC", "codigoBuque");
         Viaje.llenarJCombobox(cmbPuertoSalida, "SELECT [codigoPuerto] FROM [dbo].[puertosSalida] WHERE [estado] = 'Activo' ORDER BY [nombrePuerto] ASC", "codigoPuerto");
         Viaje.llenarJCombobox(cmbDestinos, "SELECT [codigoDestino] FROM [dbo].[destinosTuristicos] WHERE [estado] = 'Activo' ORDER BY [nombreDestino] ASC", "codigoDestino");
-        LlenarJtable();
+        Viaje.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
         CodigoNuevoViaje();
 
     }//GEN-LAST:event_formWindowOpened
@@ -484,7 +461,6 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                 fechaRegreso = Viaje.obtenerFechaRegresoBuque();
 
                 if (validarFechas(fechaPartidaN, fechaRegresoN, fechaActual)) {
-                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> Verificando </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
 
                     if (validarDisponibilidadBuque(fechaRegreso, fechaPartidaN, fechaRegresoN)) {
                         if (VerificarViaje()) {
@@ -507,7 +483,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                                 if (Viaje.RegistrarViajeDisponible()) {
                                     JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
                                     limpiar();
-                                    LlenarJtable();
+                                    Viaje.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
 
                                 } else {
                                     JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -535,7 +511,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                             if (Viaje.RegistrarViajeDisponible()) {
                                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
                                 limpiar();
-                                LlenarJtable();
+                                Viaje.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
 
                             } else {
                                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -576,7 +552,8 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                             if (Viaje.RegistrarViajeDisponible()) {
                                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
                                 limpiar();
-                                LlenarJtable();
+                                Viaje.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
+
 
                             } else {
                                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -604,7 +581,8 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                         if (Viaje.RegistrarViajeDisponible()) {
                             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
                             limpiar();
-                            LlenarJtable();
+                            Viaje.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
+
 
                         } else {
                             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -695,7 +673,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                         if (Viaje.verificarEstadoAct()) {
 
                             int idViaje, codBuque, codPuertoSalida, codDestino;
-                            String fechaPartida, fechaRegreso;
+                            String fechaPartidaN, fechaRegresoN, fechaRegreso;
 
                             idViaje = Integer.parseInt(txtIdViaje.getText());
                             codBuque = Integer.parseInt(cmbBuques.getSelectedItem().toString());
@@ -711,25 +689,47 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                             int mesPartida = jdcFechaSalida.getCalendar().get(Calendar.MARCH);
                             int diaPartida = jdcFechaSalida.getCalendar().get(Calendar.DAY_OF_MONTH);
 
-                            fechaPartida = (anioPartida + "-" + mesPartida + "-" + diaPartida);
+                            fechaPartidaN = (anioPartida + "-" + mesPartida + "-" + diaPartida);
 
-                            Viaje.setFechaPartida(fechaPartida);
+                            Viaje.setFechaPartida(fechaPartidaN);
 
                             int anioRegreso = jdcFechaRegreso.getCalendar().get(Calendar.YEAR);
                             int mesRegreso = jdcFechaRegreso.getCalendar().get(Calendar.MARCH);
                             int diaRegreso = jdcFechaRegreso.getCalendar().get(Calendar.DAY_OF_MONTH);
 
-                            fechaRegreso = (anioRegreso + "-" + mesRegreso + "-" + diaRegreso);
+                            fechaRegresoN = (anioRegreso + "-" + mesRegreso + "-" + diaRegreso);
 
-                            Viaje.setFechaRegreso(fechaRegreso);
+                            Calendar c = new GregorianCalendar();
+                            String dia = Integer.toString(c.get(Calendar.DATE));
+                            String mes = Integer.toString(c.get(Calendar.MONTH));
+                            String anio = Integer.toString(c.get(Calendar.YEAR));
+                            String fechaActual = (anio + "-" + mes + "-" + dia);
+                            
+                            Viaje.setFechaRegreso(fechaRegresoN);
 
-                            if (Viaje.ActualizarViajeDisponible()) {
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE ACTUALIZADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
-                                limpiar();
-                                LlenarJtable();
+                            if (validarFechas(fechaPartidaN, fechaRegresoN, fechaActual)) {
+
+                                fechaRegreso = Viaje.obtenerFechaRegresoBuque();
+                                if (validarDisponibilidadBuque(fechaRegreso, fechaPartidaN, fechaRegresoN)) {
+
+                                    if (Viaje.ActualizarViajeDisponible()) {
+                                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE ACTUALIZADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                        limpiar();
+                                        Viaje.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
+
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL BUQUE ESTA OCUPADO EN ESA FECHA </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                    jdcFechaSalida.setCalendar(null);
+                                    jdcFechaRegreso.setCalendar(null);
+                                }
 
                             } else {
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LAS FECHAS CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                jdcFechaSalida.setCalendar(null);
+                                jdcFechaRegreso.setCalendar(null);
                             }
 
                         } else {
@@ -778,7 +778,8 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                             if (Viaje.EliminarViaje()) {
                                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE ELIMINADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
                                 limpiar();
-                                LlenarJtable();
+                                Viaje.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
+
 
                             } else {
                                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
