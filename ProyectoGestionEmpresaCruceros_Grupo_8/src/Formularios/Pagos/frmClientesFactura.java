@@ -102,7 +102,7 @@ public class frmClientesFactura extends javax.swing.JFrame {
         tablaClientes.getTableHeader().setReorderingAllowed(false);
         tablaClientes.getTableHeader().setForeground(Color.BLACK);
         tablaClientes.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
-        tablaClientes.setRowHeight(25);
+        tablaClientes.setRowHeight(30);
         
         PreparedStatement ps;
         DefaultTableModel clientes = (DefaultTableModel) tablaClientes.getModel();

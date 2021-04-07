@@ -354,8 +354,8 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarUsuarioActionPerformed
-        if (!txtIdentidadUsuario.getText().isBlank() || !txtNombresUsuarios.getText().isBlank() || !txtApellidosUsuario.getText().isBlank() || !txtTelefonoUsuario.getText().isBlank()
-                || !txtCorreoElectronicoUsuario.getText().isBlank() || !String.valueOf(txtContraseñaUsuario.getPassword()).equals("") || !String.valueOf(txtConfirmarContraseñaUsuario.getPassword()).equals("")) {
+        if (!txtIdentidadUsuario.getText().isBlank() && !txtNombresUsuarios.getText().isBlank() && !txtApellidosUsuario.getText().isBlank() && !txtTelefonoUsuario.getText().isBlank()
+                && !txtCorreoElectronicoUsuario.getText().isBlank() && !String.valueOf(txtContraseñaUsuario.getPassword()).equals("") && !String.valueOf(txtConfirmarContraseñaUsuario.getPassword()).equals("")) {
             if (validar.isEntero(txtIdentidadUsuario.getText()) && txtIdentidadUsuario.getText().length() == 13) {
                 if (validar.isLetras(txtNombresUsuarios.getText()) || validar.isLetras(txtApellidosUsuario.getText())) {
                     if (validar.isEntero(txtTelefonoUsuario.getText()) && txtTelefonoUsuario.getText().length() == 8) {
@@ -373,7 +373,8 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                             } else {
                                 Usuario.setCargo(2);
                             }
-                            Usuario.setContrasenia(txtContraseñaUsuario.getText());
+                            String contras = String.valueOf(txtContraseñaUsuario.getPassword());
+                            Usuario.setContrasenia(contras);
 
                             try {
                                 if (Usuario.ActualizarPersona()) {
@@ -424,8 +425,8 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnAgregarUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarUsuario1ActionPerformed
-        if (!txtIdentidadUsuario.getText().isBlank() || !txtNombresUsuarios.getText().isBlank() || !txtApellidosUsuario.getText().isBlank() || !txtTelefonoUsuario.getText().isBlank()
-                || !txtCorreoElectronicoUsuario.getText().isBlank() || !String.valueOf(txtContraseñaUsuario.getPassword()).equals("") || !String.valueOf(txtConfirmarContraseñaUsuario.getPassword()).equals("")) {
+        if (!txtIdentidadUsuario.getText().isBlank() && !txtNombresUsuarios.getText().isBlank() && !txtApellidosUsuario.getText().isBlank() && !txtTelefonoUsuario.getText().isBlank()
+                && !txtCorreoElectronicoUsuario.getText().isBlank() && !String.valueOf(txtContraseñaUsuario.getPassword()).equals("") && !String.valueOf(txtConfirmarContraseñaUsuario.getPassword()).equals("")) {
             if (validar.isEntero(txtIdentidadUsuario.getText()) && txtIdentidadUsuario.getText().length() == 13) {
                 if (validar.isLetras(txtNombresUsuarios.getText()) || validar.isLetras(txtApellidosUsuario.getText())) {
                     if (validar.isEntero(txtTelefonoUsuario.getText()) && txtTelefonoUsuario.getText().length() == 8) {
@@ -444,7 +445,8 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                                 } else {
                                     Usuario.setCargo(2);
                                 }
-                                Usuario.setContrasenia(txtContraseñaUsuario.getText());
+                                String contras = String.valueOf(txtContraseñaUsuario.getPassword());
+                                Usuario.setContrasenia(contras);
 
                                 try {
                                     if (Usuario.AgregarPersona()) {

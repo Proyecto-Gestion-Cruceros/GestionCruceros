@@ -166,6 +166,7 @@ public class frmVerFacturas extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         cargarJTable(1);
+        tablaFacturas.setRowHeight(30);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
