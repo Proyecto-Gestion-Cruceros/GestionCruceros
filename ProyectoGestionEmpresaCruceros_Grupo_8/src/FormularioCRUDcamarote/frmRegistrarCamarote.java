@@ -485,7 +485,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
     
     private void cargarCamarote() {
         cmbTipoCamarote.removeAllItems();
-        cmbTipoCamarote.addItem("Seleccione una Opción");
+        cmbTipoCamarote.addItem("-----------------");
         cmbTipoCamarote.addItem("Interior");
         cmbTipoCamarote.addItem("Vista al Oceáno");
         cmbTipoCamarote.addItem("Balcón");
@@ -557,7 +557,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
                     retornarCodigoCamarote = retornarUltimoIdCamarote();
                     txtCodigoCamarote.setText(String.valueOf(retornarCodigoCamarote));
                     bloquear(); 
-                    cmbTipoCamarote.addItem("Seleccione una Opción");
+                    cmbTipoCamarote.addItem("-----------------");
                     JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> LA CAPACIDAD MAXIMA DE CAMAROTES EN EL BUQUE HA SIDO ALCANZADA </b></html>" , "",JOptionPane.INFORMATION_MESSAGE, message.icono);
                 }else {
                     retornarCodigoCamarote = 1;
