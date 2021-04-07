@@ -5,7 +5,6 @@ import Clases.clsMessage;
 import Clases.dbConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 

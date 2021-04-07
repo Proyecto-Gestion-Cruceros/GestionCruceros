@@ -336,6 +336,8 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
         tablaSeleccionados.getTableHeader().setReorderingAllowed(false);
         tablaSeleccionados.getTableHeader().setForeground(Color.BLACK);
         tablaSeleccionados.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
+        tablaClientes.setRowHeight(30);
+        tablaSeleccionados.setRowHeight(30);
                 
         if(variables.getCodigoOperacion() == 1){
             cargarDatos();

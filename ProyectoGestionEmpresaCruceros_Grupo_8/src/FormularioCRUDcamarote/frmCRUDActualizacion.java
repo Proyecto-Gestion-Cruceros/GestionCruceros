@@ -6,7 +6,6 @@ import Clases.ClsFuncionesDB;
 import Clases.ClsValidaciones;
 import Clases.clsMessage;
 import Clases.dbConnection;
-
 import static Clases.dbConnection.dbConexion;
 import java.awt.Color;
 import java.awt.Font;
@@ -15,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.ResultSetMetaData;
-
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
@@ -106,20 +104,9 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         lblNivel.setText("Nivel");
 
         txtIDCamarote.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        txtIDCamarote.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIDCamaroteActionPerformed(evt);
-            }
-        });
         txtIDCamarote.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtIDCamaroteKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtIDCamaroteKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtIDCamaroteKeyTyped(evt);
             }
         });
 
@@ -169,11 +156,6 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         cmbEstado.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Desocupado", "Ocupado" }));
         cmbEstado.setToolTipText("");
-        cmbEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbEstadoActionPerformed(evt);
-            }
-        });
 
         spCapacidad.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         spCapacidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, 6, 1));
@@ -231,11 +213,6 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         cmbCodigoBuque.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         cmbCodigoBuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Opción" }));
         cmbCodigoBuque.setToolTipText("");
-        cmbCodigoBuque.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cmbCodigoBuqueMouseClicked(evt);
-            }
-        });
         cmbCodigoBuque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbCodigoBuqueActionPerformed(evt);
@@ -373,6 +350,7 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         ((JSpinner.DefaultEditor) spCapacidad.getEditor()).getTextField().setEditable(false);
         txtIDCamarote.setEnabled(false);
         btnBuscar.setEnabled(false);
+        tablaDatos.setRowHeight(25);
     }//GEN-LAST:event_formWindowOpened
 
     private void limpiarCampos() {
@@ -434,10 +412,6 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         buscarCamarote();
 
     }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
-
-    }//GEN-LAST:event_cmbEstadoActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         limpiarCampos();
@@ -520,18 +494,6 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbCodigoBuqueActionPerformed
 
-    private void txtIDCamaroteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDCamaroteKeyTyped
-
-    }//GEN-LAST:event_txtIDCamaroteKeyTyped
-
-    private void txtIDCamaroteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDCamaroteKeyPressed
-
-    }//GEN-LAST:event_txtIDCamaroteKeyPressed
-
-    private void txtIDCamaroteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDCamaroteActionPerformed
-
-    }//GEN-LAST:event_txtIDCamaroteActionPerformed
-
        private void limpiar() {
         spNiveel.setValue(1);
         txtTipoCamarote.setText(null);
@@ -546,7 +508,7 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
     private void txtIDCamaroteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDCamaroteKeyReleased
         if (txtIDCamarote.getText() != "") {
 
-            if (validar.isEntero(txtIDCamarote.getText())) {
+            if (validar.isEntero(txtIDCamarote.getText()) && Integer.parseInt(txtIDCamarote.getText()) > 0) {
                 txtIDCamarote.setForeground(Color.black);
                 btnActualizarCamarote.setEnabled(true);
                 btnBuscar.setEnabled(true);
@@ -597,14 +559,10 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtIDCamaroteKeyReleased
 
-    private void cmbCodigoBuqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbCodigoBuqueMouseClicked
-
-    }//GEN-LAST:event_cmbCodigoBuqueMouseClicked
-
     private void txtPrecioCamaroteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioCamaroteKeyReleased
          if (txtPrecioCamarote.getText() != "") {
 
-            if (validar.isDecimal(txtPrecioCamarote.getText())) {
+            if (validar.isDecimal(txtPrecioCamarote.getText()) && Double.parseDouble(txtPrecioCamarote.getText()) > 0) {
                 txtPrecioCamarote.setForeground(Color.black);
                 btnActualizarCamarote.setEnabled(true);
  

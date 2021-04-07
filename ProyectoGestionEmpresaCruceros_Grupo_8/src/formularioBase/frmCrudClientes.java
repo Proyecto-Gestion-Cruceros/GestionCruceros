@@ -5,7 +5,6 @@ import Clases.ClsFuncionesDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import Clases.ClsValidaciones;
 import Clases.Personas.ClsPersona;
 import Clases.clsMessage;
@@ -14,10 +13,8 @@ import FormularioIGP.frmIGP;
 import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Color;
 import java.awt.Font;
-
 import java.sql.ResultSetMetaData;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -504,8 +501,8 @@ public class frmCrudClientes extends javax.swing.JFrame {
     
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         
-        if(!txtIdentidadCliente.getText().isBlank() || !txtNombresCliente.getText().isBlank() || !txtApellidosCliente.getText().isBlank() || !txtTelefono.getText().isBlank() 
-                || !txtCorreoCliente.getText().isBlank() || jdcFecha.getDate() != null || !txtDireccionCliente.getText().isBlank() || cmbEstadoCliente.getSelectedItem() != "<Seleccione>")
+        if(!txtIdentidadCliente.getText().isBlank() && !txtNombresCliente.getText().isBlank() && !txtApellidosCliente.getText().isBlank() && !txtTelefono.getText().isBlank() 
+                && !txtCorreoCliente.getText().isBlank() && jdcFecha.getDate() != null && !txtDireccionCliente.getText().isBlank() && cmbEstadoCliente.getSelectedItem() != "<Seleccione>")
         {
             
             if(validar.isEntero(txtIdentidadCliente.getText()) && txtIdentidadCliente.getText().length() == 13)
@@ -685,7 +682,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
        jTClientes.getTableHeader().setForeground(Color.BLACK);
        jTClientes.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
        LlenarTabla();
-       //txtFechaNacimiento.setVisible(false);
+       jTClientes.setRowHeight(30);
         
     }//GEN-LAST:event_formWindowOpened
 
@@ -737,7 +734,6 @@ public class frmCrudClientes extends javax.swing.JFrame {
         txtCorreoCliente.setText(null);
         txtDireccionCliente.setText(null);
         jdcFecha.setCalendar(null);
-        //jdcFecha.setEnabled(true);
         cmbEstadoCliente.setSelectedIndex(0);
         fecha = "";
     }

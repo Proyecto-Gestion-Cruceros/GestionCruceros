@@ -13,7 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -318,6 +317,7 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
         jPuertosSalida.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
         MostrarPuertosSalida();
         CodigoNuevoPuerto();
+        jPuertosSalida.setRowHeight(30);
     }//GEN-LAST:event_formWindowOpened
 
     private void jPuertosSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPuertosSalidaMouseClicked

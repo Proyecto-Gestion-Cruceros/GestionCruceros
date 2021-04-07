@@ -203,7 +203,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
         tablaViajes.getTableHeader().setReorderingAllowed(false);
         tablaViajes.getTableHeader().setForeground(Color.BLACK);
         tablaViajes.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
-        
+        tablaViajes.setRowHeight(25);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);      
         cargarDatos();
         

@@ -14,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
@@ -112,11 +111,6 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
 
         txtCargoUsuario.setEditable(false);
         txtCargoUsuario.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        txtCargoUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCargoUsuarioActionPerformed(evt);
-            }
-        });
 
         btnActualizarUsuario.setBackground(new java.awt.Color(255, 204, 51));
         btnActualizarUsuario.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -359,10 +353,6 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCargoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCargoUsuarioActionPerformed
-
-    }//GEN-LAST:event_txtCargoUsuarioActionPerformed
-
     private void btnActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarUsuarioActionPerformed
         if (!txtIdentidadUsuario.getText().isBlank() || !txtNombresUsuarios.getText().isBlank() || !txtApellidosUsuario.getText().isBlank() || !txtTelefonoUsuario.getText().isBlank()
                 || !txtCorreoElectronicoUsuario.getText().isBlank() || !String.valueOf(txtContraseñaUsuario.getPassword()).equals("") || !String.valueOf(txtConfirmarContraseñaUsuario.getPassword()).equals("")) {
@@ -423,6 +413,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
         lblCargo.setText(Usuario.getUsuario().toUpperCase());
         txtCargoUsuario.setText(Usuario.getUsuario());
         MostrarUsuarios();
+        JUsuarios.setRowHeight(30);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed

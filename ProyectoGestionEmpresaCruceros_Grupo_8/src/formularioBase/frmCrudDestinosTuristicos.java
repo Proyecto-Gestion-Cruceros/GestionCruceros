@@ -8,12 +8,10 @@ import Clases.dbConnection;
 import FormularioIGP.frmIGP;
 import java.awt.Color;
 import java.awt.Font;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -258,7 +256,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
         jTDestinos.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
         LimpiarTabla();
         LlenarTabla();
-        
+        jTDestinos.setRowHeight(30);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed

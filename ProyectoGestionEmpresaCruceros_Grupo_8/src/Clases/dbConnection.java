@@ -12,7 +12,7 @@ public class dbConnection {
     public static Connection conn = null;
     
     public static Connection dbConexion(){
-        String url = "jdbc:sqlserver://DESKTOP-2KKKGON:1433;databaseName=agenciaCruceros";
+        String url = "jdbc:sqlserver://HACKNEL:1433;databaseName=agenciaCruceros";
         
         try{
             
@@ -23,7 +23,7 @@ public class dbConnection {
         }
         
         try{
-           conn = DriverManager.getConnection(url, "sa", "1234");
+           conn = DriverManager.getConnection(url, "sa", "15263");
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Error de conexion");
         }  

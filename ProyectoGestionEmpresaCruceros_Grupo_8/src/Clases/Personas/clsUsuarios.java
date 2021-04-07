@@ -61,7 +61,6 @@ public class clsUsuarios extends ClsPersona {
             return resultado > 0;
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
 
             return false;
         }
@@ -88,7 +87,6 @@ public class clsUsuarios extends ClsPersona {
             return resultado > 0;
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
 
             return false;
         }
@@ -107,7 +105,6 @@ public class clsUsuarios extends ClsPersona {
             return resultado > 0;
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
 
             return false;
         }
