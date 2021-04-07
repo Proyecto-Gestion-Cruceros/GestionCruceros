@@ -6,6 +6,7 @@ import FormulariosCrucero.clsVariablesViaje;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 

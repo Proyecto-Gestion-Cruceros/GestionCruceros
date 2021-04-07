@@ -31,11 +31,6 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
     ResultSet result = null;
     clsMessage message = new clsMessage();
     
-    
-    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
-    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
-    Icon Icon = new ImageIcon(getClass().getResource("/Resources/informacion.png"));
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
