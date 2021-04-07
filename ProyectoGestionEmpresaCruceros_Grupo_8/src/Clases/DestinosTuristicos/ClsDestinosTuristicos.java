@@ -5,10 +5,7 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 
-/**
- *
- * @author edmej
- */
+
 public class ClsDestinosTuristicos {
     
     
@@ -108,38 +105,5 @@ public class ClsDestinosTuristicos {
         return false;
         
     }
-    
-    
-    /*public boolean EliminarDestino()
-    {
-        
-        int resultado = 0;
-        
-        try{
-            
-            ps = dbConnection.dbConexion().prepareStatement("Update destinosTuristicos set estado = 'Inactivo' Where nombreDestino = ?");
-            
-            ps.setString(2, Nombre_Destino);
-            ps.setString(3, Descripcion);
-            ps.setString(4, Estado);
-            
-            resultado = ps.executeUpdate();
-
-            if (resultado > 0) 
-            {
-                return true;    
-            } else 
-            {
-                return false;
-            }
-            
-        }
-        catch(SQLException ex)
-        {
-            
-        }
-        return false;
-    }*/
-    
     
 }

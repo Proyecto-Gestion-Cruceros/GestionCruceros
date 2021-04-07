@@ -1,5 +1,6 @@
 package formularioBase;
 
+import Clases.ClsFuncionesDB;
 import Clases.ClsValidaciones;
 import Clases.DestinosTuristicos.ClsDestinosTuristicos;
 import Clases.dbConnection;
@@ -11,21 +12,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author edmej
- */
+
+
 public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmCrudDestinosTuristicos
-     */
+
     public frmCrudDestinosTuristicos() {
         initComponents();
         btnMenuPrincipal.setOpaque(false);
@@ -399,33 +395,10 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
     
     public void LlenarTabla()
     {
-        
-        try{
-            
-            ps = dbConnection.dbConexion().prepareStatement("Select [nombreDestino], [estado] from [dbo].[destinosTuristicos]");
-            rs = ps.executeQuery();
-            rsm = rs.getMetaData();
-            
-            ArrayList<Object[]> data = new ArrayList<>();
-            
-            while (rs.next()) {
-                Object[] rows = new Object[rsm.getColumnCount()];
-                for (int i = 0; i < rows.length; i++)
-                {
-                    rows[i] = rs.getObject(i + 1);
-                }
-                data.add(rows);
-            }
-            
-            dtm = (DefaultTableModel) this.jTDestinos.getModel();
-            for (int i = 0; i < data.size(); i++) {
-                dtm.addRow(data.get(i));
-            }  
-        }
-        catch(Exception ex)
-        {
-            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
-        }
+               
+         dbConn = new ClsFuncionesDB();
+         dbConn.llenarJTable(jTDestinos, "SELECT [nombreDestino], [estado] FROM [dbo].[destinosTuristicos]");
+         dbConn = new ClsFuncionesDB();
         
     }
     
@@ -437,45 +410,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
         
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmCrudDestinosTuristicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmCrudDestinosTuristicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmCrudDestinosTuristicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmCrudDestinosTuristicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmCrudDestinosTuristicos().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;

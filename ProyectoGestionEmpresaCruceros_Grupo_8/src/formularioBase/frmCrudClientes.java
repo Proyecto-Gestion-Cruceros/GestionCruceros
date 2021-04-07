@@ -1,6 +1,7 @@
 package formularioBase;
 
 import Clases.Cliente.ClsClientes;
+import Clases.ClsFuncionesDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,10 +25,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author edmej
- */
+
+
 public class frmCrudClientes extends javax.swing.JFrame {
 
 
@@ -222,7 +221,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
         btnLimpiar.setBackground(new java.awt.Color(255, 204, 51));
         btnLimpiar.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 22)); // NOI18N
         btnLimpiar.setForeground(new java.awt.Color(0, 0, 0));
-        btnLimpiar.setText("Limpiar");
+        btnLimpiar.setText("LIMPIAR");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
@@ -383,7 +382,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1956, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,32 +617,10 @@ public class frmCrudClientes extends javax.swing.JFrame {
     
     public void LlenarTabla()
     {
-        try{
-            
-            ps = dbConnection.dbConexion().prepareStatement("SELECT * FROM [dbo].[clientes]");
-            rs = ps.executeQuery();
-            rsm = rs.getMetaData();
-            
-            ArrayList<Object[]> data = new ArrayList<>();
-            
-            while (rs.next()) {
-                Object[] rows = new Object[rsm.getColumnCount()];
-                for (int i = 0; i < rows.length; i++)
-                {
-                    rows[i] = rs.getObject(i + 1);
-                }
-                data.add(rows);
-            }
-            
-            dtm = (DefaultTableModel) this.jTClientes.getModel();
-            for (int i = 0; i < data.size(); i++) {
-                dtm.addRow(data.get(i));
-            }  
-        }
-        catch(Exception ex)
-        {
-            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
-        }
+
+         dbConn = new ClsFuncionesDB();
+         dbConn.llenarJTable(jTClientes, "SELECT * FROM [dbo].[clientes]");
+         dbConn = new ClsFuncionesDB();
         
     }
     

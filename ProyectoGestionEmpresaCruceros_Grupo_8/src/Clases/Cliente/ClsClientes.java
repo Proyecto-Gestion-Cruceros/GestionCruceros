@@ -37,9 +37,7 @@ public class ClsClientes extends ClsPersona{
         ClsClientes.fechaNacimiento = fechaNacimiento;
     }
    
-    
-    
-    //METODOS
+   
     
     @Override
     public boolean AgregarPersona()
@@ -146,12 +144,5 @@ public class ClsClientes extends ClsPersona{
         }
         return false;
     }
-    
 
-    @Override
-    public boolean VerPersonas()
-    {
-        return false;
-    }
-  
 }
