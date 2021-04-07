@@ -394,7 +394,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-          
+        
         if(!txtIdentidadCliente.getText().isBlank() && !txtNombresCliente.getText().isBlank() && !txtApellidosCliente.getText().isBlank() && !txtTelefono.getText().isBlank() 
                 && !txtCorreoCliente.getText().isBlank() && jdcFecha.getDate() != null && !txtDireccionCliente.getText().isBlank() && cmbEstadoCliente.getSelectedItem() != "<Seleccione>")
         {  
@@ -441,7 +441,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
                                     persona.setEstado(cmbEstadoCliente.getSelectedItem().toString());
 
                                     try{
-
+                                        
                                         if(cliente.AgregarPersona())
                                         {
                                             JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CLIENTE AGREGADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
@@ -505,9 +505,9 @@ public class frmCrudClientes extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnAgregarActionPerformed
-
+    
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-           
+        
         if(!txtIdentidadCliente.getText().isBlank() || !txtNombresCliente.getText().isBlank() || !txtApellidosCliente.getText().isBlank() || !txtTelefono.getText().isBlank() 
                 || !txtCorreoCliente.getText().isBlank() || jdcFecha.getDate() != null || !txtDireccionCliente.getText().isBlank() || cmbEstadoCliente.getSelectedItem() != "<Seleccione>")
         {
@@ -529,7 +529,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
                             int dia = jdcFecha.getCalendar().get(Calendar.DAY_OF_MONTH);
                             
                             FechaNacimiento = (año + "-" + mes + "-" + dia);
-                               
+                                
                                 if(cmbEstadoCliente.getSelectedIndex() == 0)
                                 {
                                     JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN ESTADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
@@ -546,7 +546,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
                                     persona.setEstado(cmbEstadoCliente.getSelectedItem().toString());
 
                                     try{
-
+                                        
                                         if(cliente.ActualizarPersona())
                                         {
                                             JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CLIENTE ACTUALIZADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
@@ -824,43 +824,6 @@ public class frmCrudClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarClienteActionPerformed
 
     
-    
-    
-
-    
-    
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmCrudClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmCrudClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmCrudClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmCrudClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmCrudClientes().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
