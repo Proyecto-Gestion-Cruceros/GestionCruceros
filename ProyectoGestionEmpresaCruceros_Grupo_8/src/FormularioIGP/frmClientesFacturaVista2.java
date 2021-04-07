@@ -4,11 +4,7 @@ import Clases.clsMessage;
 import Formularios.Pagos.*;
 import Clases.dbConnection;
 import FormulariosCrucero.clsVariablesViaje;
-import FormulariosCrucero.frmSeleccionClientes;
-import java.awt.Color;
-import java.awt.Font;
 import java.sql.*;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class frmClientesFacturaVista2 extends javax.swing.JFrame {
@@ -59,11 +55,6 @@ public class frmClientesFacturaVista2 extends javax.swing.JFrame {
             }
         });
         tablaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaClientesMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tablaClientes);
 
         jLabel1.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
@@ -108,38 +99,32 @@ public class frmClientesFacturaVista2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
         PreparedStatement ps;
         DefaultTableModel clientes = (DefaultTableModel) tablaClientes.getModel();
         ResultSetMetaData rsmd;
         clientes.setRowCount(0);
-        try{
-            
-            
-                ps = dbConnection.dbConexion().prepareStatement("SELECT codigoFactura, c.identidadCliente, CONCAT(nombres, ' ', apellidos)nom, telefono, correoElectronico FROM detalleClientes dc \n" +
-                                                                "INNER JOIN clientes c ON dc.identidadCliente = c.identidadCliente WHERE dc.codigoFactura = ?");
-                ps.setInt(1, idFact);
-                ResultSet rs = ps.executeQuery();
-                rsmd = rs.getMetaData();
-                int columnas = rsmd.getColumnCount();
-                while(rs.next()){
-                    Object filas[] = new Object[columnas];
-                    for(int j = 0; j< columnas; j++){
-                        filas[j] = rs.getObject(j+1);
-                    }
-                    clientes.addRow(filas);
-                }
-            
-            
-        }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al Actualizar los datos " + ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon);
-        }
-        
-    }//GEN-LAST:event_formWindowOpened
+        try {
 
-    private void tablaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClientesMouseClicked
-        
-    }//GEN-LAST:event_tablaClientesMouseClicked
+            ps = dbConnection.dbConexion().prepareStatement("SELECT codigoFactura, c.identidadCliente, CONCAT(nombres, ' ', apellidos)nom, telefono, correoElectronico FROM detalleClientes dc \n"
+                    + "INNER JOIN clientes c ON dc.identidadCliente = c.identidadCliente WHERE dc.codigoFactura = ?");
+            ps.setInt(1, idFact);
+            ResultSet rs = ps.executeQuery();
+            rsmd = rs.getMetaData();
+            int columnas = rsmd.getColumnCount();
+            while (rs.next()) {
+                Object filas[] = new Object[columnas];
+                for (int j = 0; j < columnas; j++) {
+                    filas[j] = rs.getObject(j + 1);
+                }
+                clientes.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Error al llenar tabla " + ex.getMessage());
+        }
+
+    }//GEN-LAST:event_formWindowOpened
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

@@ -7,7 +7,6 @@ import FormularioIGP.frmIGP;
 
 import Formularios.InicioSesion.frmInicioSesion;
 import FormulariosCrucero.clsVariablesViaje;
-import FormulariosCrucero.frmSeleccionClientes;
 import FormulariosCrucero.frmVistaCamarotes;
 import FormulariosCrucero.frmVistaCamarotesN2;
 import FormulariosCrucero.frmVistaCamarotesN3;
@@ -37,8 +36,7 @@ public class frmPagos extends javax.swing.JFrame {
         initComponents();
     }
 
-    DecimalFormat df = new DecimalFormat("0.##");    
-    DecimalFormat df2 = new DecimalFormat("#");
+    DecimalFormat df = new DecimalFormat("0.##");
 
     PreparedStatement ps;
     clsVariablesViaje variablesViaje = new clsVariablesViaje();
@@ -285,11 +283,6 @@ public class frmPagos extends javax.swing.JFrame {
 
         txtNivelCubierta.setEditable(false);
         txtNivelCubierta.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        txtNivelCubierta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNivelCubiertaActionPerformed(evt);
-            }
-        });
         jPanel1.add(txtNivelCubierta);
         txtNivelCubierta.setBounds(1170, 460, 182, 40);
 
@@ -483,29 +476,18 @@ public class frmPagos extends javax.swing.JFrame {
         jLabel33.setBounds(1510, 880, 190, 26);
 
         txtCantidadRecibida.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        txtCantidadRecibida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCantidadRecibidaActionPerformed(evt);
-            }
-        });
         txtCantidadRecibida.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCantidadRecibidaKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCantidadRecibidaKeyReleased(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCantidadRecibidaKeyTyped(evt);
-            }
         });
         jPanel1.add(txtCantidadRecibida);
-        txtCantidadRecibida.setBounds(1510, 810, 130, 40);
+        txtCantidadRecibida.setBounds(1510, 810, 180, 40);
 
         txtCambioEfectivo.setEditable(false);
         txtCambioEfectivo.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
         jPanel1.add(txtCambioEfectivo);
-        txtCambioEfectivo.setBounds(1510, 910, 180, 40);
+        txtCambioEfectivo.setBounds(1510, 910, 230, 40);
 
         jLabel34.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(255, 255, 255));
@@ -601,10 +583,6 @@ public class frmPagos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtNivelCubiertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNivelCubiertaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNivelCubiertaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
@@ -777,18 +755,6 @@ public class frmPagos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jrbEfectivoActionPerformed
 
-    private void txtCantidadRecibidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadRecibidaActionPerformed
-        
-    }//GEN-LAST:event_txtCantidadRecibidaActionPerformed
-
-    private void txtCantidadRecibidaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadRecibidaKeyPressed
-        
-    }//GEN-LAST:event_txtCantidadRecibidaKeyPressed
-
-    private void txtCantidadRecibidaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadRecibidaKeyTyped
-        
-    }//GEN-LAST:event_txtCantidadRecibidaKeyTyped
-
     private void txtCantidadRecibidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadRecibidaKeyReleased
         if(!jrbMasterCard.isSelected() || !jrbVisa.isSelected())
         {
@@ -920,7 +886,6 @@ public class frmPagos extends javax.swing.JFrame {
             canvas.addImage(img);
             canvas.restoreState();
             
-            //NumFactura
             Font DoppioN = new Font(baseFont, 13);
             Font DoppioNN = new Font(baseFont, 16);
             DoppioNN.setStyle(Font.UNDERLINE);
@@ -928,14 +893,12 @@ public class frmPagos extends javax.swing.JFrame {
             numeroFactura.setAlignment(Element.ALIGN_LEFT);
             document.add(numeroFactura);
             
-            //Titulo
             Font DoppioT = new Font(baseFont, 18);
             DoppioT.setStyle(Font.BOLD);
             Paragraph titulo = new Paragraph("FACTURA DE VIAJE\n\n", DoppioT);
             titulo.setAlignment(Element.ALIGN_CENTER);
             document.add(titulo);
             
-            //DatosClienteComprado
             document.add(new Paragraph("Identidad:                         " + identidadC.toString(), DoppioN));
             document.add(new Paragraph("Nombre Cliente:              " + txtNombre1.getText() + " " + txtNombre2.getText(), DoppioN));
             document.add(new Paragraph("Teléfono:                           " + txtTel.getText(), DoppioN));
@@ -946,12 +909,10 @@ public class frmPagos extends javax.swing.JFrame {
             integrantes.setAlignment(Element.ALIGN_CENTER);
             document.add(integrantes);
             
-            //Tabla de integrantes
             PdfPTable pdfTable = new PdfPTable(modelCliente.getColumnCount());
             pdfTable.setTotalWidth(530);
             pdfTable.setLockedWidth(true);
             for(int i=0; i < modelCliente.getColumnCount();i++){
-                //pdfTable.addCell(modelCliente.getColumnName(i));
                 PdfPCell cell = new PdfPCell(new Paragraph(modelCliente.getColumnName(i), DoppioN));
                 cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -968,7 +929,6 @@ public class frmPagos extends javax.swing.JFrame {
             }
             document.add(pdfTable);
             
-            //Detalles del camarote
             Paragraph detalleFactura = new Paragraph("\nDETALLES DE FACTURA\n\n", DoppioN);
             detalleFactura.setAlignment(Element.ALIGN_CENTER);
             document.add(detalleFactura);
@@ -977,7 +937,6 @@ public class frmPagos extends javax.swing.JFrame {
             document.add(new Paragraph("Cubierta Nivel:                   " + txtNivelCubierta.getText(), DoppioN));
             document.add(new Paragraph("Camarote Número:           " + txtNumeroCamarote.getText(), DoppioN));
             
-            //Detalles de factura
             document.add(new Paragraph("\nPrecio del Camarote:         " + lblPrecioCamarote.getText() + " Por Persona", DoppioN));
             document.add(new Paragraph("Cantidad de Personas:      " + lblCantPersonas.getText(), DoppioN));
             document.add(new Paragraph("Cantidad de Días:                " + txtCantDias.getText(), DoppioN));
@@ -990,7 +949,6 @@ public class frmPagos extends javax.swing.JFrame {
             
             document.add(new Paragraph("\nTotal Pagado:                    " + lblTotalPagar.getText(), DoppioNN));
             
-            //ITINEARIO
             document.newPage();
             Image imgIti = new Image(Image.getInstance(getClass().getResource("/Resources/vonVoyageIModeloItinerario.png"))) {
             };
@@ -1040,10 +998,10 @@ public class frmPagos extends javax.swing.JFrame {
             
             
             document.close();
-            System.out.println("Done");
         } catch (Exception e) {
             e.printStackTrace();
             temp.deleteOnExit();
+            document.close();
         } 
         
     }

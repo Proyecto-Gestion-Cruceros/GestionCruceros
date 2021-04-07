@@ -2,14 +2,8 @@ package Formularios.Pagos;
 
 import Clases.dbConnection;
 import FormulariosCrucero.clsVariablesViaje;
-import FormulariosCrucero.frmSeleccionClientes;
 import java.sql.*;
-import javax.swing.JOptionPane;
 
-/**
- *
- * @author Hacknel
- */
 public class ClsPagos {
     
     clsVariablesViaje variablesViaje = new clsVariablesViaje();
@@ -46,7 +40,7 @@ public class ClsPagos {
     
     protected void obtenerDatosClase(String identidadC){
         try {
-            //Obtener precio del camarote
+            
             ps = dbConnection.dbConexion().prepareStatement("SELECT precioCamarote pc FROM [dbo].[camarotes] WHERE codigoCamarote = ?");
             ps.setInt(1, variablesViaje.getNumeroCamarote());
             ResultSet rs = ps.executeQuery();
@@ -56,7 +50,7 @@ public class ClsPagos {
             }
             rs = null;
             
-            //Obtiene la de edad del cliente
+            
             ps = dbConnection.dbConexion().prepareStatement("SELECT DATEDIFF(YEAR, fechaNacimiento, GETDATE())edad FROM clientes WHERE identidadCliente = ?");
             ps.setString(1, identidadC);
             rs = ps.executeQuery();
@@ -66,7 +60,7 @@ public class ClsPagos {
             }
             rs = null;
             
-            //Obtiene los dias de viaje
+            
             ps = dbConnection.dbConexion().prepareStatement("SELECT DATEDIFF(DAY, fechaSalida, fechaRegreso)dias FROM viajesDisponibles WHERE idViaje = ?");
             ps.setInt(1, variablesViaje.getCodigoViaje());
             rs = ps.executeQuery();

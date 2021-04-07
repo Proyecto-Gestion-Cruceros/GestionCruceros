@@ -4,7 +4,6 @@ import Clases.ClsFuncionesDB;
 import Clases.clsMessage;
 import Clases.dbConnection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -101,20 +100,9 @@ public class frmVerFacturas extends javax.swing.JFrame {
 
         txtBusqueda.setFont(new java.awt.Font("Doppio One", 0, 14)); // NOI18N
         txtBusqueda.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBusquedaActionPerformed(evt);
-            }
-        });
         txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtBusquedaKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBusquedaKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBusquedaKeyTyped(evt);
             }
         });
 
@@ -221,18 +209,6 @@ public class frmVerFacturas extends javax.swing.JFrame {
             }
     }
     
-    private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
-       
-    }//GEN-LAST:event_txtBusquedaActionPerformed
-
-    private void txtBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyTyped
-        
-    }//GEN-LAST:event_txtBusquedaKeyTyped
-
-    private void txtBusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyPressed
-      
-    }//GEN-LAST:event_txtBusquedaKeyPressed
-
     private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
         cargarJTable(2);
     }//GEN-LAST:event_txtBusquedaKeyReleased

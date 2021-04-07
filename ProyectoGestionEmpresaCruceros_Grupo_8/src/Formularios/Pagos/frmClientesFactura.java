@@ -3,11 +3,9 @@ package Formularios.Pagos;
 import Clases.clsMessage;
 import Clases.dbConnection;
 import FormulariosCrucero.clsVariablesViaje;
-import FormulariosCrucero.frmSeleccionClientes;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.*;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -56,11 +54,6 @@ public class frmClientesFactura extends javax.swing.JFrame {
             }
         });
         tablaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaClientesMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tablaClientes);
 
         jLabel1.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
@@ -136,10 +129,6 @@ public class frmClientesFactura extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_formWindowOpened
-
-    private void tablaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClientesMouseClicked
-        
-    }//GEN-LAST:event_tablaClientesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
