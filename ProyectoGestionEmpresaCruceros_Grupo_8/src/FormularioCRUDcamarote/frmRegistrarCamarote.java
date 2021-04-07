@@ -38,6 +38,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
         txtCodigoCamarote.setText(null);
         cmbNivel.setSelectedIndex(0);
         cmbTipoCamarote.setSelectedIndex(0);
+        cmbTipoCamarote.setEnabled(false);
         cmbPrecio.setSelectedIndex(0);
         spCapacidadPersonas.setValue(1);
         cmbEstadoCamarote.setSelectedIndex(0);
@@ -55,7 +56,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
     
        private void desbloquear(){
         btnAgregar.setEnabled(true);
-        cmbTipoCamarote.setEnabled(true);
+        cmbTipoCamarote.setEnabled(false);
         cmbPrecio.setEnabled(false);
         cmbNivel.setEnabled(false);
         spCapacidadPersonas.setEnabled(true);
@@ -155,7 +156,9 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
         jLabel8.setText("Capacidad Máxima de Personas");
 
         cmbTipoCamarote.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        cmbTipoCamarote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Opción", "Interior", "Vista al Océano ", "Balcón", "Suite " }));
+        cmbTipoCamarote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Opción", " " }));
+        cmbTipoCamarote.setToolTipText("");
+        cmbTipoCamarote.setEnabled(false);
         cmbTipoCamarote.setInheritsPopupMenu(true);
         cmbTipoCamarote.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -479,12 +482,21 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
         cmbNivel.addItem("3");
         cmbNivel.addItem("4");
     }
+    
+    private void cargarCamarote() {
+        cmbTipoCamarote.removeAllItems();
+        cmbTipoCamarote.addItem("Seleccione una Opción");
+        cmbTipoCamarote.addItem("Interior");
+        cmbTipoCamarote.addItem("Vista al Oceáno");
+        cmbTipoCamarote.addItem("Balcón");
+        cmbTipoCamarote.addItem("Suite");
+    }
 
     private void cmbTipoCamaroteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoCamaroteActionPerformed
         try {
 
             int selectedIndex = cmbPrecio.getSelectedIndex();
-
+            
             if (cmbTipoCamarote.getSelectedIndex() == 1) {
                 ps = dbConexion().prepareStatement("SELECT precioCamarote FROM camarotes WHERE tipoCamarote = '" + this.cmbTipoCamarote.getSelectedItem() + "'");
                 ResultSet result = ps.executeQuery();
@@ -497,33 +509,61 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon); 
-            
         }
     }//GEN-LAST:event_cmbTipoCamaroteActionPerformed
 
     private void cmbCodigoBuqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCodigoBuqueActionPerformed
-        try {     
+         
+        try {   
+       
+           cargarCamarote();
             if (cmbCodigoBuque.getSelectedIndex() != 0) {
+                
                 btnAgregar.setEnabled(true);
                 ps = dbConexion().prepareStatement("SELECT nombreBuque FROM buques WHERE codigoBuque = '" + this.cmbCodigoBuque.getSelectedItem() + "'");
                 ResultSet result = ps.executeQuery();
                 result.next();
                 this.txtNombreBuque.setText(result.getString("nombreBuque"));
-
-                if (retornarUltimoIdCamarote() > 0 && retornarUltimoIdCamarote() <= 153) {
+                
+                if (retornarUltimoIdCamarote() > 0 && retornarUltimoIdCamarote() <= 52){
                     retornarCodigoCamarote = retornarUltimoIdCamarote() + 1;
                     txtCodigoCamarote.setText(String.valueOf(retornarCodigoCamarote));
                     desbloquear();
-
-                } else if (retornarUltimoIdCamarote() >= 154) {
+               
+                    cmbTipoCamarote.setSelectedItem("Interior");
+                    
+                } else if (retornarUltimoIdCamarote() > 52 && retornarUltimoIdCamarote() <= 94){
+                    retornarCodigoCamarote = retornarUltimoIdCamarote() + 1;
+                    txtCodigoCamarote.setText(String.valueOf(retornarCodigoCamarote));
+                    desbloquear();
+         
+                    cmbTipoCamarote.setSelectedItem("Vista al Océano");
+                    
+                } else if (retornarUltimoIdCamarote() > 94 && retornarUltimoIdCamarote() <= 136){
+                    retornarCodigoCamarote = retornarUltimoIdCamarote() + 1;
+                    txtCodigoCamarote.setText(String.valueOf(retornarCodigoCamarote));
+                    desbloquear();
+              
+                    cmbTipoCamarote.setSelectedItem("Balcón");
+                    
+                } else if (retornarUltimoIdCamarote() > 136 && retornarUltimoIdCamarote() < 154){
+                    retornarCodigoCamarote = retornarUltimoIdCamarote() + 1;
+                    txtCodigoCamarote.setText(String.valueOf(retornarCodigoCamarote));
+                    desbloquear();
+              
+                    cmbTipoCamarote.setSelectedItem("Suite");
+                    
+                } else if (retornarUltimoIdCamarote() > 154) {
                     retornarCodigoCamarote = retornarUltimoIdCamarote();
                     txtCodigoCamarote.setText(String.valueOf(retornarCodigoCamarote));
-                    bloquear();      
+                    bloquear(); 
+                    cmbTipoCamarote.addItem("Seleccione una Opción");
                     JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> LA CAPACIDAD MAXIMA DE CAMAROTES EN EL BUQUE HA SIDO ALCANZADA </b></html>" , "",JOptionPane.INFORMATION_MESSAGE, message.icono);
                 }else {
                     retornarCodigoCamarote = 1;
                     txtCodigoCamarote.setText(Integer.toString(retornarCodigoCamarote));
                     desbloquear();
+                    cmbTipoCamarote.setSelectedItem("Interior");
         
                 }
 
@@ -576,6 +616,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
 
     ((JSpinner.DefaultEditor) spCapacidadPersonas.getEditor()).getTextField().setEditable(false);
     btnAgregar.setEnabled(false);
+    cmbTipoCamarote.setEnabled(false);
     
     }//GEN-LAST:event_formWindowOpened
 
