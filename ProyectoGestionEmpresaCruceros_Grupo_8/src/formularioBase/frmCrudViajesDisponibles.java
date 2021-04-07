@@ -341,6 +341,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
     ResultSetMetaData rsm;
     DefaultTableModel dtm;
     
+    dbConnection conexion = new dbConnection();
     ClsValidaciones Validar = new ClsValidaciones();
     ClsViajesDisponibles Viaje = new ClsViajesDisponibles();
     
@@ -371,6 +372,14 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
         
     }
 
+    private void LlenarJtable() {
+        conexion = new ClsFuncionesDB();
+        conexion.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
+        conexion = new ClsFuncionesDB();
+        
+    }
+    
+    
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         jtViajesDisp.getTableHeader().setReorderingAllowed(false);
         jtViajesDisp.getTableHeader().setForeground(Color.BLACK);
@@ -378,7 +387,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
         Viaje.llenarJCombobox(cmbBuques, "SELECT [codigoBuque] FROM [dbo].[buques] WHERE [estado] = 'Activo' OR [estado] = 'Ocupado' ORDER BY [nombreBuque] ASC", "codigoBuque");
         Viaje.llenarJCombobox(cmbPuertoSalida, "SELECT [codigoPuerto] FROM [dbo].[puertosSalida] WHERE [estado] = 'Activo' ORDER BY [nombrePuerto] ASC", "codigoPuerto");
         Viaje.llenarJCombobox(cmbDestinos, "SELECT [codigoDestino] FROM [dbo].[destinosTuristicos] WHERE [estado] = 'Activo' ORDER BY [nombreDestino] ASC", "codigoDestino");
-        Viaje.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
+        LlenarJtable();
         CodigoNuevoViaje();
 
     }//GEN-LAST:event_formWindowOpened
@@ -425,13 +434,12 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
         }
     }
 
-
     private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
 
         if ((cmbBuques.getSelectedIndex() != -1) && (cmbPuertoSalida.getSelectedIndex() != -1) && (cmbDestinos.getSelectedIndex() != -1) && (jdcFechaSalida.getDate() != null) && (jdcFechaRegreso.getDate() != null)) {
 
-            int codBuque, codPuertoSalida, codDestino;
-            String fechaPartidaN, fechaRegresoN, fechaRegreso;
+            int idViaje = 0, codBuque = 0, codPuertoSalida = 0, codDestino = 0;
+            String fechaPartidaN = null, fechaRegresoN = null, fechaRegreso = null;
 
             int anioPartida = jdcFechaSalida.getCalendar().get(Calendar.YEAR);
             int mesPartida = jdcFechaSalida.getCalendar().get(Calendar.MARCH);
@@ -483,7 +491,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                                 if (Viaje.RegistrarViajeDisponible()) {
                                     JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
                                     limpiar();
-                                    Viaje.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
+                                    LlenarJtable();
 
                                 } else {
                                     JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -511,8 +519,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                             if (Viaje.RegistrarViajeDisponible()) {
                                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
                                 limpiar();
-                                Viaje.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
-
+                                LlenarJtable();
                             } else {
                                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
 
@@ -552,8 +559,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                             if (Viaje.RegistrarViajeDisponible()) {
                                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
                                 limpiar();
-                                Viaje.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
-
+                                LlenarJtable();
 
                             } else {
                                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -581,8 +587,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                         if (Viaje.RegistrarViajeDisponible()) {
                             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
                             limpiar();
-                            Viaje.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
-
+                            LlenarJtable();
 
                         } else {
                             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -658,12 +663,13 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
         if ((cmbBuques.getSelectedIndex() != -1) && (cmbPuertoSalida.getSelectedIndex() != -1) && (cmbDestinos.getSelectedIndex() != -1) && (jdcFechaSalida.getDate() != null) && (jdcFechaRegreso.getDate() != null)) {
 
             try {
-                String obtenerUltimoCodigo;
-                int UltimoCodigo;
+                
                 ps = dbConnection.dbConexion().prepareStatement("SELECT TOP 1 [idViaje] FROM [dbo].[viajesDisponibles] order by [idViaje] desc");
                 rs = ps.executeQuery();
 
                 if (rs.next()) {
+                    String obtenerUltimoCodigo = null;
+                    int UltimoCodigo = 0;
                     obtenerUltimoCodigo = rs.getString("idViaje").trim();
                     UltimoCodigo = Integer.parseInt(obtenerUltimoCodigo) + 1;
 
@@ -672,8 +678,8 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                         VerificarViaje();
                         if (Viaje.verificarEstadoAct()) {
 
-                            int idViaje, codBuque, codPuertoSalida, codDestino;
-                            String fechaPartidaN, fechaRegresoN, fechaRegreso;
+                            int idViaje = 0, codBuque = 0, codPuertoSalida = 0, codDestino = 0;
+                            String fechaPartidaN = null, fechaRegresoN = null, fechaRegreso = null;
 
                             idViaje = Integer.parseInt(txtIdViaje.getText());
                             codBuque = Integer.parseInt(cmbBuques.getSelectedItem().toString());
@@ -715,8 +721,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                                     if (Viaje.ActualizarViajeDisponible()) {
                                         JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE ACTUALIZADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
                                         limpiar();
-                                        Viaje.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
-
+                                        LlenarJtable();
                                     } else {
                                         JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
                                     }
@@ -778,8 +783,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                             if (Viaje.EliminarViaje()) {
                                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE ELIMINADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
                                 limpiar();
-                                Viaje.llenarJTable(jtViajesDisp, "SELECT vd.idViaje, b.nombreBuque, ps.nombrePuerto, dt.nombreDestino, vd.fechaSalida, vd.fechaRegreso, vd.estado FROM dbo.buques b INNER JOIN dbo.viajesDisponibles vd ON b.codigoBuque = vd.codigoBuque INNER JOIN dbo.destinosTuristicos dt ON vd.codigoDestino = dt.codigoDestino INNER JOIN dbo.puertosSalida ps ON vd.codigoPuertoSalida = ps.codigoPuerto");
-
+                                LlenarJtable();
 
                             } else {
                                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -950,7 +954,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
         }
     }
     
-    public static void main(String args[]) {
+        public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

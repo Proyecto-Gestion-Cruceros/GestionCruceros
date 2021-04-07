@@ -1,6 +1,7 @@
 package formularioBase;
 
 import Clases.BuquesyViajesDisponibles.ClsBuques;
+import Clases.ClsFuncionesDB;
 import Clases.ClsValidaciones;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
@@ -274,6 +275,7 @@ public class frmCrudBuques extends javax.swing.JFrame {
     ResultSetMetaData rsm;
     DefaultTableModel dtm;
     
+    dbConnection conexion = new dbConnection();
     ClsValidaciones Validar = new ClsValidaciones();
     ClsBuques buques = new ClsBuques();
     
@@ -288,27 +290,12 @@ public class frmCrudBuques extends javax.swing.JFrame {
         txtNumNIveles.setText(null);
         CodigoNuevoBuque();
     }
-    
-    private void LlenarJtable(){
-        dtm = (DefaultTableModel) jtBuques.getModel();
-        dtm.setRowCount(0);
-        try {
-            ps = dbConnection.dbConexion().prepareStatement("SELECT [codigoBuque], [nombreBuque], [numeroCamarotes], [numeroNiveles], [estado] FROM [dbo].[buques]");
-            rs = ps.executeQuery();
-            rsm = rs.getMetaData();
 
-            int columna = rsm.getColumnCount();
+    private void LlenarJtable() {
+        conexion = new ClsFuncionesDB();
+        conexion.llenarJTable(jtBuques, "SELECT [codigoBuque], [nombreBuque], [numeroCamarotes], [numeroNiveles], [estado] FROM [dbo].[buques]");
+        conexion = new ClsFuncionesDB();
 
-            while (rs.next()) {
-                Object fil[] = new Object[columna];
-                for (int i = 0; i < columna; i++) {
-                    fil[i] = rs.getObject(i + 1);
-                }
-                dtm.addRow(fil);
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla " + ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
-        }
     }
 
     public void CodigoNuevoBuque() {
@@ -567,7 +554,7 @@ public class frmCrudBuques extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtNombreBuqueKeyPressed
 
-    public static void main(String args[]) {
+        public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -598,7 +585,7 @@ public class frmCrudBuques extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;

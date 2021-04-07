@@ -3,7 +3,6 @@ package Clases.BuquesyViajesDisponibles;
 import Clases.ClsFuncionesDB;
 import Clases.dbConnection;
 import java.sql.*;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 public class ClsViajesDisponibles extends ClsFuncionesDB {
@@ -13,7 +12,6 @@ public class ClsViajesDisponibles extends ClsFuncionesDB {
     int idViaje, codBuque, codPuertoSalida, codDestino, codigoBuque, codigoSalida, codigoDestino, idBuque, buque;
     String estado, estadoIn, fechaPartida, fechaRegreso, nombreBuque, nombreDestino, nombreSalida, estadoBuque;
 
-    //Método
     public int getIdViaje() {
         return idViaje;
     }
