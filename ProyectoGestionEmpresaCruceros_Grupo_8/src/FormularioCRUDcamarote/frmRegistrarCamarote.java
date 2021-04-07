@@ -1,6 +1,7 @@
 package FormularioCRUDcamarote;
 
 import Clases.CRUDcamarote.clsCamarote;
+import Clases.clsMessage;
 import Clases.dbConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +10,6 @@ import static Clases.dbConnection.dbConexion;
 import java.net.URL;
 
 import java.sql.SQLException;
-import javax.swing.Icon;
 import javax.swing.JOptionPane;
 
 import javax.swing.ImageIcon;
@@ -22,10 +22,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
     dbConnection conexion = new dbConnection();
     PreparedStatement ps;
     ResultSet result = null;
-
-    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
-    Icon Icono = new ImageIcon(getClass().getResource("/Resources/Check.png"));
-    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
+    clsMessage message = new clsMessage();
     
     private int retornarCodigoCamarote;
 
@@ -393,19 +390,18 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
                 ps.setString(6, String.valueOf(cmbPrecio.getSelectedItem()));
                 ps.setString(7, String.valueOf(cmbEstadoCamarote.getSelectedItem()));
                 ps.executeUpdate();
-                 JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CAMAROTE REGISTRADO CORRECTAMENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
+                 JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CAMAROTE REGISTRADO CORRECTAMENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.Icono);
                  limpiarCampos();
             } else {
                 
-                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> VERIFIQUE QUE TODOS LOS CAMPOS ESTEN LLENOS</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> VERIFIQUE QUE TODOS LOS CAMPOS ESTEN LLENOS</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al Registrar los datos " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, "Error al Registrar los datos " + ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon);
         } finally {
             retornarCodigoCamarote = retornarUltimoIdCamarote() + 1;
-           // txtCodigoCamarote.setText(Integer.toString(retornarCodigoCamarote));
-
+    
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -500,7 +496,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon); 
             
         }
     }//GEN-LAST:event_cmbTipoCamaroteActionPerformed
@@ -523,12 +519,12 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
                     retornarCodigoCamarote = retornarUltimoIdCamarote();
                     txtCodigoCamarote.setText(String.valueOf(retornarCodigoCamarote));
                     bloquear();      
-                    JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> LA CAPACIDAD MAXIMA DE CAMAROTES EN EL BUQUE HA SIDO ALCANZADA </b></html>" , "",JOptionPane.INFORMATION_MESSAGE, icono);
+                    JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> LA CAPACIDAD MAXIMA DE CAMAROTES EN EL BUQUE HA SIDO ALCANZADA </b></html>" , "",JOptionPane.INFORMATION_MESSAGE, message.icono);
                 }else {
                     retornarCodigoCamarote = 1;
                     txtCodigoCamarote.setText(Integer.toString(retornarCodigoCamarote));
                     desbloquear();
-                  //  btnAgregar.setEnabled(false);  
+        
                 }
 
             } else {
@@ -537,7 +533,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon);   
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon);   
         }
     }//GEN-LAST:event_cmbCodigoBuqueActionPerformed
 
@@ -560,7 +556,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
             return ultimoCamarote;
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon); 
 
         }
         return 0;
@@ -585,15 +581,15 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
 
 
     private void cmbPrecioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPrecioItemStateChanged
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_cmbPrecioItemStateChanged
 
     private void cmbPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPrecioActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_cmbPrecioActionPerformed
 
     private void txtCodigoCamaroteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoCamaroteActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtCodigoCamaroteActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -610,47 +606,13 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
     }//GEN-LAST:event_spCapacidadPersonasKeyPressed
 
     private void cmbNivelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNivelItemStateChanged
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_cmbNivelItemStateChanged
 
     private void cmbNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNivelActionPerformed
-        // TODO add your handling code here:
+ 
     }//GEN-LAST:event_cmbNivelActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmRegistrarCamarote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmRegistrarCamarote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmRegistrarCamarote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmRegistrarCamarote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmRegistrarCamarote().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Camarote;

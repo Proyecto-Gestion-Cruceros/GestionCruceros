@@ -1,5 +1,6 @@
 package Formularios.Pagos;
 
+import Clases.clsMessage;
 import Clases.dbConnection;
 import FormulariosCrucero.clsVariablesViaje;
 import FormulariosCrucero.frmSeleccionClientes;
@@ -17,7 +18,7 @@ public class frmClientesFactura extends javax.swing.JFrame {
     }
 
     clsVariablesViaje variablesViaje = new clsVariablesViaje();
-    
+    clsMessage message = new clsMessage();
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -131,7 +132,7 @@ public class frmClientesFactura extends javax.swing.JFrame {
             
             
         }catch(SQLException ex){
-            System.out.println("Error al llenar tabla " + ex.getMessage());
+             JOptionPane.showMessageDialog(null, "Error al Llenar Tabla " + ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon);
         }
         
     }//GEN-LAST:event_formWindowOpened

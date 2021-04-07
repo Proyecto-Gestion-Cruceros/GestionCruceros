@@ -3,6 +3,7 @@ package formularioBase;
 import Clases.BuquesyViajesDisponibles.ClsBuques;
 import Clases.ClsFuncionesDB;
 import Clases.ClsValidaciones;
+import Clases.clsMessage;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
 import java.awt.Color;
@@ -11,8 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -278,11 +278,8 @@ public class frmCrudBuques extends javax.swing.JFrame {
     dbConnection conexion = new dbConnection();
     ClsValidaciones Validar = new ClsValidaciones();
     ClsBuques buques = new ClsBuques();
-    
-    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
-    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
-    Icon Icono = new ImageIcon(getClass().getResource("/Resources/Check.png"));
-    
+    clsMessage message = new clsMessage();
+
     private void limpiar() {
         txtCodBuque.setText(null);
         txtNombreBuque.setText(null);
@@ -312,7 +309,7 @@ public class frmCrudBuques extends javax.swing.JFrame {
 
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
         }
 
     }
@@ -336,7 +333,7 @@ public class frmCrudBuques extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al verificar buque " + ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, "Error al verificar buque " + ex, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
             return false;
         }
     }
@@ -369,34 +366,34 @@ public class frmCrudBuques extends javax.swing.JFrame {
 
                                 if (buques.ActualizarBuque()) {
 
-                                    JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> BUQUE ACTUALIZADO CORRECTAMENTE</b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                    JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> BUQUE ACTUALIZADO CORRECTAMENTE</b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.Icono);
 
                                     LlenarJtable();
                                     limpiar();
                                 } else {
-                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                                 }
 
                             } else {
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> NO SE PUEDE ACTUALIZAR UN BUQUE ELIMINADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> NO SE PUEDE ACTUALIZAR UN BUQUE ELIMINADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                                 limpiar();
                             }
 
                         } else {
-                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN BUQUE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN BUQUE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
 
                         }
 
                     }
                 } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
+                    JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                 }
 
             } else {
-                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE LOS DATOS SOLICITADOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE LOS DATOS SOLICITADOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
             }
         }else{
-            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LOS DATOS SOLICITADOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LOS DATOS SOLICITADOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
             
         }
         
@@ -417,15 +414,15 @@ public class frmCrudBuques extends javax.swing.JFrame {
                     buques.setEstado("Activo");
                     
                     if (buques.RegistrarBuque()) {
-                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> BUQUE REGISTRADO CORRECTAMENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
+                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> BUQUE REGISTRADO CORRECTAMENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.Icono);
 
                         LlenarJtable();
                         limpiar();
                     } else {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
                     }
                 } else {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL BUQUE YA EXISTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL BUQUE YA EXISTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
                         limpiar();
                     }
                 } else {
@@ -436,20 +433,20 @@ public class frmCrudBuques extends javax.swing.JFrame {
                     
                     if (buques.RegistrarBuque()) {
                         
-                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> BUQUE REGISTRADO CORRECTAMENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
+                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> BUQUE REGISTRADO CORRECTAMENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.Icono);
 
                         LlenarJtable();
                         limpiar();
                     } else {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE LOS DATOS SOLICITADOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE LOS DATOS SOLICITADOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
                 limpiar();
             }
         } else {
-            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LOS DATOS SOLICITADOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LOS DATOS SOLICITADOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
             
         }
         
@@ -487,33 +484,33 @@ public class frmCrudBuques extends javax.swing.JFrame {
                                 buques.setNombreBuque(txtNombreBuque.getText());
 
                                 if (buques.EliminarBuque()) {
-                                    JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> BUQUE ELIMINADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                    JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> BUQUE ELIMINADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                     LlenarJtable();
                                     limpiar();
 
                                 } else {
-                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                                 }
 
                             } else {
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> YA SE ENCUENTRA ELIMINADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> YA SE ENCUENTRA ELIMINADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                                 limpiar();
 
                             }
                         } else {
-                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN BUQUE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN BUQUE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
 
                         }
 
                     }
                 } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
+                    JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE LOS DATOS SOLICITADOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE LOS DATOS SOLICITADOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LOS DATOS SOLICITADOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LOS DATOS SOLICITADOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
         } 
         
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -526,7 +523,7 @@ public class frmCrudBuques extends javax.swing.JFrame {
     private void btnMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseClicked
         int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
             JOptionPane.YES_NO_OPTION, 
-            JOptionPane.QUESTION_MESSAGE, icono);
+            JOptionPane.QUESTION_MESSAGE, message.icono);
 
         if(result == JOptionPane.YES_NO_OPTION)
         {

@@ -6,6 +6,7 @@
 package FormulariosCrucero;
 
 import Clases.ClsFuncionesDB;
+import Clases.clsMessage;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
 
@@ -19,8 +20,7 @@ import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.HashSet;
 import javax.swing.AbstractButton;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
@@ -42,8 +42,8 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
     DefaultTableModel model;
     ResultSet result = null;
     public static int codigoViajeSeleccionado = 0;
-    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
-    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
+
+    clsMessage message = new clsMessage();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -195,7 +195,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
             this.dispose();
             
         }else{
-        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR UN VIAJE!</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR UN VIAJE!</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
         }
 
     }//GEN-LAST:event_btnSiguienteActionPerformed
@@ -227,7 +227,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
         int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Esta seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
             JOptionPane.YES_NO_OPTION, 
-            JOptionPane.QUESTION_MESSAGE, icono);
+            JOptionPane.QUESTION_MESSAGE, message.icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             variables.resetVariables();
@@ -271,7 +271,7 @@ public class frmSeleccionViaje extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon); 
         }
     }
 

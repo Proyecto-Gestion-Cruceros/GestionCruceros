@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package FormularioIGP;
 
+import Clases.clsMessage;
 import FormularioCRUDcamarote.frmCRUDCamarote;
 import Formularios.InicioSesion.frmInicioSesion;
 import FormulariosCrucero.frmSeleccionClientes;
@@ -14,8 +11,7 @@ import formularioBase.frmCrudDestinosTuristicos;
 import formularioBase.frmCrudPuertosDeSalida;
 import formularioBase.frmCrudUsuarios;
 import formularioBase.frmCrudViajesDisponibles;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+
 import javax.swing.JOptionPane;
 
 
@@ -26,11 +22,9 @@ public class frmIGP extends javax.swing.JFrame {
         initComponents();
     }
 
-    //  1 : Adminitrador
-    //  2 : Agente de venta
+   
     private int codigoAcceso = frmInicioSesion.tipoInicio;
-    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png")); 
-    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
+    clsMessage message = new clsMessage();
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -319,7 +313,7 @@ public class frmIGP extends javax.swing.JFrame {
 
         int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Está seguro que desea Salir?</b></html>" , "Salir del Programa",
             JOptionPane.YES_NO_OPTION, 
-            JOptionPane.QUESTION_MESSAGE, icono);
+            JOptionPane.QUESTION_MESSAGE, message.icono);
         if (result == JOptionPane.YES_OPTION) {
 
             dispose();   
@@ -389,7 +383,7 @@ public class frmIGP extends javax.swing.JFrame {
                 btnPuertos.setEnabled(true);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -402,7 +396,7 @@ public class frmIGP extends javax.swing.JFrame {
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Está seguro que desea Cerrar Sesión?</b></html>", "Cerrar Sesión",
                 JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE, icono);
+                JOptionPane.QUESTION_MESSAGE, message.icono);
         if (result == JOptionPane.YES_OPTION) {
             frmInicioSesion inicioSesion = new frmInicioSesion();
             inicioSesion.setVisible(true);
@@ -417,40 +411,7 @@ public class frmIGP extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnPuertosActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmIGP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmIGP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmIGP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmIGP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmIGP().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuques;

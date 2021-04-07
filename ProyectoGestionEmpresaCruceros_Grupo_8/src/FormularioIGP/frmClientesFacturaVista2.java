@@ -1,5 +1,6 @@
 package FormularioIGP;
 
+import Clases.clsMessage;
 import Formularios.Pagos.*;
 import Clases.dbConnection;
 import FormulariosCrucero.clsVariablesViaje;
@@ -19,6 +20,7 @@ public class frmClientesFacturaVista2 extends javax.swing.JFrame {
 
     clsVariablesViaje variablesViaje = new clsVariablesViaje();
     int idFact = 0;
+    clsMessage message = new clsMessage();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -130,7 +132,7 @@ public class frmClientesFacturaVista2 extends javax.swing.JFrame {
             
             
         }catch(SQLException ex){
-            System.out.println("Error al llenar tabla " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al Actualizar los datos " + ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon);
         }
         
     }//GEN-LAST:event_formWindowOpened

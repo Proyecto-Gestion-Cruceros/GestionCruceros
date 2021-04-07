@@ -5,6 +5,7 @@
  */
 package FormulariosCrucero;
 
+import Clases.clsMessage;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
 
@@ -19,8 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -45,11 +45,9 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
     int numeroCamaroteSeleccionado = 0;
     PreparedStatement ps;
     ResultSet result = null;
+    clsMessage message = new clsMessage();
     
-    
-    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
-    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
-    Icon Icon = new ImageIcon(getClass().getResource("/Resources/informacion.png"));
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1305,7 +1303,7 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
             this.dispose();
             new frmPagos().setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR UN CAMAROTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR UN CAMAROTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
         }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
@@ -1328,7 +1326,7 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
         int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
             JOptionPane.YES_NO_OPTION, 
-            JOptionPane.QUESTION_MESSAGE, icono);
+            JOptionPane.QUESTION_MESSAGE, message.icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             variables.resetVariables();
@@ -1459,7 +1457,7 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon); 
         }
     }
 
@@ -1496,7 +1494,7 @@ public class frmVistaCamarotesN3 extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon); 
         }
     }
 

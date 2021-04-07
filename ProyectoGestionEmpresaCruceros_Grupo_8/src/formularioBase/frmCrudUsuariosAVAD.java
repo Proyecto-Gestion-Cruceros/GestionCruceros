@@ -5,6 +5,7 @@ import Clases.Personas.clsUsuarios;
 import Clases.Personas.ClsPersona;
 import javax.swing.JOptionPane;
 import Clases.ClsValidaciones;
+import Clases.clsMessage;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
 import java.awt.Color;
@@ -14,8 +15,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
@@ -35,9 +34,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     ClsPersona Persona = new ClsPersona();
     ClsValidaciones validar = new ClsValidaciones();
 
-    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
-    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
-    Icon Icono = new ImageIcon(getClass().getResource("/Resources/Check.png"));
+    clsMessage message = new clsMessage();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -83,7 +80,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
 
         lblCargo.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
         lblCargo.setForeground(new java.awt.Color(255, 204, 51));
-        lblCargo.setText("----------------- ");
+        lblCargo.setText("USUARIOS");
 
         jLabel3.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -279,7 +276,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(543, 543, 543)))
+                                .addGap(516, 516, 516)))
                         .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -296,7 +293,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                         .addGap(70, 70, 70))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(lblCargo)
-                        .addGap(43, 43, 43)))
+                        .addGap(47, 47, 47)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -391,30 +388,30 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                             try {
                                 if (Usuario.ActualizarPersona()) {
 
-                                    JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> USUARIO ACTUALIZADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                    JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> USUARIO ACTUALIZADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                     MostrarUsuarios();
 
                                 } else {
-                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL ACTUALIZAR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL ACTUALIZAR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                                 }
                             } catch (Exception ex) {
                                 JOptionPane.showMessageDialog(null, ex);
                             }
                         } else {
-                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE LA CONTRASEÑA </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE LA CONTRASEÑA </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NUMERO DE TELEFONICO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NUMERO DE TELEFONICO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NOMBRE O APELLIDO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NOMBRE O APELLIDO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NUMERO DE IDENTIDAD </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NUMERO DE IDENTIDAD </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> INGRESE TODOS LOS DATOS NECESARIOS </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icono);
+            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> INGRESE TODOS LOS DATOS NECESARIOS </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icono);
 
         }
     }//GEN-LAST:event_btnActualizarUsuarioActionPerformed
@@ -460,32 +457,32 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
 
                                 try {
                                     if (Usuario.AgregarPersona()) {
-                                        JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> USUARIO REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                        JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> USUARIO REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                         MostrarUsuarios();
                                     } else {
-                                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL REGISTRAR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL REGISTRAR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                                     }
                                 } catch (Exception ex) {
                                     JOptionPane.showMessageDialog(null, ex);
                                 }
                             } else {
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE LA CONTRASEÑA </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE LA CONTRASEÑA </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                             }
                         } else {
-                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL CORREO ELECTRONICO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL CORREO ELECTRONICO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NUMERO DE TELEFONICO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NUMERO DE TELEFONICO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NOMBRE O APELLIDO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NOMBRE O APELLIDO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NUMERO DE IDENTIDAD </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NUMERO DE IDENTIDAD </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> INGRESE TODOS LOS DATOS NECESARIOS </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icono);
+            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> INGRESE TODOS LOS DATOS NECESARIOS </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icono);
         }
     }//GEN-LAST:event_btnAgregarUsuario1ActionPerformed
 
@@ -503,14 +500,14 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
 
                             int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Está Seguro de Eliminar El Usuario?</b></html>", "Salir del Módulo",
                                     JOptionPane.YES_NO_OPTION,
-                                    JOptionPane.QUESTION_MESSAGE, icono);
+                                    JOptionPane.QUESTION_MESSAGE, message.icono);
                             if (result == JOptionPane.YES_OPTION) {
-                                JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> USUARIO ELIMINADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> USUARIO ELIMINADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                 MostrarUsuarios();
                             }
 
                         } else {
-                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL ELIMINAR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL ELIMINAR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                         }
                     } else if (User.equals("ADMINISTRADOR")) {
                         if (VerificarCantidadAdmins() > 1) {
@@ -519,29 +516,29 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
 
                                 int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Está Seguro de Eliminar El Usuario?</b></html>", "Salir del Módulo",
                                         JOptionPane.YES_NO_OPTION,
-                                        JOptionPane.QUESTION_MESSAGE, icono);
+                                        JOptionPane.QUESTION_MESSAGE, message.icono);
                                 if (result == JOptionPane.YES_OPTION) {
-                                    JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> USUARIO ELIMINADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                    JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> USUARIO ELIMINADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                     MostrarUsuarios();
                                 }
 
                             } else {
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL ELIMINAR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL ELIMINAR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                             }
 
                         } else {
-                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> NO SE PUEDE ELIMINAR EL ULTIMO ADMINISTRADOR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> NO SE PUEDE ELIMINAR EL ULTIMO ADMINISTRADOR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                         }
                     }
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
+                    JOptionPane.showMessageDialog(null, ex, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NUMERO DE IDENTIDAD </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE CORRECTAMENTE EL NUMERO DE IDENTIDAD </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> INGRESE EL NUMERO DE IDENTIDAD PARA PODER ELIMINAR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icono);
+            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> INGRESE EL NUMERO DE IDENTIDAD PARA PODER ELIMINAR </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icono);
         }
     }//GEN-LAST:event_btnEliminarUsuarioActionPerformed
 
@@ -565,7 +562,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
 
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
         }
 
         txtConfirmarContraseñaUsuario.setText(null);
@@ -575,7 +572,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
         int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">¿Está seguro de volver al Menú Principal?</b></html>", "Salir del Módulo",
                 JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE, icono);
+                JOptionPane.QUESTION_MESSAGE, message.icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             frmIGP igp = new frmIGP();
@@ -609,7 +606,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
             temp = (DefaultTableModel) JUsuarios.getModel();
             temp.setRowCount(0);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, ex, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
         }
     }
 
@@ -643,7 +640,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
 
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
             return 0;
         }
         return 0;

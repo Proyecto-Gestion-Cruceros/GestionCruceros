@@ -2,9 +2,9 @@ package formularioBase;
 
 import Clases.Personas.clsUsuarios;
 import Clases.Personas.ClsPersona;
+import Clases.clsMessage;
 import FormularioIGP.frmIGP;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+
 
 import javax.swing.JOptionPane;
 
@@ -17,7 +17,7 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
     clsUsuarios Usuario = new clsUsuarios(); 
     ClsPersona Persona = new ClsPersona(); 
     
-    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
+    clsMessage message = new clsMessage();
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -135,7 +135,7 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
         int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
             JOptionPane.YES_NO_OPTION, 
-            JOptionPane.QUESTION_MESSAGE, icono);
+            JOptionPane.QUESTION_MESSAGE, message.icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             frmIGP igp = new frmIGP();

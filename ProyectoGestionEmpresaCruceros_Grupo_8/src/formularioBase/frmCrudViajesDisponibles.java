@@ -3,6 +3,7 @@ package formularioBase;
 import Clases.BuquesyViajesDisponibles.ClsViajesDisponibles;
 import Clases.ClsFuncionesDB;
 import Clases.ClsValidaciones;
+import Clases.clsMessage;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
 import com.toedter.calendar.JTextFieldDateEditor;
@@ -17,8 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -345,10 +345,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
     ClsValidaciones Validar = new ClsValidaciones();
     ClsViajesDisponibles Viaje = new ClsViajesDisponibles();
     
-    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
-    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
-    Icon Icono = new ImageIcon(getClass().getResource("/Resources/Check.png"));
-    
+    clsMessage message = new clsMessage();
     private void limpiar() {
         txtIdViaje.setText(null);
         cmbBuques.setSelectedIndex(-1);
@@ -489,16 +486,16 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                                 Viaje.actulizarEstadoBuque();
 
                                 if (Viaje.RegistrarViajeDisponible()) {
-                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                     limpiar();
                                     LlenarJtable();
 
                                 } else {
-                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                                 }
 
                             } else {
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL VIAJE YA EXISTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL VIAJE YA EXISTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                             }
                         } else {
 
@@ -517,22 +514,22 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                             Viaje.actulizarEstadoBuque();
 
                             if (Viaje.RegistrarViajeDisponible()) {
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                 limpiar();
                                 LlenarJtable();
                             } else {
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
 
                             }
                         }
                     } else {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL BUQUE ESTA OCUPADO EN ESA FECHA </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL BUQUE ESTA OCUPADO EN ESA FECHA </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                         jdcFechaSalida.setCalendar(null);
                         jdcFechaRegreso.setCalendar(null);
                     }
 
                 } else {
-                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LAS FECHAS CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LAS FECHAS CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                     jdcFechaSalida.setCalendar(null);
                     jdcFechaRegreso.setCalendar(null);
                 }
@@ -557,16 +554,16 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                             Viaje.actulizarEstadoBuque();
 
                             if (Viaje.RegistrarViajeDisponible()) {
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                 limpiar();
                                 LlenarJtable();
 
                             } else {
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                             }
 
                         } else {
-                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL VIAJE YA EXISTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL VIAJE YA EXISTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                         }
                     } else {
 
@@ -585,17 +582,17 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                         Viaje.actulizarEstadoBuque();
 
                         if (Viaje.RegistrarViajeDisponible()) {
-                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.Icono);
                             limpiar();
                             LlenarJtable();
 
                         } else {
-                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
 
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LAS FECHAS CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LAS FECHAS CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                     jdcFechaSalida.setCalendar(null);
                     jdcFechaRegreso.setCalendar(null);
                 }
@@ -603,7 +600,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LOS DATOS SOLICITADOS </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icono);
+            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LOS DATOS SOLICITADOS </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icono);
 
         }
     }//GEN-LAST:event_btnAgregar1ActionPerformed
@@ -627,7 +624,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al verificar buque " + ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, " Error al verificar buque " + ex, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
             return false;
         }
     }
@@ -652,7 +649,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al verificar buque " + ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, " Error al verificar buque " + ex, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
             return false;
         }
     }
@@ -719,39 +716,39 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                                 if (validarDisponibilidadBuque(fechaRegreso, fechaPartidaN, fechaRegresoN)) {
 
                                     if (Viaje.ActualizarViajeDisponible()) {
-                                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE ACTUALIZADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE ACTUALIZADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                         limpiar();
                                         LlenarJtable();
                                     } else {
-                                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                                     }
                                 } else {
-                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL BUQUE ESTA OCUPADO EN ESA FECHA </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL BUQUE ESTA OCUPADO EN ESA FECHA </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                                     jdcFechaSalida.setCalendar(null);
                                     jdcFechaRegreso.setCalendar(null);
                                 }
 
                             } else {
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LAS FECHAS CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LAS FECHAS CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                                 jdcFechaSalida.setCalendar(null);
                                 jdcFechaRegreso.setCalendar(null);
                             }
 
                         } else {
-                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> NO SE PUEDE ACTUALIZAR UN VIAJE CANCELADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> NO SE PUEDE ACTUALIZAR UN VIAJE CANCELADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                         }
 
                     } else {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN VIAJE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN VIAJE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
 
                     }
                 }
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LOS DATOS SOLICITADOS </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icono);
+            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> INGRESE LOS DATOS SOLICITADOS </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icono);
         }
     }//GEN-LAST:event_btnActualizar1ActionPerformed
 
@@ -781,28 +778,28 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
                             Viaje.actulizarEstadoBuque();
                             
                             if (Viaje.EliminarViaje()) {
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE ELIMINADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, Icono);
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> VIAJE ELIMINADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                 limpiar();
                                 LlenarJtable();
 
                             } else {
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR DE PROCEDIMIENTO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
                             }
                         } else {
-                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL VIAJE YA SE ENCUENTRA ELIMINADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL VIAJE YA SE ENCUENTRA ELIMINADO </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
 
                         }
 
                     } else {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN VIAJE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN VIAJE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icon);
 
                     }
                 }
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN VIAJE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, icono);
+            JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN VIAJE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.icono);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -814,7 +811,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
     private void btnMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseClicked
         int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>", "Salir del Módulo",
                 JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE, icono);
+                JOptionPane.QUESTION_MESSAGE, message.icono);
 
         if (result == JOptionPane.YES_NO_OPTION) {
             this.dispose();
@@ -838,7 +835,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
 
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
         }
 
     }
@@ -936,7 +933,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
             fechaNSal = formatoDelTexto.parse(fechaSalida);
             jdcFechaSalida.setDate(fechaNSal);
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar fecha salida " + ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, "Error al cargar fecha salida " + ex, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
         }
     }
 
@@ -950,7 +947,7 @@ public class frmCrudViajesDisponibles extends javax.swing.JFrame {
             fechaNRe = formatoDelTexto.parse(fechaRegreso);
             jdcFechaRegreso.setDate(fechaNRe);
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar fecha regreso" + ex, "", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, "Error al cargar fecha regreso" + ex, "", JOptionPane.INFORMATION_MESSAGE, message.icon);
         }
     }
     

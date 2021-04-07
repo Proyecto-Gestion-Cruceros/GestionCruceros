@@ -1,6 +1,7 @@
 package Formularios.Pagos;
 
 import Clases.ClsValidaciones;
+import Clases.clsMessage;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
 
@@ -47,9 +48,8 @@ public class frmPagos extends javax.swing.JFrame {
     String identidadC = modelCliente.getValueAt(0, 0).toString();
     File temp;
     String msgMetodoPago = null;
-    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
-    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));    
     
+    clsMessage message = new clsMessage();
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -659,22 +659,22 @@ public class frmPagos extends javax.swing.JFrame {
                         }
                         else
                         {
-                            JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> INGRESE UN MES DE VENCIMIENTO CORRECTO</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                            JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> INGRESE UN MES DE VENCIMIENTO CORRECTO</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
                         }
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> INGRESE UN AÑO DE VENCIMIENTO CORRECTA</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                        JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> INGRESE UN AÑO DE VENCIMIENTO CORRECTA</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
                     }
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> VERIFIQUE LOS VALORES INGRESADOS</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                    JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> VERIFIQUE LOS VALORES INGRESADOS</b></html>", "",JOptionPane.INFORMATION_MESSAGE,  message.icono);
                 }
             }
             else
             {
-                JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> INGRESE DATOS DE PAGO</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> INGRESE DATOS DE PAGO</b></html>", "",JOptionPane.INFORMATION_MESSAGE,  message.icono);
             }
         }
         else if(jrbEfectivo.isSelected())
@@ -691,17 +691,17 @@ public class frmPagos extends javax.swing.JFrame {
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> VERIFIQUE LOS VALORES INGRESADOS</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                        JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> VERIFIQUE LOS VALORES INGRESADOS</b></html>", "",JOptionPane.INFORMATION_MESSAGE,  message.icono);
                     }
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> INGRESE DATOS DE PAGO</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                    JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> INGRESE DATOS DE PAGO</b></html>", "",JOptionPane.INFORMATION_MESSAGE,  message.icono);
                 }
         }
         else
         {
-            JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN MÉTODO DE PAGO</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+            JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN MÉTODO DE PAGO</b></html>", "",JOptionPane.INFORMATION_MESSAGE,  message.icono);
         }
         
         
@@ -846,7 +846,7 @@ public class frmPagos extends javax.swing.JFrame {
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
         int result = JOptionPane.showConfirmDialog(this,"<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
             JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE, new ImageIcon(getClass().getResource("/Resources/Error.png")));
+            JOptionPane.QUESTION_MESSAGE, message.icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             variablesViaje.resetVariables();
@@ -1055,7 +1055,7 @@ public class frmPagos extends javax.swing.JFrame {
             if (pago.insertarViajeBD(Integer.parseInt(txtNumFactura.getText()), identidadC, frmInicioSesion.identidadEmpleado, variablesViaje.getCodigoBuque(), variablesViaje.getCodigoViaje(), variablesViaje.getNumeroCamarote())) {
                     temp = File.createTempFile("tempFactura00000" + txtNumFactura.getText(), ".pdf");
                     generarFactura();
-                    JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> GENERACIÓN DE VIAJE CORRECTA IMPRIMIENDO FACTURA...</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                    JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> GENERACIÓN DE VIAJE CORRECTA IMPRIMIENDO FACTURA...</b></html>", "",JOptionPane.INFORMATION_MESSAGE,  message.icono);
                     if (job.printDialog() == true) {
                         PDDocument document = PDDocument.load(temp);
                         job.setPageable(new PDFPageable(document));
@@ -1066,7 +1066,7 @@ public class frmPagos extends javax.swing.JFrame {
                     
             }
             else{
-                JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR DONDE IMPRIMIR LA FACTURA</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR DONDE IMPRIMIR LA FACTURA</b></html>", "",JOptionPane.INFORMATION_MESSAGE,  message.icono);
                 imprimirFactura();
             }
         } catch (Exception ex) {

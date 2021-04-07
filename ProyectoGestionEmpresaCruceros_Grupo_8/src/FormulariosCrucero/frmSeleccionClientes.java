@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package FormulariosCrucero;
 
 import Clases.ClsFuncionesDB;
 import Clases.ClsValidaciones;
+import Clases.clsMessage;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
 import com.sun.jdi.Value;
@@ -23,8 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSetMetaData;
 import java.util.HashSet;
 import javax.swing.DefaultListModel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -78,16 +74,14 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
     Statement st;
     PreparedStatement ps;
     ResultSetMetaData rsmd;
-
+    clsMessage message = new clsMessage();
     ResultSet result = null;
     String identidadCliente = "";
     String identidadClienteEliminar = "";
     String nombreCliente;
     private TableRowSorter trsfiltro;
     String filtro;
-    
-    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
-    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -338,7 +332,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
 
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR AL MENOS UN CLIENTE!</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE SELECCIONAR AL MENOS UN CLIENTE!</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
 
         }
 
@@ -392,7 +386,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
             cantidadClientes += 1;
             txtCantidadClientes.setText(""+cantidadClientes);
         } else {
-            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN CLIENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN CLIENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
         }
     }//GEN-LAST:event_btnAgregarClienteActionPerformed
 
@@ -412,7 +406,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
             cantidadClientes -= 1;
             txtCantidadClientes.setText("" + cantidadClientes);
         }else{
-            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN CLIENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);        
+            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN CLIENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);        
         }
 
     }//GEN-LAST:event_btnEliminarClienteActionPerformed
@@ -446,7 +440,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
        
         int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Esta seguro de volver al Menú Principal?</b></html>", "Salir del Módulo",
                 JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE, icono);
+                JOptionPane.QUESTION_MESSAGE, message.icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             variables.resetVariables();
@@ -528,7 +522,7 @@ public class frmSeleccionClientes extends javax.swing.JFrame {
                 variables.model.addRow(fil);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla " + ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon);
         }
     }
 

@@ -3,6 +3,7 @@ package formularioBase;
 import Clases.ClsFuncionesDB;
 import Clases.ClsValidaciones;
 import Clases.DestinosTuristicos.ClsDestinosTuristicos;
+import Clases.clsMessage;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
 import java.awt.Color;
@@ -12,8 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,10 +30,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
     }
 
 
-    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
-    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
-    Icon Icono = new ImageIcon(getClass().getResource("/Resources/Check.png"));
-     
+    clsMessage message = new clsMessage();
     ClsValidaciones validar = new ClsValidaciones();
     ClsDestinosTuristicos destinos = new ClsDestinosTuristicos();
     dbConnection dbConn =  new dbConnection();
@@ -242,7 +239,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
         
         int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
             JOptionPane.YES_NO_OPTION, 
-            JOptionPane.QUESTION_MESSAGE, icono);
+            JOptionPane.QUESTION_MESSAGE, message.icono);
         
         if(result == JOptionPane.YES_NO_OPTION)
         {
@@ -273,7 +270,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
                 
                 if(cmbEstadoDestino.getSelectedIndex() == 0 || txtNombreDestino.getText().isEmpty() || txtNombreDestino.getText() == null)
                 {
-                    JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> INGRESE UN NOMBRE Y UN ESTADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                    JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> INGRESE UN NOMBRE Y UN ESTADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
 
                 }
                 else 
@@ -285,31 +282,31 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
                 
                     if(destinos.AgregarDestino())
                     {
-                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> SE REGISTRO CORRECTAMENTE EL DESTINO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
+                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> SE REGISTRO CORRECTAMENTE EL DESTINO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.Icono);
                         LimpiarTabla();
                         LlenarTabla();
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> YA EXISTE UN DESTINO CON ESE NOMBRE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> YA EXISTE UN DESTINO CON ESE NOMBRE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
 
                     }
                 
                     }
                     catch(Exception ex)
                     {
-                       JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
+                       JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon); 
                     }
                 }  
             }
             else
             {
-                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN NOMBRE VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN NOMBRE VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
             }
         }
         else
         {
-           JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE INGRESAR TODOS LOS DATOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+           JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE INGRESAR TODOS LOS DATOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
         } 
                 
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -323,7 +320,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
                              
                 if(cmbEstadoDestino.getSelectedIndex() == 0 || txtNombreDestino.getText() == null)
                 {
-                    JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN ESTADO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                    JOptionPane.showMessageDialog(this,"<html><b style=\"color:black; font-size:13px;\"> SELECCIONE UN ESTADO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
                 }
                 else 
                 {
@@ -334,32 +331,32 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
                 
                     if(destinos.ActualizarDestino())
                     {
-                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DESTINO ACTUALIZADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
+                        JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DESTINO ACTUALIZADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.Icono);
                         LimpiarTabla();
                         LlenarTabla();
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL INTENTAR ACTUALIZAR EL DESTINO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                        JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL INTENTAR ACTUALIZAR EL DESTINO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
 
                     }
                 
                     }
                     catch(Exception ex)
                     {
-                        JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
+                        JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon); 
                     }
                     
                 }
             }
             else
             {
-                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN NOMBRE VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                 JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN NOMBRE VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
             }
         }
         else
         {
-           JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE INGRESAR TODOS LOS DATOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+           JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> DEBE INGRESAR TODOS LOS DATOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
         }
         
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -388,7 +385,7 @@ public class frmCrudDestinosTuristicos extends javax.swing.JFrame {
         }
         catch(Exception ex)
         {
-            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon); 
         }
         
     }

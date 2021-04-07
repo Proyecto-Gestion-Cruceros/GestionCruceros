@@ -1,10 +1,9 @@
 package Formularios.InicioSesion;
 
 import Clases.ClsValidaciones;
+import Clases.clsMessage;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class frmInicioSesion extends javax.swing.JFrame {
@@ -18,8 +17,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
     public static String identidadEmpleado;
     public static int tipoInicio;
     
-     Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
-     Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
+    clsMessage message = new clsMessage(); 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -177,13 +175,13 @@ public class frmInicioSesion extends javax.swing.JFrame {
                     IGP.setVisible(true);
                     this.dispose();
                 } else {      
-                    JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> USUARIO O CONTRASEÑA INCORRECTOS</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                    JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> USUARIO O CONTRASEÑA INCORRECTOS</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
                 }
             } else {
-                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> VERIFIQUE VALORES</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> VERIFIQUE VALORES</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
             }
         } else {
-             JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> INGRESE VALORES</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+             JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> INGRESE VALORES</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
         }
 
 
@@ -201,7 +199,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
 
         int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Está seguro que desea Salir?</b></html>" , "Salir del Programa",
             JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE, icono);
+            JOptionPane.QUESTION_MESSAGE, message.icono);
         if (result == JOptionPane.YES_OPTION) {
             System.exit(0);
         }

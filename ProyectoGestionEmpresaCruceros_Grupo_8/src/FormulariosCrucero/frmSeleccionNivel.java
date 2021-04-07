@@ -6,9 +6,9 @@
 package FormulariosCrucero;
 
 
+import Clases.clsMessage;
 import FormularioIGP.frmIGP;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -26,8 +26,8 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
     }
     
         clsVariablesViaje variables = new clsVariablesViaje();
-        
-        Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
+        clsMessage message = new clsMessage();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -211,7 +211,7 @@ public class frmSeleccionNivel extends javax.swing.JFrame {
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
         int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Esta seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
                 JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE, icono);
+                JOptionPane.QUESTION_MESSAGE, message.icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             variables.resetVariables();

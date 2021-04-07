@@ -1,12 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package FormularioCRUDcamarote;
 
 import Clases.CRUDcamarote.clsCamarote;
+import Clases.ClsFuncionesDB;
 import Clases.ClsValidaciones;
+import Clases.clsMessage;
 import Clases.dbConnection;
 
 import static Clases.dbConnection.dbConexion;
@@ -17,35 +15,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.ResultSetMetaData;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
+
 
 public class frmCRUDActualizacion extends javax.swing.JFrame {
 
     clsCamarote camarote = new clsCamarote();
     dbConnection conexion = new dbConnection();
     ClsValidaciones validar = new ClsValidaciones();
-
+    clsMessage message = new clsMessage();
     PreparedStatement ps, pss, pps;
     ResultSet result = null;
 
     Statement st;
     ResultSetMetaData rsmd;
     DefaultTableModel model;
-
-
-    private int retornarCodigoCamarote;
-    
-    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
-    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
-    Icon Icono = new ImageIcon(getClass().getResource("/Resources/Check.png"));
+   
 
     public frmCRUDActualizacion() {
         initComponents();
@@ -402,27 +390,6 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         model.setRowCount(0);
     }
 
-    private void limpiar() {
-        spNiveel.setValue(1);
-        txtTipoCamarote.setText(null);
-        spCapacidad.setValue(1);
-        txtPrecioCamarote.setText(null);
-        txtPrecioCamarote.setEnabled(false);
-        cmbEstado.setSelectedIndex(0);
-    }
-
-    private void limpiarCambio() {
-        txtIDCamarote.setText(null);
-        spNiveel.setValue(1);
-        txtTipoCamarote.setText(null);
-        spCapacidad.setValue(1);
-        txtPrecioCamarote.setText(null);
-        cmbEstado.setSelectedIndex(0);
-        cmbEstado.setEnabled(false);
-        spCapacidad.setEnabled(false);
-        btnBuscar.setEnabled(false);
-        txtPrecioCamarote.setEnabled(false);
-    }
 
     private void buscarCamarote() {
         try {
@@ -451,7 +418,7 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 cargarDatosSeleccionados(Integer.parseInt(txtIDCamarote.getText()));
                 
             } else {
-                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> REGISTRO DE CAMAROTE NO ENCONTRADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> REGISTRO DE CAMAROTE NO ENCONTRADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
                 cmbEstado.setEnabled(false);
                 spCapacidad.setEnabled(false);
                 txtIDCamarote.setText(null);
@@ -460,7 +427,7 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
 
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al Buscar " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, "Error al Buscar " + ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon);
         }
     }
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -476,6 +443,19 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         limpiarCampos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
+     private void limpiarCambio() {
+        txtIDCamarote.setText(null);
+        spNiveel.setValue(1);
+        txtTipoCamarote.setText(null);
+        spCapacidad.setValue(1);
+        txtPrecioCamarote.setText(null);
+        cmbEstado.setSelectedIndex(0);
+        cmbEstado.setEnabled(false);
+        spCapacidad.setEnabled(false);
+        btnBuscar.setEnabled(false);
+        txtPrecioCamarote.setEnabled(false);
+    }
+     
     private void btnActualizarCamaroteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarCamaroteActionPerformed
         try {
             ps = dbConexion().prepareStatement("UPDATE camarotes SET capacidadMaxima=?, estadoCamarote=?, precioCamarote = ?  WHERE codigoCamarote = ?");
@@ -487,15 +467,15 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
             int llenado = ps.executeUpdate();
 
             if (llenado > 0) { 
-                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CAMAROTE ACTUALIZADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
+                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CAMAROTE ACTUALIZADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.Icono);
                 cargarDatos();
                 limpiarCambio();
             } else {     
-                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> INSERTAR CODIGO DEL CAMAROTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> INSERTAR CODIGO DEL CAMAROTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE,message.icono);
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al Actualizar los datos " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, "Error al Actualizar los datos " + ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon);
         }
     }//GEN-LAST:event_btnActualizarCamaroteActionPerformed
 
@@ -536,7 +516,7 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, icon); 
+            JOptionPane.showMessageDialog(null, ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon); 
         }
     }//GEN-LAST:event_cmbCodigoBuqueActionPerformed
 
@@ -552,6 +532,17 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtIDCamaroteActionPerformed
 
+       private void limpiar() {
+        spNiveel.setValue(1);
+        txtTipoCamarote.setText(null);
+        spCapacidad.setValue(1);
+        txtPrecioCamarote.setText(null);
+        txtPrecioCamarote.setEnabled(false);
+        cmbEstado.setSelectedIndex(0);
+    }
+
+   
+       
     private void txtIDCamaroteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDCamaroteKeyReleased
         if (txtIDCamarote.getText() != "") {
 
@@ -628,27 +619,11 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPrecioCamaroteKeyReleased
 
+
     private void cargarDatos() {
-        model = (DefaultTableModel) tablaDatos.getModel();
-        model.setRowCount(0);
-
-        try {
-            ps = dbConexion().prepareStatement("SELECT codigoCamarote, nivel, tipoCamarote, capacidadMaxima, precioCamarote, estadoCamarote FROM camarotes WHERE codigoBuque = '" + this.cmbCodigoBuque.getSelectedItem() + "'");
-            ResultSet result = ps.executeQuery();
-            rsmd = result.getMetaData();
-
-            int columna = rsmd.getColumnCount();
-
-            while (result.next()) {
-                Object fil[] = new Object[columna];
-                for (int i = 0; i < columna; i++) {
-                    fil[i] = result.getObject(i + 1);
-                }
-                model.addRow(fil);
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
-        }
+        conexion = new ClsFuncionesDB();
+        conexion.llenarJTable(tablaDatos, "SELECT codigoCamarote, nivel, tipoCamarote, capacidadMaxima, precioCamarote, estadoCamarote FROM camarotes WHERE codigoBuque = '" + this.cmbCodigoBuque.getSelectedItem() + "'");
+        conexion = new dbConnection();
     }
     
      private void cargarDatosSeleccionados(int codigoCamarote) {
@@ -670,51 +645,11 @@ public class frmCRUDActualizacion extends javax.swing.JFrame {
                 model.addRow(fil);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla " + ex, "",JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la tabla " + ex, "",JOptionPane.INFORMATION_MESSAGE, message.icon);
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmCRUDActualizacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmCRUDActualizacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmCRUDActualizacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmCRUDActualizacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmCRUDActualizacion().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizarCamarote;

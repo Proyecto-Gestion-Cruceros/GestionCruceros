@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 
 import Clases.ClsValidaciones;
 import Clases.Personas.ClsPersona;
+import Clases.clsMessage;
 import Clases.dbConnection;
 import FormularioIGP.frmIGP;
 import com.toedter.calendar.JTextFieldDateEditor;
@@ -20,8 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -39,6 +39,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
         initDateEditor();
     }
 
+    clsMessage message = new clsMessage();
     ClsValidaciones validar = new ClsValidaciones();
     ClsClientes cliente = new ClsClientes();
     ClsPersona persona = new ClsPersona();
@@ -50,11 +51,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
     ResultSetMetaData rsm;
     DefaultTableModel dtm;
     DefaultTableModel temp;
-    
-    Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
-    Icon icono = new ImageIcon(getClass().getResource("/Resources/Advertencia.png"));
-    Icon Icono = new ImageIcon(getClass().getResource("/Resources/Check.png"));
-     
+   
     String fecha = "";
     
     
@@ -103,7 +100,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 1, 40)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel1.setText("Clientes");
+        jLabel1.setText("CLIENTES");
 
         jLabel2.setFont(new java.awt.Font("Doppio One", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -313,8 +310,8 @@ public class frmCrudClientes extends javax.swing.JFrame {
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(351, 351, 351))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(837, 837, 837))))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(757, 757, 757))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,7 +423,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
                             {
                                 if(cmbEstadoCliente.getSelectedIndex() == 0)
                                 {
-                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN ESTADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN ESTADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
                                 }
                                 else 
                                 {
@@ -443,7 +440,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
                                         
                                         if(cliente.AgregarPersona())
                                         {
-                                            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CLIENTE AGREGADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
+                                            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CLIENTE AGREGADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                             Limpiar();
                                             LimpiarTabla();
                                             LlenarTabla();
@@ -451,7 +448,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
                                         }
                                         else 
                                         {
-                                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL INTENTAR AGREGAR EL CLIENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL INTENTAR AGREGAR EL CLIENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
                                             fecha = "";
                                         }
 
@@ -465,7 +462,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
                             else
                             {
                                 
-                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UNA FECHA VALIDA </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UNA FECHA VALIDA </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
                                 
                             }
                            
@@ -473,34 +470,34 @@ public class frmCrudClientes extends javax.swing.JFrame {
                         }
                         else{
                             
-                             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN CORREO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN CORREO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
 
                         }
 
                     }   
                     else {
                         
-                         JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN TELEFONO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                         JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN TELEFONO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
 
                     }
   
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> REVISE NOMBRES Y APELLIDOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> REVISE NOMBRES Y APELLIDOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
 
                 }
             }
             else
             {
-                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL NUMERO DE IDENTIDAD NO TIENE UN FORMATO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL NUMERO DE IDENTIDAD NO TIENE UN FORMATO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
 
             }
             
         }
         else
         {
-             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> DEBE INGRESAR TODOS LOS DATOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> DEBE INGRESAR TODOS LOS DATOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
         }
         
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -531,7 +528,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
                                 
                                 if(cmbEstadoCliente.getSelectedIndex() == 0)
                                 {
-                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN ESTADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN ESTADO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
                                 }
                                 else 
                                 {
@@ -548,14 +545,14 @@ public class frmCrudClientes extends javax.swing.JFrame {
                                         
                                         if(cliente.ActualizarPersona())
                                         {
-                                            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CLIENTE ACTUALIZADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
+                                            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CLIENTE ACTUALIZADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                             LimpiarTabla();
                                             LlenarTabla();
 
                                         }
                                         else 
                                         {
-                                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL INTENTAR ACTUALIZAR CLIENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                                            JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL INTENTAR ACTUALIZAR CLIENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
                                             fecha = "";
                                         }
 
@@ -570,34 +567,34 @@ public class frmCrudClientes extends javax.swing.JFrame {
                         }
                         else{
                             
-                             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN CORREO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN CORREO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
 
                         }
 
                     }   
                     else {
                         
-                         JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN TELEFONO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                         JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> INGRESE UN TELEFONO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
 
                     }
   
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> REVISE NOMBRES Y APELLIDOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                    JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> REVISE NOMBRES Y APELLIDOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
 
                 }
             }
             else
             {
-                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL NUMERO DE IDENTIDAD NO TIENE UN FORMATO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL NUMERO DE IDENTIDAD NO TIENE UN FORMATO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
 
             }
             
         }
         else
         {
-             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> DEBE INGRESAR TODOS LOS DATOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> DEBE INGRESAR TODOS LOS DATOS </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
         }
         
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -642,7 +639,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
         }
         catch(Exception ex)
         {
-            JOptionPane.showMessageDialog(null, "Error al cargar Fecha" + ex, "", JOptionPane.INFORMATION_MESSAGE, icon);           
+            JOptionPane.showMessageDialog(null, "Error al cargar Fecha" + ex, "", JOptionPane.INFORMATION_MESSAGE, message.icon);           
         }
         
     }
@@ -697,7 +694,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
         
         int result = JOptionPane.showConfirmDialog(null,"<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
             JOptionPane.YES_NO_OPTION, 
-            JOptionPane.QUESTION_MESSAGE, icono);
+            JOptionPane.QUESTION_MESSAGE, message.icono);
         if(result == JOptionPane.YES_NO_OPTION)
         {
             this.dispose();
@@ -766,11 +763,11 @@ public class frmCrudClientes extends javax.swing.JFrame {
                            
                         int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">¿Está Seguro de Eliminar el Cliente?</b></html>","",
                         JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE, icono);
+                        JOptionPane.QUESTION_MESSAGE, message.icono);
                         if (result == JOptionPane.YES_OPTION) 
 			{
 							
-                            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> ELIMINADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, Icono);
+                            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> ELIMINADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.Icono);
                             LimpiarTabla();
                             LlenarTabla();
 							
@@ -779,7 +776,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
                      }
                      else 
                      {
-                             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL INTENTAR ELIMINAR EL CLIENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, icon);
+                             JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> ERROR AL INTENTAR ELIMINAR EL CLIENTE</b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icon);
                      }
                      
                 }
@@ -790,12 +787,12 @@ public class frmCrudClientes extends javax.swing.JFrame {
             }
             else 
             {
-                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL NUMERO DE IDENTIDAD NO TIENE UN FORMATO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+                JOptionPane.showMessageDialog(this, "<html><b style=\"color:black; font-size:13px;\"> EL NUMERO DE IDENTIDAD NO TIENE UN FORMATO VALIDO </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
             }
         }
         else
         {
-            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> INGRESE UN NUMERO DE IDENTIDAD </b></html>", "",JOptionPane.INFORMATION_MESSAGE, icono);
+            JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> INGRESE UN NUMERO DE IDENTIDAD </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.icono);
         }
         
     }//GEN-LAST:event_btnEliminarClienteActionPerformed

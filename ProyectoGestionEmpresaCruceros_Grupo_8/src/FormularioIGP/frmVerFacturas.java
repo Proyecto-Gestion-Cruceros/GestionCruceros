@@ -1,12 +1,12 @@
 package FormularioIGP;
 
 import Clases.ClsFuncionesDB;
+import Clases.clsMessage;
 import Clases.dbConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,7 +21,7 @@ public class frmVerFacturas extends javax.swing.JFrame {
     PreparedStatement ps;
     DefaultTableModel facturas;
     ResultSetMetaData rsmd;
-        
+    clsMessage message = new clsMessage();
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -184,7 +184,7 @@ public class frmVerFacturas extends javax.swing.JFrame {
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
         int result = JOptionPane.showConfirmDialog(this,"<html><b style=\"color:black; font-size:13px;\">Está seguro de volver al Menú Principal?</b></html>" , "Salir del Módulo",
             JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE, new ImageIcon(getClass().getResource("/Resources/Error.png")));
+            JOptionPane.QUESTION_MESSAGE, message.icono);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             frmIGP igp = new frmIGP();
@@ -222,15 +222,15 @@ public class frmVerFacturas extends javax.swing.JFrame {
     }
     
     private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_txtBusquedaActionPerformed
 
     private void txtBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyTyped
-        //cargarJTable(2);
+        
     }//GEN-LAST:event_txtBusquedaKeyTyped
 
     private void txtBusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyPressed
-        //cargarJTable(2);
+      
     }//GEN-LAST:event_txtBusquedaKeyPressed
 
     private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
