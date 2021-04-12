@@ -78,11 +78,6 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
         jLabel4.setText("Nombre del Puerto");
 
         txtNombrePuertoSalida.setFont(new java.awt.Font("Doppio One", 0, 16)); // NOI18N
-        txtNombrePuertoSalida.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombrePuertoSalidaKeyTyped(evt);
-            }
-        });
 
         btnActualizarPuertoSalida.setBackground(new java.awt.Color(255, 204, 51));
         btnActualizarPuertoSalida.setFont(new java.awt.Font("Avenir LT Std 65 Medium", 0, 18)); // NOI18N
@@ -340,12 +335,6 @@ public class frmCrudPuertosDeSalida extends javax.swing.JFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         Limpiar();
     }//GEN-LAST:event_btnLimpiarActionPerformed
-
-    private void txtNombrePuertoSalidaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePuertoSalidaKeyTyped
-        if (txtNombrePuertoSalida.getText().equals("")) {
-            Limpiar();
-        }
-    }//GEN-LAST:event_txtNombrePuertoSalidaKeyTyped
 
     private void limpiaTabla() {
         try {

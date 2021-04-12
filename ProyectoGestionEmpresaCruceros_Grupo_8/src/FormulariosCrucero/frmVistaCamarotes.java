@@ -117,7 +117,7 @@ public class frmVistaCamarotes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnAtras);
-        btnAtras.setBounds(0, 970, 210, 70);
+        btnAtras.setBounds(0, 1020, 210, 70);
 
         indicador64.setBackground(new java.awt.Color(0, 255, 0));
         indicador64.setFont(new java.awt.Font("Doppio One", 0, 8)); // NOI18N

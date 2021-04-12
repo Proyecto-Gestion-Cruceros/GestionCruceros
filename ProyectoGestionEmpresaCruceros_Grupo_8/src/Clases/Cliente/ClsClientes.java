@@ -14,29 +14,8 @@ import Clases.Personas.ClsPersona;
  */
 public class ClsClientes extends ClsPersona{
     
-    
-    ClsPersona per = new ClsPersona();
-    public static String direccionCliente;
-    public static String fechaNacimiento;
     PreparedStatement ps;
     ResultSet rs = null;
-
-    public static String getDireccionCliente() {
-        return direccionCliente;
-    }
-
-    public static void setDireccionCliente(String direccionCliente) {
-        ClsClientes.direccionCliente = direccionCliente;
-    }
-
-    public static String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public static void setFechaNacimiento(String fechaNacimiento) {
-        ClsClientes.fechaNacimiento = fechaNacimiento;
-    }
-   
    
     
     @Override

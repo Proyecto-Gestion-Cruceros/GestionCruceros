@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -38,7 +39,6 @@ public class frmCrudClientes extends javax.swing.JFrame {
 
     clsMessage message = new clsMessage();
     ClsValidaciones validar = new ClsValidaciones();
-    ClsClientes cliente = new ClsClientes();
     ClsPersona persona = new ClsPersona();
     dbConnection dbConn =  new dbConnection();
     Connection cn = dbConn.dbConexion();
@@ -424,18 +424,21 @@ public class frmCrudClientes extends javax.swing.JFrame {
                                 }
                                 else 
                                 {
+                                    persona = new ClsPersona();
                                     persona.setIdentidad(txtIdentidadCliente.getText());
                                     persona.setNombres(txtNombresCliente.getText());
                                     persona.setApellidos(txtApellidosCliente.getText());
                                     persona.setTelefono(txtTelefono.getText());
                                     persona.setCorreoElectronico(txtCorreoCliente.getText());
-                                    cliente.setFechaNacimiento(FechaNacimiento);
-                                    cliente.setDireccionCliente(txtDireccionCliente.getText());
+                                    persona.setFechaNacimiento(FechaNacimiento);
+                                    persona.setDireccionCliente(txtDireccionCliente.getText());
                                     persona.setEstado(cmbEstadoCliente.getSelectedItem().toString());
 
+                                    persona = new ClsClientes();
+                                    
                                     try{
                                         
-                                        if(cliente.AgregarPersona())
+                                        if(persona.AgregarPersona())
                                         {
                                             JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CLIENTE AGREGADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                             Limpiar();
@@ -529,18 +532,19 @@ public class frmCrudClientes extends javax.swing.JFrame {
                                 }
                                 else 
                                 {
+                                    persona = new ClsPersona();
                                     persona.setIdentidad(txtIdentidadCliente.getText());
                                     persona.setNombres(txtNombresCliente.getText());
                                     persona.setApellidos(txtApellidosCliente.getText());
                                     persona.setTelefono(txtTelefono.getText());
                                     persona.setCorreoElectronico(txtCorreoCliente.getText());
-                                    cliente.setFechaNacimiento(FechaNacimiento);
-                                    cliente.setDireccionCliente(txtDireccionCliente.getText());
+                                    persona.setFechaNacimiento(FechaNacimiento);
+                                    persona.setDireccionCliente(txtDireccionCliente.getText());
                                     persona.setEstado(cmbEstadoCliente.getSelectedItem().toString());
 
                                     try{
-                                        
-                                        if(cliente.ActualizarPersona())
+                                        persona = new ClsClientes();
+                                        if(persona.ActualizarPersona())
                                         {
                                             JOptionPane.showMessageDialog(null,"<html><b style=\"color:black; font-size:13px;\"> CLIENTE ACTUALIZADO CORRECTAMENTE </b></html>", "",JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                             LimpiarTabla();
@@ -713,7 +717,7 @@ public class frmCrudClientes extends javax.swing.JFrame {
         txtCorreoCliente.setText(String.valueOf(jTClientes.getValueAt(select, 4)));
         llenarFecha();
         txtDireccionCliente.setText(String.valueOf(jTClientes.getValueAt(select, 6)));
-        
+        cmbEstadoCliente.setSelectedItem(String.valueOf(jTClientes.getValueAt(select, 7)));
         jdcFecha.setEnabled(false);
         
     }//GEN-LAST:event_jTClientesMouseClicked
@@ -752,9 +756,10 @@ public class frmCrudClientes extends javax.swing.JFrame {
             if(validar.isEntero(txtIdentidadCliente.getText()) && txtIdentidadCliente.getText().length() == 13)
             {
                 try{
+                    persona = new ClsClientes();
                      persona.setIdentidad(txtIdentidadCliente.getText());
                      
-                     if(cliente.EliminarPersona())
+                     if(persona.EliminarPersona())
                      {
                            
                         int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">¿Está Seguro de Eliminar el Cliente?</b></html>","",

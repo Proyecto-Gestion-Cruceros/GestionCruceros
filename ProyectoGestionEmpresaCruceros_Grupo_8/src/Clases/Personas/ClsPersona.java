@@ -7,7 +7,36 @@ public class ClsPersona {
     protected static String Telefono;
     protected static String CorreoElectronico;
     protected static String Estado;
+    protected static String direccionCliente;
+    protected static String fechaNacimiento;
+    protected static int Cargo;
+    protected static String Contrasenia;
+    protected static String Usuario;
 
+    public static String getUsuario() {
+        return Usuario;
+    }
+
+    public static void setUsuario(String Usuario) {
+        ClsPersona.Usuario = Usuario;
+    }
+    
+    public static int getCargo() {
+        return Cargo;
+    }
+
+    public static void setCargo(int Cargo) {
+        ClsPersona.Cargo = Cargo;
+    }
+
+    public static String getContrasenia() {
+        return Contrasenia;
+    }
+
+    public static void setContrasenia(String Contrasenia) {
+        ClsPersona.Contrasenia = Contrasenia;
+    }
+    
     public static String getIdentidad() {
         return Identidad;
     }
@@ -56,6 +85,22 @@ public class ClsPersona {
         ClsPersona.Estado = Estado;
     }
 
+    public static String getDireccionCliente() {
+        return direccionCliente;
+    }
+
+    public static void setDireccionCliente(String direccionCliente) {
+        ClsPersona.direccionCliente = direccionCliente;
+    }
+
+    public static String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public static void setFechaNacimiento(String fechaNacimiento) {
+        ClsPersona.fechaNacimiento = fechaNacimiento;
+    }
+    
     public boolean AgregarPersona(){
         return false;
     }

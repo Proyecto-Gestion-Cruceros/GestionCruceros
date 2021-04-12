@@ -13,8 +13,7 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
     public frmCrudUsuarios() {
         initComponents();
     }
-
-    clsUsuarios Usuario = new clsUsuarios(); 
+ 
     ClsPersona Persona = new ClsPersona(); 
     
     clsMessage message = new clsMessage();
@@ -119,14 +118,14 @@ public class frmCrudUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministradorActionPerformed
-       Usuario.setUsuario("Administrador");
+       Persona.setUsuario("Administrador");
        frmCrudUsuariosAVAD frmUsuarios = new frmCrudUsuariosAVAD();
        frmUsuarios.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnAdministradorActionPerformed
 
     private void btnAgenteVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgenteVentaActionPerformed
-       Usuario.setUsuario("Agente de ventas");
+       Persona.setUsuario("Agente de ventas");
        frmCrudUsuariosAVAD frmUsuarios = new frmCrudUsuariosAVAD();
        frmUsuarios.setVisible(true);
        this.setVisible(false);

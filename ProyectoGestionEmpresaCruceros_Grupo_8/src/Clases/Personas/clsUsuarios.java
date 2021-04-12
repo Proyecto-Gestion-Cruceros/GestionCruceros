@@ -10,36 +10,9 @@ import javax.swing.JOptionPane;
 
 public class clsUsuarios extends ClsPersona {
 
-    public static String Usuario;
-    protected static int Cargo;
-    protected static String Contrasenia;
     PreparedStatement ps;
     ResultSet result = null;
     Icon icon = new ImageIcon(getClass().getResource("/Resources/Error.png"));
-
-    public static String getUsuario() {
-        return Usuario;
-    }
-
-    public static void setUsuario(String Usuario) {
-        clsUsuarios.Usuario = Usuario;
-    }
-
-    public static int getCargo() {
-        return Cargo;
-    }
-
-    public static void setCargo(int Cargo) {
-        clsUsuarios.Cargo = Cargo;
-    }
-
-    public static String getContrasenia() {
-        return Contrasenia;
-    }
-
-    public static void setContrasenia(String Contrasenia) {
-        clsUsuarios.Contrasenia = Contrasenia;
-    }
 
     @Override
     public boolean AgregarPersona() {

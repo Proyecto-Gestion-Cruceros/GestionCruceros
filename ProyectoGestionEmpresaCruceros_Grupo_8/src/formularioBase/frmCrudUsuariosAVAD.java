@@ -1,5 +1,6 @@
 package formularioBase;
 
+import Clases.Cliente.ClsClientes;
 import Clases.ClsFuncionesDB;
 import Clases.Personas.clsUsuarios;
 import Clases.Personas.ClsPersona;
@@ -29,7 +30,6 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
     DefaultTableModel dtm;
     DefaultTableModel temp;
 
-    clsUsuarios Usuario = new clsUsuarios();
     ClsPersona Persona = new ClsPersona();
     ClsValidaciones validar = new ClsValidaciones();
 
@@ -370,15 +370,16 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                             Persona.setCorreoElectronico(txtCorreoElectronicoUsuario.getText());
 
                             if (txtCargoUsuario.getText().equals("Administrador")) {
-                                Usuario.setCargo(1);
+                                Persona.setCargo(1);
                             } else {
-                                Usuario.setCargo(2);
+                                Persona.setCargo(2);
                             }
                             String contras = String.valueOf(txtContraseñaUsuario.getPassword());
-                            Usuario.setContrasenia(contras);
-
+                            Persona.setContrasenia(contras);
+                            
                             try {
-                                if (Usuario.ActualizarPersona()) {
+                                Persona = new clsUsuarios();
+                                if (Persona.ActualizarPersona()) {
 
                                     JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> USUARIO ACTUALIZADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                     MostrarUsuarios();
@@ -412,8 +413,8 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
         JUsuarios.getTableHeader().setReorderingAllowed(false);
         JUsuarios.getTableHeader().setForeground(Color.BLACK);
         JUsuarios.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
-        lblCargo.setText(Usuario.getUsuario().toUpperCase());
-        txtCargoUsuario.setText(Usuario.getUsuario());
+        lblCargo.setText(Persona.getUsuario().toUpperCase());
+        txtCargoUsuario.setText(Persona.getUsuario());
         MostrarUsuarios();
         JUsuarios.setRowHeight(30);
     }//GEN-LAST:event_formWindowOpened
@@ -442,15 +443,16 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                                 Persona.setCorreoElectronico(txtCorreoElectronicoUsuario.getText());
 
                                 if (txtCargoUsuario.getText().equals("Administrador")) {
-                                    Usuario.setCargo(1);
+                                    Persona.setCargo(1);
                                 } else {
-                                    Usuario.setCargo(2);
+                                    Persona.setCargo(2);
                                 }
                                 String contras = String.valueOf(txtContraseñaUsuario.getPassword());
-                                Usuario.setContrasenia(contras);
+                                Persona.setContrasenia(contras);
 
                                 try {
-                                    if (Usuario.AgregarPersona()) {
+                                    Persona = new clsUsuarios();
+                                    if (Persona.AgregarPersona()) {
                                         JOptionPane.showMessageDialog(null, "<html><b style=\"color:black; font-size:13px;\"> USUARIO REGISTRADO CORRECTAMENTE </b></html>", "", JOptionPane.INFORMATION_MESSAGE, message.Icono);
                                         MostrarUsuarios();
                                     } else {
@@ -482,15 +484,17 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
 
     private void btnEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioActionPerformed
         String User;
+        Persona = new ClsPersona();
+        User = Persona.getUsuario().toUpperCase();
 
-        User = Usuario.getUsuario().toUpperCase();
-
+        Persona = new clsUsuarios();
+        
         if (!txtIdentidadUsuario.getText().isBlank()) {
             if (validar.isEntero(txtIdentidadUsuario.getText()) && txtIdentidadUsuario.getText().length() == 13) {
                 try {
                     if (User.equals("AGENTE DE VENTAS")) {
                         Persona.setIdentidad(txtIdentidadUsuario.getText());
-                        if (Usuario.EliminarPersona()) {
+                        if (Persona.EliminarPersona()) {
 
                             int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Está Seguro de Eliminar El Usuario?</b></html>", "Salir del Módulo",
                                     JOptionPane.YES_NO_OPTION,
@@ -506,7 +510,7 @@ public class frmCrudUsuariosAVAD extends javax.swing.JFrame {
                     } else if (User.equals("ADMINISTRADOR")) {
                         if (VerificarCantidadAdmins() > 1) {
                             Persona.setIdentidad(txtIdentidadUsuario.getText());
-                            if (Usuario.EliminarPersona()) {
+                            if (Persona.EliminarPersona()) {
 
                                 int result = JOptionPane.showConfirmDialog(null, "<html><b style=\"color:black; font-size:13px;\">Está Seguro de Eliminar El Usuario?</b></html>", "Salir del Módulo",
                                         JOptionPane.YES_NO_OPTION,
