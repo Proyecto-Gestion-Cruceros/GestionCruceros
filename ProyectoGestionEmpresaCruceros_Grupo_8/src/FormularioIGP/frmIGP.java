@@ -377,10 +377,10 @@ public class frmIGP extends javax.swing.JFrame {
                 btnClientes.setEnabled(true);
                 btnBuques.setEnabled(false);
                 btnCamarotes.setEnabled(false);
-                btnFacturas.setEnabled(false);
+                btnFacturas.setEnabled(true);
                 btnViajesDisponibles.setEnabled(false);
                 btnDestinosTuristicos.setEnabled(false);
-                btnPuertos.setEnabled(true);
+                btnPuertos.setEnabled(false);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "", JOptionPane.INFORMATION_MESSAGE, message.icon);

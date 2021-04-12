@@ -119,6 +119,7 @@ public class frmClientesFacturaVista2 extends javax.swing.JFrame {
                 }
                 clientes.addRow(filas);
             }
+            tablaClientes.setRowHeight(30);
 
         } catch (SQLException ex) {
             System.out.println("Error al llenar tabla " + ex.getMessage());

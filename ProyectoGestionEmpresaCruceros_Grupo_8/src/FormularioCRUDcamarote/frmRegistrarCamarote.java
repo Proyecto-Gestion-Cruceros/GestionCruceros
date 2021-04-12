@@ -487,7 +487,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
         cmbTipoCamarote.removeAllItems();
         cmbTipoCamarote.addItem("-----------------");
         cmbTipoCamarote.addItem("Interior");
-        cmbTipoCamarote.addItem("Vista al Oceáno");
+        cmbTipoCamarote.addItem("Vista al Océano");
         cmbTipoCamarote.addItem("Balcón");
         cmbTipoCamarote.addItem("Suite");
     }
@@ -553,7 +553,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
               
                     cmbTipoCamarote.setSelectedItem("Suite");
                     
-                } else if (retornarUltimoIdCamarote() > 154) {
+                } else if (retornarUltimoIdCamarote() >= 154) {
                     retornarCodigoCamarote = retornarUltimoIdCamarote();
                     txtCodigoCamarote.setText(String.valueOf(retornarCodigoCamarote));
                     bloquear(); 
@@ -583,7 +583,7 @@ public class frmRegistrarCamarote extends javax.swing.JFrame {
             int ultimoCamarote = 0;
             if (cmbCodigoBuque.getSelectedIndex() != 0) {
 
-                ps = dbConexion().prepareStatement("SELECT MAX(codigoCamarote) as ultimoCamarote FROM camarotes WHERE codigoBuque = '" + this.cmbCodigoBuque.getSelectedItem() + "'");
+                ps = dbConexion().prepareStatement("SELECT MAX(codigoCamarote) as ultimoCamarote FROM camarotes WHERE codigoBuque = " + Integer.parseInt(cmbCodigoBuque.getSelectedItem().toString()));
                 ResultSet result = ps.executeQuery();
 
                 if (result.next()) {
